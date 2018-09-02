@@ -1,0 +1,6 @@
+framework module Pods_Notify_Nearby_Redesign {
+  umbrella header "Pods-Notify Nearby Redesign-umbrella.h"
+
+  export *
+  module * { export * }
+}

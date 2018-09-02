@@ -1,0 +1,16 @@
+PODS:
+  - KeyboardLayoutHelper (0.0.2)
+
+DEPENDENCIES:
+  - KeyboardLayoutHelper
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - KeyboardLayoutHelper
+
+SPEC CHECKSUMS:
+  KeyboardLayoutHelper: 9439b8296cb96c79c3531492ff307907a11d5d48
+
+PODFILE CHECKSUM: 16fe03f8250c35bf79aa8e5d8fd50b7d47eca472
+
+COCOAPODS: 1.5.3
