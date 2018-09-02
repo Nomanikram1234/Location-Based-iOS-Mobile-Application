@@ -429,91 +429,181 @@
             </objects>
             <point key="canvasLocation" x="1612" y="138.91625615763547"/>
         </scene>
-        <!--Item 2-->
+        <!--Interest-->
         <scene sceneID="Kxq-nT-yqo">
             <objects>
                 <viewController id="wAa-19-IHn" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C8Z-n7-tfm">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cIa-yI-wce">
+                                <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Interest" id="NnC-gf-4P7">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" image="ic_format_list_bulleted" id="06S-gz-bjF">
+                                            <color key="tintColor" red="0.18823529410000001" green="0.23137254900000001" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Item" image="Profile" id="9vo-5p-Eet">
+                                            <color key="tintColor" red="0.18823529410000001" green="0.23137254900000001" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="iLs-4P-FtF"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" image="Image" id="ND0-v6-QMa"/>
+                    <tabBarItem key="tabBarItem" title="Interest" image="Image" id="ND0-v6-QMa"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nGH-7c-PSk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3521" y="461"/>
         </scene>
-        <!--Item 1-->
+        <!--Home-->
         <scene sceneID="sfA-MV-QuT">
             <objects>
                 <viewController id="JPp-md-eQc" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rPq-qn-Vbw">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8vI-fk-y9J">
+                                <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Home" id="ghv-40-asS">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" image="ic_format_list_bulleted" id="V3S-wY-pse">
+                                            <color key="tintColor" red="0.18823529410000001" green="0.23137254900000001" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Item" image="Profile" id="Oh3-D3-q11">
+                                            <color key="tintColor" red="0.18823529411764706" green="0.23137254901960785" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Lwz-L3-0Ou"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" image="Stroke 1" id="ZMk-ek-3TQ"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="Stroke 1" id="ZMk-ek-3TQ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C3M-Xa-KhJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3521" y="-191"/>
         </scene>
-        <!--Item-->
+        <!--Favourite-->
         <scene sceneID="IPv-kJ-gqj">
             <objects>
                 <viewController id="rRT-d5-g42" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NPd-9w-0Eq">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TbV-rc-sf3">
+                                <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Favourite" id="KlH-ff-67s">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" image="ic_format_list_bulleted" id="cgp-BU-hkc">
+                                            <color key="tintColor" red="0.18823529410000001" green="0.23137254900000001" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Item" image="Profile" id="N6e-Is-WsF">
+                                            <color key="tintColor" red="0.18823529410000001" green="0.23137254900000001" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="2xh-DL-zJJ"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" image="Explore" id="W4p-Sk-jQa"/>
+                    <tabBarItem key="tabBarItem" title="Favourite" image="ic_local_activity" id="W4p-Sk-jQa"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rMU-b5-EdI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4836" y="-310"/>
         </scene>
-        <!--Item-->
+        <!--ads-->
         <scene sceneID="JcX-hG-yCY">
             <objects>
                 <viewController id="L2r-Mx-7gI" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WRq-Oe-yKk">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pM5-HU-a2B">
+                                <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Ads" id="aHx-zA-4at">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" image="ic_format_list_bulleted" id="tga-Ne-Of8">
+                                            <color key="tintColor" red="0.18823529410000001" green="0.23137254900000001" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Item" image="Profile" id="tne-Bm-XV4">
+                                            <color key="tintColor" red="0.18823529410000001" green="0.23137254900000001" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="kNB-1c-XJJ"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" image="Profile" id="lfC-K7-ISA"/>
+                    <tabBarItem key="tabBarItem" title="ads" image="ic_live_tv" id="lfC-K7-ISA"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UWo-2v-JZ1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4836" y="378"/>
         </scene>
-        <!--Item-->
+        <!--Discovery-->
         <scene sceneID="T6t-Mh-Oy1">
             <objects>
                 <viewController id="BFF-Jb-09F" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="llw-0G-fNO">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="imL-Io-BnI">
+                                <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Discovery" id="FV5-OR-g1P">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" image="ic_format_list_bulleted" id="ozf-vn-ryq">
+                                            <color key="tintColor" red="0.18823529410000001" green="0.23137254900000001" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Item" image="Profile" id="IQF-L3-ZK1">
+                                            <color key="tintColor" red="0.18823529410000001" green="0.23137254900000001" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="uKl-mo-hoX">
+                                <rect key="frame" x="29" y="100" width="317" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Islamabad"/>
+                                    <segment title="Rawalpindi"/>
+                                    <segment title="Karachi"/>
+                                </segments>
+                                <color key="tintColor" red="0.18823529410000001" green="0.23137254900000001" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </segmentedControl>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="svr-9a-Gqb"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" image="Feed" id="uyw-bH-PSN"/>
+                    <tabBarItem key="tabBarItem" title="Discovery" image="ic_public" id="uyw-bH-PSN"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ni0-hZ-tV1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4857" y="1029"/>
+            <point key="canvasLocation" x="4836" y="1158.6206896551726"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="uUz-Qi-aQ9">
             <objects>
                 <tabBarController id="Dvf-Ea-RoV" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="F7D-jM-nV4">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="F7D-jM-nV4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -533,11 +623,13 @@
     </scenes>
     <resources>
         <image name="Bitmap" width="375" height="667"/>
-        <image name="Explore" width="20" height="23"/>
-        <image name="Feed" width="20" height="23"/>
         <image name="Image" width="22" height="22"/>
         <image name="Profile" width="21" height="24"/>
         <image name="Splash" width="750" height="1334"/>
         <image name="Stroke 1" width="22" height="22"/>
+        <image name="ic_format_list_bulleted" width="19" height="16"/>
+        <image name="ic_live_tv" width="22" height="20"/>
+        <image name="ic_local_activity" width="20" height="16"/>
+        <image name="ic_public" width="20" height="20"/>
     </resources>
 </document>
