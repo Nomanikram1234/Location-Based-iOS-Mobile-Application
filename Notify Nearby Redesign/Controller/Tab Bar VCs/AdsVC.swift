@@ -1,5 +1,5 @@
 //
-//  SpashVC.swift
+//  AdsVC.swift
 //  Notify Nearby Redesign
 //
 //  Created by Noman Ikram on 03/09/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SpashVC: UIViewController {
+class AdsVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

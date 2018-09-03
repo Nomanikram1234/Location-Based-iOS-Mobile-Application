@@ -11,8 +11,13 @@
 		F809ED2F213C72EE007280E5 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F809ED2E213C72EE007280E5 /* SWRevealViewController.m */; };
 		F809ED33213D85C4007280E5 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809ED32213D85C4007280E5 /* HomeVC.swift */; };
 		F809ED35213D8D88007280E5 /* SideMenuTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809ED34213D8D88007280E5 /* SideMenuTVC.swift */; };
-		F809ED38213D8EE3007280E5 /* SpashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809ED37213D8EE3007280E5 /* SpashVC.swift */; };
+		F809ED38213D8EE3007280E5 /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809ED37213D8EE3007280E5 /* SplashVC.swift */; };
 		F809ED3A213D8F29007280E5 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809ED39213D8F29007280E5 /* LoginVC.swift */; };
+		F809ED3C213D9034007280E5 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809ED3B213D9034007280E5 /* SignUpVC.swift */; };
+		F809ED3F213D9172007280E5 /* InterestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809ED3E213D9172007280E5 /* InterestVC.swift */; };
+		F809ED41213D918A007280E5 /* AdsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809ED40213D918A007280E5 /* AdsVC.swift */; };
+		F809ED43213D919F007280E5 /* DiscoveryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809ED42213D919F007280E5 /* DiscoveryVC.swift */; };
+		F809ED45213D91D1007280E5 /* FavouriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809ED44213D91D1007280E5 /* FavouriteVC.swift */; };
 		F821606D213BC5BC00CA19AD /* TransparentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F821606C213BC5BC00CA19AD /* TransparentButton.swift */; };
 		F83598D1213BCE1700BFF1D8 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83598D0213BCE1700BFF1D8 /* CustomView.swift */; };
 		F83598D3213BD02200BFF1D8 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83598D2213BD02200BFF1D8 /* CustomTextField.swift */; };
@@ -31,8 +36,13 @@
 		F809ED2E213C72EE007280E5 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		F809ED32213D85C4007280E5 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		F809ED34213D8D88007280E5 /* SideMenuTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTVC.swift; sourceTree = "<group>"; };
-		F809ED37213D8EE3007280E5 /* SpashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpashVC.swift; sourceTree = "<group>"; };
+		F809ED37213D8EE3007280E5 /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		F809ED39213D8F29007280E5 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		F809ED3B213D9034007280E5 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
+		F809ED3E213D9172007280E5 /* InterestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestVC.swift; sourceTree = "<group>"; };
+		F809ED40213D918A007280E5 /* AdsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsVC.swift; sourceTree = "<group>"; };
+		F809ED42213D919F007280E5 /* DiscoveryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryVC.swift; sourceTree = "<group>"; };
+		F809ED44213D91D1007280E5 /* FavouriteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteVC.swift; sourceTree = "<group>"; };
 		F821606C213BC5BC00CA19AD /* TransparentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentButton.swift; sourceTree = "<group>"; };
 		F83598D0213BCE1700BFF1D8 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		F83598D2213BD02200BFF1D8 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -85,11 +95,50 @@
 		F809ED36213D8EBA007280E5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				F809ED37213D8EE3007280E5 /* SpashVC.swift */,
+				F809ED47213D92E8007280E5 /* Side Menu */,
 				F809ED31213D8087007280E5 /* SWRevealController */,
-				F809ED39213D8F29007280E5 /* LoginVC.swift */,
+				F809ED37213D8EE3007280E5 /* SplashVC.swift */,
+				F809ED46213D9203007280E5 /* Authentication */,
+				F809ED3D213D9124007280E5 /* Tab Bar VCs */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		F809ED3D213D9124007280E5 /* Tab Bar VCs */ = {
+			isa = PBXGroup;
+			children = (
+				F809ED32213D85C4007280E5 /* HomeVC.swift */,
+				F809ED3E213D9172007280E5 /* InterestVC.swift */,
+				F809ED40213D918A007280E5 /* AdsVC.swift */,
+				F809ED42213D919F007280E5 /* DiscoveryVC.swift */,
+				F809ED44213D91D1007280E5 /* FavouriteVC.swift */,
+			);
+			path = "Tab Bar VCs";
+			sourceTree = "<group>";
+		};
+		F809ED46213D9203007280E5 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				F809ED39213D8F29007280E5 /* LoginVC.swift */,
+				F809ED3B213D9034007280E5 /* SignUpVC.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		F809ED47213D92E8007280E5 /* Side Menu */ = {
+			isa = PBXGroup;
+			children = (
+				F809ED48213D9315007280E5 /* Side Menu VCs */,
+				F809ED34213D8D88007280E5 /* SideMenuTVC.swift */,
+			);
+			path = "Side Menu";
+			sourceTree = "<group>";
+		};
+		F809ED48213D9315007280E5 /* Side Menu VCs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Side Menu VCs";
 			sourceTree = "<group>";
 		};
 		F821606A213BC58500CA19AD /* View */ = {
@@ -139,8 +188,6 @@
 				F836C10C213AFF78005A86F8 /* LaunchScreen.storyboard */,
 				F836C10F213AFF78005A86F8 /* Info.plist */,
 				F809ED2C213C72ED007280E5 /* Notify Nearby Redesign-Bridging-Header.h */,
-				F809ED32213D85C4007280E5 /* HomeVC.swift */,
-				F809ED34213D8D88007280E5 /* SideMenuTVC.swift */,
 			);
 			path = "Notify Nearby Redesign";
 			sourceTree = "<group>";
@@ -258,12 +305,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F809ED38213D8EE3007280E5 /* SpashVC.swift in Sources */,
+				F809ED43213D919F007280E5 /* DiscoveryVC.swift in Sources */,
+				F809ED38213D8EE3007280E5 /* SplashVC.swift in Sources */,
+				F809ED3F213D9172007280E5 /* InterestVC.swift in Sources */,
 				F821606D213BC5BC00CA19AD /* TransparentButton.swift in Sources */,
 				F83598D1213BCE1700BFF1D8 /* CustomView.swift in Sources */,
 				F809ED35213D8D88007280E5 /* SideMenuTVC.swift in Sources */,
+				F809ED3C213D9034007280E5 /* SignUpVC.swift in Sources */,
 				F836C104213AFF76005A86F8 /* AppDelegate.swift in Sources */,
+				F809ED41213D918A007280E5 /* AdsVC.swift in Sources */,
 				F809ED3A213D8F29007280E5 /* LoginVC.swift in Sources */,
+				F809ED45213D91D1007280E5 /* FavouriteVC.swift in Sources */,
 				F809ED33213D85C4007280E5 /* HomeVC.swift in Sources */,
 				F83598D3213BD02200BFF1D8 /* CustomTextField.swift in Sources */,
 				F809ED2F213C72EE007280E5 /* SWRevealViewController.m in Sources */,
