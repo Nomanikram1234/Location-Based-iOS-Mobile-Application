@@ -21,6 +21,8 @@
 		F821606D213BC5BC00CA19AD /* TransparentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F821606C213BC5BC00CA19AD /* TransparentButton.swift */; };
 		F83598D1213BCE1700BFF1D8 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83598D0213BCE1700BFF1D8 /* CustomView.swift */; };
 		F83598D3213BD02200BFF1D8 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83598D2213BD02200BFF1D8 /* CustomTextField.swift */; };
+		F835E3A8213DBAC900901CFF /* DiscoveryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F835E3A7213DBAC900901CFF /* DiscoveryCollectionViewCell.swift */; };
+		F835E3AB213DCFFA00901CFF /* Discovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = F835E3AA213DCFFA00901CFF /* Discovery.swift */; };
 		F836C104213AFF76005A86F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F836C103213AFF76005A86F8 /* AppDelegate.swift */; };
 		F836C109213AFF76005A86F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F836C107213AFF76005A86F8 /* Main.storyboard */; };
 		F836C10B213AFF78005A86F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F836C10A213AFF78005A86F8 /* Assets.xcassets */; };
@@ -46,6 +48,8 @@
 		F821606C213BC5BC00CA19AD /* TransparentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentButton.swift; sourceTree = "<group>"; };
 		F83598D0213BCE1700BFF1D8 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		F83598D2213BD02200BFF1D8 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		F835E3A7213DBAC900901CFF /* DiscoveryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryCollectionViewCell.swift; sourceTree = "<group>"; };
+		F835E3AA213DCFFA00901CFF /* Discovery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discovery.swift; sourceTree = "<group>"; };
 		F836C100213AFF76005A86F8 /* Notify Nearby Redesign.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Notify Nearby Redesign.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F836C103213AFF76005A86F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F836C108213AFF76005A86F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -95,9 +99,9 @@
 		F809ED36213D8EBA007280E5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				F809ED37213D8EE3007280E5 /* SplashVC.swift */,
 				F809ED47213D92E8007280E5 /* Side Menu */,
 				F809ED31213D8087007280E5 /* SWRevealController */,
-				F809ED37213D8EE3007280E5 /* SplashVC.swift */,
 				F809ED46213D9203007280E5 /* Authentication */,
 				F809ED3D213D9124007280E5 /* Tab Bar VCs */,
 			);
@@ -107,10 +111,10 @@
 		F809ED3D213D9124007280E5 /* Tab Bar VCs */ = {
 			isa = PBXGroup;
 			children = (
+				F835E3A4213DB9E000901CFF /* Discovery */,
 				F809ED32213D85C4007280E5 /* HomeVC.swift */,
 				F809ED3E213D9172007280E5 /* InterestVC.swift */,
 				F809ED40213D918A007280E5 /* AdsVC.swift */,
-				F809ED42213D919F007280E5 /* DiscoveryVC.swift */,
 				F809ED44213D91D1007280E5 /* FavouriteVC.swift */,
 			);
 			path = "Tab Bar VCs";
@@ -167,6 +171,23 @@
 			path = "Custom Library Item Views";
 			sourceTree = "<group>";
 		};
+		F835E3A4213DB9E000901CFF /* Discovery */ = {
+			isa = PBXGroup;
+			children = (
+				F809ED42213D919F007280E5 /* DiscoveryVC.swift */,
+				F835E3A7213DBAC900901CFF /* DiscoveryCollectionViewCell.swift */,
+			);
+			path = Discovery;
+			sourceTree = "<group>";
+		};
+		F835E3A9213DCFDC00901CFF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F835E3AA213DCFFA00901CFF /* Discovery.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		F836C0F7213AFF76005A86F8 = {
 			isa = PBXGroup;
 			children = (
@@ -188,6 +209,7 @@
 		F836C102213AFF76005A86F8 /* Notify Nearby Redesign */ = {
 			isa = PBXGroup;
 			children = (
+				F835E3A9213DCFDC00901CFF /* Model */,
 				F809ED36213D8EBA007280E5 /* Controller */,
 				F821606A213BC58500CA19AD /* View */,
 				F836C103213AFF76005A86F8 /* AppDelegate.swift */,
@@ -295,11 +317,15 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Notify Nearby Redesign/Pods-Notify Nearby Redesign-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/KeyboardLayoutHelper/KeyboardLayoutHelper.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftSoup/SwiftSoup.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeyboardLayoutHelper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSoup.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -315,6 +341,7 @@
 			files = (
 				F809ED43213D919F007280E5 /* DiscoveryVC.swift in Sources */,
 				F809ED38213D8EE3007280E5 /* SplashVC.swift in Sources */,
+				F835E3AB213DCFFA00901CFF /* Discovery.swift in Sources */,
 				F809ED3F213D9172007280E5 /* InterestVC.swift in Sources */,
 				F821606D213BC5BC00CA19AD /* TransparentButton.swift in Sources */,
 				F83598D1213BCE1700BFF1D8 /* CustomView.swift in Sources */,
@@ -327,6 +354,7 @@
 				F809ED33213D85C4007280E5 /* HomeVC.swift in Sources */,
 				F83598D3213BD02200BFF1D8 /* CustomTextField.swift in Sources */,
 				F809ED2F213C72EE007280E5 /* SWRevealViewController.m in Sources */,
+				F835E3A8213DBAC900901CFF /* DiscoveryCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

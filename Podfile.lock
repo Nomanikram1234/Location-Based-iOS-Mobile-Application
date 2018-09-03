@@ -1,16 +1,24 @@
 PODS:
-  - KeyboardLayoutHelper (0.0.2)
+  - Alamofire (4.7.2)
+  - SwiftSoup (1.7.1)
+  - SwiftyJSON (4.1.0)
 
 DEPENDENCIES:
-  - KeyboardLayoutHelper
+  - Alamofire
+  - SwiftSoup
+  - SwiftyJSON
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - KeyboardLayoutHelper
+    - Alamofire
+    - SwiftSoup
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
-  KeyboardLayoutHelper: 9439b8296cb96c79c3531492ff307907a11d5d48
+  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  SwiftSoup: 277f7ef548826e0ca7603a06b30d4a5df3ee0587
+  SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 16fe03f8250c35bf79aa8e5d8fd50b7d47eca472
+PODFILE CHECKSUM: d6c7573925f0784dcae51a78cf5a82cd887f419f
 
 COCOAPODS: 1.5.3
