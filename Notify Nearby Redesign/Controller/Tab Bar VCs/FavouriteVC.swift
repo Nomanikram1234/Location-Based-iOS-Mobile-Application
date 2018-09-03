@@ -10,10 +10,12 @@ import UIKit
 
 class FavouriteVC: UIViewController {
 
+    @IBOutlet weak var moreButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        sidemenu()
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,6 +23,16 @@ class FavouriteVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func sidemenu(){
+        if revealViewController() != nil{
+            moreButton.target = revealViewController()
+            moreButton.action = #selector(revealViewController().revealToggle(_:))
+            revealViewController().rearViewRevealWidth = 275
+            
+            revealViewController().rightViewRevealWidth = 160
+            
+        }
+    }
 
     /*
     // MARK: - Navigation

@@ -13,8 +13,9 @@ class HomeVC: UIViewController {
     @IBOutlet weak var moreButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
-sidemenu()
+
         // Do any additional setup after loading the view.
+        sidemenu()
     }
 
     override func didReceiveMemoryWarning() {
