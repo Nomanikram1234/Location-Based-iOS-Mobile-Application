@@ -13,13 +13,19 @@ class DiscoveryCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageview: UIImageView!
     @IBOutlet weak var eventTitle: UILabel!
-    @IBOutlet weak var eventDescription: UITextView!
+    @IBOutlet weak var eventAddress: UITextView!
+    @IBOutlet weak var eventDate: UILabel!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         layer.cornerRadius = 14
         imageview.layer.cornerRadius = 14
+        
+        layer.shadowColor = UIColor.darkGray.cgColor
+        layer.shadowRadius = 100
+        layer.shadowOffset = CGSize(width: 100, height: 100)
         
     }
 }

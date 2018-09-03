@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftSoup
+import SDWebImage
 
 class DiscoveryVC: UIViewController, UICollectionViewDelegate , UICollectionViewDataSource {
    
@@ -20,22 +21,29 @@ class DiscoveryVC: UIViewController, UICollectionViewDelegate , UICollectionView
 
         // Do any additional setup after loading the view.
         sidemenu()
+        
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+//        print(AppDelegate.arr)
+        collectionview.reloadData()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return AppDelegate.arr.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! DiscoveryCollectionViewCell
-        cell.imageview.image = UIImage(named: "avatar")
-        cell.eventTitle.text = "Event"
-        cell.eventDescription.text = "ENT DES"
+        print(AppDelegate.arr[indexPath.row].imageUrl!)
+        cell.imageview.sd_setImage(with: URL(string:AppDelegate.arr[indexPath.row].imageUrl!), completed: nil)
+        cell.eventTitle.text = AppDelegate.arr[indexPath.row].title
+        cell.eventAddress.text = AppDelegate.arr[indexPath.row].address
+        cell.eventDate.text = AppDelegate.arr[indexPath.row].date
         return cell
     }
     
@@ -99,6 +107,9 @@ class DiscoveryVC: UIViewController, UICollectionViewDelegate , UICollectionView
         }
         
     }
+    
+    
+    
     
     func sidemenu(){
         if revealViewController() != nil{

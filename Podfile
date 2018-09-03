@@ -7,6 +7,7 @@ target 'Notify Nearby Redesign' do
   pod 'Alamofire'
   pod 'SwiftyJSON'
   pod 'SwiftSoup'
+  pod 'SDWebImage'
 
   # Pods for Notify Nearby Redesign
 

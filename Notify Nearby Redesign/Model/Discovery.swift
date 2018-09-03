@@ -14,10 +14,10 @@ class Discovery{
     var title:String?
     var address:String?
     var imageUrl:String?
-    var time:String?
+    var date:String?
     
     static let data = Discovery()
     
-    private init(){}
+    init(){}
     
 }
