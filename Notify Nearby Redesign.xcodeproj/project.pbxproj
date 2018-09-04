@@ -27,6 +27,11 @@
 		F836C109213AFF76005A86F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F836C107213AFF76005A86F8 /* Main.storyboard */; };
 		F836C10B213AFF78005A86F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F836C10A213AFF78005A86F8 /* Assets.xcassets */; };
 		F836C10E213AFF78005A86F8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F836C10C213AFF78005A86F8 /* LaunchScreen.storyboard */; };
+		F8670931213E3DDF004CAD58 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8670930213E3DDF004CAD58 /* ProfileVC.swift */; };
+		F8670933213EDE0B004CAD58 /* MyInterestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8670932213EDE0B004CAD58 /* MyInterestVC.swift */; };
+		F8670935213EDE24004CAD58 /* MyFavouriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8670934213EDE24004CAD58 /* MyFavouriteVC.swift */; };
+		F8670937213EDE63004CAD58 /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8670936213EDE63004CAD58 /* AccountVC.swift */; };
+		F8670939213EDEA0004CAD58 /* NotificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8670938213EDEA0004CAD58 /* NotificationVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +61,11 @@
 		F836C10A213AFF78005A86F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F836C10D213AFF78005A86F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F836C10F213AFF78005A86F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F8670930213E3DDF004CAD58 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		F8670932213EDE0B004CAD58 /* MyInterestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInterestVC.swift; sourceTree = "<group>"; };
+		F8670934213EDE24004CAD58 /* MyFavouriteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFavouriteVC.swift; sourceTree = "<group>"; };
+		F8670936213EDE63004CAD58 /* AccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
+		F8670938213EDEA0004CAD58 /* NotificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +151,11 @@
 		F809ED48213D9315007280E5 /* Side Menu VCs */ = {
 			isa = PBXGroup;
 			children = (
+				F8670930213E3DDF004CAD58 /* ProfileVC.swift */,
+				F8670932213EDE0B004CAD58 /* MyInterestVC.swift */,
+				F8670934213EDE24004CAD58 /* MyFavouriteVC.swift */,
+				F8670936213EDE63004CAD58 /* AccountVC.swift */,
+				F8670938213EDEA0004CAD58 /* NotificationVC.swift */,
 			);
 			path = "Side Menu VCs";
 			sourceTree = "<group>";
@@ -319,6 +334,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Notify Nearby Redesign/Pods-Notify Nearby Redesign-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftSoup/SwiftSoup.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
@@ -326,6 +342,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSoup.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
@@ -343,6 +360,7 @@
 			files = (
 				F809ED43213D919F007280E5 /* DiscoveryVC.swift in Sources */,
 				F809ED38213D8EE3007280E5 /* SplashVC.swift in Sources */,
+				F8670933213EDE0B004CAD58 /* MyInterestVC.swift in Sources */,
 				F835E3AB213DCFFA00901CFF /* Discovery.swift in Sources */,
 				F809ED3F213D9172007280E5 /* InterestVC.swift in Sources */,
 				F821606D213BC5BC00CA19AD /* TransparentButton.swift in Sources */,
@@ -351,9 +369,13 @@
 				F809ED3C213D9034007280E5 /* SignUpVC.swift in Sources */,
 				F836C104213AFF76005A86F8 /* AppDelegate.swift in Sources */,
 				F809ED41213D918A007280E5 /* AdsVC.swift in Sources */,
+				F8670935213EDE24004CAD58 /* MyFavouriteVC.swift in Sources */,
 				F809ED3A213D8F29007280E5 /* LoginVC.swift in Sources */,
+				F8670939213EDEA0004CAD58 /* NotificationVC.swift in Sources */,
 				F809ED45213D91D1007280E5 /* FavouriteVC.swift in Sources */,
 				F809ED33213D85C4007280E5 /* HomeVC.swift in Sources */,
+				F8670931213E3DDF004CAD58 /* ProfileVC.swift in Sources */,
+				F8670937213EDE63004CAD58 /* AccountVC.swift in Sources */,
 				F83598D3213BD02200BFF1D8 /* CustomTextField.swift in Sources */,
 				F809ED2F213C72EE007280E5 /* SWRevealViewController.m in Sources */,
 				F835E3A8213DBAC900901CFF /* DiscoveryCollectionViewCell.swift in Sources */,

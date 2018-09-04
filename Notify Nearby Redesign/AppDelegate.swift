@@ -14,17 +14,20 @@ import  SwiftSoup
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    static var arr = [Discovery]()
+//    static var arr = [Discovery]()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        scraping()
+//        scraping()
+        scrapingIslamabad()
+        scrapingLahore()
+        scrapingKarachi()
         
         return true
     }
 
-    func scraping()  {
+    func scrapingKarachi()  {
         let urlString = URL(string: "https://allevents.in/karachi/all")
         /////////////////////
         Alamofire.request(URLRequest(url: urlString!)).validate().responseString { (response) in
@@ -64,13 +67,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         addressString =   addressString.replacingOccurrences(of: "   ", with: " ")
                         addressString =   addressString.replacingOccurrences(of: "  ", with: " ")
                         
-                        print("----------------------------------------------------------------------------- ")
-                        print("Image url: \(imgLink)")
-                        print("Title: \(title)")
-                        print("Address: \(addressString)")
-                        print("url: \(link)")
-                        print(time)
-                        print("")
+//                        print("----------------------------------------------------------------------------- ")
+//                        print("Image url: \(imgLink)")
+//                        print("Title: \(title)")
+//                        print("Address: \(addressString)")
+//                        print("url: \(link)")
+//                        print(time)
+//                        print("")
                         
                         let dis = Discovery()
                         dis.imageUrl = imgLink
@@ -78,8 +81,152 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         dis.address = addressString
                         dis.date = time
                         
-                        AppDelegate.arr.append(dis)
-                        print("Done")
+                        DiscoveryVC.arrKarachi.append(dis)
+                        
+                    }
+                    //                    }
+                    
+                }
+                
+                
+            }catch{
+                print(error)
+            }
+            
+        }
+        
+    }
+    
+    
+    
+    func scrapingIslamabad()  {
+        let urlString = URL(string: "https://allevents.in/Islamabad/all")
+        /////////////////////
+        Alamofire.request(URLRequest(url: urlString!)).validate().responseString { (response) in
+            let html = response
+            do{
+                let doc = try SwiftSoup.parse("\(html)")
+                let body = doc.body()
+                let listview =  try body!.select("div").attr("class", "event-item listview").attr("id", "event-list")
+                //                print(body)
+                for item in listview{
+                    //                    if j.hasAttr("id"){
+                    if item.hasAttr("id") && item.hasAttr("typeof"){
+                        //                                                print(item)
+                        let imgLink = try item.select("img").attr("data-original")
+                        
+                        let title = try item.select("a").attr("title")
+                        let link = try item.select("a").attr("href")
+                        let address = try item.select("p").attr("property", "location").attr("class", "location").attr("typeof","Place")
+                        var time = try item.select("span").attr("content")
+                        time.removeLast(10)
+                        
+                        
+                        // test
+                        var addressString = ""
+                        for l in address{
+                            //                            print(try l.select("span"))
+                            for i in try l.select("span"){
+                                //                                print(i)
+                                addressString = "\(addressString)\(i)"
+                            }
+                        }
+                        addressString =   addressString.replacingOccurrences(of: "<span property=\"name\"> ", with: "")
+                        addressString =   addressString.replacingOccurrences(of: "</span>", with: "")
+                        addressString =   addressString.replacingOccurrences(of: "<span property=\"address\" typeof=\"PostalAddress\">", with: "")
+                        addressString =   addressString.replacingOccurrences(of: "<span property=\"streetAddress\">", with: "")
+                        addressString =   addressString.replacingOccurrences(of: "<span property=\"address\">", with: "")
+                        addressString =   addressString.replacingOccurrences(of: "   ", with: " ")
+                        addressString =   addressString.replacingOccurrences(of: "  ", with: " ")
+                        
+//                        print("----------------------------------------------------------------------------- ")
+//                        print("Image url: \(imgLink)")
+//                        print("Title: \(title)")
+//                        print("Address: \(addressString)")
+//                        print("url: \(link)")
+//                        print(time)
+//                        print("")
+                        
+                        let dis = Discovery()
+                        dis.imageUrl = imgLink
+                        dis.title = title
+                        dis.address = addressString
+                        dis.date = time
+                        
+                        DiscoveryVC.arrIslamabad.append(dis)
+                       
+                    }
+                    //                    }
+                    
+                }
+                
+                
+            }catch{
+                print(error)
+            }
+            
+        }
+        
+    }
+    
+    func scrapingLahore()  {
+        let urlString = URL(string: "https://allevents.in/lahore/all")
+        /////////////////////
+        Alamofire.request(URLRequest(url: urlString!)).validate().responseString { (response) in
+            let html = response
+            do{
+                let doc = try SwiftSoup.parse("\(html)")
+                let body = doc.body()
+                let listview =  try body!.select("div").attr("class", "event-item listview").attr("id", "event-list")
+                //                print(body)
+                for item in listview{
+                    //                    if j.hasAttr("id"){
+                    if item.hasAttr("id") && item.hasAttr("typeof"){
+                        //                                                print(item)
+                        let imgLink = try item.select("img").attr("data-original")
+                        
+                        let title = try item.select("a").attr("title")
+                        let link = try item.select("a").attr("href")
+                        let address = try item.select("p").attr("property", "location").attr("class", "location").attr("typeof","Place")
+                        var time = try item.select("span").attr("content")
+                        time.removeLast(10)
+                        
+                        
+                        // test
+                        var addressString = ""
+                        for l in address{
+                            //                            print(try l.select("span"))
+                            for i in try l.select("span"){
+                                //                                print(i)
+                                addressString = "\(addressString)\(i)"
+                            }
+                        }
+                        addressString =   addressString.replacingOccurrences(of: "<span property=\"name\"> ", with: "")
+                        addressString =   addressString.replacingOccurrences(of: "</span>", with: "")
+                        addressString =   addressString.replacingOccurrences(of: "<span property=\"address\" typeof=\"PostalAddress\">", with: "")
+                        addressString =   addressString.replacingOccurrences(of: "<span property=\"streetAddress\">", with: "")
+                        addressString =   addressString.replacingOccurrences(of: "<span property=\"address\">", with: "")
+                        addressString =   addressString.replacingOccurrences(of: "   ", with: " ")
+                        addressString =   addressString.replacingOccurrences(of: "  ", with: " ")
+                        
+//                        print("----------------------------------------------------------------------------- ")
+//                        print("Image url: \(imgLink)")
+//                        print("Title: \(title)")
+//                        print("Address: \(addressString)")
+//                        print("url: \(link)")
+//                        print(time)
+//                        print("")
+                        
+                        let dis = Discovery()
+                        dis.imageUrl = imgLink
+                        dis.title = title
+                        dis.address = addressString
+                        dis.date = time
+                        
+                        
+                        DiscoveryVC.arrLahore.append(dis)
+                        
+                        
                     }
                     //                    }
                     

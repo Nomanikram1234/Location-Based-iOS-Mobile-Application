@@ -10,11 +10,13 @@ import UIKit
 
 class SideMenuTVC: UITableViewController {
 
-
+    @IBOutlet weak var imageview: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
 
+        imageview.roundImageView()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -29,7 +31,7 @@ class SideMenuTVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
-    }
+     }
     
     // MARK: - Table view data source
 
@@ -98,4 +100,13 @@ class SideMenuTVC: UITableViewController {
     }
     */
 
+}
+
+extension UIImageView{
+    
+    func roundImageView(){
+        layer.cornerRadius = frame.height / 2
+        layer.masksToBounds = true
+    }
+    
 }

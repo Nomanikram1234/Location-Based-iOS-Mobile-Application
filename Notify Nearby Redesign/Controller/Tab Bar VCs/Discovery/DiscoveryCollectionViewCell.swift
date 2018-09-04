@@ -21,11 +21,13 @@ class DiscoveryCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         
         layer.cornerRadius = 14
-        imageview.layer.cornerRadius = 14
+        imageview.layer.cornerRadius = 7
         
-        layer.shadowColor = UIColor.darkGray.cgColor
-        layer.shadowRadius = 100
-        layer.shadowOffset = CGSize(width: 100, height: 100)
+        self.layer.shadowColor = UIColor.darkGray.cgColor
+        self.layer.shadowOffset = CGSize(width: 0, height: 3)
+        self.layer.shadowRadius = 5
+        self.layer.shadowOpacity = 0.5
+        
         
     }
 }

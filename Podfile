@@ -8,6 +8,7 @@ target 'Notify Nearby Redesign' do
   pod 'SwiftyJSON'
   pod 'SwiftSoup'
   pod 'SDWebImage'
+  pod 'SVProgressHUD'
 
   # Pods for Notify Nearby Redesign
 
