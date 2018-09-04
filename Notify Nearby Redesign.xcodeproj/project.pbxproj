@@ -35,6 +35,9 @@
 		F867093D213EFB8C004CAD58 /* BlackBorderSmallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F867093C213EFB8C004CAD58 /* BlackBorderSmallButton.swift */; };
 		F8C80980213F009D008FBC44 /* ProfileTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C8097F213F009D008FBC44 /* ProfileTVC.swift */; };
 		F8C80982213F0249008FBC44 /* RoundedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C80981213F0249008FBC44 /* RoundedImage.swift */; };
+		F8C80988213F0934008FBC44 /* StoriesCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C80987213F0934008FBC44 /* StoriesCVC.swift */; };
+		F8C8098A213F0947008FBC44 /* InterestCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C80989213F0947008FBC44 /* InterestCVC.swift */; };
+		F8C8098C213F095D008FBC44 /* FollowersCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C8098B213F095D008FBC44 /* FollowersCVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +75,9 @@
 		F867093C213EFB8C004CAD58 /* BlackBorderSmallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackBorderSmallButton.swift; sourceTree = "<group>"; };
 		F8C8097F213F009D008FBC44 /* ProfileTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTVC.swift; sourceTree = "<group>"; };
 		F8C80981213F0249008FBC44 /* RoundedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedImage.swift; sourceTree = "<group>"; };
+		F8C80987213F0934008FBC44 /* StoriesCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesCVC.swift; sourceTree = "<group>"; };
+		F8C80989213F0947008FBC44 /* InterestCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestCVC.swift; sourceTree = "<group>"; };
+		F8C8098B213F095D008FBC44 /* FollowersCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersCVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,11 +163,11 @@
 		F809ED48213D9315007280E5 /* Side Menu VCs */ = {
 			isa = PBXGroup;
 			children = (
+				F8C80983213F07F9008FBC44 /* Profile */,
 				F8670932213EDE0B004CAD58 /* MyInterestVC.swift */,
 				F8670934213EDE24004CAD58 /* MyFavouriteVC.swift */,
 				F8670936213EDE63004CAD58 /* AccountVC.swift */,
 				F8670938213EDEA0004CAD58 /* NotificationVC.swift */,
-				F8C8097F213F009D008FBC44 /* ProfileTVC.swift */,
 			);
 			path = "Side Menu VCs";
 			sourceTree = "<group>";
@@ -244,6 +250,41 @@
 				F809ED2C213C72ED007280E5 /* Notify Nearby Redesign-Bridging-Header.h */,
 			);
 			path = "Notify Nearby Redesign";
+			sourceTree = "<group>";
+		};
+		F8C80983213F07F9008FBC44 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				F8C80986213F088D008FBC44 /* Followers */,
+				F8C80985213F0884008FBC44 /* Interests */,
+				F8C80984213F0879008FBC44 /* Stories */,
+				F8C8097F213F009D008FBC44 /* ProfileTVC.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		F8C80984213F0879008FBC44 /* Stories */ = {
+			isa = PBXGroup;
+			children = (
+				F8C80987213F0934008FBC44 /* StoriesCVC.swift */,
+			);
+			path = Stories;
+			sourceTree = "<group>";
+		};
+		F8C80985213F0884008FBC44 /* Interests */ = {
+			isa = PBXGroup;
+			children = (
+				F8C80989213F0947008FBC44 /* InterestCVC.swift */,
+			);
+			path = Interests;
+			sourceTree = "<group>";
+		};
+		F8C80986213F088D008FBC44 /* Followers */ = {
+			isa = PBXGroup;
+			children = (
+				F8C8098B213F095D008FBC44 /* FollowersCVC.swift */,
+			);
+			path = Followers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -370,6 +411,7 @@
 				F809ED43213D919F007280E5 /* DiscoveryVC.swift in Sources */,
 				F809ED38213D8EE3007280E5 /* SplashVC.swift in Sources */,
 				F8670933213EDE0B004CAD58 /* MyInterestVC.swift in Sources */,
+				F8C80988213F0934008FBC44 /* StoriesCVC.swift in Sources */,
 				F835E3AB213DCFFA00901CFF /* Discovery.swift in Sources */,
 				F809ED3F213D9172007280E5 /* InterestVC.swift in Sources */,
 				F867093D213EFB8C004CAD58 /* BlackBorderSmallButton.swift in Sources */,
@@ -380,6 +422,7 @@
 				F809ED3C213D9034007280E5 /* SignUpVC.swift in Sources */,
 				F8C80980213F009D008FBC44 /* ProfileTVC.swift in Sources */,
 				F836C104213AFF76005A86F8 /* AppDelegate.swift in Sources */,
+				F8C8098A213F0947008FBC44 /* InterestCVC.swift in Sources */,
 				F809ED41213D918A007280E5 /* AdsVC.swift in Sources */,
 				F867093B213EFB48004CAD58 /* RedSmallButton.swift in Sources */,
 				F8670935213EDE24004CAD58 /* MyFavouriteVC.swift in Sources */,
@@ -389,6 +432,7 @@
 				F809ED33213D85C4007280E5 /* HomeVC.swift in Sources */,
 				F8670937213EDE63004CAD58 /* AccountVC.swift in Sources */,
 				F83598D3213BD02200BFF1D8 /* CustomTextField.swift in Sources */,
+				F8C8098C213F095D008FBC44 /* FollowersCVC.swift in Sources */,
 				F809ED2F213C72EE007280E5 /* SWRevealViewController.m in Sources */,
 				F835E3A8213DBAC900901CFF /* DiscoveryCollectionViewCell.swift in Sources */,
 			);

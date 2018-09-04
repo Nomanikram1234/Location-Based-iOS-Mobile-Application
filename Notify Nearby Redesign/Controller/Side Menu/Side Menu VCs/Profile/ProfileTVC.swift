@@ -8,8 +8,50 @@
 
 import UIKit
 
-class ProfileTVC: UITableViewController {
+class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        if collectionView == storyCollectionview{
+          return 5
+        }
+        else if collectionView == interestCollectionview{
+            return 5
+        }
+        else{
+            return 15
+        }
 
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if collectionView == storyCollectionview{
+            let cell = storyCollectionview.dequeueReusableCell(withReuseIdentifier: "storyCell", for: indexPath) as! StoriesCVC
+            cell.imageview.image = UIImage(named: "avatar")
+            return cell
+            
+        }
+        else if collectionView == interestCollectionview{
+            let cell = interestCollectionview.dequeueReusableCell(withReuseIdentifier: "interestCell", for: indexPath) as! InterestCVC
+            cell.imageview.image = UIImage(named: "avatar")
+            return cell
+        }
+        else if collectionView == followerCollectionview{
+            let cell = followerCollectionview.dequeueReusableCell(withReuseIdentifier: "followerCell", for: indexPath) as! FollowersCVC
+          cell.imageview.image = UIImage(named: "avatar")
+            return cell
+        }else{
+            return UICollectionViewCell()
+        }
+        
+        
+    }
+    
+   
+    @IBOutlet weak var storyCollectionview: UICollectionView!
+    @IBOutlet weak var interestCollectionview: UICollectionView!
+    @IBOutlet weak var followerCollectionview: UICollectionView!
+    
     @IBOutlet weak var moreButton: UIBarButtonItem!
     
     override func viewDidLoad() {
@@ -28,6 +70,10 @@ class ProfileTVC: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+
+    
+    
     func sidemenu(){
         if revealViewController() != nil{
             moreButton.target = revealViewController()
@@ -42,12 +88,12 @@ class ProfileTVC: UITableViewController {
 
 //    override func numberOfSections(in tableView: UITableView) -> Int {
 //        // #warning Incomplete implementation, return the number of sections
-//        return 0
+//        return 1
 //    }
 //
 //    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        // #warning Incomplete implementation, return the number of rows
-//        return 0
+//        return 1
 //    }
 
     /*
