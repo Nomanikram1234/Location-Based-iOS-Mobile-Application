@@ -38,6 +38,7 @@
 		F8C80988213F0934008FBC44 /* StoriesCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C80987213F0934008FBC44 /* StoriesCVC.swift */; };
 		F8C8098A213F0947008FBC44 /* InterestCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C80989213F0947008FBC44 /* InterestCVC.swift */; };
 		F8C8098C213F095D008FBC44 /* FollowersCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C8098B213F095D008FBC44 /* FollowersCVC.swift */; };
+		F8C8099521404F6D008FBC44 /* InterestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C8099421404F6D008FBC44 /* InterestCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		F8C80987213F0934008FBC44 /* StoriesCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesCVC.swift; sourceTree = "<group>"; };
 		F8C80989213F0947008FBC44 /* InterestCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestCVC.swift; sourceTree = "<group>"; };
 		F8C8098B213F095D008FBC44 /* FollowersCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersCVC.swift; sourceTree = "<group>"; };
+		F8C8099421404F6D008FBC44 /* InterestCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,8 +137,8 @@
 			children = (
 				F835E3A4213DB9E000901CFF /* Discovery */,
 				F809ED32213D85C4007280E5 /* HomeVC.swift */,
-				F809ED3E213D9172007280E5 /* InterestVC.swift */,
-				F809ED40213D918A007280E5 /* AdsVC.swift */,
+				F8C8099321404F3D008FBC44 /* Interest */,
+				F8C8099721405BA7008FBC44 /* Ads */,
 				F809ED44213D91D1007280E5 /* FavouriteVC.swift */,
 			);
 			path = "Tab Bar VCs";
@@ -287,6 +289,23 @@
 			path = Followers;
 			sourceTree = "<group>";
 		};
+		F8C8099321404F3D008FBC44 /* Interest */ = {
+			isa = PBXGroup;
+			children = (
+				F809ED3E213D9172007280E5 /* InterestVC.swift */,
+				F8C8099421404F6D008FBC44 /* InterestCollectionViewCell.swift */,
+			);
+			path = Interest;
+			sourceTree = "<group>";
+		};
+		F8C8099721405BA7008FBC44 /* Ads */ = {
+			isa = PBXGroup;
+			children = (
+				F809ED40213D918A007280E5 /* AdsVC.swift */,
+			);
+			path = Ads;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -416,6 +435,7 @@
 				F809ED3F213D9172007280E5 /* InterestVC.swift in Sources */,
 				F867093D213EFB8C004CAD58 /* BlackBorderSmallButton.swift in Sources */,
 				F821606D213BC5BC00CA19AD /* TransparentButton.swift in Sources */,
+				F8C8099521404F6D008FBC44 /* InterestCollectionViewCell.swift in Sources */,
 				F83598D1213BCE1700BFF1D8 /* CustomView.swift in Sources */,
 				F809ED35213D8D88007280E5 /* SideMenuTVC.swift in Sources */,
 				F8C80982213F0249008FBC44 /* RoundedImage.swift in Sources */,

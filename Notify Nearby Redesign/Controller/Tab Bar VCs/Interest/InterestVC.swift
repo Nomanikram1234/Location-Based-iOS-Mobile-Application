@@ -8,9 +8,13 @@
 
 import UIKit
 
-class InterestVC: UIViewController {
+class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDataSource{
+ 
+    
 
+    @IBOutlet weak var collectionview: UICollectionView!
     @IBOutlet weak var moreButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,6 +38,17 @@ class InterestVC: UIViewController {
         }
     }
 
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! InterestCollectionViewCell
+        cell.imageview.image = UIImage(named: "avatar")
+        cell.title.text = "Momina"
+        return cell
+        
+    }
     /*
     // MARK: - Navigation
 
