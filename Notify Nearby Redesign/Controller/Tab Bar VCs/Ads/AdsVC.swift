@@ -37,7 +37,7 @@ class AdsVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! AdsCollectionViewCell
-        cell.imageview.image = UIImage(named: "avatar")
+        cell.imageview.image = UIImage(named: "avatar2")
         cell.title.text = "Momina"
         cell.category.text = "Advertisement"
         return cell

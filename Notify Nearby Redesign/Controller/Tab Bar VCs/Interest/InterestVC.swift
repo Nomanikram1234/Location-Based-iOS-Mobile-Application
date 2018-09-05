@@ -44,7 +44,7 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! InterestCollectionViewCell
-        cell.imageview.image = UIImage(named: "avatar")
+        cell.imageview.image = UIImage(named: "avatar3")
         cell.title.text = "Momina"
         return cell
         
