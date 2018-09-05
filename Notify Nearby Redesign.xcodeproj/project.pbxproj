@@ -39,6 +39,8 @@
 		F8C8098A213F0947008FBC44 /* InterestCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C80989213F0947008FBC44 /* InterestCVC.swift */; };
 		F8C8098C213F095D008FBC44 /* FollowersCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C8098B213F095D008FBC44 /* FollowersCVC.swift */; };
 		F8C8099521404F6D008FBC44 /* InterestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C8099421404F6D008FBC44 /* InterestCollectionViewCell.swift */; };
+		F8C80999214069CB008FBC44 /* AdsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C80998214069CB008FBC44 /* AdsCollectionViewCell.swift */; };
+		F8C8099C21406E65008FBC44 /* FavouriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C8099B21406E65008FBC44 /* FavouriteCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +82,8 @@
 		F8C80989213F0947008FBC44 /* InterestCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestCVC.swift; sourceTree = "<group>"; };
 		F8C8098B213F095D008FBC44 /* FollowersCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersCVC.swift; sourceTree = "<group>"; };
 		F8C8099421404F6D008FBC44 /* InterestCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestCollectionViewCell.swift; sourceTree = "<group>"; };
+		F8C80998214069CB008FBC44 /* AdsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsCollectionViewCell.swift; sourceTree = "<group>"; };
+		F8C8099B21406E65008FBC44 /* FavouriteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,7 +143,7 @@
 				F809ED32213D85C4007280E5 /* HomeVC.swift */,
 				F8C8099321404F3D008FBC44 /* Interest */,
 				F8C8099721405BA7008FBC44 /* Ads */,
-				F809ED44213D91D1007280E5 /* FavouriteVC.swift */,
+				F8C8099A21406E4C008FBC44 /* Favourite */,
 			);
 			path = "Tab Bar VCs";
 			sourceTree = "<group>";
@@ -302,8 +306,18 @@
 			isa = PBXGroup;
 			children = (
 				F809ED40213D918A007280E5 /* AdsVC.swift */,
+				F8C80998214069CB008FBC44 /* AdsCollectionViewCell.swift */,
 			);
 			path = Ads;
+			sourceTree = "<group>";
+		};
+		F8C8099A21406E4C008FBC44 /* Favourite */ = {
+			isa = PBXGroup;
+			children = (
+				F809ED44213D91D1007280E5 /* FavouriteVC.swift */,
+				F8C8099B21406E65008FBC44 /* FavouriteCollectionViewCell.swift */,
+			);
+			path = Favourite;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -443,11 +457,13 @@
 				F8C80980213F009D008FBC44 /* ProfileTVC.swift in Sources */,
 				F836C104213AFF76005A86F8 /* AppDelegate.swift in Sources */,
 				F8C8098A213F0947008FBC44 /* InterestCVC.swift in Sources */,
+				F8C80999214069CB008FBC44 /* AdsCollectionViewCell.swift in Sources */,
 				F809ED41213D918A007280E5 /* AdsVC.swift in Sources */,
 				F867093B213EFB48004CAD58 /* RedSmallButton.swift in Sources */,
 				F8670935213EDE24004CAD58 /* MyFavouriteVC.swift in Sources */,
 				F809ED3A213D8F29007280E5 /* LoginVC.swift in Sources */,
 				F8670939213EDEA0004CAD58 /* NotificationVC.swift in Sources */,
+				F8C8099C21406E65008FBC44 /* FavouriteCollectionViewCell.swift in Sources */,
 				F809ED45213D91D1007280E5 /* FavouriteVC.swift in Sources */,
 				F809ED33213D85C4007280E5 /* HomeVC.swift in Sources */,
 				F8670937213EDE63004CAD58 /* AccountVC.swift in Sources */,

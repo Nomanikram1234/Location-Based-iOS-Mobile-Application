@@ -8,8 +8,12 @@
 
 import UIKit
 
-class FavouriteVC: UIViewController {
+class FavouriteVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+  
+    
 
+    @IBOutlet weak var collectionview: UICollectionView!
+    
     @IBOutlet weak var moreButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +25,21 @@ class FavouriteVC: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width - 30, height: collectionView.frame.height - 40)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! FavouriteCollectionViewCell
+        cell.imageview.image = UIImage(named: "avatar")
+        cell.title.text = "Momina"
+        return cell
     }
     
     func sidemenu(){
