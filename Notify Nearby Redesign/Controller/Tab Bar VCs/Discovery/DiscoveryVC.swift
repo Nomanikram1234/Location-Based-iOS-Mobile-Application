@@ -15,6 +15,10 @@ import SVProgressHUD
 class DiscoveryVC: UIViewController, UICollectionViewDelegate , UICollectionViewDataSource{
     @IBOutlet weak var segmentedcontrols: UISegmentedControl!
     
+    var isbProcessed = false
+    var lahoreProcessed = false
+    var karachiProcessed = false
+    
     static var arrIslamabad = [Discovery]()
     static var arrLahore = [Discovery]()
     static var arrKarachi = [Discovery]()
@@ -31,9 +35,11 @@ class DiscoveryVC: UIViewController, UICollectionViewDelegate , UICollectionView
 
 //        SVProgressHUD.show()
         scrapingIslamabad()
+        
         collectionview.reloadData()
 //        SVProgressHUD.dismiss()
-        
+        scrapingLahore()
+        scrapingKarachi()
         // Do any additional setup after loading the view.
         sidemenu()
         
@@ -49,6 +55,22 @@ class DiscoveryVC: UIViewController, UICollectionViewDelegate , UICollectionView
         // Dispose of any resources that can be recreated.
     }
     @IBAction func segmentedControlsPressed(_ sender: UISegmentedControl) {
+        
+        
+//        if segmentedcontrols.selectedSegmentIndex == 0 {
+////            scrapingIslamabad()
+//        }else if segmentedcontrols.selectedSegmentIndex == 1{
+//            if !lahoreProcessed{
+//            scrapingLahore()
+//                lahoreProcessed = true
+//            }
+//        }else if segmentedcontrols.selectedSegmentIndex == 2{
+//            if !karachiProcessed{
+//            scrapingKarachi()
+//                karachiProcessed
+//            }
+//        }
+        
         collectionview.reloadData()
     }
     

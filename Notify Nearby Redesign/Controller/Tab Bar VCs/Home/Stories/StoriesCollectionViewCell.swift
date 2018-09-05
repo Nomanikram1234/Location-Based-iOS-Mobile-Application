@@ -1,5 +1,5 @@
 //
-//  AdsCollectionViewCell.swift
+//  StoriesCollectionViewCell.swift
 //  Notify Nearby Redesign
 //
 //  Created by Noman Ikram on 06/09/2018.
@@ -8,23 +8,24 @@
 
 import UIKit
 
-class AdsCollectionViewCell: UICollectionViewCell {
-   
+class StoriesCollectionViewCell: UICollectionViewCell {
+    
     @IBOutlet weak var imageview: UIImageView!
-    @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var category: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        layer.cornerRadius = 7
-        imageview.layer.cornerRadius = 14
-       
+        layer.cornerRadius = layer.frame.height / 2
+        layer.masksToBounds = true
+        
+        layer.borderColor = UIColor.darkGray.cgColor
+        layer.borderWidth = 2
         
         self.layer.shadowColor = UIColor.darkGray.cgColor
         self.layer.shadowOffset = CGSize(width: 0, height: 3)
         self.layer.shadowRadius = 5
         self.layer.shadowOpacity = 0.5
     }
-    
+   
+
 }

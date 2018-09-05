@@ -17,6 +17,7 @@ class InterestCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         
         layer.cornerRadius = 7
+         imageview.layer.cornerRadius = 14
 //        layer.masksToBounds = true
         
         self.layer.shadowColor = UIColor.darkGray.cgColor

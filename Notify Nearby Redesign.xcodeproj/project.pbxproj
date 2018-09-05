@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		934366EA8EFD3F913AC910F7 /* Pods_Notify_Nearby_Redesign.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5F012C12D7F2083FE7F68F2 /* Pods_Notify_Nearby_Redesign.framework */; };
 		F809ED2F213C72EE007280E5 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F809ED2E213C72EE007280E5 /* SWRevealViewController.m */; };
-		F809ED33213D85C4007280E5 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809ED32213D85C4007280E5 /* HomeVC.swift */; };
+		F809ED33213D85C4007280E5 /* HomeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809ED32213D85C4007280E5 /* HomeTVC.swift */; };
 		F809ED35213D8D88007280E5 /* SideMenuTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809ED34213D8D88007280E5 /* SideMenuTVC.swift */; };
 		F809ED38213D8EE3007280E5 /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809ED37213D8EE3007280E5 /* SplashVC.swift */; };
 		F809ED3A213D8F29007280E5 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809ED39213D8F29007280E5 /* LoginVC.swift */; };
@@ -41,6 +41,7 @@
 		F8C8099521404F6D008FBC44 /* InterestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C8099421404F6D008FBC44 /* InterestCollectionViewCell.swift */; };
 		F8C80999214069CB008FBC44 /* AdsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C80998214069CB008FBC44 /* AdsCollectionViewCell.swift */; };
 		F8C8099C21406E65008FBC44 /* FavouriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C8099B21406E65008FBC44 /* FavouriteCollectionViewCell.swift */; };
+		F8C809A021408004008FBC44 /* StoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C8099F21408004008FBC44 /* StoriesCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,7 +51,7 @@
 		F809ED2C213C72ED007280E5 /* Notify Nearby Redesign-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Notify Nearby Redesign-Bridging-Header.h"; sourceTree = "<group>"; };
 		F809ED2D213C72EE007280E5 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		F809ED2E213C72EE007280E5 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
-		F809ED32213D85C4007280E5 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		F809ED32213D85C4007280E5 /* HomeTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTVC.swift; sourceTree = "<group>"; };
 		F809ED34213D8D88007280E5 /* SideMenuTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTVC.swift; sourceTree = "<group>"; };
 		F809ED37213D8EE3007280E5 /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		F809ED39213D8F29007280E5 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -84,6 +85,7 @@
 		F8C8099421404F6D008FBC44 /* InterestCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestCollectionViewCell.swift; sourceTree = "<group>"; };
 		F8C80998214069CB008FBC44 /* AdsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsCollectionViewCell.swift; sourceTree = "<group>"; };
 		F8C8099B21406E65008FBC44 /* FavouriteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCollectionViewCell.swift; sourceTree = "<group>"; };
+		F8C8099F21408004008FBC44 /* StoriesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,7 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				F835E3A4213DB9E000901CFF /* Discovery */,
-				F809ED32213D85C4007280E5 /* HomeVC.swift */,
+				F8C8099D21407CB7008FBC44 /* Home */,
 				F8C8099321404F3D008FBC44 /* Interest */,
 				F8C8099721405BA7008FBC44 /* Ads */,
 				F8C8099A21406E4C008FBC44 /* Favourite */,
@@ -320,6 +322,23 @@
 			path = Favourite;
 			sourceTree = "<group>";
 		};
+		F8C8099D21407CB7008FBC44 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				F8C8099E21407FDF008FBC44 /* Stories */,
+				F809ED32213D85C4007280E5 /* HomeTVC.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		F8C8099E21407FDF008FBC44 /* Stories */ = {
+			isa = PBXGroup;
+			children = (
+				F8C8099F21408004008FBC44 /* StoriesCollectionViewCell.swift */,
+			);
+			path = Stories;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -450,6 +469,7 @@
 				F867093D213EFB8C004CAD58 /* BlackBorderSmallButton.swift in Sources */,
 				F821606D213BC5BC00CA19AD /* TransparentButton.swift in Sources */,
 				F8C8099521404F6D008FBC44 /* InterestCollectionViewCell.swift in Sources */,
+				F8C809A021408004008FBC44 /* StoriesCollectionViewCell.swift in Sources */,
 				F83598D1213BCE1700BFF1D8 /* CustomView.swift in Sources */,
 				F809ED35213D8D88007280E5 /* SideMenuTVC.swift in Sources */,
 				F8C80982213F0249008FBC44 /* RoundedImage.swift in Sources */,
@@ -465,7 +485,7 @@
 				F8670939213EDEA0004CAD58 /* NotificationVC.swift in Sources */,
 				F8C8099C21406E65008FBC44 /* FavouriteCollectionViewCell.swift in Sources */,
 				F809ED45213D91D1007280E5 /* FavouriteVC.swift in Sources */,
-				F809ED33213D85C4007280E5 /* HomeVC.swift in Sources */,
+				F809ED33213D85C4007280E5 /* HomeTVC.swift in Sources */,
 				F8670937213EDE63004CAD58 /* AccountVC.swift in Sources */,
 				F83598D3213BD02200BFF1D8 /* CustomTextField.swift in Sources */,
 				F8C8098C213F095D008FBC44 /* FollowersCVC.swift in Sources */,

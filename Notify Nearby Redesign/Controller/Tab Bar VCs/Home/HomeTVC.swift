@@ -7,10 +7,15 @@
 //
 
 import UIKit
+import MapKit
 
-class HomeVC: UIViewController {
-
+class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, MKMapViewDelegate{
+ 
+    
+    @IBOutlet weak var mapview: MKMapView!
+    
     @IBOutlet weak var moreButton: UIBarButtonItem!
+    @IBOutlet weak var collectionview: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,6 +26,16 @@ class HomeVC: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+       return 25
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! StoriesCollectionViewCell
+        cell.imageview.image = UIImage(named: "avatar4")
+        return cell
     }
     
     func sidemenu(){
