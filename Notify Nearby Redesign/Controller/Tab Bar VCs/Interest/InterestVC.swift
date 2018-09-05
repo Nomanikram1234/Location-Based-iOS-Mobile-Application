@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDataSource{
+class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
  
     
 
@@ -48,6 +48,11 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
         cell.title.text = "Momina"
         return cell
         
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width - 30, height: collectionView.frame.height - 40)
     }
     /*
     // MARK: - Navigation
