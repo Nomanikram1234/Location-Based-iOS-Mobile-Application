@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		934366EA8EFD3F913AC910F7 /* Pods_Notify_Nearby_Redesign.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5F012C12D7F2083FE7F68F2 /* Pods_Notify_Nearby_Redesign.framework */; };
+		F802D3082142C9A0001934A2 /* TopInterestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F802D3072142C9A0001934A2 /* TopInterestCollectionViewCell.swift */; };
+		F802D30A2142CEA8001934A2 /* RoundedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F802D3092142CEA8001934A2 /* RoundedLabel.swift */; };
 		F809ED2F213C72EE007280E5 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F809ED2E213C72EE007280E5 /* SWRevealViewController.m */; };
 		F809ED33213D85C4007280E5 /* HomeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809ED32213D85C4007280E5 /* HomeTVC.swift */; };
 		F809ED35213D8D88007280E5 /* SideMenuTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809ED34213D8D88007280E5 /* SideMenuTVC.swift */; };
@@ -42,12 +44,16 @@
 		F8C80999214069CB008FBC44 /* AdsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C80998214069CB008FBC44 /* AdsCollectionViewCell.swift */; };
 		F8C8099C21406E65008FBC44 /* FavouriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C8099B21406E65008FBC44 /* FavouriteCollectionViewCell.swift */; };
 		F8C809A021408004008FBC44 /* StoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C8099F21408004008FBC44 /* StoriesCollectionViewCell.swift */; };
+		F8C809A221409264008FBC44 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8C809A121409264008FBC44 /* CoreLocation.framework */; };
+		F8C809A42140926F008FBC44 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8C809A32140926F008FBC44 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3E7B8CAEC84FC85C69208E17 /* Pods-Notify Nearby Redesign.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Notify Nearby Redesign.release.xcconfig"; path = "Pods/Target Support Files/Pods-Notify Nearby Redesign/Pods-Notify Nearby Redesign.release.xcconfig"; sourceTree = "<group>"; };
 		545E1CDABABA27ED5C531E15 /* Pods-Notify Nearby Redesign.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Notify Nearby Redesign.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Notify Nearby Redesign/Pods-Notify Nearby Redesign.debug.xcconfig"; sourceTree = "<group>"; };
 		D5F012C12D7F2083FE7F68F2 /* Pods_Notify_Nearby_Redesign.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Notify_Nearby_Redesign.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F802D3072142C9A0001934A2 /* TopInterestCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopInterestCollectionViewCell.swift; sourceTree = "<group>"; };
+		F802D3092142CEA8001934A2 /* RoundedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedLabel.swift; sourceTree = "<group>"; };
 		F809ED2C213C72ED007280E5 /* Notify Nearby Redesign-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Notify Nearby Redesign-Bridging-Header.h"; sourceTree = "<group>"; };
 		F809ED2D213C72EE007280E5 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		F809ED2E213C72EE007280E5 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
@@ -86,6 +92,8 @@
 		F8C80998214069CB008FBC44 /* AdsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsCollectionViewCell.swift; sourceTree = "<group>"; };
 		F8C8099B21406E65008FBC44 /* FavouriteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCollectionViewCell.swift; sourceTree = "<group>"; };
 		F8C8099F21408004008FBC44 /* StoriesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesCollectionViewCell.swift; sourceTree = "<group>"; };
+		F8C809A121409264008FBC44 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		F8C809A32140926F008FBC44 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +101,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8C809A42140926F008FBC44 /* MapKit.framework in Frameworks */,
+				F8C809A221409264008FBC44 /* CoreLocation.framework in Frameworks */,
 				934366EA8EFD3F913AC910F7 /* Pods_Notify_Nearby_Redesign.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -103,6 +113,8 @@
 		32E7EEC6D14D25C5BA04EB65 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F8C809A32140926F008FBC44 /* MapKit.framework */,
+				F8C809A121409264008FBC44 /* CoreLocation.framework */,
 				D5F012C12D7F2083FE7F68F2 /* Pods_Notify_Nearby_Redesign.framework */,
 			);
 			name = Frameworks;
@@ -115,6 +127,14 @@
 				3E7B8CAEC84FC85C69208E17 /* Pods-Notify Nearby Redesign.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		F802D3062142C973001934A2 /* Top Interest Selection */ = {
+			isa = PBXGroup;
+			children = (
+				F802D3072142C9A0001934A2 /* TopInterestCollectionViewCell.swift */,
+			);
+			path = "Top Interest Selection";
 			sourceTree = "<group>";
 		};
 		F809ED31213D8087007280E5 /* SWRevealController */ = {
@@ -198,6 +218,7 @@
 				F867093A213EFB48004CAD58 /* RedSmallButton.swift */,
 				F867093C213EFB8C004CAD58 /* BlackBorderSmallButton.swift */,
 				F8C80981213F0249008FBC44 /* RoundedImage.swift */,
+				F802D3092142CEA8001934A2 /* RoundedLabel.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -298,6 +319,7 @@
 		F8C8099321404F3D008FBC44 /* Interest */ = {
 			isa = PBXGroup;
 			children = (
+				F802D3062142C973001934A2 /* Top Interest Selection */,
 				F809ED3E213D9172007280E5 /* InterestVC.swift */,
 				F8C8099421404F6D008FBC44 /* InterestCollectionViewCell.swift */,
 			);
@@ -477,11 +499,13 @@
 				F8C80980213F009D008FBC44 /* ProfileTVC.swift in Sources */,
 				F836C104213AFF76005A86F8 /* AppDelegate.swift in Sources */,
 				F8C8098A213F0947008FBC44 /* InterestCVC.swift in Sources */,
+				F802D30A2142CEA8001934A2 /* RoundedLabel.swift in Sources */,
 				F8C80999214069CB008FBC44 /* AdsCollectionViewCell.swift in Sources */,
 				F809ED41213D918A007280E5 /* AdsVC.swift in Sources */,
 				F867093B213EFB48004CAD58 /* RedSmallButton.swift in Sources */,
 				F8670935213EDE24004CAD58 /* MyFavouriteVC.swift in Sources */,
 				F809ED3A213D8F29007280E5 /* LoginVC.swift in Sources */,
+				F802D3082142C9A0001934A2 /* TopInterestCollectionViewCell.swift in Sources */,
 				F8670939213EDEA0004CAD58 /* NotificationVC.swift in Sources */,
 				F8C8099C21406E65008FBC44 /* FavouriteCollectionViewCell.swift in Sources */,
 				F809ED45213D91D1007280E5 /* FavouriteVC.swift in Sources */,

@@ -28,7 +28,7 @@ class AdsVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-         return CGSize(width: collectionView.frame.width - 30, height: collectionView.frame.height - 40)
+        return CGSize(width: collectionview.frame.width - 150, height: collectionview.frame.height - 130)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -12,7 +12,7 @@ import SwiftSoup
 import SDWebImage
 import SVProgressHUD
 
-class DiscoveryVC: UIViewController, UICollectionViewDelegate , UICollectionViewDataSource{
+class DiscoveryVC: UIViewController, UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout{
     @IBOutlet weak var segmentedcontrols: UISegmentedControl!
     
     var isbProcessed = false
@@ -54,6 +54,12 @@ class DiscoveryVC: UIViewController, UICollectionViewDelegate , UICollectionView
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width - 150, height: collectionView.frame.height - 130)
+    }
+    
+    
     @IBAction func segmentedControlsPressed(_ sender: UISegmentedControl) {
         
         

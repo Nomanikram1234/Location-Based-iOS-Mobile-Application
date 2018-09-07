@@ -12,8 +12,12 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
  
     
 
-    @IBOutlet weak var collectionview: UICollectionView!
+   
     @IBOutlet weak var moreButton: UIBarButtonItem!
+    
+    @IBOutlet weak var interest_collectionview: UICollectionView!
+    
+    @IBOutlet weak var commonInterest_collectionview: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,20 +43,38 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        if collectionView == interest_collectionview{
         return 5
-    }
+        }else {
+            return 5
+        }
+        }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if collectionView == interest_collectionview{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! InterestCollectionViewCell
         cell.imageview.image = UIImage(named: "avatar3")
         cell.title.text = "Momina"
         return cell
-        
+        }
+        else
+        {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "interest_cell", for: indexPath) as! TopInterestCollectionViewCell
+            
+            cell.name.text = "Interest"
+            return cell
+        }
     }
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width - 30, height: collectionView.frame.height - 40)
+        if collectionView == interest_collectionview{
+        return CGSize(width: interest_collectionview.frame.width - 150, height: interest_collectionview.frame.height - 130)
+        }else{
+            return CGSize(width: commonInterest_collectionview.frame.size.width / 4, height: commonInterest_collectionview.frame.size.height - 8)
+        }
     }
     /*
     // MARK: - Navigation

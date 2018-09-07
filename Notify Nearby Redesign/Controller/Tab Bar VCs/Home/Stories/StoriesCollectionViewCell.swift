@@ -18,8 +18,8 @@ class StoriesCollectionViewCell: UICollectionViewCell {
         layer.cornerRadius = layer.frame.height / 2
         layer.masksToBounds = true
         
-        layer.borderColor = UIColor.darkGray.cgColor
-        layer.borderWidth = 2
+        layer.borderColor = UIColor.lightGray.cgColor
+        layer.borderWidth = 1
         
         self.layer.shadowColor = UIColor.darkGray.cgColor
         self.layer.shadowOffset = CGSize(width: 0, height: 3)
