@@ -12,4 +12,11 @@ class StoriesCVC: UICollectionViewCell {
     
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var imageview: UIImageView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        layer.cornerRadius = 7
+        layer.masksToBounds = true
+    }
 }

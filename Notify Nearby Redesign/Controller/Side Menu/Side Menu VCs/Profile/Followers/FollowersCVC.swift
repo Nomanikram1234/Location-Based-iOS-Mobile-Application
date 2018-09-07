@@ -11,4 +11,6 @@ import UIKit
 class FollowersCVC: UICollectionViewCell {
     
     @IBOutlet weak var imageview: RoundedImage!
+    
+   
 }

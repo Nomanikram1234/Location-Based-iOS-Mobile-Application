@@ -691,7 +691,7 @@
             </objects>
             <point key="canvasLocation" x="700" y="980.54187192118229"/>
         </scene>
-        <!--Favourite-->
+        <!--Joint-->
         <scene sceneID="IPv-kJ-gqj">
             <objects>
                 <viewController id="rRT-d5-g42" customClass="FavouriteVC" customModule="Notify_Nearby_Redesign" customModuleProvider="target" sceneMemberID="viewController">
@@ -702,7 +702,7 @@
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TbV-rc-sf3">
                                 <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                                 <items>
-                                    <navigationItem title="Favourite" id="KlH-ff-67s">
+                                    <navigationItem title="Joint" id="KlH-ff-67s">
                                         <barButtonItem key="leftBarButtonItem" title="Item" image="ic_menu" id="cgp-BU-hkc">
                                             <color key="tintColor" red="0.18823529410000001" green="0.23137254900000001" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </barButtonItem>
@@ -774,7 +774,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2xh-DL-zJJ"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Favourite" image="ic_local_activity" id="W4p-Sk-jQa"/>
+                    <tabBarItem key="tabBarItem" title="Joint" image="ic_local_activity" id="W4p-Sk-jQa"/>
                     <connections>
                         <outlet property="collectionview" destination="Zz7-Ee-36d" id="N99-yw-cDH"/>
                         <outlet property="moreButton" destination="cgp-BU-hkc" id="Pax-Ow-Iwb"/>
@@ -1247,8 +1247,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HiW-WI-YDY" customClass="RedSmallButton" customModule="Notify_Nearby_Redesign" customModuleProvider="target">
-                                                    <rect key="frame" x="103" y="6" width="75" height="30"/>
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HiW-WI-YDY" customClass="RedSmallButton" customModule="Notify_Nearby_Redesign" customModuleProvider="target">
+                                                    <rect key="frame" x="23" y="3" width="75" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <state key="normal" title="Follow">
@@ -1256,9 +1256,9 @@
                                                     </state>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tcN-Ct-fgA" customClass="BlackBorderSmallButton" customModule="Notify_Nearby_Redesign" customModuleProvider="target">
-                                                    <rect key="frame" x="197" y="6" width="75" height="30"/>
+                                                    <rect key="frame" x="150" y="7" width="75" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Message">
+                                                    <state key="normal" title="Edit">
                                                         <color key="titleColor" red="0.23241167539999999" green="0.27045232060000002" blue="0.24450468750000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     </state>
                                                 </button>
