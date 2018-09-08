@@ -9,7 +9,25 @@
 import UIKit
 
 class SplashVC: UIViewController {
-
+    
+    /* Variable related to Sign in */
+    
+    @IBOutlet var signinView: UIView!
+    @IBOutlet weak var signinView_email: UITextField!
+    @IBOutlet weak var signinView_password: UITextField!
+    @IBOutlet weak var signinView_loginBtn: TransparentButton!
+    @IBOutlet weak var signinView_signupBtn: UIButton!
+    
+    
+    
+    /* Variable related to Sign up */
+    
+    
+    /* Variable related to this View Controller */
+    
+    @IBOutlet weak var splash_loginBtn: TransparentButton!
+    @IBOutlet weak var splash_signupBtn: TransparentButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,7 +39,15 @@ class SplashVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    @IBAction func splash_loginBtnPressed(_ sender: Any) {
+        
+        print("Splash: Login Button Pressed")
+    }
+    
+    @IBAction func splash_signupBtnPressed(_ sender: Any) {
+        
+        print("Splash: Signup Button Pressed")
+    }
     /*
     // MARK: - Navigation
 

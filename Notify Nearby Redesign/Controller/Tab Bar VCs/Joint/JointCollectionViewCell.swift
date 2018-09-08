@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavouriteCollectionViewCell: UICollectionViewCell {
+class JointCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageview: UIImageView!
     @IBOutlet weak var title: UILabel!

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavouriteVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+class JointVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
   
     
 
@@ -36,7 +36,7 @@ class FavouriteVC: UIViewController,UICollectionViewDelegate,UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! FavouriteCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! JointCollectionViewCell
         cell.imageview.image = UIImage(named: "avatar4")
         cell.title.text = "Momina"
         return cell
