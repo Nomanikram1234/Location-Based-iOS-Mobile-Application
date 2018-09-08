@@ -1,5 +1,5 @@
 //
-//  NotificationVC.swift
+//  MyFavouriteVC.swift
 //  Notify Nearby Redesign
 //
 //  Created by Noman Ikram on 04/09/2018.
@@ -8,7 +8,11 @@
 
 import UIKit
 
-class NotificationVC: UIViewController {
+class MyFavouriteVC: UIViewController ,UITableViewDelegate,UITableViewDataSource{
+ 
+    
+    @IBOutlet weak var tableview: UITableView!
+    
     @IBOutlet weak var moreButton: UIBarButtonItem!
     
     override func viewDidLoad() {
@@ -23,6 +27,21 @@ class NotificationVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableview.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MyFavouriteTableViewCell
+        cell.imageview.image = UIImage(named: "avatar4")
+        cell.title.text = "Momina"
+        cell.type.text = "Interest"
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 85.0
+    }
     func sidemenu(){
         if revealViewController() != nil{
             moreButton.target = revealViewController()
@@ -33,6 +52,7 @@ class NotificationVC: UIViewController {
             
         }
     }
+    
 
     /*
     // MARK: - Navigation

@@ -1,5 +1,5 @@
 //
-//  MyFavouriteVC.swift
+//  NotificationVC.swift
 //  Notify Nearby Redesign
 //
 //  Created by Noman Ikram on 04/09/2018.
@@ -8,9 +8,11 @@
 
 import UIKit
 
-class MyFavouriteVC: UIViewController {
-
+class NotificationTVC: UITableViewController {
     @IBOutlet weak var moreButton: UIBarButtonItem!
+    
+    @IBOutlet weak var toggle: UISwitch!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +36,10 @@ class MyFavouriteVC: UIViewController {
             
         }
     }
-    
 
+    @IBAction func togglePressed(_ sender: Any) {
+        print("Notification: Toggle Interacted")
+        }
     /*
     // MARK: - Navigation
 
