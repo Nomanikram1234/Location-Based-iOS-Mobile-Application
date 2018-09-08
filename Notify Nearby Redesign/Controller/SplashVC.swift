@@ -13,20 +13,46 @@ class SplashVC: UIViewController {
     /* Variable related to Sign in */
     
     @IBOutlet var signinView: UIView!
+    
     @IBOutlet weak var signinView_email: UITextField!
     @IBOutlet weak var signinView_password: UITextField!
+    
+    @IBOutlet weak var signin_forgottonPassword: UIButton!
+    
     @IBOutlet weak var signinView_loginBtn: TransparentButton!
     @IBOutlet weak var signinView_signupBtn: UIButton!
-    
-    
     
     /* Variable related to Sign up */
     
     
+    @IBOutlet var signupView: UIView!
+    
+    @IBOutlet weak var signupView_name: UITextField!
+    @IBOutlet weak var signupView_email: UITextField!
+    @IBOutlet weak var signupView_password: UITextField!
+    @IBOutlet weak var signupView_confirmPassword: UITextField!
+    @IBOutlet weak var signupView_contact: UITextField!
+    
+    
+    /* Reset View */
+    @IBOutlet var resetView: RoundedView!
+    
+    @IBOutlet weak var resetView_email: UITextField!
+    @IBOutlet weak var resetView_resetBtn: TransparentButton!
+    @IBOutlet weak var resetView_cancelBtn: BlackBorderSmallButton!
+    
+    /* Verification View*/
+    
+    @IBOutlet var verificationView: UIView!
+    @IBOutlet weak var verificationView_email: UITextField!
+    
     /* Variable related to this View Controller */
+    @IBOutlet weak var verificationView_cancelBtn: BlackBorderSmallButton!
     
     @IBOutlet weak var splash_loginBtn: TransparentButton!
     @IBOutlet weak var splash_signupBtn: TransparentButton!
+    
+    @IBOutlet weak var blackBG: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,14 +65,193 @@ class SplashVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    /***********Splash Screen***************/
+    
     @IBAction func splash_loginBtnPressed(_ sender: Any) {
         
         print("Splash: Login Button Pressed")
+        
+        // adding signin view
+        let v = self.signinView
+        v?.center = self.view.center
+        v?.frame.origin.y = (v?.frame.origin.y)! - 50
+        self.view.addSubview(v!)
+        
+        // animating
+        UIView.animate(withDuration: 1) {
+            self.blackBG.alpha = 0.4
+            self.splash_loginBtn.alpha = 0
+            self.splash_signupBtn.alpha = 0
+            
+        }
+        
     }
     
     @IBAction func splash_signupBtnPressed(_ sender: Any) {
         
         print("Splash: Signup Button Pressed")
+        
+        // adding signup view
+        let v = self.signupView
+        v?.center = self.view.center
+        v?.frame.origin.y = (v?.frame.origin.y)! - 100
+        self.view.addSubview(v!)
+        
+        // animating
+        UIView.animate(withDuration: 1) {
+            self.blackBG.alpha = 0.4
+            self.splash_loginBtn.alpha = 0
+            self.splash_signupBtn.alpha = 0
+            
+        }
+        
+    }
+    
+    
+    /***********   Sign In View    ***************/
+    @IBAction func signinView_loginBtnPressed(_ sender: Any) {
+        print("Login View: Login Button Pressed")
+    }
+    
+    @IBAction func signinView_signupBtnPressed(_ sender: Any) {
+        
+        
+        // adding signup view
+        let v = self.signupView
+        v?.center = self.view.center
+        v?.frame.origin.y = (v?.frame.origin.y)! - 100
+        v?.alpha = 0
+        self.view.addSubview(v!)
+        
+        UIView.animate(withDuration: 2) {
+            // removing previous view i.e. signin view
+            for view in self.view.subviews{
+                if view == self.signinView{
+                    view.removeFromSuperview()
+                }
+            }
+            
+            v?.alpha = 1
+ 
+        }
+  
+       
+        
+        
+        
+    }
+    
+    
+    @IBAction func signinView_forgottenPassword(_ sender: Any) {
+        
+        // adding signup view
+        let v = self.resetView
+        v?.center = self.view.center
+        v?.frame.origin.y = (v?.frame.origin.y)! - 50
+        v?.alpha = 0
+        self.view.addSubview(v!)
+        
+        
+        
+        UIView.animate(withDuration: 1) {
+            for view in self.view.subviews{
+                if view == self.signinView{
+                    view.removeFromSuperview()
+                }
+            }
+            
+            v?.alpha = 1
+        }
+        
+    }
+    
+    
+    
+     /***********   Sign Up View    ***************/
+    
+    @IBAction func signupView_signupBtnPressed(_ sender: Any) {
+    }
+    
+    @IBAction func signupView_signinBtnPressed(_ sender: Any) {
+   
+        // adding signup view
+        let v = self.signinView
+        v?.center = self.view.center
+        v?.frame.origin.y = (v?.frame.origin.y)! - 100
+        v?.alpha = 0
+        self.view.addSubview(v!)
+        
+        // animating
+        UIView.animate(withDuration: 2) {
+            // removing previous view i.e. signin view
+            for view in self.view.subviews{
+                if view == self.signupView{
+                    view.removeFromSuperview()
+                }
+            }
+            
+            v?.alpha = 1
+            
+        }
+        
+    }
+    
+    /****** Reset ******/
+    
+    @IBAction func resetView_resetBtn(_ sender: Any) {
+        print("Reset View: Reset Button Pressed")
+    }
+    @IBAction func resetView_cancelBtn(_ sender: Any) {
+        
+        print("Reset View: Cancel Button Pressed")
+        
+        // adding signin view
+        let v = self.signinView
+        v?.center = self.view.center
+        v?.frame.origin.y = (v?.frame.origin.y)! - 50
+        v?.alpha = 0
+        self.view.addSubview(v!)
+        
+        
+        UIView.animate(withDuration: 2) {
+            for view in self.view.subviews{
+                if view == self.resetView{
+                    view.removeFromSuperview()
+                }
+            }
+            
+            v?.alpha = 1
+        }
+    }
+    
+    
+    /******* Verification****/
+    
+    
+    @IBAction func verificationView_sendBtn(_ sender: Any) {
+        print("Verification View: Send Button Pressed")
+    }
+    
+    @IBAction func verificationView_cancelButton(_ sender: Any) {
+        print("Verification View: Cancel Button Pressed")
+        
+        // adding signin view
+        let v = self.signinView
+        v?.center = self.view.center
+        v?.frame.origin.y = (v?.frame.origin.y)! - 50
+        v?.alpha = 0
+        self.view.addSubview(v!)
+        
+        
+        UIView.animate(withDuration: 2) {
+            for view in self.view.subviews{
+                if view == self.resetView{
+                    view.removeFromSuperview()
+                }
+            }
+            
+            v?.alpha = 1
+        }
     }
     /*
     // MARK: - Navigation
