@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SplashVC: UIViewController {
+class SplashVC: UIViewController ,UITextFieldDelegate{
     
     /* Variable related to Sign in */
     
@@ -65,6 +65,18 @@ class SplashVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // when we touch outside the textfield then keyboard will disappear
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    // when we will touch on return button on key it will hide the keyboard
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    
     /***********Splash Screen***************/
     
     @IBAction func splash_loginBtnPressed(_ sender: Any) {
@@ -111,6 +123,9 @@ class SplashVC: UIViewController {
     /***********   Sign In View    ***************/
     @IBAction func signinView_loginBtnPressed(_ sender: Any) {
         print("Login View: Login Button Pressed")
+        
+        let vc = storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+        present(vc, animated: true, completion: nil)
     }
     
     @IBAction func signinView_signupBtnPressed(_ sender: Any) {

@@ -10,6 +10,9 @@ import UIKit
 
 class MyInterestVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
+    var arr = ["one","two","three","four","five","six","seven"]
+    
+    
     @IBOutlet var additional_view: UIView!
     
     @IBOutlet weak var interest_name: UITextField!
@@ -27,6 +30,27 @@ class MyInterestVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     @IBAction func addInterestPressed(_ sender: Any)
     {
+        print("Interest View: Additional View -> Add Button Pressed")
+        
+        arr.append(interest_name.text!)
+        
+        tableview.reloadData()
+        
+        
+        
+        UIView.animate(withDuration: 1) {
+        
+            for view in self.view.subviews{
+                if view ==  self.additional_view{
+                    view.removeFromSuperview()
+                }
+            }
+            
+            self.black_view.alpha = 0
+            
+        }
+     
+        
         
         
     }
@@ -52,15 +76,30 @@ class MyInterestVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return arr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as!  MyInterestTableViewCell
-        cell.interest_title.text = "Interest title"
+        cell.interest_title.text = arr[indexPath.row]
       return cell
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    
+        if editingStyle == .delete {
+            
+            // remove the item from the data model
+            arr.remove(at: indexPath.row)
+            
+            // delete the table view row
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+        }
+        
+    }
+    
+  
     
     func sidemenu(){
         if revealViewController() != nil{

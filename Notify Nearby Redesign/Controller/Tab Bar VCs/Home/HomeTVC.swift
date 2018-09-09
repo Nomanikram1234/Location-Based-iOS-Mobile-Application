@@ -11,6 +11,7 @@ import MapKit
 
 class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, MKMapViewDelegate{
  
+    @IBOutlet weak var notificationBarBtn: UIBarButtonItem!
     
     @IBOutlet var tableview: UITableView!
     
@@ -60,7 +61,13 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
             moreButton.action = #selector(revealViewController().revealToggle(_:))
             revealViewController().rearViewRevealWidth = 275
             
-            revealViewController().rightViewRevealWidth = 160
+
+            
+            
+//            revealViewController().rightViewRevealWidth = 160
+            revealViewController().rightViewRevealWidth = 270
+            notificationBarBtn.target = revealViewController()
+            notificationBarBtn.action = #selector(SWRevealViewController.rightRevealToggle(_:))
             
         }
     }

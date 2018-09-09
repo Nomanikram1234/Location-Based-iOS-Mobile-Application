@@ -33,13 +33,25 @@ class DiscoveryVC: UIViewController, UICollectionViewDelegate , UICollectionView
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        SVProgressHUD.show()
+        if DiscoveryVC.arrIslamabad.count == 0 {
         scrapingIslamabad()
+             collectionview.reloadData()
+        }
         
-        collectionview.reloadData()
-//        SVProgressHUD.dismiss()
-        scrapingLahore()
-        scrapingKarachi()
+        if DiscoveryVC.arrKarachi.count == 0 {
+            scrapingKarachi()
+//             collectionview.reloadData()
+        }
+        
+        if DiscoveryVC.arrLahore.count == 0 {
+            scrapingLahore()
+//             collectionview.reloadData()
+        }
+        
+//        collectionview.reloadData()
+
+//        scrapingLahore()
+//        scrapingKarachi()
         // Do any additional setup after loading the view.
         sidemenu()
         
@@ -135,7 +147,7 @@ class DiscoveryVC: UIViewController, UICollectionViewDelegate , UICollectionView
    
     
     func scrapingKarachi()  {
-        SVProgressHUD.show()
+//        SVProgressHUD.show()
         
         let urlString = URL(string: "https://allevents.in/karachi/all")
         /////////////////////
@@ -213,7 +225,7 @@ class DiscoveryVC: UIViewController, UICollectionViewDelegate , UICollectionView
     
     
     func scrapingIslamabad()  {
-        SVProgressHUD.show()
+//        SVProgressHUD.show()
         
         let urlString = URL(string: "https://allevents.in/Islamabad/all")
         /////////////////////
@@ -289,7 +301,7 @@ class DiscoveryVC: UIViewController, UICollectionViewDelegate , UICollectionView
     }
     
     func scrapingLahore()  {
-        SVProgressHUD.show()
+//        SVProgressHUD.show()
         
         let urlString = URL(string: "https://allevents.in/lahore/all")
         /////////////////////

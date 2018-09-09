@@ -12,7 +12,8 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
  
     
 
-   
+    @IBOutlet weak var notificationBarBtn: UIBarButtonItem!
+    
     @IBOutlet weak var moreButton: UIBarButtonItem!
     
     @IBOutlet weak var interest_collectionview: UICollectionView!

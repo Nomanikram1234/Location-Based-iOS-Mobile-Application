@@ -14,6 +14,7 @@
 		F802D30F2142F118001934A2 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F802D30E2142F118001934A2 /* RoundedButton.swift */; };
 		F802D31121443369001934A2 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F802D31021443369001934A2 /* RoundedView.swift */; };
 		F802D3142144504E001934A2 /* MyFavouriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F802D3132144504E001934A2 /* MyFavouriteTableViewCell.swift */; };
+		F802D3182144FE85001934A2 /* ActivityRightSideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F802D3172144FE85001934A2 /* ActivityRightSideMenuVC.swift */; };
 		F809ED2F213C72EE007280E5 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F809ED2E213C72EE007280E5 /* SWRevealViewController.m */; };
 		F809ED33213D85C4007280E5 /* HomeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809ED32213D85C4007280E5 /* HomeTVC.swift */; };
 		F809ED35213D8D88007280E5 /* SideMenuTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F809ED34213D8D88007280E5 /* SideMenuTVC.swift */; };
@@ -35,7 +36,7 @@
 		F836C10E213AFF78005A86F8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F836C10C213AFF78005A86F8 /* LaunchScreen.storyboard */; };
 		F8670933213EDE0B004CAD58 /* MyInterestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8670932213EDE0B004CAD58 /* MyInterestVC.swift */; };
 		F8670935213EDE24004CAD58 /* MyFavouriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8670934213EDE24004CAD58 /* MyFavouriteVC.swift */; };
-		F8670937213EDE63004CAD58 /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8670936213EDE63004CAD58 /* AccountVC.swift */; };
+		F8670937213EDE63004CAD58 /* AccountTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8670936213EDE63004CAD58 /* AccountTVC.swift */; };
 		F8670939213EDEA0004CAD58 /* NotificationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8670938213EDEA0004CAD58 /* NotificationTVC.swift */; };
 		F867093B213EFB48004CAD58 /* RedSmallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F867093A213EFB48004CAD58 /* RedSmallButton.swift */; };
 		F867093D213EFB8C004CAD58 /* BlackBorderSmallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F867093C213EFB8C004CAD58 /* BlackBorderSmallButton.swift */; };
@@ -62,6 +63,7 @@
 		F802D30E2142F118001934A2 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		F802D31021443369001934A2 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		F802D3132144504E001934A2 /* MyFavouriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFavouriteTableViewCell.swift; sourceTree = "<group>"; };
+		F802D3172144FE85001934A2 /* ActivityRightSideMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRightSideMenuVC.swift; sourceTree = "<group>"; };
 		F809ED2C213C72ED007280E5 /* Notify Nearby Redesign-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Notify Nearby Redesign-Bridging-Header.h"; sourceTree = "<group>"; };
 		F809ED2D213C72EE007280E5 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		F809ED2E213C72EE007280E5 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
@@ -87,7 +89,7 @@
 		F836C10F213AFF78005A86F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F8670932213EDE0B004CAD58 /* MyInterestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInterestVC.swift; sourceTree = "<group>"; };
 		F8670934213EDE24004CAD58 /* MyFavouriteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFavouriteVC.swift; sourceTree = "<group>"; };
-		F8670936213EDE63004CAD58 /* AccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
+		F8670936213EDE63004CAD58 /* AccountTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTVC.swift; sourceTree = "<group>"; };
 		F8670938213EDEA0004CAD58 /* NotificationTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTVC.swift; sourceTree = "<group>"; };
 		F867093A213EFB48004CAD58 /* RedSmallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedSmallButton.swift; sourceTree = "<group>"; };
 		F867093C213EFB8C004CAD58 /* BlackBorderSmallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackBorderSmallButton.swift; sourceTree = "<group>"; };
@@ -171,6 +173,14 @@
 			path = Notification;
 			sourceTree = "<group>";
 		};
+		F802D3162144609D001934A2 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				F8670936213EDE63004CAD58 /* AccountTVC.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
 		F809ED31213D8087007280E5 /* SWRevealController */ = {
 			isa = PBXGroup;
 			children = (
@@ -218,6 +228,7 @@
 			children = (
 				F809ED48213D9315007280E5 /* Side Menu VCs */,
 				F809ED34213D8D88007280E5 /* SideMenuTVC.swift */,
+				F802D3172144FE85001934A2 /* ActivityRightSideMenuVC.swift */,
 			);
 			path = "Side Menu";
 			sourceTree = "<group>";
@@ -228,7 +239,7 @@
 				F8C80983213F07F9008FBC44 /* Profile */,
 				F802D30B2142EA91001934A2 /* MyInterest */,
 				F802D31221445004001934A2 /* MyFavourte */,
-				F8670936213EDE63004CAD58 /* AccountVC.swift */,
+				F802D3162144609D001934A2 /* Account */,
 				F802D315214456F4001934A2 /* Notification */,
 			);
 			path = "Side Menu VCs";
@@ -540,6 +551,7 @@
 				F8C8098A213F0947008FBC44 /* InterestCVC.swift in Sources */,
 				F802D30A2142CEA8001934A2 /* RoundedLabel.swift in Sources */,
 				F802D31121443369001934A2 /* RoundedView.swift in Sources */,
+				F802D3182144FE85001934A2 /* ActivityRightSideMenuVC.swift in Sources */,
 				F8C80999214069CB008FBC44 /* AdsCollectionViewCell.swift in Sources */,
 				F809ED41213D918A007280E5 /* AdsVC.swift in Sources */,
 				F867093B213EFB48004CAD58 /* RedSmallButton.swift in Sources */,
@@ -550,7 +562,7 @@
 				F8C8099C21406E65008FBC44 /* JointCollectionViewCell.swift in Sources */,
 				F809ED45213D91D1007280E5 /* JointVC.swift in Sources */,
 				F809ED33213D85C4007280E5 /* HomeTVC.swift in Sources */,
-				F8670937213EDE63004CAD58 /* AccountVC.swift in Sources */,
+				F8670937213EDE63004CAD58 /* AccountTVC.swift in Sources */,
 				F83598D3213BD02200BFF1D8 /* CustomTextField.swift in Sources */,
 				F8C8098C213F095D008FBC44 /* FollowersCVC.swift in Sources */,
 				F809ED2F213C72EE007280E5 /* SWRevealViewController.m in Sources */,

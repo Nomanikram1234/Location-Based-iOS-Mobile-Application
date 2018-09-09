@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AccountVC: UIViewController {
+class AccountTVC: UITableViewController {
 
     @IBOutlet weak var moreButton: UIBarButtonItem!
     
