@@ -113,24 +113,75 @@ class DiscoveryVC: UIViewController, UICollectionViewDelegate , UICollectionView
      
         if segmentedcontrols.selectedSegmentIndex == 0{
 //            print(DiscoveryVC.arrIslamabad[indexPath.row].imageUrl!)
-            cell.imageview.sd_setImage(with: URL(string:DiscoveryVC.arrIslamabad[indexPath.row].imageUrl!), completed: nil)
-            cell.eventTitle.text = DiscoveryVC.arrIslamabad[indexPath.row].title
-            cell.eventAddress.text = DiscoveryVC.arrIslamabad[indexPath.row].address
-            cell.eventDate.text = DiscoveryVC.arrIslamabad[indexPath.row].date
+         
+            // Activity Indicator Added
+            let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+            activityIndicator.center = view.center
+            activityIndicator.hidesWhenStopped = true
+            activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+            self.view.addSubview(activityIndicator)
+            
+            let imgView = cell.viewWithTag(1) as! UIImageView
+            imgView.sd_setShowActivityIndicatorView(true)
+            imgView.sd_setIndicatorStyle(.gray)
+            
+            activityIndicator.startAnimating()
+            
+            cell.imageview.sd_setImage(with: URL(string:DiscoveryVC.arrIslamabad[indexPath.row].imageUrl!), completed: nil) // Functional
+            
+            activityIndicator.stopAnimating()
+            
+            cell.eventTitle.text = DiscoveryVC.arrIslamabad[indexPath.row].title // Functional
+            cell.eventAddress.text = DiscoveryVC.arrIslamabad[indexPath.row].address // Functional
+            cell.eventDate.text = DiscoveryVC.arrIslamabad[indexPath.row].date // Functional
         }else if segmentedcontrols.selectedSegmentIndex == 1{
 //            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! DiscoveryCollectionViewCell
 //            print(DiscoveryVC.arrLahore[indexPath.row].imageUrl!)
+            
+            let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+            activityIndicator.center = view.center
+            activityIndicator.hidesWhenStopped = true
+            activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+            self.view.addSubview(activityIndicator)
+            
+            let imgView = cell.viewWithTag(1) as! UIImageView
+            imgView.sd_setShowActivityIndicatorView(true)
+            imgView.sd_setIndicatorStyle(.gray)
+            
+            activityIndicator.startAnimating()
+            
+            
             cell.imageview.sd_setImage(with: URL(string:DiscoveryVC.arrLahore[indexPath.row].imageUrl!), completed: nil)
+            
+            activityIndicator.stopAnimating()
+            
             cell.eventTitle.text = DiscoveryVC.arrLahore[indexPath.row].title
             cell.eventAddress.text = DiscoveryVC.arrLahore[indexPath.row].address
             cell.eventDate.text = DiscoveryVC.arrLahore[indexPath.row].date
         }else if segmentedcontrols.selectedSegmentIndex == 2{
 //            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! DiscoveryCollectionViewCell
 //            print(DiscoveryVC.arrKarachi[indexPath.row].imageUrl!)
-            cell.imageview.sd_setImage(with: URL(string:DiscoveryVC.arrKarachi[indexPath.row].imageUrl!), completed: nil)
-            cell.eventTitle.text = DiscoveryVC.arrKarachi[indexPath.row].title
-            cell.eventAddress.text = DiscoveryVC.arrKarachi[indexPath.row].address
-            cell.eventDate.text = DiscoveryVC.arrKarachi[indexPath.row].date
+            
+            
+            let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+            activityIndicator.center = view.center
+            activityIndicator.hidesWhenStopped = true
+            activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+            self.view.addSubview(activityIndicator)
+            
+            let imgView = cell.viewWithTag(1) as! UIImageView
+            imgView.sd_setShowActivityIndicatorView(true)
+            imgView.sd_setIndicatorStyle(.gray)
+            
+            activityIndicator.startAnimating()
+            
+            cell.imageview.sd_setImage(with: URL(string:DiscoveryVC.arrKarachi[indexPath.row].imageUrl!), completed: nil) // Funtional
+            
+            activityIndicator.stopAnimating()
+            
+            cell.eventTitle.text = DiscoveryVC.arrKarachi[indexPath.row].title // Funtional
+            cell.eventAddress.text = DiscoveryVC.arrKarachi[indexPath.row].address // Funtional
+            cell.eventDate.text = DiscoveryVC.arrKarachi[indexPath.row].date // Funtional
         }
         
         
