@@ -11,10 +11,11 @@ import MapKit
 
 class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, MKMapViewDelegate{
  
+    var locationManager = CLLocationManager()
+    let authStatus = CLLocationManager.authorizationStatus()
+    
     @IBOutlet weak var notificationBarBtn: UIBarButtonItem!
-    
     @IBOutlet var tableview: UITableView!
-    
     @IBOutlet weak var mapview: MKMapView!
     
     @IBOutlet weak var moreButton: UIBarButtonItem!
@@ -24,20 +25,9 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
 
         // Do any additional setup after loading the view.
         sidemenu()
-//
-//        mapview.layer.frame.size.height = mapview.layer.frame.size.width
-//
-////        tableview.layer.frame.size.height = view.frame.size.height
-//        mapview.layer.cornerRadius = 40
-//        mapview.layer.masksToBounds = true
-//
-//        mapview.layer.shadowColor = UIColor.darkGray.cgColor
-//        mapview.layer.shadowOffset = CGSize(width: 0, height: 3)
-//        mapview.layer.shadowRadius = 5
-//        mapview.layer.shadowOpacity = 0.5
         
-//        mapview.clipsToBounds = false
-//        mapview.layer.backgroundColor = UIColor.clear.cgColor
+        configureLocationServices()
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,15 +52,26 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
             revealViewController().rearViewRevealWidth = 275
             
 
-            
-            
 //            revealViewController().rightViewRevealWidth = 160
-            revealViewController().rightViewRevealWidth = 270
+            revealViewController().rightViewRevealWidth = 275
             notificationBarBtn.target = revealViewController()
             notificationBarBtn.action = #selector(SWRevealViewController.rightRevealToggle(_:))
             
         }
     }
+    
+    // to request the location services at the start of mapVC incase it is not turned on
+    func configureLocationServices() {
+        if authStatus == .notDetermined {
+            locationManager.requestAlwaysAuthorization()
+        }
+        else{
+            return
+        }
+    }
+    
+    
+    
     /*
     // MARK: - Navigation
 

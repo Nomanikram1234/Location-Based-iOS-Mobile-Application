@@ -57,6 +57,9 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
         // Dispose of any resources that can be recreated.
     }
     
+    
+    
+    
 //    @IBAction func mapviewMaximizeBtnPressed(_ sender: Any) {
 //        print("view button pressed")
 //        UIView.animate(withDuration: 2) {
