@@ -53,6 +53,7 @@
 		F8C809A42140926F008FBC44 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8C809A32140926F008FBC44 /* MapKit.framework */; };
 		F8CE7999214510C100B965B8 /* StoriesDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CE7998214510C100B965B8 /* StoriesDetailVC.swift */; };
 		F8CE799B2145139800B965B8 /* interestStoryDetailCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CE799A2145139800B965B8 /* interestStoryDetailCVC.swift */; };
+		F8CE799D21457F5700B965B8 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CE799C21457F5700B965B8 /* Event.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +109,7 @@
 		F8C809A32140926F008FBC44 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		F8CE7998214510C100B965B8 /* StoriesDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesDetailVC.swift; sourceTree = "<group>"; };
 		F8CE799A2145139800B965B8 /* interestStoryDetailCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = interestStoryDetailCVC.swift; sourceTree = "<group>"; };
+		F8CE799C21457F5700B965B8 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -294,6 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				F835E3AA213DCFFA00901CFF /* Discovery.swift */,
+				F8CE799C21457F5700B965B8 /* Event.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -572,6 +575,7 @@
 				F809ED41213D918A007280E5 /* AdsVC.swift in Sources */,
 				F867093B213EFB48004CAD58 /* RedSmallButton.swift in Sources */,
 				F8670935213EDE24004CAD58 /* MyFavouriteVC.swift in Sources */,
+				F8CE799D21457F5700B965B8 /* Event.swift in Sources */,
 				F809ED3A213D8F29007280E5 /* LoginVC.swift in Sources */,
 				F802D3082142C9A0001934A2 /* TopInterestCollectionViewCell.swift in Sources */,
 				F8670939213EDEA0004CAD58 /* NotificationTVC.swift in Sources */,
