@@ -54,6 +54,9 @@
 		F8CE7999214510C100B965B8 /* StoriesDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CE7998214510C100B965B8 /* StoriesDetailVC.swift */; };
 		F8CE799B2145139800B965B8 /* interestStoryDetailCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CE799A2145139800B965B8 /* interestStoryDetailCVC.swift */; };
 		F8CE799D21457F5700B965B8 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CE799C21457F5700B965B8 /* Event.swift */; };
+		F8CE79A02145815700B965B8 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CE799F2145815700B965B8 /* AnnotationView.swift */; };
+		F8CE79A32145862D00B965B8 /* EventCalloutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8CE79A22145862D00B965B8 /* EventCalloutView.xib */; };
+		F8CE79A52145864300B965B8 /* EventCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CE79A42145864300B965B8 /* EventCalloutView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,6 +113,9 @@
 		F8CE7998214510C100B965B8 /* StoriesDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesDetailVC.swift; sourceTree = "<group>"; };
 		F8CE799A2145139800B965B8 /* interestStoryDetailCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = interestStoryDetailCVC.swift; sourceTree = "<group>"; };
 		F8CE799C21457F5700B965B8 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		F8CE799F2145815700B965B8 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
+		F8CE79A22145862D00B965B8 /* EventCalloutView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventCalloutView.xib; sourceTree = "<group>"; };
+		F8CE79A42145864300B965B8 /* EventCalloutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCalloutView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,6 +260,7 @@
 		F821606A213BC58500CA19AD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F8CE799E2145813F00B965B8 /* Callout Views */,
 				F835E3A1213DAF5700901CFF /* Custom Library Item Views */,
 				F821606B213BC59100CA19AD /* Custom */,
 			);
@@ -425,6 +432,24 @@
 			path = "Stories Detail on next VC";
 			sourceTree = "<group>";
 		};
+		F8CE799E2145813F00B965B8 /* Callout Views */ = {
+			isa = PBXGroup;
+			children = (
+				F8CE79A1214585FD00B965B8 /* Event Callout View */,
+				F8CE799F2145815700B965B8 /* AnnotationView.swift */,
+			);
+			path = "Callout Views";
+			sourceTree = "<group>";
+		};
+		F8CE79A1214585FD00B965B8 /* Event Callout View */ = {
+			isa = PBXGroup;
+			children = (
+				F8CE79A22145862D00B965B8 /* EventCalloutView.xib */,
+				F8CE79A42145864300B965B8 /* EventCalloutView.swift */,
+			);
+			path = "Event Callout View";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -488,6 +513,7 @@
 			files = (
 				F836C10E213AFF78005A86F8 /* LaunchScreen.storyboard in Resources */,
 				F836C10B213AFF78005A86F8 /* Assets.xcassets in Resources */,
+				F8CE79A32145862D00B965B8 /* EventCalloutView.xib in Resources */,
 				F836C109213AFF76005A86F8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -558,6 +584,7 @@
 				F867093D213EFB8C004CAD58 /* BlackBorderSmallButton.swift in Sources */,
 				F821606D213BC5BC00CA19AD /* TransparentButton.swift in Sources */,
 				F8C8099521404F6D008FBC44 /* InterestCollectionViewCell.swift in Sources */,
+				F8CE79A52145864300B965B8 /* EventCalloutView.swift in Sources */,
 				F8C809A021408004008FBC44 /* StoriesCollectionViewCell.swift in Sources */,
 				F83598D1213BCE1700BFF1D8 /* CustomView.swift in Sources */,
 				F802D30F2142F118001934A2 /* RoundedButton.swift in Sources */,
@@ -577,6 +604,7 @@
 				F8670935213EDE24004CAD58 /* MyFavouriteVC.swift in Sources */,
 				F8CE799D21457F5700B965B8 /* Event.swift in Sources */,
 				F809ED3A213D8F29007280E5 /* LoginVC.swift in Sources */,
+				F8CE79A02145815700B965B8 /* AnnotationView.swift in Sources */,
 				F802D3082142C9A0001934A2 /* TopInterestCollectionViewCell.swift in Sources */,
 				F8670939213EDEA0004CAD58 /* NotificationTVC.swift in Sources */,
 				F8C8099C21406E65008FBC44 /* JointCollectionViewCell.swift in Sources */,

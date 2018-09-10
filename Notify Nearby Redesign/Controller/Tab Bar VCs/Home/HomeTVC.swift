@@ -9,13 +9,15 @@
 import UIKit
 import MapKit
 
-class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, MKMapViewDelegate{
+class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, MKMapViewDelegate,CLLocationManagerDelegate{
     
     var circle: MKCircle? = nil
     let regionRadius: Double = 1000
  
     var locationManager = CLLocationManager()
     let authStatus = CLLocationManager.authorizationStatus()
+    
+     var eventCalloutView : EventCalloutView!
     
     @IBOutlet weak var notificationBarBtn: UIBarButtonItem!
     @IBOutlet var tableview: UITableView!
@@ -32,14 +34,17 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         configureLocationServices()
         centerMapOnUserLocation()
         
-        let anno = MKPointAnnotation()
+        let anno = Event(coordinate: CLLocationCoordinate2D(latitude: 33.549803, longitude: 73.122932))
         anno.title = "Title"
         anno.subtitle = "Subtitle"
         anno.coordinate.latitude = 33.549803
         anno.coordinate.longitude = 73.122932
         mapview.addAnnotation(anno)
-//        showCircle(coordinate: MKUserLocation.coordinate, radius: 1000)
+
+    
     }
+    
+   
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -95,21 +100,65 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     
     // Showing Circle of certian radius
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        // If you want to include other shapes, then this check is needed. If you only want circles, then remove it.
-        //        if let circleOverlay = overlay as? MKCircle {
-        
+    
         let circleRenderer = MKCircleRenderer(overlay: overlay)
         circleRenderer.fillColor = UIColor.black
         circleRenderer.alpha = 0.1
         
         return circleRenderer
-        //        }
+   
     }
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         removeCircle() // remove radius around the current location
         showCircle(coordinate: userLocation.coordinate, radius: 10000) // radius in 10000 meters = 10 kms
     }
+    
+    func mapView(_ mapView: MKMapView,didSelect view: MKAnnotationView)
+    {
+        // 1
+        if view.annotation is MKUserLocation
+        {
+            // Don't proceed with custom callout
+            return
+        }
+        
+        
+        let event = view.annotation as! Event
+        let views = Bundle.main.loadNibNamed("EventCalloutView", owner: nil, options: nil)
+        eventCalloutView = views?[0] as! EventCalloutView
+
+//        storyCalloutView.title.text = story.title
+        
+         eventCalloutView.readMoreButton.addTarget(self, action: #selector(HomeTVC.test(sender:)) , for: .touchUpInside)
+        
+        
+        // 3
+        eventCalloutView.center = CGPoint(x: view.bounds.size.width / 2, y: -eventCalloutView.bounds.size.height*0.52)
+        
+        view.addSubview(eventCalloutView)
+        mapView.setCenter((view.annotation?.coordinate)!, animated: true)
+        
+    }
+
+    @objc func test(sender: UIButton){
+        print("TESTing")
+    }
+    // When select the annotation view
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        print("Annotation Deselected")
+
+        if view.isKind(of: UIView.self)
+        {
+            print("Annotation Deselected: Kind of UIView")
+
+            print(view.viewWithTag(1)?.frame.origin)
+
+                view.viewWithTag(1)?.removeFromSuperview()
+
+        }
+    }
+
     
     // show the circle
     func showCircle(coordinate: CLLocationCoordinate2D, radius: CLLocationDistance) {
@@ -184,9 +233,36 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     func calculateDistance(mainCoordinate: CLLocation,coordinate: CLLocation) -> Double{
         
         let distance = mainCoordinate.distance(from: coordinate)
-        //        print(distance)
+        print("Calculate Distance: \(distance)")
         
         return distance
     }
     
+}
+
+extension MKAnnotationView {
+    override open func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let hitView = super.hitTest(point, with: event)
+        if (hitView != nil)
+        {
+            self.superview?.bringSubview(toFront: self)
+        }
+        return hitView
+    }
+    override open func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        let rect = self.bounds
+        var isInside: Bool = rect.contains(point)
+        if(!isInside)
+        {
+            for view in self.subviews
+            {
+                isInside = view.frame.contains(point)
+                if isInside
+                {
+                    break
+                }
+            }
+        }
+        return isInside
+    }
 }
