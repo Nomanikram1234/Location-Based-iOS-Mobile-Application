@@ -34,7 +34,7 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
     @IBOutlet weak var signupView_password: UITextField!
     @IBOutlet weak var signupView_confirmPassword: UITextField!
     @IBOutlet weak var signupView_contact: UITextField!
-    
+    @IBOutlet weak var signupView_usertype: UISegmentedControl!
     
     /* Reset View */
     @IBOutlet var resetView: RoundedView!
@@ -66,6 +66,9 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+//       login(email: "nomanikram0@icloud.com", password: "Nomi1234")
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -122,9 +125,8 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
             self.blackBG.alpha = 0.4
             self.splash_loginBtn.alpha = 0
             self.splash_signupBtn.alpha = 0
-            
         }
-        
+      resetSigninFields()
     }
     
     
@@ -132,8 +134,9 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
     @IBAction func signinView_loginBtnPressed(_ sender: Any) {
         print("Login View: Login Button Pressed")
         
-        let vc = storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
-        present(vc, animated: true, completion: nil)
+        login(email: signinView_email.text! , password: signinView_password.text!)
+        
+      
     }
     
     @IBAction func signinView_signupBtnPressed(_ sender: Any) {
@@ -193,6 +196,13 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
      /***********   Sign Up View    ***************/
     
     @IBAction func signupView_signupBtnPressed(_ sender: Any) {
+        if signupView_password.text! == signupView_confirmPassword.text!{
+        createNewUser(email: signupView_email.text!, password: signupView_password.text!, name: signupView_name.text!, contact: signupView_contact.text!)
+            
+    
+        }else{
+            print("Signup Failure: Password Not Match")
+        }
     }
     
     @IBAction func signupView_signinBtnPressed(_ sender: Any) {
@@ -216,7 +226,7 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
             v?.alpha = 1
             
         }
-        
+        resetSignupFields()
     }
     
     /****** Reset ******/
@@ -275,6 +285,152 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
             
             v?.alpha = 1
         }
+    }
+    
+    /**FIREBASE**/
+    func createNewUser(email:String,password:String , name:String ,contact:String){
+        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+            if error == nil{
+                print("User Created Successfully")
+             
+                // If first first tab/segment is selected
+                if self.signupView_usertype.selectedSegmentIndex == 0{
+                
+                    let data = ["name":name,
+                                "email":email,
+                                "contact":contact,
+                                "userType":"user"]
+                
+                self.database.child("Users").child((self.auth.currentUser?.uid)!).setValue(data)
+             
+                }
+                // if second tab/ segment is selected
+                else if self.signupView_usertype.selectedSegmentIndex == 1{
+                    
+                    let data = ["name":name,
+                                "email":email,
+                                "contact":contact,
+                                "userType":"advertiser"]
+                    
+                    self.database.child("Users").child((self.auth.currentUser?.uid)!).setValue(data)
+                    
+                }
+                
+                // Sending email verification
+                self.auth.currentUser?.sendEmailVerification(completion: { (error) in
+                    if error == nil{
+                        print("Email Verification Sent")
+                    }else{
+                        print("Email Verification Failed to Send")
+                    }
+                })
+                
+                
+                // Animation
+                
+                // Initializing Sign In View
+                let v = self.signinView
+                v?.alpha = 0
+                v?.center = self.view.center
+                v?.frame.origin.y = (v?.frame.origin.y)! - 100
+                self.view.addSubview(v!)
+                
+                
+                // removing signup view
+                UIView.animate(withDuration: 1) {
+                    
+                    for view in self.view.subviews{
+                        if view == self.signupView{
+                            view.removeFromSuperview()
+                        }
+                    }
+                    
+                    v?.alpha = 1
+                }
+                
+                // signout the current signed in uid
+                do
+                {
+                    try self.auth.signOut()
+                }
+                catch{
+                    print("Signout Failure ")
+                }
+                
+                // reset fields
+                self.resetSignupFields()
+            
+                
+            }else{
+                print("Registration Failed")
+            }
+            
+        }
+    }
+    
+    
+    
+    // Login
+    func login(email:String,password:String){
+        auth.signIn(withEmail: email, password: password) { (result, error) in
+            if error == nil {
+                print("Login Success")
+                
+                // Email Verification
+                if (self.auth.currentUser?.isEmailVerified)! {
+                    print("Email is Verified")
+                    
+                    
+                    // Intiantiate Main Screen
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+                    self.present(vc, animated: true, completion: nil)
+                    
+                }else{
+                    print("Email is not Verified")
+                    let v = self.verificationView
+                    v?.alpha = 0
+                    v?.center = self.view.center
+                    self.verificationView_email.text = self.signinView_email.text
+                    self.view.addSubview(v!)
+                    
+                    UIView.animate(withDuration: 1, animations: {
+                        
+                        self.resetSigninFields()
+                        
+                        for view in self.view.subviews{
+                            if view == self.signinView{
+                                view.removeFromSuperview()
+                            }
+                        }
+                       
+                        v?.alpha = 1
+                    })
+                    
+                    
+                 
+                    
+                }
+                
+            }else{
+                print("Login Failure")
+            }
+        }
+    }
+    
+    
+    // reset fields
+    func resetSignupFields() {
+        self.signupView_usertype.selectedSegmentIndex = 0
+        self.signupView_contact.text = ""
+        self.signupView_password.text = ""
+        self.signupView_confirmPassword.text = ""
+        self.signupView_name.text = ""
+        self.signupView_email.text = ""
+    }
+    
+    func resetSigninFields(){
+        self.signinView_email.text = ""
+        self.signinView_password.text = ""
     }
     /*
     // MARK: - Navigation
