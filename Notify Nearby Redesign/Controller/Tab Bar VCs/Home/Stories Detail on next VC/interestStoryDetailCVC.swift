@@ -11,4 +11,10 @@ import UIKit
 class interestStoryDetailCVC: UICollectionViewCell {
     
     @IBOutlet weak var interest: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        layer.cornerRadius = 7
+    }
 }

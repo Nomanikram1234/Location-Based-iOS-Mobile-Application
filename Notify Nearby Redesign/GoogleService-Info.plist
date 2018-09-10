@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>496145465124-c83vl5qog50bkqhjqqcm7jp5nvkp9i45.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.496145465124-c83vl5qog50bkqhjqqcm7jp5nvkp9i45</string>
+	<key>API_KEY</key>
+	<string>AIzaSyApxsopMq2fqXN4wLlNL7NI1dWxwoo1euM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>496145465124</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.fyp.Notify-Nearby-Redesign</string>
+	<key>PROJECT_ID</key>
+	<string>fypdatabse-3442c</string>
+	<key>STORAGE_BUCKET</key>
+	<string>fypdatabse-3442c.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:496145465124:ios:cf973e99aa8a41c5</string>
+	<key>DATABASE_URL</key>
+	<string>https://fypdatabse-3442c.firebaseio.com</string>
+</dict>
+</plist>

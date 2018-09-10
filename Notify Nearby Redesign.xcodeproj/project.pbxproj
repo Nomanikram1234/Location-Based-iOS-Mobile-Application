@@ -40,6 +40,7 @@
 		F8670939213EDEA0004CAD58 /* NotificationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8670938213EDEA0004CAD58 /* NotificationTVC.swift */; };
 		F867093B213EFB48004CAD58 /* RedSmallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F867093A213EFB48004CAD58 /* RedSmallButton.swift */; };
 		F867093D213EFB8C004CAD58 /* BlackBorderSmallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F867093C213EFB8C004CAD58 /* BlackBorderSmallButton.swift */; };
+		F87BB8A12146E5B200D21AF6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F87BB8A02146E5B200D21AF6 /* GoogleService-Info.plist */; };
 		F8C80980213F009D008FBC44 /* ProfileTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C8097F213F009D008FBC44 /* ProfileTVC.swift */; };
 		F8C80982213F0249008FBC44 /* RoundedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C80981213F0249008FBC44 /* RoundedImage.swift */; };
 		F8C80988213F0934008FBC44 /* StoriesCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C80987213F0934008FBC44 /* StoriesCVC.swift */; };
@@ -99,6 +100,7 @@
 		F8670938213EDEA0004CAD58 /* NotificationTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTVC.swift; sourceTree = "<group>"; };
 		F867093A213EFB48004CAD58 /* RedSmallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedSmallButton.swift; sourceTree = "<group>"; };
 		F867093C213EFB8C004CAD58 /* BlackBorderSmallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackBorderSmallButton.swift; sourceTree = "<group>"; };
+		F87BB8A02146E5B200D21AF6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F8C8097F213F009D008FBC44 /* ProfileTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTVC.swift; sourceTree = "<group>"; };
 		F8C80981213F0249008FBC44 /* RoundedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedImage.swift; sourceTree = "<group>"; };
 		F8C80987213F0934008FBC44 /* StoriesCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesCVC.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 		F836C102213AFF76005A86F8 /* Notify Nearby Redesign */ = {
 			isa = PBXGroup;
 			children = (
+				F87BB8A02146E5B200D21AF6 /* GoogleService-Info.plist */,
 				F835E3A9213DCFDC00901CFF /* Model */,
 				F809ED36213D8EBA007280E5 /* Controller */,
 				F821606A213BC58500CA19AD /* View */,
@@ -513,6 +516,7 @@
 			files = (
 				F836C10E213AFF78005A86F8 /* LaunchScreen.storyboard in Resources */,
 				F836C10B213AFF78005A86F8 /* Assets.xcassets in Resources */,
+				F87BB8A12146E5B200D21AF6 /* GoogleService-Info.plist in Resources */,
 				F8CE79A32145862D00B965B8 /* EventCalloutView.xib in Resources */,
 				F836C109213AFF76005A86F8 /* Main.storyboard in Resources */,
 			);
@@ -547,18 +551,26 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Notify Nearby Redesign/Pods-Notify Nearby Redesign-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftSoup/SwiftSoup.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSoup.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -767,7 +779,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.nomanikram.Notify-Nearby-Redesign";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.fyp.Notify-Nearby-Redesign";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Notify Nearby Redesign/Notify Nearby Redesign-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -789,7 +801,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.nomanikram.Notify-Nearby-Redesign";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.fyp.Notify-Nearby-Redesign";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Notify Nearby Redesign/Notify Nearby Redesign-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;

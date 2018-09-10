@@ -9,6 +9,10 @@ target 'Notify Nearby Redesign' do
   pod 'SwiftSoup'
   pod 'SDWebImage'
   pod 'SVProgressHUD'
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Database'
+  pod 'Firebase/Storage'
 
   # Pods for Notify Nearby Redesign
 

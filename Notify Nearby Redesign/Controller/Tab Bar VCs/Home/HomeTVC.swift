@@ -34,6 +34,9 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         configureLocationServices()
         centerMapOnUserLocation()
         
+        tableview.frame.size.height = view.frame.size.height
+        
+        // Demo Annotation Code
         let anno = Event(coordinate: CLLocationCoordinate2D(latitude: 33.549803, longitude: 73.122932))
         anno.title = "Title"
         anno.subtitle = "Subtitle"
@@ -150,12 +153,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
 
         if view.isKind(of: UIView.self)
         {
-            print("Annotation Deselected: Kind of UIView")
-
-            print(view.viewWithTag(1)?.frame.origin)
-
                 view.viewWithTag(1)?.removeFromSuperview()
-
         }
     }
 
