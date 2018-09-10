@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseDatabase
 
 class SplashVC: UIViewController ,UITextFieldDelegate{
     
@@ -53,6 +55,12 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
     @IBOutlet weak var splash_signupBtn: TransparentButton!
     
     @IBOutlet weak var blackBG: UIView!
+    
+    
+    /* Firebase */
+    var auth = Auth.auth()
+    let database = Database.database().reference()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
