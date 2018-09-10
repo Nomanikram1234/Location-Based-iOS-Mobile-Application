@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
+import SVProgressHUD
 
 class SplashVC: UIViewController ,UITextFieldDelegate{
     
@@ -133,7 +134,8 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
     /***********   Sign In View    ***************/
     @IBAction func signinView_loginBtnPressed(_ sender: Any) {
         print("Login View: Login Button Pressed")
-        
+       
+        SVProgressHUD.show()
         login(email: signinView_email.text! , password: signinView_password.text!)
         
       
@@ -197,6 +199,8 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
     
     @IBAction func signupView_signupBtnPressed(_ sender: Any) {
         if signupView_password.text! == signupView_confirmPassword.text!{
+            
+        SVProgressHUD.show()
         createNewUser(email: signupView_email.text!, password: signupView_password.text!, name: signupView_name.text!, contact: signupView_contact.text!)
             
     
@@ -233,6 +237,10 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
     
     @IBAction func resetView_resetBtn(_ sender: Any) {
         print("Reset View: Reset Button Pressed")
+        
+        SVProgressHUD.show()
+        resetPassword(email: resetView_email.text!)
+        
     }
     @IBAction func resetView_cancelBtn(_ sender: Any) {
         
@@ -263,6 +271,34 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
     
     @IBAction func verificationView_sendBtn(_ sender: Any) {
         print("Verification View: Send Button Pressed")
+        
+        auth.currentUser?.sendEmailVerification(completion: { (error) in
+            if error == nil{
+                print("Email Verification Sent")
+                
+                self.verificationView_email.text = ""
+                
+                // Initializing sign in view
+                let v = self.signinView
+                v?.alpha = 0
+                v?.center = self.view.center
+                v?.frame.origin.y = (v?.frame.origin.y)! - 50
+                self.view.addSubview(v!)
+                
+                UIView.animate(withDuration: 1, animations: {
+                    for view in self.view.subviews{
+                        if view == self.verificationView{
+                            view.removeFromSuperview()
+                        }
+                        v?.alpha = 1
+                    }
+                })
+ 
+            }else{
+                SVProgressHUD.showError(withStatus: "Email Verification failed to Send")
+                print("Email Verification failed to Send")
+            }
+        })
     }
     
     @IBAction func verificationView_cancelButton(_ sender: Any) {
@@ -278,7 +314,7 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
         
         UIView.animate(withDuration: 2) {
             for view in self.view.subviews{
-                if view == self.resetView{
+                if view == self.verificationView{
                     view.removeFromSuperview()
                 }
             }
@@ -315,6 +351,8 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
                     self.database.child("Users").child((self.auth.currentUser?.uid)!).setValue(data)
                     
                 }
+                
+                SVProgressHUD.dismiss()
                 
                 // Sending email verification
                 self.auth.currentUser?.sendEmailVerification(completion: { (error) in
@@ -363,6 +401,7 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
                 
             }else{
                 print("Registration Failed")
+                SVProgressHUD.showError(withStatus: "Registration Failed")
             }
             
         }
@@ -381,28 +420,38 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
                     print("Email is Verified")
                     
                     
+                    
                     // Intiantiate Main Screen
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
                     self.present(vc, animated: true, completion: nil)
                     
+                    SVProgressHUD.dismiss()
+                    
                 }else{
                     print("Email is not Verified")
+                    
+                    SVProgressHUD.showError(withStatus: "Email is Not Verified")
+                    
+                    // Initializing verigfication view
                     let v = self.verificationView
                     v?.alpha = 0
                     v?.center = self.view.center
                     self.verificationView_email.text = self.signinView_email.text
                     self.view.addSubview(v!)
                     
+                    // animating
                     UIView.animate(withDuration: 1, animations: {
                         
                         self.resetSigninFields()
                         
+                        // removing signin view
                         for view in self.view.subviews{
                             if view == self.signinView{
                                 view.removeFromSuperview()
                             }
                         }
                        
+                        
                         v?.alpha = 1
                     })
                     
@@ -431,6 +480,45 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
     func resetSigninFields(){
         self.signinView_email.text = ""
         self.signinView_password.text = ""
+        
+    }
+    
+    func resetPassword(email:String){
+    
+        auth.sendPasswordReset(withEmail: email) { (error) in
+            if error == nil{
+                print("Reset Password Request Successful")
+                
+                self.resetView_email.text = ""
+                
+                // Initializing Sign In View
+                let v = self.signinView
+                v?.alpha = 0
+                v?.center = self.view.center
+                v?.frame.origin.y = (v?.frame.origin.y)! - 100
+                self.view.addSubview(v!)
+                
+                
+                // removing signup view
+                UIView.animate(withDuration: 1) {
+                    
+                    for view in self.view.subviews{
+                        if view == self.resetView{
+                            view.removeFromSuperview()
+                        }
+                    }
+                    
+                    v?.alpha = 1
+                }
+                
+                SVProgressHUD.dismiss()
+                
+            }else{
+                SVProgressHUD.showError(withStatus: "Reset Password Request Failed")
+                print("Reset Password Request Failed")
+            }
+        }
+        
     }
     /*
     // MARK: - Navigation
