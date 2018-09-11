@@ -80,7 +80,8 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
             moreButton.action = #selector(revealViewController().revealToggle(_:))
             revealViewController().rearViewRevealWidth = 275
             
-            revealViewController().rightViewRevealWidth = 160
+//            revealViewController().rightViewRevealWidth = 160
+            
             
         }
     }

@@ -8,6 +8,9 @@
 
 import UIKit
 import MapKit
+import SwiftyJSON
+import FirebaseAuth
+import FirebaseDatabase
 
 class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, MKMapViewDelegate,CLLocationManagerDelegate{
     
@@ -17,7 +20,13 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     var locationManager = CLLocationManager()
     let authStatus = CLLocationManager.authorizationStatus()
     
-     var eventCalloutView : EventCalloutView!
+    var eventCalloutView : EventCalloutView!
+    
+    let auth = Auth.auth()
+    let database = Database.database().reference()
+    let uid = Auth.auth().currentUser?.uid
+    
+    static var eventArray = [Event]()
     
     @IBOutlet weak var notificationBarBtn: UIBarButtonItem!
     @IBOutlet var tableview: UITableView!
@@ -25,11 +34,14 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     
     @IBOutlet weak var moreButton: UIBarButtonItem!
     @IBOutlet weak var collectionview: UICollectionView!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        sidemenu()
+//        sidemenu()
         
         configureLocationServices()
         centerMapOnUserLocation()
@@ -44,14 +56,41 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         anno.coordinate.longitude = 73.122932
         mapview.addAnnotation(anno)
 
-    
+        fetchUserDetails()
+        fetchEvents()
+        
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        sidemenu()
+    }
    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func fetchUserDetails(){
+        database.child("Users").child(uid!).observe(DataEventType.value) { (snapshot) in
+            let json = JSON(snapshot.value)
+            User.singleton = User.init(json: json)
+        }
+    }
+    
+    func fetchEvents() {
+        
+        database.child("stories").observe(DataEventType.value) { (snapshot) in
+            
+            for key in snapshot.children{
+                let json = JSON((key as! DataSnapshot).value)
+                let id = JSON((key as! DataSnapshot).key).stringValue
+                let event = Event(eventId:id , json: json)
+                HomeTVC.eventArray.append(event)
+            }
+            print("fetchEvents(): fetched Events")
+            
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -114,6 +153,12 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         removeCircle() // remove radius around the current location
+        
+        // Uploading User Current Location
+        let data = ["latitude":   "\(userLocation.location?.coordinate.latitude)",
+                    "longitutde": "\(userLocation.location?.coordinate.longitude)"]
+        database.child("UserLocation").child(uid!).setValue(data)
+        
         showCircle(coordinate: userLocation.coordinate, radius: 10000) // radius in 10000 meters = 10 kms
     }
     

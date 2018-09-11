@@ -41,6 +41,7 @@
 		F867093B213EFB48004CAD58 /* RedSmallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F867093A213EFB48004CAD58 /* RedSmallButton.swift */; };
 		F867093D213EFB8C004CAD58 /* BlackBorderSmallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F867093C213EFB8C004CAD58 /* BlackBorderSmallButton.swift */; };
 		F87BB8A12146E5B200D21AF6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F87BB8A02146E5B200D21AF6 /* GoogleService-Info.plist */; };
+		F87BB8A321481D2F00D21AF6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87BB8A221481D2F00D21AF6 /* User.swift */; };
 		F8C80980213F009D008FBC44 /* ProfileTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C8097F213F009D008FBC44 /* ProfileTVC.swift */; };
 		F8C80982213F0249008FBC44 /* RoundedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C80981213F0249008FBC44 /* RoundedImage.swift */; };
 		F8C80988213F0934008FBC44 /* StoriesCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C80987213F0934008FBC44 /* StoriesCVC.swift */; };
@@ -101,6 +102,7 @@
 		F867093A213EFB48004CAD58 /* RedSmallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedSmallButton.swift; sourceTree = "<group>"; };
 		F867093C213EFB8C004CAD58 /* BlackBorderSmallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackBorderSmallButton.swift; sourceTree = "<group>"; };
 		F87BB8A02146E5B200D21AF6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F87BB8A221481D2F00D21AF6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F8C8097F213F009D008FBC44 /* ProfileTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTVC.swift; sourceTree = "<group>"; };
 		F8C80981213F0249008FBC44 /* RoundedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedImage.swift; sourceTree = "<group>"; };
 		F8C80987213F0934008FBC44 /* StoriesCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesCVC.swift; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 			children = (
 				F835E3AA213DCFFA00901CFF /* Discovery.swift */,
 				F8CE799C21457F5700B965B8 /* Event.swift */,
+				F87BB8A221481D2F00D21AF6 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -616,6 +619,7 @@
 				F8670935213EDE24004CAD58 /* MyFavouriteVC.swift in Sources */,
 				F8CE799D21457F5700B965B8 /* Event.swift in Sources */,
 				F809ED3A213D8F29007280E5 /* LoginVC.swift in Sources */,
+				F87BB8A321481D2F00D21AF6 /* User.swift in Sources */,
 				F8CE79A02145815700B965B8 /* AnnotationView.swift in Sources */,
 				F802D3082142C9A0001934A2 /* TopInterestCollectionViewCell.swift in Sources */,
 				F8670939213EDEA0004CAD58 /* NotificationTVC.swift in Sources */,

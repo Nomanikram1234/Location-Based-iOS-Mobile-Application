@@ -819,11 +819,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="xnJ-IM-AoZ">
-                                                    <rect key="frame" x="67" y="11" width="242" height="29"/>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="xnJ-IM-AoZ">
+                                                    <rect key="frame" x="70" y="11" width="235" height="29"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <segments>
-                                                        <segment title="Loc-Based"/>
                                                         <segment title="Interest"/>
                                                         <segment title="Around"/>
                                                     </segments>
@@ -841,7 +840,7 @@
                                                 <constraint firstItem="xnJ-IM-AoZ" firstAttribute="top" secondItem="00h-Qe-xAX" secondAttribute="topMargin" id="Uvl-eE-aWb"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="xnJ-IM-AoZ" secondAttribute="bottom" constant="-1" id="ZYZ-oa-PFz"/>
                                                 <constraint firstItem="ItG-pf-5nr" firstAttribute="leading" secondItem="00h-Qe-xAX" secondAttribute="leadingMargin" id="daJ-vT-0vC"/>
-                                                <constraint firstItem="xnJ-IM-AoZ" firstAttribute="leading" secondItem="ItG-pf-5nr" secondAttribute="trailing" constant="16" id="mKO-rz-ID0"/>
+                                                <constraint firstItem="xnJ-IM-AoZ" firstAttribute="leading" secondItem="ItG-pf-5nr" secondAttribute="trailing" constant="19" id="mKO-rz-ID0"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
