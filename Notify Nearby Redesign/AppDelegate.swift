@@ -33,11 +33,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                print("Scraping Isb Completed")
 //            }
         }
-        DispatchQueue.global(qos: .userInteractive).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             self.scrapingKarachi()
         
         }
-        DispatchQueue.global(qos: .userInteractive).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             self.scrapingLahore()
 //            DispatchQueue.main.async {
 //                print("Scraping Lahore Completed")

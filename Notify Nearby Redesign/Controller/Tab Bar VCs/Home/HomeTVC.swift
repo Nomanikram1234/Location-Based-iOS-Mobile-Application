@@ -32,10 +32,22 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     @IBOutlet var tableview: UITableView!
     @IBOutlet weak var mapview: MKMapView!
     
+    @IBOutlet weak var segmentedcontrols: UISegmentedControl!
+    //    @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var moreButton: UIBarButtonItem!
     @IBOutlet weak var collectionview: UICollectionView!
     
     
+    @IBAction func segmentedControlsChanged(_ sender: Any) {
+        if segmentedcontrols.selectedSegmentIndex == 0{
+            removeAnnotations()
+        }else
+        
+        if segmentedcontrols.selectedSegmentIndex == 1{
+            removeAnnotations()
+            DisplayEventsOnMapFromArray()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,16 +61,16 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         tableview.frame.size.height = view.frame.size.height
         
         // Demo Annotation Code
-        let anno = Event(coordinate: CLLocationCoordinate2D(latitude: 33.549803, longitude: 73.122932))
-        anno.title = "Title"
-        anno.subtitle = "Subtitle"
-        anno.coordinate.latitude = 33.549803
-        anno.coordinate.longitude = 73.122932
-        mapview.addAnnotation(anno)
+//        let anno = Event(coordinate: CLLocationCoordinate2D(latitude: 33.549803, longitude: 73.122932))
+//        anno.title = "Title"
+//        anno.subtitle = "Subtitle"
+//        anno.coordinate.latitude = 33.549803
+//        anno.coordinate.longitude = 73.122932
+//        mapview.addAnnotation(anno)
 
         fetchUserDetails()
-        fetchEvents()
-        
+//        fetchEventsAndDisplayOnMap()
+       fetchEvents()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -78,7 +90,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         }
     }
     
-    func fetchEvents() {
+    func fetchEventsAndDisplayOnMap() {
         
         database.child("stories").observe(DataEventType.value) { (snapshot) in
             
@@ -86,12 +98,90 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                 let json = JSON((key as! DataSnapshot).value)
                 let id = JSON((key as! DataSnapshot).key).stringValue
                 let event = Event(eventId:id , json: json)
+                
+                guard let userLocation = self.locationManager.location else {return}
+                let coordinate = CLLocation(latitude: event.event_latitude!, longitude: event.event_longitude!)
+              
+                let anno = Event(coordinate: CLLocationCoordinate2D(latitude: event.event_latitude!, longitude: event.event_longitude! ))
+                let distanceDifference = self.calculateDistance(mainCoordinate: userLocation , coordinate: coordinate)
+
+                
+                if self.segmentedcontrols.selectedSegmentIndex == 1{
+                
+                if self.calculateDistance(mainCoordinate: userLocation , coordinate: coordinate) <= 10000{
+                
+                print("Pin inside 10km radius , Distance Difference: \(Int(distanceDifference))")
+                    
+                anno.title = event.event_title
+                anno.subtitle = event.event_interests
+
+                self.mapview.addAnnotation(anno)
+                }
+            }
                 HomeTVC.eventArray.append(event)
             }
-            print("fetchEvents(): fetched Events")
-            
+            print("fetchEventsAndDisplayOnMap(): fetched Events")
+            print("Event Array: Number of Events -> \(HomeTVC.eventArray.count)")
         }
     }
+    
+    
+    func fetchEvents() {
+        database.child("stories").observe(DataEventType.value) { (snapshot) in
+            
+            for key in snapshot.children{
+                let json = JSON((key as! DataSnapshot).value)
+                let id = JSON((key as! DataSnapshot).key).stringValue
+                let event = Event(eventId:id , json: json)
+                
+                guard let userLocation = self.locationManager.location else {return}
+                let coordinate = CLLocation(latitude: event.event_latitude!, longitude: event.event_longitude!)
+                
+                HomeTVC.eventArray.append(event)
+
+            }
+            print("fetchEvents(): fetched Events")
+            print("Event Array: Number of Events -> \(HomeTVC.eventArray.count)")
+        }
+    }
+    
+    
+    func DisplayEventsOnMapFromArray() {
+        
+//        database.child("stories").observe(DataEventType.value) { (snapshot) in
+        
+        
+        
+        
+            for event in HomeTVC.eventArray{
+                
+                guard let userLocation = self.locationManager.location else {return}
+                let coordinate = CLLocation(latitude: event.event_latitude!, longitude: event.event_longitude!)
+                
+                let anno = Event(coordinate: CLLocationCoordinate2D(latitude: event.event_latitude!, longitude: event.event_longitude! ))
+                let distanceDifference = self.calculateDistance(mainCoordinate: userLocation , coordinate: coordinate)
+
+                
+                if segmentedcontrols.selectedSegmentIndex == 0{
+                    
+                }else if segmentedcontrols.selectedSegmentIndex == 1{
+                if self.calculateDistance(mainCoordinate: userLocation , coordinate: coordinate) <= 10000{
+                    print("Pin inside 10km radius , Distance Difference: \(Int(distanceDifference))")
+                    
+                    anno.title = event.event_title
+                    anno.subtitle = event.event_interests
+                    
+                    self.mapview.addAnnotation(anno)
+                }
+                }
+                
+            }
+            print("DisplayEventsOnMapFromArray(): Called ")
+
+//        }
+    }
+    
+
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
        return 25
@@ -140,6 +230,16 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         centerMapOnUserLocation()
     }
     
+    @IBAction func addEvent(_ sender: UIButton) {
+        print("Add Event Button Pressed")
+        DisplayEventsOnMapFromArray()
+    }
+    
+    @IBAction func relocateButton(_ sender: UIButton) {
+        print("Centered Map on User Location")
+        centerMapOnUserLocation()
+    }
+    
     // Showing Circle of certian radius
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
     
@@ -155,8 +255,8 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         removeCircle() // remove radius around the current location
         
         // Uploading User Current Location
-        let data = ["latitude":   "\(userLocation.location?.coordinate.latitude)",
-                    "longitutde": "\(userLocation.location?.coordinate.longitude)"]
+        let data = ["latitude":  userLocation.location?.coordinate.latitude,
+            "longitutde": userLocation.location?.coordinate.longitude]
         database.child("UserLocation").child(uid!).setValue(data)
         
         showCircle(coordinate: userLocation.coordinate, radius: 10000) // radius in 10000 meters = 10 kms
@@ -276,7 +376,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     func calculateDistance(mainCoordinate: CLLocation,coordinate: CLLocation) -> Double{
         
         let distance = mainCoordinate.distance(from: coordinate)
-        print("Calculate Distance: \(distance)")
+//        print("Calculate Distance: \(distance)")
         
         return distance
     }

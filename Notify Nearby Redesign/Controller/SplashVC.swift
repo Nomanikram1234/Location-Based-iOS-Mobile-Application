@@ -254,7 +254,7 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
         self.view.addSubview(v!)
         
         
-        UIView.animate(withDuration: 2) {
+        UIView.animate(withDuration: 1) {
             for view in self.view.subviews{
                 if view == self.resetView{
                     view.removeFromSuperview()
@@ -507,7 +507,6 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
                             view.removeFromSuperview()
                         }
                     }
-                    
                     v?.alpha = 1
                 }
                 
@@ -520,6 +519,7 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
         }
         
     }
+    
     /*
     // MARK: - Navigation
 

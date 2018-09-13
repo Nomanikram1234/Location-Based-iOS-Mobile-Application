@@ -37,6 +37,7 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.4)
   - GTMSessionFetcher/Core (1.1.15)
   - leveldb-library (1.20)
+  - LUNSegmentedControl (1.0.7)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
@@ -55,6 +56,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
+  - LUNSegmentedControl
   - SDWebImage
   - SVProgressHUD
   - SwiftSoup
@@ -73,6 +75,7 @@ SPEC REPOS:
     - GoogleToolboxForMac
     - GTMSessionFetcher
     - leveldb-library
+    - LUNSegmentedControl
     - nanopb
     - SDWebImage
     - SVProgressHUD
@@ -91,12 +94,13 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   GTMSessionFetcher: 5fa5b80fd20e439ef5f545fb2cb3ca6c6714caa2
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
+  LUNSegmentedControl: f868b1ea740f9917f05dbcb4cded85c33ec606e6
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftSoup: 277f7ef548826e0ca7603a06b30d4a5df3ee0587
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 3fac46cd595ce8fccb2137bd8be872d5b905f8c6
+PODFILE CHECKSUM: 3491fdec0dee80c061aef18aa14180b8f4d65101
 
 COCOAPODS: 1.5.3

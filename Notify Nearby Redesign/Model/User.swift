@@ -15,10 +15,15 @@ class User{
     var email:String?
     var profileImgURL : String?
     var userType: String?
+    
     var followers: [String]?
     var following: [String]?
     var favourite: [String]?
+   
     var events: [String]?
+    
+//    var interest = [String]()
+    
     
     static var singleton = User()
     
@@ -31,7 +36,7 @@ class User{
         
     }
     
-    private init(){
+     init(){
         
     }
 }
