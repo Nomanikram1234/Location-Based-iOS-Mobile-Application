@@ -89,7 +89,10 @@ class MyInterestVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         // Dispose of any resources that can be recreated.
     }
     
-    func fetchUserInterests(){
+   static func fetchUserInterests(){
+        let database = Database.database().reference()
+        let uid = Auth.auth().currentUser?.uid
+    
         database.child("Users").child(uid!).child("UserInterests").observe(.value) { (snapshot) in
             MyInterestVC.interest.removeAll()
             for snap in snapshot.children{

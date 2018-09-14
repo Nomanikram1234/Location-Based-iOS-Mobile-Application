@@ -41,6 +41,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     @IBAction func segmentedControlsChanged(_ sender: Any) {
         if segmentedcontrols.selectedSegmentIndex == 0{
             removeAnnotations()
+            DisplayEventsOnMapFromArray()
         }else
         
         if segmentedcontrols.selectedSegmentIndex == 1{
@@ -69,12 +70,15 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
 //        mapview.addAnnotation(anno)
 
         fetchUserDetails()
+        MyInterestVC.fetchUserInterests()
 //        fetchEventsAndDisplayOnMap()
-       fetchEvents()
+       fetchEventsAndDisplayOnMap()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         sidemenu()
+        fetchEventsAndDisplayOnMap()
     }
    
 
@@ -99,13 +103,43 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                 let id = JSON((key as! DataSnapshot).key).stringValue
                 let event = Event(eventId:id , json: json)
                 
+                // getting user location
                 guard let userLocation = self.locationManager.location else {return}
+                // getting lat and long for event locations
                 let coordinate = CLLocation(latitude: event.event_latitude!, longitude: event.event_longitude!)
               
+                // anno short for annotation(Map Pin)
                 let anno = Event(coordinate: CLLocationCoordinate2D(latitude: event.event_latitude!, longitude: event.event_longitude! ))
                 let distanceDifference = self.calculateDistance(mainCoordinate: userLocation , coordinate: coordinate)
 
                 
+                // if INTEREST is selected in segmented controls
+                if self.segmentedcontrols.selectedSegmentIndex == 0{
+                    
+                    if self.calculateDistance(mainCoordinate: userLocation , coordinate: coordinate) <= 10000{
+                        var user_interests = MyInterestVC.interest
+                        var event_interests = self.stringToArray(string: event.event_interests!)
+                        var common_interests = self.commonInterest(firstSet: user_interests, secondSet: event_interests)
+                        
+                        // if there are any/some matching interest between user and event
+                        if !common_interests.isEmpty{
+                            anno.title = event.event_title
+                            anno.subtitle = event.event_interests
+                            
+                            self.mapview.addAnnotation(anno)
+                        }
+                        
+                        print(user_interests)
+                        print(event_interests)
+                       print ( "Common Interests\(self.commonInterest(firstSet: user_interests, secondSet: event_interests))" )
+                        print()
+                        
+                    }
+                    
+                }
+                
+                
+                // if AROUND is selected in segmented controls
                 if self.segmentedcontrols.selectedSegmentIndex == 1{
                 
                 if self.calculateDistance(mainCoordinate: userLocation , coordinate: coordinate) <= 10000{
@@ -161,8 +195,27 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                 let anno = Event(coordinate: CLLocationCoordinate2D(latitude: event.event_latitude!, longitude: event.event_longitude! ))
                 let distanceDifference = self.calculateDistance(mainCoordinate: userLocation , coordinate: coordinate)
 
-                
+                //FIXME: MODiFying
                 if segmentedcontrols.selectedSegmentIndex == 0{
+                    if self.calculateDistance(mainCoordinate: userLocation , coordinate: coordinate) <= 10000{
+                        var user_interests = MyInterestVC.interest
+                        var event_interests = self.stringToArray(string: event.event_interests!)
+                        var common_interests = self.commonInterest(firstSet: user_interests, secondSet: event_interests)
+                        
+                        // if there are any/some matching interest between user and event
+                        if !common_interests.isEmpty{
+                            anno.title = event.event_title
+                            anno.subtitle = event.event_interests
+                            
+                            self.mapview.addAnnotation(anno)
+                        }
+                        
+                        print(user_interests)
+                        print(event_interests)
+                        print ( "Common Interests\(self.commonInterest(firstSet: user_interests, secondSet: event_interests))" )
+                        print()
+                        
+                    }
                     
                 }else if segmentedcontrols.selectedSegmentIndex == 1{
                 if self.calculateDistance(mainCoordinate: userLocation , coordinate: coordinate) <= 10000{
