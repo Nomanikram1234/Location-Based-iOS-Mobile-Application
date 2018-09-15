@@ -14,6 +14,8 @@ import FirebaseDatabase
 
 class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, MKMapViewDelegate,CLLocationManagerDelegate{
     
+
+
     
    
     var circle: MKCircle? = nil
@@ -42,6 +44,9 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     
     
     /************Additional View Variables**************/
+    @IBOutlet var blackBgView: UIView!
+    
+    
     @IBOutlet var addEventView: UIView!
     @IBOutlet weak var addEventView_imageview: UIImageView!
     @IBOutlet weak var addEventView_selectPhoto: RoundedButton!
@@ -50,6 +55,21 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     @IBOutlet weak var addEventView_description: UITextView!
     
     @IBAction func addEventView_uploadBtn(_ sender: Any) {
+     let ref = database.child("stories").childByAutoId()
+     
+        let data = ["uid":uid,
+                    "title":"",
+                    "type":"",
+                    "storypostedby":"",
+                    "longitude":"",
+                    "lat":"",
+                    "interest":"",
+                    "image":"",
+                    "acceptedNumber":"",
+                    "deniedNumber":"",
+                    "favouriteNumber":""]
+        
+    
     }
     @IBAction func addEventView_cancelBtn(_ sender: Any) {
     }
@@ -105,9 +125,28 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func addEvent(_ sender: UIButton) {
+        print("called: addEvent()")
+  
+        blackBgView.frame.size = view.frame.size
+        addEventView.center = view.center
+        addEventView.frame.origin.y = 0
+        UIView.animate(withDuration: 1) {
+            
+//            self.view.alpha = 0.4
+            self.blackBgView.alpha = 0.4
+             self.view.addSubview(self.blackBgView)
+             self.view.addSubview(self.addEventView)
+        }
+       
+        
+        
+    }
+    
     /**************** USER DETAIL ****************/
     
     func fetchUserDetails(){
+        print("Called:fetchUserDetails")
         database.child("Users").child(uid!).observe(DataEventType.value) { (snapshot) in
             let json = JSON(snapshot.value)
             User.singleton = User.init(json: json)
@@ -116,7 +155,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     
     /**************** EVENT ****************/
     func fetchEventsAndDisplayOnMap() {
-        
+        print("fetchEventsAndDisplayOnMap")
         database.child("stories").observe(DataEventType.value) { (snapshot) in
             
             for key in snapshot.children{
@@ -332,11 +371,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         centerMapOnUserLocation()
     }
-    
-    @IBAction func addEvent(_ sender: UIButton) {
-        print("Add Event Button Pressed")
-        DisplayEventsOnMapFromArray()
-    }
+
     
     @IBAction func relocateButton(_ sender: UIButton) {
         print("Centered Map on User Location")

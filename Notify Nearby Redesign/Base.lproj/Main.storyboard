@@ -868,6 +868,7 @@
                         <outlet property="addEventView_interests" destination="vIw-1h-5Tb" id="p7P-Zc-ufs"/>
                         <outlet property="addEventView_selectPhoto" destination="luA-eT-Fdg" id="JqZ-sY-Zsw"/>
                         <outlet property="addEventView_title" destination="XUB-jt-6Jx" id="Akg-Z0-bmQ"/>
+                        <outlet property="blackBgView" destination="AVc-Lp-AaU" id="Ie4-1H-e2w"/>
                         <outlet property="collectionview" destination="N4v-fw-o0A" id="oN7-et-NGP"/>
                         <outlet property="mapview" destination="87n-AG-Auw" id="TtM-YQ-amR"/>
                         <outlet property="moreButton" destination="zL1-hp-yiJ" id="mb3-Re-FDS"/>
@@ -878,7 +879,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zkn-9w-NaO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <view contentMode="scaleToFill" id="tk0-p3-oGj">
-                    <rect key="frame" x="0.0" y="0.0" width="334" height="428"/>
+                    <rect key="frame" x="0.0" y="0.0" width="334" height="408"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BgP-2o-zms" customClass="RoundedView" customModule="Notify_Nearby_Redesign" customModuleProvider="target">
@@ -900,7 +901,7 @@
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Nnk-bb-8qZ">
-                                    <rect key="frame" x="21" y="182" width="235" height="128"/>
+                                    <rect key="frame" x="21" y="182" width="235" height="106"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
@@ -908,7 +909,7 @@
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 </textView>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Yc-7w-36Y" customClass="TransparentButton" customModule="Notify_Nearby_Redesign" customModuleProvider="target">
-                                    <rect key="frame" x="70" y="318" width="60" height="30"/>
+                                    <rect key="frame" x="70" y="307" width="60" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <state key="normal" title="Upload">
@@ -919,7 +920,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1QI-T7-aEZ" customClass="BlackBorderSmallButton" customModule="Notify_Nearby_Redesign" customModuleProvider="target">
-                                    <rect key="frame" x="138" y="318" width="60" height="30"/>
+                                    <rect key="frame" x="138" y="307" width="60" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" title="Cancel">
                                         <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -951,6 +952,12 @@
                     </subviews>
                     <viewLayoutGuide key="safeArea" id="wBi-ub-Qjj"/>
                 </view>
+                <view alpha="0.0" contentMode="scaleToFill" id="AVc-Lp-AaU">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="387"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.23241167539999999" green="0.27045232060000002" blue="0.24450468750000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <viewLayoutGuide key="safeArea" id="1i3-5J-lCI"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="698.39999999999998" y="1244.3349753694581"/>
         </scene>
@@ -979,17 +986,17 @@
                                 </state>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tos-Zp-cpN">
-                                <rect key="frame" x="0.0" y="490" width="375" height="0.0"/>
+                                <rect key="frame" x="0.0" y="279" width="375" height="211"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bitmap" translatesAutoresizingMaskIntoConstraints="NO" id="1Ky-Vt-MuD">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="475"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="264"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edinburg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emQ-Ky-Y2A">
-                                <rect key="frame" x="16" y="200" width="137" height="255"/>
+                                <rect key="frame" x="16" y="200" width="137" height="44"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="32"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -3109,7 +3116,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Bitmap" width="375" height="667"/>
+        <image name="Bitmap" width="375" height="225"/>
         <image name="BitmapBG" width="375" height="667"/>
         <image name="Image" width="22" height="22"/>
         <image name="Profile" width="21" height="24"/>
