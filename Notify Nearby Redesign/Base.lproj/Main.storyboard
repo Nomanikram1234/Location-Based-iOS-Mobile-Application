@@ -836,7 +836,7 @@
                                                     </constraints>
                                                     <state key="normal" image="ic_add_circle"/>
                                                     <connections>
-                                                        <action selector="addEvent:" destination="6KH-4k-ycv" eventType="touchUpInside" id="Q4w-kQ-NI1"/>
+                                                        <action selector="addEvent:" destination="6KH-4k-ycv" eventType="touchUpInside" id="u4P-XX-Mlx"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -862,6 +862,12 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Home" image="Stroke 1" springLoaded="YES" id="uFM-Yd-FrT"/>
                     <connections>
+                        <outlet property="addEventView" destination="tk0-p3-oGj" id="p9N-iK-zHQ"/>
+                        <outlet property="addEventView_description" destination="Nnk-bb-8qZ" id="2XP-Sq-Uou"/>
+                        <outlet property="addEventView_imageview" destination="qts-Wx-4Ty" id="mRo-im-x3p"/>
+                        <outlet property="addEventView_interests" destination="vIw-1h-5Tb" id="p7P-Zc-ufs"/>
+                        <outlet property="addEventView_selectPhoto" destination="luA-eT-Fdg" id="JqZ-sY-Zsw"/>
+                        <outlet property="addEventView_title" destination="XUB-jt-6Jx" id="Akg-Z0-bmQ"/>
                         <outlet property="collectionview" destination="N4v-fw-o0A" id="oN7-et-NGP"/>
                         <outlet property="mapview" destination="87n-AG-Auw" id="TtM-YQ-amR"/>
                         <outlet property="moreButton" destination="zL1-hp-yiJ" id="mb3-Re-FDS"/>
@@ -908,6 +914,9 @@
                                     <state key="normal" title="Upload">
                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="addEventView_uploadBtn:" destination="6KH-4k-ycv" eventType="touchUpInside" id="aR0-p8-gHS"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1QI-T7-aEZ" customClass="BlackBorderSmallButton" customModule="Notify_Nearby_Redesign" customModuleProvider="target">
                                     <rect key="frame" x="138" y="318" width="60" height="30"/>
@@ -915,6 +924,9 @@
                                     <state key="normal" title="Cancel">
                                         <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="addEventView_cancelBtn:" destination="6KH-4k-ycv" eventType="touchUpInside" id="AWT-yh-cTE"/>
+                                    </connections>
                                 </button>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="avatar3" translatesAutoresizingMaskIntoConstraints="NO" id="qts-Wx-4Ty">
                                     <rect key="frame" x="86" y="-48" width="100" height="100"/>
@@ -3100,7 +3112,7 @@
         <image name="Bitmap" width="375" height="667"/>
         <image name="BitmapBG" width="375" height="667"/>
         <image name="Image" width="22" height="22"/>
-        <image name="Profile" width="20" height="24"/>
+        <image name="Profile" width="21" height="24"/>
         <image name="Splash" width="750" height="1334"/>
         <image name="Stroke 1" width="22" height="22"/>
         <image name="avatar" width="520" height="520"/>

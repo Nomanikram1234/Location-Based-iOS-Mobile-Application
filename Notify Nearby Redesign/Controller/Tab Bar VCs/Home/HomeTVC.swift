@@ -14,6 +14,8 @@ import FirebaseDatabase
 
 class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, MKMapViewDelegate,CLLocationManagerDelegate{
     
+    
+   
     var circle: MKCircle? = nil
     let regionRadius: Double = 1000
  
@@ -28,6 +30,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     
     static var eventArray = [Event]()
     
+    
     @IBOutlet weak var notificationBarBtn: UIBarButtonItem!
     @IBOutlet var tableview: UITableView!
     @IBOutlet weak var mapview: MKMapView!
@@ -37,6 +40,20 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     @IBOutlet weak var moreButton: UIBarButtonItem!
     @IBOutlet weak var collectionview: UICollectionView!
     
+    
+    /************Additional View Variables**************/
+    @IBOutlet var addEventView: UIView!
+    @IBOutlet weak var addEventView_imageview: UIImageView!
+    @IBOutlet weak var addEventView_selectPhoto: RoundedButton!
+    @IBOutlet weak var addEventView_title: UITextField!
+    @IBOutlet weak var addEventView_interests: UITextField!
+    @IBOutlet weak var addEventView_description: UITextView!
+    
+    @IBAction func addEventView_uploadBtn(_ sender: Any) {
+    }
+    @IBAction func addEventView_cancelBtn(_ sender: Any) {
+    }
+    /******************************************************/
     
     @IBAction func segmentedControlsChanged(_ sender: Any) {
         if segmentedcontrols.selectedSegmentIndex == 0{
@@ -49,6 +66,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
             DisplayEventsOnMapFromArray()
         }
     }
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,6 +105,8 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         // Dispose of any resources that can be recreated.
     }
     
+    /**************** USER DETAIL ****************/
+    
     func fetchUserDetails(){
         database.child("Users").child(uid!).observe(DataEventType.value) { (snapshot) in
             let json = JSON(snapshot.value)
@@ -94,6 +114,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         }
     }
     
+    /**************** EVENT ****************/
     func fetchEventsAndDisplayOnMap() {
         
         database.child("stories").observe(DataEventType.value) { (snapshot) in
@@ -120,18 +141,23 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                         var user_interests = MyInterestVC.interest
                         var event_interests = self.stringToArray(string: event.event_interests!)
                         var common_interests = self.commonInterest(firstSet: user_interests, secondSet: event_interests)
+                         var common_interests_string = self.commonInterestToString(common: common_interests)
                         
                         // if there are any/some matching interest between user and event
                         if !common_interests.isEmpty{
-                            anno.title = event.event_title
-                            anno.subtitle = event.event_interests
+                            anno.title = common_interests_string
+                            anno.subtitle = event.event_title
+                            
+                            anno.event_title = event.event_title
+                            anno.event_interests  =  common_interests_string
+                            
                             
                             self.mapview.addAnnotation(anno)
                         }
                         
                         print(user_interests)
                         print(event_interests)
-                       print ( "Common Interests\(self.commonInterest(firstSet: user_interests, secondSet: event_interests))" )
+                        print ( "Common Interests\(self.commonInterest(firstSet: user_interests, secondSet: event_interests))")
                         print()
                         
                     }
@@ -142,12 +168,20 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                 // if AROUND is selected in segmented controls
                 if self.segmentedcontrols.selectedSegmentIndex == 1{
                 
-                if self.calculateDistance(mainCoordinate: userLocation , coordinate: coordinate) <= 10000{
-                
+                if self.calculateDistance(mainCoordinate: userLocation , coordinate: coordinate) <= 10000
+                {
+                    var user_interests = MyInterestVC.interest
+                    var event_interests = self.stringToArray(string: event.event_interests!)
+                    var common_interests = self.commonInterest(firstSet: user_interests, secondSet: event_interests)
+                    var common_interests_string = self.commonInterestToString(common: common_interests)
+                    
                 print("Pin inside 10km radius , Distance Difference: \(Int(distanceDifference))")
                     
                 anno.title = event.event_title
                 anno.subtitle = event.event_interests
+                    
+                    anno.event_title = event.event_title
+                    anno.event_interests  =  common_interests_string
 
                 self.mapview.addAnnotation(anno)
                 }
@@ -201,11 +235,17 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                         var user_interests = MyInterestVC.interest
                         var event_interests = self.stringToArray(string: event.event_interests!)
                         var common_interests = self.commonInterest(firstSet: user_interests, secondSet: event_interests)
+                        var common_interests_string = self.commonInterestToString(common: common_interests)
                         
                         // if there are any/some matching interest between user and event
                         if !common_interests.isEmpty{
-                            anno.title = event.event_title
-                            anno.subtitle = event.event_interests
+                            
+                            anno.title = common_interests_string
+                            anno.subtitle = event.event_title
+                            
+                            
+                            anno.event_title = event.event_title
+                            anno.event_interests  =  common_interests_string
                             
                             self.mapview.addAnnotation(anno)
                         }
@@ -219,10 +259,20 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                     
                 }else if segmentedcontrols.selectedSegmentIndex == 1{
                 if self.calculateDistance(mainCoordinate: userLocation , coordinate: coordinate) <= 10000{
+                    
+                    var user_interests = MyInterestVC.interest
+                    var event_interests = self.stringToArray(string: event.event_interests!)
+                    var common_interests = self.commonInterest(firstSet: user_interests, secondSet: event_interests)
+                    var common_interests_string = self.commonInterestToString(common: common_interests)
+                    
                     print("Pin inside 10km radius , Distance Difference: \(Int(distanceDifference))")
                     
+                    //FIXME: Modify Annotation
                     anno.title = event.event_title
-                    anno.subtitle = event.event_interests
+                    anno.subtitle = common_interests_string
+                    
+                    anno.event_title = event.event_title
+                    anno.event_interests  =  common_interests_string
                     
                     self.mapview.addAnnotation(anno)
                 }
@@ -329,7 +379,8 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         let views = Bundle.main.loadNibNamed("EventCalloutView", owner: nil, options: nil)
         eventCalloutView = views?[0] as! EventCalloutView
 
-//        storyCalloutView.title.text = story.title
+        eventCalloutView.event_title.text =  event.event_title
+        eventCalloutView.event_basedon.text = event.event_interests
         
          eventCalloutView.readMoreButton.addTarget(self, action: #selector(HomeTVC.test(sender:)) , for: .touchUpInside)
         
@@ -436,6 +487,9 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     
 }
 
+
+
+
 extension MKAnnotationView {
     override open func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let hitView = super.hitTest(point, with: event)
@@ -462,3 +516,5 @@ extension MKAnnotationView {
         return isInside
     }
 }
+
+

@@ -35,7 +35,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I2g-19-uBz">
-                            <rect key="frame" x="8" y="69" width="199" height="21"/>
+                            <rect key="frame" x="8" y="69" width="207" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -94,6 +94,12 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="event_basedon" destination="gqW-hx-p6N" id="gRJ-MI-xxq"/>
+                <outlet property="event_imageview" destination="DQk-hZ-1Gw" id="NXy-En-jLb"/>
+                <outlet property="event_noOfAccepts" destination="rHg-5f-bOZ" id="Nnb-ZM-B3Y"/>
+                <outlet property="event_noOfDenied" destination="IcM-Mb-TRh" id="naG-Ib-3K3"/>
+                <outlet property="event_noOfFavourite" destination="PfT-Ko-rn5" id="Brm-bg-cyc"/>
+                <outlet property="event_title" destination="I2g-19-uBz" id="0Yw-Js-JJS"/>
                 <outlet property="readMoreButton" destination="9kd-hS-lnS" id="afh-4C-43U"/>
             </connections>
             <point key="canvasLocation" x="-84.5" y="54.5"/>

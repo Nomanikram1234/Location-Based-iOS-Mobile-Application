@@ -14,18 +14,26 @@ import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    
+    static var current_time_in_millisecond :Int?
 
     var window: UIWindow?
 //    static var arr = [Discovery]()
     
     override init() {
-         FirebaseApp.configure()
+       
+        var date = Date()
+        AppDelegate.current_time_in_millisecond = Int(date.timeIntervalSince1970 * 1000)
+        
+        FirebaseApp.configure()       
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 //        FirebaseApp.configure()
         
+//        let timer = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(timeUpdate), userInfo: nil, repeats: true)
         
         DispatchQueue.global(qos: .userInteractive).async {
             self.scrapingIslamabad()
@@ -52,6 +60,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
+    @objc func timeUpdate(){
+        let date = Date()
+        AppDelegate.current_time_in_millisecond = Int(date.timeIntervalSince1970 * 1000)
+       
+        let totalSeconds = AppDelegate.current_time_in_millisecond! / 1000;
+        let currentSecond = totalSeconds % 60;
+        let totalMinutes = totalSeconds / 60;
+        let currentMinute = totalMinutes % 60;
+        let totalHours = totalMinutes / 60;
+        let currentHour = totalHours % 24;
+        
+        //Note: 86400000 milliseconds are there in 24hours
+        
+        print(AppDelegate.current_time_in_millisecond)
+        print("\(currentHour):\(currentMinute):\(currentSecond)")
+    }
+    
 
     func scrapingKarachi()  {
         let urlString = URL(string: "https://allevents.in/karachi/all")
