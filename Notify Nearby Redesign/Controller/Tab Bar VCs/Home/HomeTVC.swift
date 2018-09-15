@@ -11,13 +11,10 @@ import MapKit
 import SwiftyJSON
 import FirebaseAuth
 import FirebaseDatabase
+import FirebaseStorage
 
-class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, MKMapViewDelegate,CLLocationManagerDelegate{
+class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, MKMapViewDelegate,CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
-
-
-    
-   
     var circle: MKCircle? = nil
     let regionRadius: Double = 1000
  
@@ -28,7 +25,9 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     
     let auth = Auth.auth()
     let database = Database.database().reference()
+    let storageRef = Storage.storage().reference()
     let uid = Auth.auth().currentUser?.uid
+    
     
     static var eventArray = [Event]()
     
@@ -49,32 +48,130 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     
     @IBOutlet var addEventView: UIView!
     @IBOutlet weak var addEventView_imageview: UIImageView!
-    @IBOutlet weak var addEventView_selectPhoto: RoundedButton!
+//    @IBOutlet weak var addEventView_selectPhoto: RoundedButton!
     @IBOutlet weak var addEventView_title: UITextField!
     @IBOutlet weak var addEventView_interests: UITextField!
     @IBOutlet weak var addEventView_description: UITextView!
     
     @IBAction func addEventView_uploadBtn(_ sender: Any) {
-     let ref = database.child("stories").childByAutoId()
-     
-        let data = ["uid":uid,
-                    "title":"",
-                    "type":"",
-                    "storypostedby":"",
-                    "longitude":"",
-                    "lat":"",
-                    "interest":"",
-                    "image":"",
-                    "acceptedNumber":"",
-                    "deniedNumber":"",
-                    "favouriteNumber":""]
+        
+        guard let userLocation = locationManager.location else { return }
+        
+     let eventRef = database.child("stories").childByAutoId()
+//        let storiesRef = Database.database().reference().child("stories").childByAutoId()
+        let userRef = database.child("Users").child(uid!).child("stories").childByAutoId().setValue(eventRef.key)
+       let tempImgRef = storageRef.child("images/\(eventRef.key).jpg")
+        
+        // creating metafile which contains information about the image which we will save in the database
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpeg"
+       
+        
+        ////////
+      
+        // it place the image in the storage on firebase
+        tempImgRef.putData(UIImageJPEGRepresentation(addEventView_imageview.image!, 0)!, metadata: metadata) { (data, error) in
+            // if image is uploaded successfully and you can say that there is no error
+            if error == nil {
+                
+                tempImgRef.downloadURL(completion: { (url, error) in
+                
+                    // creating dictionary
+                    let data = ["uid":"\(self.uid!)",
+                                "des":"\(self.addEventView_description.text!)",
+                                "title":self.addEventView_title.text,
+                                "type":User.singleton.userType,
+                                "storypostedby":User.singleton.name,
+                                "longitude":"\(userLocation.coordinate.longitude)",
+                                "lat":"\(userLocation.coordinate.latitude)",
+                                "interest":self.addEventView_interests.text,
+                                "image": "\(url!)",
+                                "acceptedNumber":"0",
+                                "deniedNumber":"0",
+                                "favouriteNumber":"0"] as [String : Any]
+                    
+//                    var storyDic = ["title": self.titleTxt.text!,
+//                                    "description": self.des.text!,
+//                                    "uid":uid,
+//                                    "keywords": self.keyword.text!,
+//                                    "image": "images/\(eventRef.key).jpg",
+//                        "lat": self.latitude!,
+//                        "long": self.longitude!] as [String : Any]
+                    
+                    print("Image Uploaded: Successfully")
+                    eventRef.setValue(data)
+                    
+                    for v in self.view.subviews{
+                        if v == self.addEventView{
+                        v.removeFromSuperview()
+                        }
+                        self.fetchEventsAndDisplayOnMap()
+                        
+                    }
+                    
+                    UIView.animate(withDuration: 1) {
+                        self.blackBgView.alpha = 0
+                    }
+                    
+                })
+                
+            }else{
+//                SVProgressHUD.showError(withStatus: "Failure")
+                print("Image Upload Failure")
+            }
+        }
+        
+        //////
+        
+       
+        
         
     
     }
     @IBAction func addEventView_cancelBtn(_ sender: Any) {
+        
+        for v in view.subviews{
+            if v == addEventView{
+                v.removeFromSuperview()
+            }
+        }
+        
+        UIView.animate(withDuration: 1) {
+            self.blackBgView.alpha = 0
+        }
+        
     }
     /******************************************************/
     
+    /*Camera Roll Related*/
+    @IBAction func addEventView_imageview(_ sender: Any) {
+        let image = UIImagePickerController()
+        image.delegate = self
+        image.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        self.present(image, animated: true, completion: nil)
+    }
+    
+    // choose image from cameraRoll
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        let theInfo:NSDictionary = info as NSDictionary
+        let img:UIImage = theInfo.object(forKey: UIImagePickerControllerOriginalImage) as! UIImage
+        addEventView_imageview.image = img
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    // when we touch outside the textfield then keyboard will disappear
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    // when we will touch on return button on key it will hide the keyboard
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    /*********************/
     @IBAction func segmentedControlsChanged(_ sender: Any) {
         if segmentedcontrols.selectedSegmentIndex == 0{
             removeAnnotations()

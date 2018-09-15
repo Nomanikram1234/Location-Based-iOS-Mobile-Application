@@ -866,7 +866,6 @@
                         <outlet property="addEventView_description" destination="Nnk-bb-8qZ" id="2XP-Sq-Uou"/>
                         <outlet property="addEventView_imageview" destination="qts-Wx-4Ty" id="mRo-im-x3p"/>
                         <outlet property="addEventView_interests" destination="vIw-1h-5Tb" id="p7P-Zc-ufs"/>
-                        <outlet property="addEventView_selectPhoto" destination="luA-eT-Fdg" id="JqZ-sY-Zsw"/>
                         <outlet property="addEventView_title" destination="XUB-jt-6Jx" id="Akg-Z0-bmQ"/>
                         <outlet property="blackBgView" destination="AVc-Lp-AaU" id="Ie4-1H-e2w"/>
                         <outlet property="collectionview" destination="N4v-fw-o0A" id="oN7-et-NGP"/>
@@ -945,6 +944,9 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <state key="normal" image="ic_camera_alt"/>
+                                    <connections>
+                                        <action selector="addEventView_imageview:" destination="6KH-4k-ycv" eventType="touchUpInside" id="pXI-lV-vaW"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
