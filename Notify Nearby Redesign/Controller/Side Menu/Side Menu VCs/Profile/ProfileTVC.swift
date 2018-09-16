@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewDataSource {
+class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewDataSource , UINavigationControllerDelegate , UIImagePickerControllerDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if collectionView == storyCollectionview{
@@ -47,7 +47,12 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
         
     }
     
-   
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var noOfInterests: UILabel!
+    @IBOutlet weak var noOfStories: UILabel!
+    @IBOutlet weak var profileBG_imageview: UIImageView!
+    @IBOutlet weak var profile_imageview: RoundedImage!
+    
     @IBOutlet weak var storyCollectionview: UICollectionView!
     @IBOutlet weak var interestCollectionview: UICollectionView!
     @IBOutlet weak var followerCollectionview: UICollectionView!
@@ -56,6 +61,16 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        name.text =  User.singleton.name
+//        profile_imageview.sd_setImage(with: URL(string:User.singleton.profileImgURL!), completed: nil)
+        
+        if let image = User.singleton.profileImgURL{
+            profile_imageview.sd_setImage(with: URL(string: image), completed: nil)
+            profileBG_imageview.sd_setImage(with: URL(string: image), completed: nil)
+        }
+        
+        noOfInterests.text = "\(MyInterestVC.interest.count)"
         
         sidemenu()
         
@@ -85,6 +100,9 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
             
         }
     }
+    
+    
+    
     // MARK: - Table view data source
 
 //    override func numberOfSections(in tableView: UITableView) -> Int {

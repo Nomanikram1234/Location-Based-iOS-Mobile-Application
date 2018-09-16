@@ -67,7 +67,7 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-       login(email: "nomanikram0@icloud.com", password: "Nomi1234")
+       login(email: "nomanikram0@icloud.com", password: "Rajanoman1")
         
         
     }

@@ -487,10 +487,11 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
                 
                 editStoryView_title.text = event.event_title
                 editStoryView_description.text = event.event_description
+                event_description.text = event.event_description
                 editStoryView_interest.text = event.event_interests
                 editStoryView_imageview.sd_setImage(with: URL(string: event.event_image!), completed: nil)
                 
-                if event.uid == Auth.auth().currentUser?.uid{
+                if event.event_author_uid == Auth.auth().currentUser?.uid{
                     deleteButton.isHidden == false
                     editButton.isHidden == false
                 }else{

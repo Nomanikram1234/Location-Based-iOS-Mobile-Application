@@ -481,8 +481,8 @@
                                     <outlet property="delegate" destination="wAa-19-IHn" id="owO-oG-coY"/>
                                 </connections>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Common Interests" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQA-9Y-F5h">
-                                <rect key="frame" x="16" y="100" width="143" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interests" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQA-9Y-F5h">
+                                <rect key="frame" x="16" y="100" width="67" height="24"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -517,10 +517,10 @@
             </objects>
             <point key="canvasLocation" x="2301.5999999999999" y="976.84729064039414"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Edit ProfileTVC-->
         <scene sceneID="Eix-ai-72e">
             <objects>
-                <tableViewController id="6Sj-dp-654" sceneMemberID="viewController">
+                <tableViewController id="6Sj-dp-654" customClass="EditProfileTVC" customModule="Notify_Nearby_Redesign" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="QC3-AN-l4z">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -586,6 +586,9 @@
                                                     <state key="normal" title="Change Image">
                                                         <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="changePhoto:" destination="6Sj-dp-654" eventType="touchUpInside" id="ohZ-MD-CDP"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -651,6 +654,9 @@
                                                     <state key="normal" title="Save Changes">
                                                         <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="saveChanges:" destination="6Sj-dp-654" eventType="touchUpInside" id="2RH-OQ-0CO"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -663,6 +669,12 @@
                             <outlet property="delegate" destination="6Sj-dp-654" id="BEc-EX-6wp"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="avatarBg_imageview" destination="6mf-ev-mM9" id="r12-Pn-7R3"/>
+                        <outlet property="avatar_imageview" destination="iup-0W-yqD" id="nRA-Ri-mU6"/>
+                        <outlet property="contact" destination="l8R-Fj-Faf" id="Bco-Jl-Wfy"/>
+                        <outlet property="name" destination="xau-J0-oDt" id="ylz-nz-U4c"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vUf-Md-Mbc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -998,7 +1010,6 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tos-Zp-cpN">
                                 <rect key="frame" x="16" y="296" width="343" height="212"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -1801,6 +1812,9 @@
                                                     <state key="normal" title="Change Password">
                                                         <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="changePasswordPressed:" destination="T5T-SY-Ukl" eventType="touchUpInside" id="QbS-Bd-0XI"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -1814,7 +1828,9 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="confirmPassword" destination="jEZ-CP-oEP" id="Se1-yx-rr3"/>
                         <outlet property="moreButton" destination="TQr-hV-EMh" id="z0k-RA-WXe"/>
+                        <outlet property="password" destination="9mL-e4-dzR" id="Pam-RP-2r4"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="esV-9y-HAI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2564,8 +2580,8 @@
                                                     <rect key="frame" x="123" y="90" width="128" height="128"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Momina" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ozF-Xj-Guh">
-                                                    <rect key="frame" x="157" y="226" width="63" height="24"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Momina" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ozF-Xj-Guh">
+                                                    <rect key="frame" x="16" y="226" width="343" height="24"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -2595,6 +2611,9 @@
                                                     <state key="normal" title="Edit">
                                                         <color key="titleColor" red="0.23241167539999999" green="0.27045232060000002" blue="0.24450468750000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     </state>
+                                                    <connections>
+                                                        <segue destination="6Sj-dp-654" kind="show" id="jS2-ys-9br"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -2841,6 +2860,11 @@
                         <outlet property="followerCollectionview" destination="YFJ-gg-h6R" id="1d1-QL-Ead"/>
                         <outlet property="interestCollectionview" destination="eeK-j7-O3l" id="oxt-zH-xTb"/>
                         <outlet property="moreButton" destination="AQX-Kg-Ohg" id="3vR-8s-fmj"/>
+                        <outlet property="name" destination="ozF-Xj-Guh" id="ZAL-my-13N"/>
+                        <outlet property="noOfInterests" destination="F6L-Cg-UWA" id="4zA-ga-1Ib"/>
+                        <outlet property="noOfStories" destination="yj2-hE-LeY" id="ihZ-Fx-yhp"/>
+                        <outlet property="profileBG_imageview" destination="Xgb-78-zLb" id="lw5-zc-Tgr"/>
+                        <outlet property="profile_imageview" destination="92A-5z-4I3" id="2ZG-F3-PKG"/>
                         <outlet property="storyCollectionview" destination="xdq-PX-N2b" id="1H4-NL-hHu"/>
                     </connections>
                 </tableViewController>
@@ -3026,8 +3050,8 @@
                                                         <constraint firstAttribute="width" constant="96" id="P93-ET-vQE"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Momina" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y3A-KE-XyR">
-                                                    <rect key="frame" x="127" y="113" width="63" height="24"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Momina" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y3A-KE-XyR">
+                                                    <rect key="frame" x="130.33333333333334" y="118" width="56.666666666666657" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="17" id="Edb-Qv-cQt"/>
                                                     </constraints>
@@ -3239,6 +3263,7 @@
                     </tableView>
                     <connections>
                         <outlet property="imageview" destination="TIL-B7-IAf" id="W4C-So-2xI"/>
+                        <outlet property="name" destination="Y3A-KE-XyR" id="7ZV-Zp-FNx"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nIL-B9-8ei" userLabel="First Responder" sceneMemberID="firstResponder"/>

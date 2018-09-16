@@ -7,10 +7,17 @@
 //
 
 import UIKit
+import  FirebaseAuth
+import FirebaseCore
 
 class AccountTVC: UITableViewController {
 
     @IBOutlet weak var moreButton: UIBarButtonItem!
+    
+    @IBOutlet weak var password: UITextField!
+    
+    @IBOutlet weak var confirmPassword: UITextField!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +42,16 @@ class AccountTVC: UITableViewController {
         }
     }
 
+    @IBAction func changePasswordPressed(_ sender: Any) {
+        
+        if password.text == confirmPassword.text{
+        let email = Auth.auth().currentUser?.email
+        Auth.auth().currentUser?.updatePassword(to: password.text!, completion: nil)
+        print("Changed Password")
+        }else{
+            print("Passwords not match")
+        }
+    }
     /*
     // MARK: - Navigation
 

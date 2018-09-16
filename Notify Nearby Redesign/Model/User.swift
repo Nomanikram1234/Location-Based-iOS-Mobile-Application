@@ -34,6 +34,7 @@ class User{
         email = json["email"].stringValue as! String
         userType = json["userType"].stringValue as! String
         contact = json["contact"].stringValue as! String
+        profileImgURL = json["profileImageUrl"].stringValue
         
     }
     

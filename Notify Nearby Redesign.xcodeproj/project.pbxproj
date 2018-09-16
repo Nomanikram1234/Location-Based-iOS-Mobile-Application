@@ -59,6 +59,7 @@
 		F8CE79A02145815700B965B8 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CE799F2145815700B965B8 /* AnnotationView.swift */; };
 		F8CE79A32145862D00B965B8 /* EventCalloutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8CE79A22145862D00B965B8 /* EventCalloutView.xib */; };
 		F8CE79A52145864300B965B8 /* EventCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CE79A42145864300B965B8 /* EventCalloutView.swift */; };
+		F8F5B33E214EF79600793248 /* EditProfileTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F5B33D214EF79600793248 /* EditProfileTVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,6 +121,7 @@
 		F8CE799F2145815700B965B8 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
 		F8CE79A22145862D00B965B8 /* EventCalloutView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventCalloutView.xib; sourceTree = "<group>"; };
 		F8CE79A42145864300B965B8 /* EventCalloutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCalloutView.swift; sourceTree = "<group>"; };
+		F8F5B33D214EF79600793248 /* EditProfileTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileTVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -351,6 +353,7 @@
 		F8C80983213F07F9008FBC44 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				F8F5B338214EF6A300793248 /* Edit Profile */,
 				F8C80986213F088D008FBC44 /* Followers */,
 				F8C80985213F0884008FBC44 /* Interests */,
 				F8C80984213F0879008FBC44 /* Stories */,
@@ -454,6 +457,14 @@
 				F8CE79A42145864300B965B8 /* EventCalloutView.swift */,
 			);
 			path = "Event Callout View";
+			sourceTree = "<group>";
+		};
+		F8F5B338214EF6A300793248 /* Edit Profile */ = {
+			isa = PBXGroup;
+			children = (
+				F8F5B33D214EF79600793248 /* EditProfileTVC.swift */,
+			);
+			path = "Edit Profile";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -600,6 +611,7 @@
 				F809ED3F213D9172007280E5 /* InterestVC.swift in Sources */,
 				F867093D213EFB8C004CAD58 /* BlackBorderSmallButton.swift in Sources */,
 				F821606D213BC5BC00CA19AD /* TransparentButton.swift in Sources */,
+				F8F5B33E214EF79600793248 /* EditProfileTVC.swift in Sources */,
 				F8C8099521404F6D008FBC44 /* InterestCollectionViewCell.swift in Sources */,
 				F8CE79A52145864300B965B8 /* EventCalloutView.swift in Sources */,
 				F8C809A021408004008FBC44 /* StoriesCollectionViewCell.swift in Sources */,

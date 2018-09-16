@@ -11,11 +11,16 @@ import UIKit
 class SideMenuTVC: UITableViewController {
 
     @IBOutlet weak var imageview: UIImageView!
+    @IBOutlet weak var name: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        
+        name.text = User.singleton.name
+        if let image = User.singleton.profileImgURL{
+        imageview.sd_setImage(with: URL(string: image), completed: nil)
+        }
         imageview.roundImageView()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

@@ -12,6 +12,7 @@ import SwiftyJSON
 import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
+import UserNotifications
 
 class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, MKMapViewDelegate,CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
@@ -186,6 +187,8 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
 
         // Do any additional setup after loading the view.
 //        sidemenu()
+        authorizingLocalNotification()
+        
         
         configureLocationServices()
         centerMapOnUserLocation()
@@ -212,6 +215,14 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         fetchEventsAndDisplayOnMap()
     }
    
+    func authorizingLocalNotification(){
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.badge,.sound]) { (bool, error) in
+            if error == nil
+            {
+                print(bool)
+            }
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -286,9 +297,19 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                             
                             anno.event_key = event.event_key
                             anno.event_image = event.event_image
+                            anno.event_noOfAccepted = event.event_noOfAccepted
+                            anno.event_noOfDenied = event.event_noOfDenied
+                            anno.event_noOfFavourite = event.event_noOfFavourite
                             self.collectionview.reloadData()
+                            
+//                            self.localNotification(title: event.event_title, subtitle: event.event_title, body: common_interests_string, lat: coordinate.coordinate.latitude, long: coordinate.coordinate.longitude)
+                            
                             self.mapview.addAnnotation(anno)
                         }
+                        //FIXME: - Local Notification
+                        
+                        
+                        
                         
                         print(user_interests)
                         print(event_interests)
@@ -319,17 +340,63 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                     anno.event_interests  =  common_interests_string
                     anno.event_key = event.event_key
                     anno.event_image = event.event_image
+                    anno.event_noOfAccepted = event.event_noOfAccepted
+                    anno.event_noOfDenied = event.event_noOfDenied
+                    anno.event_noOfFavourite = event.event_noOfFavourite
                     
+//                    self.localNotification(title: event.event_title, subtitle: event.event_title, body: common_interests_string, lat: coordinate.coordinate.latitude, long: coordinate.coordinate.longitude)
                 self.mapview.addAnnotation(anno)
                 }
             }
+                //FIXME: - Local Notification
+//                let content = UNMutableNotificationContent()
+                
+                //        var badge = 0
+                
+//                content.title = "New Event is observed nearby"
+//                content.subtitle = "\(event.event_title)"
+//                content.body = "\(common_interests_string)"
+//                content.badge = 1
+//                content.sound = UNNotificationSound.default()
+//                //        content.
+//
+////                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
+//
+//                let center = CLLocationCoordinate2D(latitude: 37.335400, longitude: -122.009201)
+//                let region = CLCircularRegion(center: center, radius: 2000.0, identifier: "Headquarters")
+//                region.notifyOnEntry = true
+//                region.notifyOnExit = false
+//                let trigger = UNLocationNotificationTrigger(region: region, repeats: false)
+//                let request = UNNotificationRequest(identifier: "IS", content: content, trigger: trigger)
+//
+//                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+                
                 HomeTVC.eventArray.append(event)
             }
             print("fetchEventsAndDisplayOnMap(): fetched Events")
             print("Event Array: Number of Events -> \(HomeTVC.eventArray.count)")
         }
     }
-    
+    func localNotification(title:String?,subtitle:String?,body:String?,lat:CLLocationDegrees,long:CLLocationDegrees) {
+        let content = UNMutableNotificationContent()
+        content.title = title!
+        content.subtitle = subtitle!
+        content.body = body!
+        content.badge = 1
+        content.sound = UNNotificationSound.default()
+        //        content.
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
+        
+        let center = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        let region = CLCircularRegion(center: center, radius: 10000.0, identifier: "Events")
+        region.notifyOnEntry = true
+        region.notifyOnExit = false
+        let loc_trigger = UNLocationNotificationTrigger(region: region, repeats: false)
+        let request = UNNotificationRequest(identifier: "IS", content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+    }
     
     func fetchEvents() {
         database.child("stories").observe(DataEventType.value) { (snapshot) in
@@ -384,6 +451,9 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                             anno.event_title = event.event_title
                             anno.event_interests  =  common_interests_string
                             anno.event_image = event.event_image
+                            anno.event_noOfAccepted = event.event_noOfAccepted
+                            anno.event_noOfDenied = event.event_noOfDenied
+                            anno.event_noOfFavourite = event.event_noOfFavourite
                             
                             self.mapview.addAnnotation(anno)
                         }
@@ -413,6 +483,9 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                     anno.event_interests  =  common_interests_string
                     anno.event_key = event.event_key
                     anno.event_image = event.event_image!
+                    anno.event_noOfAccepted = event.event_noOfAccepted
+                    anno.event_noOfDenied = event.event_noOfDenied
+                    anno.event_noOfFavourite = event.event_noOfFavourite
                     
                     self.mapview.addAnnotation(anno)
                 }
@@ -518,6 +591,9 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         eventCalloutView.event_title.text =  event.event_title
         eventCalloutView.event_basedon.text = event.event_interests
         eventCalloutView.event_key.text = event.event_key
+        eventCalloutView.event_noOfAccepts.text = event.event_noOfAccepted
+        eventCalloutView.event_noOfDenied.text = event.event_noOfDenied
+        eventCalloutView.event_noOfFavourite.text = event.event_noOfFavourite
         eventCalloutView.event_imageview.sd_setImage(with: URL(string: event.event_image!), completed: nil)
         print(event.event_image)
         
