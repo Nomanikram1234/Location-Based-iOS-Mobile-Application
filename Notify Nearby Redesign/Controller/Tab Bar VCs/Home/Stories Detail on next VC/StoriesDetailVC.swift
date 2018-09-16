@@ -11,10 +11,11 @@ import MapKit
 import CoreLocation
 import FirebaseAuth
 import FirebaseDatabase
+import FirebaseStorage
+import SwiftyJSON
 
-class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDataSource{
-    
-    
+class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDataSource , UINavigationControllerDelegate , UIImagePickerControllerDelegate {
+
     var Previouskey :String?
     var event:Event?
     var interestArray : [String]?
@@ -35,11 +36,112 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
     
     @IBOutlet weak var collectionview: UICollectionView!
     
+    /* Addional Views */
+    @IBOutlet var blackBgView: UIView!
+    @IBOutlet var editStoryView: UIView!
+    
+    @IBOutlet weak var editStoryView_imageview: UIImageView!
+    @IBOutlet weak var editStoryView_title: UITextField!
+    @IBOutlet weak var editStoryView_interest: UITextField!
+    @IBOutlet weak var editStoryView_description: UITextView!
+    
+    @IBAction func changePhoto(_ sender: Any) {
+        let image = UIImagePickerController()
+        image.delegate = self
+        image.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        self.present(image, animated: true, completion: nil)
+        
+    }
+    @IBAction func updateButtonPressed(_ sender: Any) {
+       
+        let storageRef = Storage.storage().reference()
+        
+        let userRef = database.child("Users").child(uid!).child("stories").child(Previouskey!).setValue(Previouskey)
+        let tempImgRef = storageRef.child("images/\(Previouskey).jpg")
+        
+        // creating metafile which contains information about the image which we will save in the database
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpeg"
+        
+        
+        // it place the image in the storage on firebase
+        tempImgRef.putData(UIImageJPEGRepresentation(editStoryView_imageview.image!, 0)!, metadata: metadata) { (data, error) in
+            // if image is uploaded successfully and you can say that there is no error
+            if error == nil {
+                
+                tempImgRef.downloadURL(completion: { (url, error) in
+     
+                    self.database.child("stories").child(self.Previouskey!).child("description").setValue(self.editStoryView_description.text)
+                    self.database.child("stories").child(self.Previouskey!).child("title").setValue(self.editStoryView_title.text)
+        
+                    self.database.child("stories").child(self.self.Previouskey!).child("interest").setValue(self.editStoryView_interest.text)
+        
+                    self.database.child("stories").child(self.Previouskey!).child("image").setValue("\(url!)")
+            
+                    // Intiantiate Main Screen
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+                    self.present(vc, animated: true, completion: nil)
+                    
+//                        self.dismiss(animated: true, completion: nil)
+                })
+                
+            }else{
+                //                SVProgressHUD.showError(withStatus: "Failure")
+                print("Image Upload Failure")
+            }
+        }
+                
+//        database.child("stories").child(Previouskey).child("image").setValue(<#T##value: Any?##Any?#>)
+        
+    }
     
     
+//    // functions for picking image from CameraRoll
+//    @IBAction func uploadImage(_ sender: Any) {
+//        let image = UIImagePickerController()
+//        image.delegate = self
+//        image.sourceType = UIImagePickerControllerSourceType.photoLibrary
+//        self.present(image, animated: true, completion: nil)
+//    }
+    
+    // choose image from cameraRoll
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        let theInfo:NSDictionary = info as NSDictionary
+        let img:UIImage = theInfo.object(forKey: UIImagePickerControllerOriginalImage) as! UIImage
+        editStoryView_imageview.image = img
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    // when we touch outside the textfield then keyboard will disappear
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    // when we will touch on return button on key it will hide the keyboard
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    @IBAction func cancelButtonPressed(_ sender: Any) {
+        
+        UIView.animate(withDuration: 1) {
+            self.blackBgView.alpha = 0
+            
+            for v in self.view.subviews{
+                if v == self.editStoryView{
+                    v.removeFromSuperview()
+                }
+            }
+        }
+        
+    }
     
     
-//    @IBOutlet weak var mapview: MKMapView!
+    /* Additional View Ended */
+    
+    //    @IBOutlet weak var mapview: MKMapView!
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return interestArray!.count
@@ -59,6 +161,85 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
     
     @IBAction func reportButtonPressed(_ sender: Any) {
         print("Report Button Pressed")
+        
+        let actionsheet = UIAlertController(title: "Feedback", message: "Help us understand what's happening", preferredStyle: .actionSheet)
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        let fakeInformation = UIAlertAction(title: "Fake Information", style: .default) { (action) in
+            self.reportType(reason: "Fake Information")
+//            self.alertTicketMessage(ticketno: "Fake Information")
+        }
+        
+        let pretendingToBeSomeoneElse = UIAlertAction(title: "Pretending to be Someone", style: .default) { (action) in
+            self.reportType(reason: "Pretending to be Someone")
+//            self.alertTicketMessage(ticketno: "Pretending to be Someone")
+        }
+        
+        let unethicalContent = UIAlertAction(title: "Unethical Content", style: .default) { (action) in
+           
+            self.reportType(reason: "Unethical Content")
+//            self.alertTicketMessage(ticketno: "Unethical Content")
+        }
+        
+        let fakeAccount = UIAlertAction(title: "Fake Account", style: .default) { (action) in
+            self.reportType(reason: "Fake Account")
+//            self.alertTicketMessage(ticketno: "Fake Account")
+        }
+        
+        let offensiveBehaviour = UIAlertAction(title: "Offensive Behaviour", style: .default) { (action) in
+            self.reportType(reason: "Offensive Behaviour")
+//            self.alertTicketMessage(ticketno: "Offensive Behaviour")
+            
+        }
+        
+        actionsheet.addAction(fakeInformation)
+        actionsheet.addAction(fakeAccount)
+        actionsheet.addAction(pretendingToBeSomeoneElse)
+        actionsheet.addAction(unethicalContent)
+        actionsheet.addAction(offensiveBehaviour)
+        actionsheet.addAction(cancel)
+        
+//        reportType(reason: "")
+        
+        present(actionsheet, animated: true, completion: nil)
+        
+    }
+    
+    // alertaction
+    func reportType(reason:String)  {
+
+        var ticketnumber = Int(arc4random_uniform(99999))
+        
+//        database.child("Tickets").observeSingleEvent(of: .value) { (snapshot) in
+//            for e in snapshot.children{
+//                let ticketno = Int("\(JSON((e as! DataSnapshot).value)["ticketnumber"]))")
+//
+//                while ticketnumber != ticketno{
+//                    ticketnumber = Int(arc4random_uniform(99999))
+//                }
+//            }
+            let data = ["reason":"\(reason)",
+                "reportedbyuserid":"\(self.uid!)",
+                "reportedid":"\((self.event?.event_author_uid)!)",
+                "reportedusername":"\((self.event?.event_author)!)",
+                "ticket":"\(ticketnumber)"]
+            
+        self.database.child("Tickets").childByAutoId().setValue(data) { (error, ref) in
+            if error == nil{
+                self.alertTicketMessage(ticketno: "\(ticketnumber)")
+            }
+        }
+//            alertTicketMessage(ticketno: "\(ticketnumber)")
+        
+//        }
+    
+    }
+    
+    func alertTicketMessage(ticketno:String){
+        let alertcontroller = UIAlertController(title: "Ticket Number", message: "Your Ticket Number: \(ticketno)", preferredStyle: .alert)
+         alertcontroller.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
+        present(alertcontroller, animated: true, completion: nil)
     }
     
     @IBAction func acceptButtonPressed(_ sender: Any) {
@@ -194,9 +375,11 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
                 if (snap as! AnyObject).value == self.Previouskey{
                     (snap as! AnyObject).ref.removeValue()
                 print("Deleted Successfully")
-                    self.dismiss(animated: true, completion: {
-                        
-                    })
+                   
+                    // Intiantiate Main Screen
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+                    self.present(vc, animated: true, completion: nil)
+                    
                 }else{
                     print("Failed to Delete")
                 }
@@ -236,9 +419,6 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
                 self.database.child("stories").child(self.Previouskey!).child("favouriteNumber").setValue("\(count+1)")
             }else{
                 
-                
-                
-                
                 for id in snapshot.children{
                     
                     
@@ -247,7 +427,7 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
                         
                         self.database.child("stories").child(self.Previouskey!).child("favourite").childByAutoId().setValue(self.uid)
                         
-                        self.database.child("users").child(self.uid!).child("favourite").childByAutoId().setValue(self.Previouskey)
+                        self.database.child("Users").child(self.uid!).child("favourite").childByAutoId().setValue(self.Previouskey)
                         
                         
                         count = snapshot.childrenCount
@@ -273,6 +453,19 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
     @IBAction func editButtonPressed(_ sender: Any) {
          print("Edit Button Pressed")
         
+//        blackBgView.alpha = 0
+        blackBgView.frame.size.height = view.frame.height
+        blackBgView.frame.size.width = view.frame.width
+        editStoryView.center = view.center
+        editStoryView.frame.origin.y = 16
+         view.addSubview(blackBgView)
+        
+      
+        
+        UIView.animate(withDuration: 1) {
+            self.blackBgView.alpha = 0.4
+            self.view.addSubview(self.editStoryView)
+        }
         
     }
     
@@ -301,6 +494,12 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
                 
                 event_title.text = event.event_title
                 event_image.sd_setImage(with: URL(string:event.event_image!), completed: nil)
+                
+                
+                editStoryView_title.text = event.event_title
+                editStoryView_description.text = event.event_description
+                editStoryView_interest.text = event.event_interests
+                editStoryView_imageview.sd_setImage(with: URL(string: event.event_image!), completed: nil)
                 
                 if event.uid == Auth.auth().currentUser?.uid{
                     deleteButton.isHidden == false

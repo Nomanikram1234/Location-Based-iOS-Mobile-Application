@@ -19,6 +19,7 @@ class User{
     var followers: [String]?
     var following: [String]?
     var favourite: [String]?
+    
    
     var events: [String]?
     

@@ -671,13 +671,13 @@
         <!--Home-->
         <scene sceneID="W6s-tf-dyq">
             <objects>
-                <tableViewController id="6KH-4k-ycv" customClass="HomeTVC" customModule="Notify_Nearby_Redesign" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="HomeTVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6KH-4k-ycv" customClass="HomeTVC" customModule="Notify_Nearby_Redesign" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fks-W5-iIR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="T5P-Io-qWo"/>
-                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="9pd-dm-YAT">
+                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" translucent="NO" id="9pd-dm-YAT">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <items>
@@ -1150,17 +1150,106 @@
                         <viewLayoutGuide key="safeArea" id="H6P-qX-7i8"/>
                     </view>
                     <connections>
+                        <outlet property="blackBgView" destination="aGm-RA-MLd" id="0b1-K8-cQu"/>
                         <outlet property="collectionview" destination="Dyc-x3-bF0" id="x4i-sK-AuW"/>
                         <outlet property="deleteButton" destination="pZX-Ze-PD7" id="tTq-pD-ZwB"/>
                         <outlet property="editButton" destination="EXw-Bs-CYn" id="WFK-IC-Thp"/>
+                        <outlet property="editStoryView" destination="T45-EX-JEl" id="cIx-3U-MCu"/>
+                        <outlet property="editStoryView_description" destination="l43-0J-Cu5" id="kkX-ok-tUB"/>
+                        <outlet property="editStoryView_imageview" destination="zHK-B2-ItZ" id="Eot-zS-dwM"/>
+                        <outlet property="editStoryView_interest" destination="8f3-Tp-JoO" id="9Ax-SM-REd"/>
+                        <outlet property="editStoryView_title" destination="3y8-6d-Uhk" id="htQ-ab-bxL"/>
                         <outlet property="event_description" destination="tos-Zp-cpN" id="4W3-xw-URI"/>
                         <outlet property="event_image" destination="1Ky-Vt-MuD" id="VEN-Oc-UvF"/>
                         <outlet property="event_title" destination="emQ-Ky-Y2A" id="zsL-m8-MWA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="efa-Kb-XmR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="T45-EX-JEl">
+                    <rect key="frame" x="0.0" y="0.0" width="334" height="408"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hx2-FB-vxK" customClass="RoundedView" customModule="Notify_Nearby_Redesign" customModuleProvider="target">
+                            <rect key="frame" x="30" y="44" width="273" height="364"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="avatar2" translatesAutoresizingMaskIntoConstraints="NO" id="zHK-B2-ItZ">
+                                    <rect key="frame" x="86" y="-45" width="100" height="100"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9VN-iq-E76">
+                                    <rect key="frame" x="172" y="13" width="28" height="32"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" image="ic_camera_alt"/>
+                                    <connections>
+                                        <action selector="changePhoto:" destination="FPh-t9-4PO" eventType="touchUpInside" id="zyH-K9-Sbw"/>
+                                    </connections>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Edit Story" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0M4-gM-g6I">
+                                    <rect key="frame" x="99" y="63" width="75" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3y8-6d-Uhk">
+                                    <rect key="frame" x="14" y="92" width="240" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Interests" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8f3-Tp-JoO">
+                                    <rect key="frame" x="14" y="130" width="240" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="l43-0J-Cu5">
+                                    <rect key="frame" x="14" y="164" width="240" height="128"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                </textView>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0qs-0d-xdy" customClass="TransparentButton" customModule="Notify_Nearby_Redesign" customModuleProvider="target">
+                                    <rect key="frame" x="61" y="312" width="75" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                    <state key="normal" title="Update">
+                                        <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="updateButtonPressed:" destination="FPh-t9-4PO" eventType="touchUpInside" id="cvR-dI-ZUU"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Oz-XC-3JL" customClass="BlackBorderSmallButton" customModule="Notify_Nearby_Redesign" customModuleProvider="target">
+                                    <rect key="frame" x="138" y="312" width="75" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Cancel">
+                                        <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="cancelButtonPressed:" destination="FPh-t9-4PO" eventType="touchUpInside" id="AfC-qa-QHO"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="r7I-Xj-7xI"/>
+                </view>
+                <view alpha="0.0" contentMode="scaleToFill" id="aGm-RA-MLd">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.18823529410000001" green="0.23137254900000001" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <viewLayoutGuide key="safeArea" id="b7t-3v-Wol"/>
+                </view>
             </objects>
-            <point key="canvasLocation" x="696.79999999999995" y="2045.3201970443351"/>
+            <point key="canvasLocation" x="698" y="2680"/>
         </scene>
         <!--Joint-->
         <scene sceneID="IPv-kJ-gqj">
@@ -3158,7 +3247,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Bitmap" width="375" height="225"/>
+        <image name="Bitmap" width="375" height="667"/>
         <image name="BitmapBG" width="375" height="667"/>
         <image name="Image" width="22" height="22"/>
         <image name="Profile" width="21" height="24"/>
@@ -3166,6 +3255,7 @@
         <image name="Stroke 1" width="22" height="22"/>
         <image name="avatar" width="520" height="520"/>
         <image name="avatar 2" width="500" height="500"/>
+        <image name="avatar2" width="564" height="651"/>
         <image name="avatar3" width="564" height="564"/>
         <image name="back" width="32" height="14"/>
         <image name="ic_account_circle" width="20" height="20"/>

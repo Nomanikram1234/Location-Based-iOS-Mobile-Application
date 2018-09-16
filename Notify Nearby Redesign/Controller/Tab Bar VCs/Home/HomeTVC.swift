@@ -78,7 +78,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                 
                     // creating dictionary
                     let data = ["uid":"\(self.uid!)",
-                                "des":"\(self.addEventView_description.text!)",
+                                "description":"\(self.addEventView_description.text!)",
                                 "title":self.addEventView_title.text,
                                 "type":User.singleton.userType,
                                 "storypostedby":User.singleton.name,
@@ -88,7 +88,8 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                                 "image": "\(url!)",
                                 "acceptedNumber":"0",
                                 "deniedNumber":"0",
-                                "favouriteNumber":"0"] as [String : Any]
+                                "favouriteNumber":"0"
+                                ] as [String : Any]
                     
 //                    var storyDic = ["title": self.titleTxt.text!,
 //                                    "description": self.des.text!,
