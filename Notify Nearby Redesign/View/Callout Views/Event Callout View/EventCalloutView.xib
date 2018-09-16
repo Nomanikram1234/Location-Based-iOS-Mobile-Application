@@ -90,12 +90,20 @@
                     <rect key="frame" x="45" y="0.0" width="125" height="125"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="key" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="va6-nv-WSl">
+                    <rect key="frame" x="178" y="20" width="27" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="event_basedon" destination="gqW-hx-p6N" id="gRJ-MI-xxq"/>
                 <outlet property="event_imageview" destination="DQk-hZ-1Gw" id="NXy-En-jLb"/>
+                <outlet property="event_key" destination="va6-nv-WSl" id="LCs-4P-5W6"/>
                 <outlet property="event_noOfAccepts" destination="rHg-5f-bOZ" id="Nnb-ZM-B3Y"/>
                 <outlet property="event_noOfDenied" destination="IcM-Mb-TRh" id="naG-Ib-3K3"/>
                 <outlet property="event_noOfFavourite" destination="PfT-Ko-rn5" id="Brm-bg-cyc"/>

@@ -16,7 +16,7 @@ class EventCalloutView: UIView {
     @IBOutlet weak var event_noOfAccepts: UILabel!
     @IBOutlet weak var event_noOfDenied: UILabel!
     @IBOutlet weak var event_noOfFavourite: UILabel!
-    
+    @IBOutlet weak var event_key: UILabel!
     @IBOutlet weak var event_imageview: RoundedImage!
     
     /*

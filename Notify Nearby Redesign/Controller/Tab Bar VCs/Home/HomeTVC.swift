@@ -101,6 +101,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                     print("Image Uploaded: Successfully")
                     eventRef.setValue(data)
                     
+                    // Uploading Data to DB then refreshing map
                     for v in self.view.subviews{
                         if v == self.addEventView{
                         v.removeFromSuperview()
@@ -251,7 +252,8 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     }
     
     /**************** EVENT ****************/
-    func fetchEventsAndDisplayOnMap() {
+   func fetchEventsAndDisplayOnMap() {
+    
         print("fetchEventsAndDisplayOnMap")
         database.child("stories").observe(DataEventType.value) { (snapshot) in
             
@@ -287,6 +289,8 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                             anno.event_title = event.event_title
                             anno.event_interests  =  common_interests_string
                             
+                            anno.event_key = event.event_key
+                            anno.event_image = event.event_image
                             
                             self.mapview.addAnnotation(anno)
                         }
@@ -318,7 +322,9 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                     
                     anno.event_title = event.event_title
                     anno.event_interests  =  common_interests_string
-
+                    anno.event_key = event.event_key
+                    anno.event_image = event.event_image
+                    
                 self.mapview.addAnnotation(anno)
                 }
             }
@@ -382,6 +388,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                             
                             anno.event_title = event.event_title
                             anno.event_interests  =  common_interests_string
+                            anno.event_image = event.event_image
                             
                             self.mapview.addAnnotation(anno)
                         }
@@ -409,6 +416,8 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                     
                     anno.event_title = event.event_title
                     anno.event_interests  =  common_interests_string
+                    anno.event_key = event.event_key
+                    anno.event_image = event.event_image!
                     
                     self.mapview.addAnnotation(anno)
                 }
@@ -513,8 +522,11 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
 
         eventCalloutView.event_title.text =  event.event_title
         eventCalloutView.event_basedon.text = event.event_interests
+        eventCalloutView.event_key.text = event.event_key
+        eventCalloutView.event_imageview.sd_setImage(with: URL(string: event.event_image!), completed: nil)
+        print(event.event_image)
         
-         eventCalloutView.readMoreButton.addTarget(self, action: #selector(HomeTVC.test(sender:)) , for: .touchUpInside)
+         eventCalloutView.readMoreButton.addTarget(self, action: #selector(HomeTVC.addEventView_readMoreBtnPressed(sender:)) , for: .touchUpInside)
         
         
         // 3
@@ -525,9 +537,20 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         
     }
 
-    @objc func test(sender: UIButton){
-        print("TESTing")
+    @objc func addEventView_readMoreBtnPressed(sender: UIButton){
+        print("Read More Button Pressed")
+         performSegue(withIdentifier: "showStoryDetail", sender: self)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let StoriesDetailVC = segue.destination as? StoriesDetailVC{
+   
+            StoriesDetailVC.Previouskey = eventCalloutView.event_key.text
+            
+            
+        }
+    }
+    
     // When select the annotation view
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
         print("Annotation Deselected")
