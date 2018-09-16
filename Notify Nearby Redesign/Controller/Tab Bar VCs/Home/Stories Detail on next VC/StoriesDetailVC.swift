@@ -211,14 +211,6 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
 
         var ticketnumber = Int(arc4random_uniform(99999))
         
-//        database.child("Tickets").observeSingleEvent(of: .value) { (snapshot) in
-//            for e in snapshot.children{
-//                let ticketno = Int("\(JSON((e as! DataSnapshot).value)["ticketnumber"]))")
-//
-//                while ticketnumber != ticketno{
-//                    ticketnumber = Int(arc4random_uniform(99999))
-//                }
-//            }
             let data = ["reason":"\(reason)",
                 "reportedbyuserid":"\(self.uid!)",
                 "reportedid":"\((self.event?.event_author_uid)!)",
@@ -230,9 +222,6 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
                 self.alertTicketMessage(ticketno: "\(ticketnumber)")
             }
         }
-//            alertTicketMessage(ticketno: "\(ticketnumber)")
-        
-//        }
     
     }
     
@@ -554,45 +543,45 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
         var strArray : [String] = removeWhiteSpcSTR.components(separatedBy: ",")
         return strArray
     }
-//
-//    //2: finding common interest from two string arrays
-//    func commonInterest(firstSet:[String],secondSet:[String]) -> Set<String>{
-//
-//        var userInterest = firstSet
-//        let userSet:Set = Set(userInterest.map { $0 })
-//
-//        //    var str = "Hello, playground, sad, a,as "
-//        //    var removeWhiteSpcSTR = str.replacingOccurrences(of: " ", with: "")
-//        //    var strArray : [String] = removeWhiteSpcSTR.components(separatedBy: ",")
-//
-//        let strSet:Set = Set(secondSet.map { $0 })
-//        //    print(strSet)
-//
-//        let common = userSet.intersection(strSet)
-//        //        print(common)
-//        return common
-//    }
-//
-//    //3: converting common set element to string form for printing
-//    func commonInterestToString(common : Set<String>) -> String {
+
+    //2: finding common interest from two string arrays
+    func commonInterest(firstSet:[String],secondSet:[String]) -> Set<String>{
+
+        var userInterest = firstSet
+        let userSet:Set = Set(userInterest.map { $0 })
+
+        //    var str = "Hello, playground, sad, a,as "
+        //    var removeWhiteSpcSTR = str.replacingOccurrences(of: " ", with: "")
+        //    var strArray : [String] = removeWhiteSpcSTR.components(separatedBy: ",")
+
+        let strSet:Set = Set(secondSet.map { $0 })
+        //    print(strSet)
+
+        let common = userSet.intersection(strSet)
+        //        print(common)
+        return common
+    }
+
+    //3: converting common set element to string form for printing
+    func commonInterestToString(common : Set<String>) -> String {
+        var stringers = ""
+        for val in common {
+            stringers = "\(stringers) \(val)"
+        }
+        return stringers
+    }
+
+    //3: converting common set element to arraylistform for printing
+    func commonInterestToStringArrayList(common : Set<String>) -> [String] {
+        var str = [String]()
+
 //        var stringers = ""
-//        for val in common {
-//            stringers = "\(stringers) \(val)"
-//        }
-//        return stringers
-//    }
-//
-//    //3: converting common set element to arraylistform for printing
-//    func commonInterestToStringArrayList(common : Set<String>) -> [String] {
-//        var str = [String]()
-//
-////        var stringers = ""
-//        for val in common {
-//            str.append(val)
-//
-//        }
-//        return str
-//    }
+        for val in common {
+            str.append(val)
+
+        }
+        return str
+    }
     
     //TODO: To calculate the distance
     func calculateDistance(mainCoordinate: CLLocation,coordinate: CLLocation) -> Double{

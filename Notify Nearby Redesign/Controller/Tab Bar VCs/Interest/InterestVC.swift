@@ -7,10 +7,15 @@
 //
 
 import UIKit
+import CoreLocation
+import MapKit
+import FirebaseDatabase
+import SwiftyJSON
 
-class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, MKMapViewDelegate,CLLocationManagerDelegate{
  
-    
+    let arr = ["sport","gaming","news","traffic","education"]
+    var interestArray = [Event]()
 
     @IBOutlet weak var notificationBarBtn: UIBarButtonItem!
     
@@ -20,11 +25,129 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
     
     @IBOutlet weak var commonInterest_collectionview: UICollectionView!
     
+    let database = Database.database().reference()
+    
+    var locationManager = CLLocationManager()
+    let authStatus = CLLocationManager.authorizationStatus()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        HomeTVC.eventArray.removeAll()
+        
+        print("Counter: \(HomeTVC.eventArray.count)")
+        
+        database.child("stories").observe(DataEventType.value) { (snapshot) in
+            
+            for key in snapshot.children{
+                let json = JSON((key as! DataSnapshot).value)
+                let id = JSON((key as! DataSnapshot).key).stringValue
+                let event = Event(eventId:id , json: json)
+                
+                // getting user location
+                guard let userLocation = self.locationManager.location else {return}
+                // getting lat and long for event locations
+                let coordinate = CLLocation(latitude: event.event_latitude!, longitude: event.event_longitude!)
+                
+                // anno short for annotation(Map Pin)
+                let anno = Event(coordinate: CLLocationCoordinate2D(latitude: event.event_latitude!, longitude: event.event_longitude! ))
+                let distanceDifference = self.calculateDistance(mainCoordinate: userLocation , coordinate: coordinate)
+                
+                
+                // if INTEREST is selected in segmented controls
+//                if self.segmentedcontrols.selectedSegmentIndex == 0{
+                
+                    if self.calculateDistance(mainCoordinate: userLocation , coordinate: coordinate) <= 10000{
+                        var user_interests = MyInterestVC.interest
+                        var event_interests = self.stringToArray(string: event.event_interests!)
+                        var common_interests = self.commonInterest(firstSet: user_interests, secondSet: event_interests)
+                        var common_interests_string = self.commonInterestToString(common: common_interests)
+                        
+                        // if there are any/some matching interest between user and event
+                        if !common_interests.isEmpty{
+                            anno.title = common_interests_string
+                            anno.subtitle = event.event_title
+                            
+                            anno.event_title = event.event_title
+                            anno.event_interests  =  common_interests_string
+                            
+                            anno.event_key = event.event_key
+                            anno.event_image = event.event_image
+//                        self.interest_collectionview.reloadData()
+                           self.interestArray.append(anno)
+                            self.interest_collectionview.reloadData()
+                        }
+                        
+                        print(user_interests)
+                        print(event_interests)
+                        print ( "Common Interests\(self.commonInterest(firstSet: user_interests, secondSet: event_interests))")
+                        print()
+                        
+                    }
+                    
+//                }
+                
+                
+//                HomeTVC.eventArray.append(event)
+            }
+            print("fetchEventsAndDisplayOnMap(): fetched Events")
+            print("Event Array: Number of Events -> \(HomeTVC.eventArray.count)")
+        }
+        
+//        for event in HomeTVC.eventArray{
+//
+//            guard let userLocation = self.locationManager.location else {return}
+//            let coordinate = CLLocation(latitude: event.event_latitude!, longitude: event.event_longitude!)
+//
+//            let anno = Event(coordinate: CLLocationCoordinate2D(latitude: event.event_latitude!, longitude: event.event_longitude! ))
+//            let distanceDifference = self.calculateDistance(mainCoordinate: userLocation , coordinate: coordinate)
+//
+//
+//                if self.calculateDistance(mainCoordinate: userLocation , coordinate: coordinate) <= 10000{
+//                    var user_interests = MyInterestVC.interest
+//                    var event_interests = self.stringToArray(string: event.event_interests!)
+//                    var common_interests = self.commonInterest(firstSet: user_interests, secondSet: event_interests)
+//                    var common_interests_string = self.commonInterestToString(common: common_interests)
+//
+//                    // if there are any/some matching interest between user and event
+//                    if !common_interests.isEmpty{
+////                        print("Common Interest Index Path: \(interestArray.in)")
+//                        anno.title = common_interests_string
+//                        anno.subtitle = event.event_title
+//
+//
+//                        anno.event_title = event.event_title
+//                        anno.event_interests  =  common_interests_string
+//                        anno.event_image = event.event_image
+//
+//                        if !interestArray.contains(anno){
+//                        interestArray.append(anno)
+//                            interest_collectionview.reloadData()
+//                        }else{
+//                            continue
+//                        }
+//
+////                        self.mapview.addAnnotation(anno)
+//                    }
+//
+////                    print(user_interests)
+////                    print(event_interests)
+////                    print ( "Common Interests\(self.commonInterest(firstSet: user_interests, secondSet: event_interests))" )
+////                    print()
+//
+//                    print(interestArray)
+//
+//                }
+//
+//
+//
+//
+//        }
+        
+        
         // Do any additional setup after loading the view.
         sidemenu()
+        commonInterest_collectionview.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,25 +169,30 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if collectionView == interest_collectionview{
-        return 5
+        
+        return interestArray.count
         }else {
-            return 5
+            return arr.count
         }
         }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if collectionView == interest_collectionview{
+            
+        
+            
+            
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! InterestCollectionViewCell
-        cell.imageview.image = UIImage(named: "avatar3")
-        cell.title.text = "Momina"
+            cell.imageview.sd_setImage(with: URL(string: interestArray[indexPath.row].event_image!), completed: nil)
+        cell.title.text = interestArray[indexPath.row].event_title
         return cell
         }
         else
         {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "interest_cell", for: indexPath) as! TopInterestCollectionViewCell
             
-            cell.name.text = "Interest"
+            cell.name.text = arr[indexPath.row]
             return cell
         }
     }
@@ -86,5 +214,49 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
         // Pass the selected object to the new view controller.
     }
     */
+    
+    //1: converting string to string array
+    func stringToArray(string:String)->[String]{
+        var string = string
+        var removeWhiteSpcSTR = string.replacingOccurrences(of: " ", with: "")
+        var strArray : [String] = removeWhiteSpcSTR.components(separatedBy: ",")
+        return strArray
+    }
+    
+    //2: finding common interest from two string arrays
+    func commonInterest(firstSet:[String],secondSet:[String]) -> Set<String>{
+        
+        var userInterest = firstSet
+        let userSet:Set = Set(userInterest.map { $0 })
+        
+        //    var str = "Hello, playground, sad, a,as "
+        //    var removeWhiteSpcSTR = str.replacingOccurrences(of: " ", with: "")
+        //    var strArray : [String] = removeWhiteSpcSTR.components(separatedBy: ",")
+        
+        let strSet:Set = Set(secondSet.map { $0 })
+        //    print(strSet)
+        
+        let common = userSet.intersection(strSet)
+        //        print(common)
+        return common
+    }
+
+    //3: converting common set element to string form for printing
+    func commonInterestToString(common : Set<String>) -> String {
+        var stringers = ""
+        for val in common {
+            stringers = "\(stringers) \(val)"
+        }
+        return stringers
+    }
+    
+    //TODO: To calculate the distance
+    func calculateDistance(mainCoordinate: CLLocation,coordinate: CLLocation) -> Double{
+        
+        let distance = mainCoordinate.distance(from: coordinate)
+        //        print("Calculate Distance: \(distance)")
+        
+        return distance
+    }
 
 }

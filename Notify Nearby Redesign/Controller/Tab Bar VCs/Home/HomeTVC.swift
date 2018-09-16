@@ -122,13 +122,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                 print("Image Upload Failure")
             }
         }
-        
-        //////
-        
-       
-        
-        
-    
+ 
     }
     @IBAction func addEventView_cancelBtn(_ sender: Any) {
         
@@ -209,7 +203,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         fetchUserDetails()
         MyInterestVC.fetchUserInterests()
 //        fetchEventsAndDisplayOnMap()
-       fetchEventsAndDisplayOnMap()
+//       fetchEventsAndDisplayOnMap()
         
     }
     
@@ -254,7 +248,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     
     /**************** EVENT ****************/
    func fetchEventsAndDisplayOnMap() {
-    
+    HomeTVC.eventArray.removeAll()
         print("fetchEventsAndDisplayOnMap")
         database.child("stories").observe(DataEventType.value) { (snapshot) in
             
@@ -292,7 +286,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                             
                             anno.event_key = event.event_key
                             anno.event_image = event.event_image
-                            
+                            self.collectionview.reloadData()
                             self.mapview.addAnnotation(anno)
                         }
                         
@@ -433,12 +427,12 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
 
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       return 25
+       return HomeTVC.eventArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! StoriesCollectionViewCell
-        cell.imageview.image = UIImage(named: "avatar4")
+        cell.imageview.sd_setImage(with: URL(string: "\(HomeTVC.eventArray[indexPath.row].event_image!)"), completed: nil)
         return cell
     }
     
