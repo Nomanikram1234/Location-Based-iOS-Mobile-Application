@@ -272,6 +272,8 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
     
     @IBAction func editButtonPressed(_ sender: Any) {
          print("Edit Button Pressed")
+        
+        
     }
     
     
