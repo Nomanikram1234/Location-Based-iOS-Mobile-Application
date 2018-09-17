@@ -492,11 +492,11 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
                 editStoryView_imageview.sd_setImage(with: URL(string: event.event_image!), completed: nil)
                 
                 if event.event_author_uid == Auth.auth().currentUser?.uid{
-                    deleteButton.isHidden == false
-                    editButton.isHidden == false
+                    deleteButton.isHidden = false
+                    editButton.isHidden = false
                 }else{
-                    deleteButton.isHidden == true
-                    editButton.isHidden == true
+                    deleteButton.isHidden = true
+                    editButton.isHidden = true
                 }
                 
                 break
@@ -572,7 +572,7 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
         return stringers
     }
 
-    //3: converting common set element to arraylistform for printing
+    //4: converting common set element to arraylistform for printing
     func commonInterestToStringArrayList(common : Set<String>) -> [String] {
         var str = [String]()
 

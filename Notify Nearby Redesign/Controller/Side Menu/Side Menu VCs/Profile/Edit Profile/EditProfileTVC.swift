@@ -19,9 +19,17 @@ class EditProfileTVC: UITableViewController, UINavigationControllerDelegate , UI
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var contact: UITextField!
     
+    
+    
+//    @IBOutlet weak var moreButton: UIBarButtonItem!
+//    @IBOutlet weak var notificationBarBtn: UIBarButtonItem!
+//
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+//        sidemenu()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         name.text = User.singleton.name
@@ -120,6 +128,22 @@ class EditProfileTVC: UITableViewController, UINavigationControllerDelegate , UI
     }
 
     
+//    func sidemenu(){
+//        if revealViewController() != nil{
+//            moreButton.target = revealViewController()
+//            moreButton.action = #selector(revealViewController().revealToggle(_:))
+//            revealViewController().rearViewRevealWidth = 275
+//
+//
+//            //          revealViewController().rightViewRevealWidth = 160
+//
+//            revealViewController().rightViewRevealWidth = 275
+//            notificationBarBtn.target = revealViewController()
+//            notificationBarBtn.action = #selector(SWRevealViewController.rightRevealToggle(_:))
+//
+//        }
+//    }
+    
 //    // functions for picking image from CameraRoll
 //    @IBAction func uploadImage(_ sender: Any) {
 //        let image = UIImagePickerController()
@@ -149,6 +173,14 @@ class EditProfileTVC: UITableViewController, UINavigationControllerDelegate , UI
         textField.resignFirstResponder()
         return true
     }
+    
+    
+    @IBAction func backButton(_ sender: Any) {
+        // Intiantiate Main Screen
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     // MARK: - Table view data source
 
 //    override func numberOfSections(in tableView: UITableView) -> Int {

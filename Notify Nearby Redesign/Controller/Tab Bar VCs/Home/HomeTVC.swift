@@ -107,8 +107,8 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                     /*Ridas*/
                     let ridaData = ["0":"\(userLocation.coordinate.latitude)",
                                     "1":"\(userLocation.coordinate.longitude)"]
-                    
-                    self.database.child("StoryLocation").child("\(eventRef)").child("l").setValue(ridaData)
+//                    print(eventRef)
+                    self.database.child("StoryLocation").child("\(eventRef.key)").child("l").setValue(ridaData)
                     
                     /*Ridas*/
                     
@@ -193,6 +193,14 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if  AppDelegate.firstStart == false{
+          
+                let alertcontroller = UIAlertController(title: "Tip", message: "Please add interests from sidemenu in order to see interest based pics on the map", preferredStyle: .alert)
+                alertcontroller.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
+                present(alertcontroller, animated: true, completion: nil)
+            AppDelegate.firstStart = true
+        }
 
         // Do any additional setup after loading the view.
 //        sidemenu()
@@ -525,7 +533,8 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
             revealViewController().rearViewRevealWidth = 275
             
 
-//            revealViewController().rightViewRevealWidth = 160
+//          revealViewController().rightViewRevealWidth = 160
+            
             revealViewController().rightViewRevealWidth = 275
             notificationBarBtn.target = revealViewController()
             notificationBarBtn.action = #selector(SWRevealViewController.rightRevealToggle(_:))
@@ -582,7 +591,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         
         let ridaData = ["0":  userLocation.location?.coordinate.latitude,
                     "1": userLocation.location?.coordinate.longitude]
-        database.child("UserLocation").child("l").child(uid!).setValue(ridaData)
+        database.child("UserLocation").child(uid!).child("l").setValue(ridaData)
         
         showCircle(coordinate: userLocation.coordinate, radius: 10000) // radius in 10000 meters = 10 kms
     }

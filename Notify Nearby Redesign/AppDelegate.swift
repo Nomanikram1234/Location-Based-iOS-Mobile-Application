@@ -15,6 +15,7 @@ import Firebase
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    static var firstStart = false
     
     static var current_time_in_millisecond :Int?
 
