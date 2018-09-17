@@ -103,6 +103,15 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                     print("Image Uploaded: Successfully")
                     eventRef.setValue(data)
                     
+                    
+                    /*Ridas*/
+                    let ridaData = ["0":"\(userLocation.coordinate.latitude)",
+                                    "1":"\(userLocation.coordinate.longitude)"]
+                    
+                    self.database.child("StoryLocation").child("\(eventRef)").child("l").setValue(ridaData)
+                    
+                    /*Ridas*/
+                    
                     // Uploading Data to DB then refreshing map
                     for v in self.view.subviews{
                         if v == self.addEventView{
@@ -570,6 +579,10 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         let data = ["latitude":  userLocation.location?.coordinate.latitude,
             "longitutde": userLocation.location?.coordinate.longitude]
         database.child("UserLocation").child(uid!).setValue(data)
+        
+        let ridaData = ["0":  userLocation.location?.coordinate.latitude,
+                    "1": userLocation.location?.coordinate.longitude]
+        database.child("UserLocation").child("l").child(uid!).setValue(ridaData)
         
         showCircle(coordinate: userLocation.coordinate, radius: 10000) // radius in 10000 meters = 10 kms
     }

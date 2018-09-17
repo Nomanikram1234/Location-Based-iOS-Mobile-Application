@@ -7,17 +7,21 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseDatabase
+import SwiftyJSON
 
 class MyFavouriteVC: UIViewController ,UITableViewDelegate,UITableViewDataSource{
  
     
     @IBOutlet weak var tableview: UITableView!
-    
     @IBOutlet weak var moreButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        fetchFavourites()
+        
         // Do any additional setup after loading the view.
         sidemenu()
     }
@@ -42,6 +46,24 @@ class MyFavouriteVC: UIViewController ,UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 85.0
     }
+    
+    func fetchFavourites(){
+    let database = Database.database().reference()
+    let uid = Auth.auth().currentUser?.uid
+        
+        database.child("Users").child(uid!).child("favourite").observe(.value) { (snapshot) in
+            for snap in snapshot.children{
+                let story = (snap as! DataSnapshot).value
+                
+                
+//                database.child("stories").child("\(story)").observe(.value, with: { (snapshot) in
+//                    print(JSON(snapshot.value))
+//                })
+                
+            }
+        }
+    }
+    
     func sidemenu(){
         if revealViewController() != nil{
             moreButton.target = revealViewController()

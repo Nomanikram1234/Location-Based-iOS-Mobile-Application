@@ -400,7 +400,7 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
             if count == 0 {
                 self.database.child("stories").child(self.Previouskey!).child("favourite").childByAutoId().setValue(self.uid)
                 
-                self.database.child("users").child(self.uid!).child("favourite").childByAutoId().setValue(self.Previouskey)
+                self.database.child("Users").child(self.uid!).child("favourite").childByAutoId().setValue(self.Previouskey)
                 
                 count = snapshot.childrenCount
                 

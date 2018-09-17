@@ -12,7 +12,6 @@ class MyFavouriteTableViewCell: UITableViewCell {
 
     
     @IBOutlet weak var imageview: UIImageView!
-    
     @IBOutlet weak var title: UILabel!
     
     @IBOutlet weak var type: UILabel!
