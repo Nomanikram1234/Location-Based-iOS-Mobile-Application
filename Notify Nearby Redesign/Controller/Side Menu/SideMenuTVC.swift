@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SideMenuTVC: UITableViewController {
 
@@ -16,8 +17,10 @@ class SideMenuTVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        // Get data from static variable of user class
         name.text = User.singleton.name
+        
+        // Get data from static variable of user class
         if let image = User.singleton.profileImgURL{
         imageview.sd_setImage(with: URL(string: image), completed: nil)
         }
@@ -36,6 +39,18 @@ class SideMenuTVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
+        
+        // signout cell is selected
+        if indexPath.row == 8{
+            // Intiantiate Main Screen
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "SplashVC") as! SplashVC
+            do{
+            try Auth.auth().signOut()
+            }catch{
+                print("error")
+            }
+            self.present(vc, animated: true, completion: nil)
+        }
      }
     
     // MARK: - Table view data source

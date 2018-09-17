@@ -13,15 +13,16 @@ import SwiftyJSON
 
 class MyInterestVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
-    var arr = ["interest","traffic","university"]
-    static var interest = [String]()
+    var arr = ["interest","traffic","university"] // not being used for now
+    static var interest = [String]() // for storing user interests
 //    static var interest = [String]()
     
  
     
-    @IBOutlet var additional_view: UIView!
-    @IBOutlet weak var interest_name: UITextField!
+    @IBOutlet var additional_view: UIView! // additional view for adding new interest
+    @IBOutlet weak var interest_name: UITextField! // new interest name would be saved here
     
+    // cancel button pressed in additonal view
     @IBAction func cancelButtonPressed(_ sender: Any) {
         for view in view.subviews{
             if view == additional_view{
@@ -33,6 +34,7 @@ class MyInterestVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         }
     }
     
+    // when add button pressed in addional view
     @IBAction func addInterestPressed(_ sender: Any)
     {
         
@@ -65,7 +67,7 @@ class MyInterestVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         }
     }
     
-    /*********************************************/
+    /******************** Main  View Related  *************************/
     @IBOutlet weak var moreButton: UIBarButtonItem!
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var black_view: UIView!
@@ -89,6 +91,7 @@ class MyInterestVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         // Dispose of any resources that can be recreated.
     }
     
+    // fetching user interests from database
    static func fetchUserInterests(){
         let database = Database.database().reference()
         let uid = Auth.auth().currentUser?.uid
@@ -102,6 +105,7 @@ class MyInterestVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         }
     }
     
+    // fetching and displaying user interest from database to screen
     func fetchAndDisplayUserInterests(){
         database.child("Users").child(uid!).child("UserInterests").observe(.value) { (snapshot) in
             MyInterestVC.interest.removeAll()
@@ -113,16 +117,19 @@ class MyInterestVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         }
     }
     
+    // it tells how many numbers of rows would be there
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return MyInterestVC.interest.count
     }
     
+    // it tells what data would be there in the cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as!  MyInterestTableViewCell
         cell.interest_title.text = MyInterestVC.interest[indexPath.row]
         return cell
     }
     
+    // related to editing style, for the purpose we are only using deleting style
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
     
         if editingStyle == .delete {
@@ -155,7 +162,7 @@ class MyInterestVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
     }
     
   
-    
+    // enables the functionality of buttons on navigation bar
     func sidemenu(){
         if revealViewController() != nil{
             moreButton.target = revealViewController()
@@ -167,6 +174,7 @@ class MyInterestVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         }
     }
 
+    //MARK: when add button is pressed from main view
     @IBAction func addButtonPressed(_ sender: BlackBorderSmallButton) {
         view.addSubview(additional_view)
         additional_view.center = view.center
@@ -175,8 +183,6 @@ class MyInterestVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
         }
 
-    
-        
         print("Pressed")
     }
     /*

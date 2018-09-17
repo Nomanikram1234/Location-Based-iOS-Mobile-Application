@@ -42,6 +42,7 @@ class JointVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSou
         return cell
     }
     
+    // enabling functionality of navigation bar buttons
     func sidemenu(){
         if revealViewController() != nil{
             moreButton.target = revealViewController()

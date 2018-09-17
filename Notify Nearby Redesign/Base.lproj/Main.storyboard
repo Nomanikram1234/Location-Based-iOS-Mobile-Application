@@ -1960,7 +1960,7 @@
         <!--SplashVC-->
         <scene sceneID="wsQ-WV-DH3">
             <objects>
-                <viewController id="ifI-YQ-7IB" customClass="SplashVC" customModule="Notify_Nearby_Redesign" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SplashVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ifI-YQ-7IB" customClass="SplashVC" customModule="Notify_Nearby_Redesign" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="l7R-hP-F3W">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -17,6 +17,8 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
      var myStories = [Event]()
     var myInterestBasedStories = [Event]()
     
+    
+    // Managing initiating the number of item in collection
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if collectionView == storyCollectionview{
@@ -31,8 +33,10 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
 
     }
     
+    // Manages initiating item and related data for the item
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        // it manages populating story collection view
         if collectionView == storyCollectionview{
             let cell = storyCollectionview.dequeueReusableCell(withReuseIdentifier: "storyCell", for: indexPath) as! StoriesCVC
             cell.imageview.sd_setImage(with: URL(string: (myStories[indexPath.row].event_image)!), completed: nil )
@@ -40,6 +44,7 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
             return cell
             
         }
+        // it manages populating interest collection
         else if collectionView == interestCollectionview{
             let cell = interestCollectionview.dequeueReusableCell(withReuseIdentifier: "interestCell", for: indexPath) as! InterestCVC
             print(myInterestBasedStories[indexPath.row].event_title)
@@ -47,17 +52,19 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
             cell.imageview.sd_setImage(with: URL(string: myInterestBasedStories[indexPath.row].event_image!), completed: nil)
             return cell
         }
+        // it manages populating follower collection view
         else if collectionView == followerCollectionview{
             let cell = followerCollectionview.dequeueReusableCell(withReuseIdentifier: "followerCell", for: indexPath) as! FollowersCVC
           cell.imageview.image = UIImage(named: "avatar")
             return cell
         }else{
-            return UICollectionViewCell()
+            return UICollectionViewCell() //Most Probably this statement won't run
         }
         
         
     }
     
+    // Variables declared at global score
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var noOfInterests: UILabel!
     @IBOutlet weak var noOfStories: UILabel!
@@ -71,7 +78,7 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
     @IBOutlet weak var moreButton: UIBarButtonItem!
     var locationManager = CLLocationManager()
    
-    
+    // method which is called when the first time view controller is launched
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -81,19 +88,18 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
         
         noOfInterests.text = "\(MyInterestVC.interest.count)"
         
+        // if there is a picture already saved then it would load from there
         if let image = User.singleton.profileImgURL{
             profile_imageview.sd_setImage(with: URL(string: image), completed: nil)
             profileBG_imageview.sd_setImage(with: URL(string: image), completed: nil)
-            
-           
         }
         
         
-         mystories()
-     myInterestStories()
-        noOfInterests.text = "\(MyInterestVC.interest.count)"
+        mystories() // fetch and store all stories in the array
+        myInterestStories() // fetch and store all interest based stories in the array
+        noOfInterests.text = "\(MyInterestVC.interest.count)" // Display on profile page panel no of follower user is following
         
-        sidemenu()
+        sidemenu() // enables the ability to interact with sidemenu
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -116,12 +122,10 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
             moreButton.action = #selector(revealViewController().revealToggle(_:))
             revealViewController().rearViewRevealWidth = 275
             
-//            revealViewController().rightViewRevealWidth = 160
-            
-            
         }
     }
     
+    // Fetching and Stores Event + Count Number of Stories
     func mystories(){
         let database = Database.database().reference()
         let uid = Auth.auth().currentUser?.uid
@@ -139,9 +143,12 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
        
     }
     
+    // Fetching and Stores Interest based Event + Count Number of Stories
     func myInterestStories(){
+        // iterating array of array to loojat events
         for event in HomeTVC.eventArray{
             
+            // do the go forward unless it get
             guard let userLocation = self.locationManager.location else {return}
             let coordinate = CLLocation(latitude: event.event_latitude!, longitude: event.event_longitude!)
             
@@ -149,6 +156,7 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
             let distanceDifference = self.calculateDistance(mainCoordinate: userLocation , coordinate: coordinate)
             
             //FIXME: MODiFying
+            // checking if the distance of event is less than 10km = 10000m
                 if self.calculateDistance(mainCoordinate: userLocation , coordinate: coordinate) <= 10000{
                     var user_interests = MyInterestVC.interest
                     var event_interests = self.stringToArray(string: event.event_interests!)
@@ -158,6 +166,7 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
                     // if there are any/some matching interest between user and event
                     if !common_interests.isEmpty{
                         
+                        // Assigning pin(Annotation => anno) data from event object obtained from some source
                         anno.title = common_interests_string
                         anno.subtitle = event.event_title
                         
@@ -169,6 +178,7 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
                         anno.event_noOfDenied = event.event_noOfDenied
                         anno.event_noOfFavourite = event.event_noOfFavourite
                         
+                        // added interest based annotation in arraylist
                         myInterestBasedStories.append(anno)
                         interestCollectionview.reloadData()
                     }
@@ -190,7 +200,6 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
     func calculateDistance(mainCoordinate: CLLocation,coordinate: CLLocation) -> Double{
         
         let distance = mainCoordinate.distance(from: coordinate)
-        //        print("Calculate Distance: \(distance)")
         
         return distance
     }
@@ -278,15 +287,11 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
         var userInterest = firstSet
         let userSet:Set = Set(userInterest.map { $0 })
         
-        //    var str = "Hello, playground, sad, a,as "
-        //    var removeWhiteSpcSTR = str.replacingOccurrences(of: " ", with: "")
-        //    var strArray : [String] = removeWhiteSpcSTR.components(separatedBy: ",")
-        
         let strSet:Set = Set(secondSet.map { $0 })
-        //    print(strSet)
+        //  print(strSet)
         
         let common = userSet.intersection(strSet)
-        //        print(common)
+        //  print(common)
         return common
     }
     

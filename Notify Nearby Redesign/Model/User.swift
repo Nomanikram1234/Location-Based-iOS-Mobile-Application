@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 
+// class for managing user related data
 class User{
     var name:String?
     var contact:String?
@@ -25,7 +26,7 @@ class User{
     
 //    var interest = [String]()
     
-    
+    // static: - Because i want this data to be accessible in every class
     static var singleton = User()
     
     init(json:JSON) {

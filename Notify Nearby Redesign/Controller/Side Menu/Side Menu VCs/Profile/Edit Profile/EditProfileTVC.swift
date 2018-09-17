@@ -10,11 +10,12 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 import FirebaseStorage
+import SVProgressHUD
 
 class EditProfileTVC: UITableViewController, UINavigationControllerDelegate , UIImagePickerControllerDelegate  {
 
-    @IBOutlet weak var avatarBg_imageview: UIImageView!
-    @IBOutlet weak var avatar_imageview: RoundedImage!
+    @IBOutlet weak var avatarBg_imageview: UIImageView! // background blurred image
+    @IBOutlet weak var avatar_imageview: RoundedImage! // profile image
     
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var contact: UITextField!
@@ -55,13 +56,14 @@ class EditProfileTVC: UITableViewController, UINavigationControllerDelegate , UI
         let database = Database.database().reference()
         let uid = Auth.auth().currentUser?.uid
         
-        ////
+        // Image Reference made to store image in firebase storage
         let tempImgRef = Storage.storage().reference().child("images/\(uid).jpg")
         
         // creating metafile which contains information about the image which we will save in the database
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpeg"
      
+        // name field should not be empty
            if !(name.text?.isEmpty)!{
         
         tempImgRef.putData(UIImageJPEGRepresentation(avatar_imageview.image!, 0)!, metadata: metadata) { (data, error) in
@@ -111,13 +113,14 @@ class EditProfileTVC: UITableViewController, UINavigationControllerDelegate , UI
                 })
                 
             }else{
-                //                SVProgressHUD.showError(withStatus: "Failure")
-                print("Image Upload Failure")
+                SVProgressHUD.showError(withStatus: "Image Upload Failure")
+                print("EditProfileTVC: -Image Upload Failure")
             }
         }
         ////
      
         }else{
+            SVProgressHUD.showError(withStatus: "Failure: - Name Fields is empty")
             print("Name Fields is empty // contact can be empty")
         }
         

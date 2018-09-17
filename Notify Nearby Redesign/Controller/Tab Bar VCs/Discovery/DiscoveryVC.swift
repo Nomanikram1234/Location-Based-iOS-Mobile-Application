@@ -19,6 +19,7 @@ class DiscoveryVC: UIViewController, UICollectionViewDelegate , UICollectionView
     var lahoreProcessed = false
     var karachiProcessed = false
     
+    // static arrays to store the data and make them accesible everywhere
     static var arrIslamabad = [Discovery]()
     static var arrLahore = [Discovery]()
     static var arrKarachi = [Discovery]()
@@ -33,6 +34,8 @@ class DiscoveryVC: UIViewController, UICollectionViewDelegate , UICollectionView
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        /* Check if threads have not fetched the data*/
+        
         if DiscoveryVC.arrIslamabad.count == 0 {
         scrapingIslamabad()
              collectionview.reloadData()
@@ -114,7 +117,7 @@ class DiscoveryVC: UIViewController, UICollectionViewDelegate , UICollectionView
         if segmentedcontrols.selectedSegmentIndex == 0{
 //            print(DiscoveryVC.arrIslamabad[indexPath.row].imageUrl!)
          
-            // Activity Indicator Added
+            // Activity Indicator Added and setting data to the cell
             let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
             activityIndicator.center = view.center
             activityIndicator.hidesWhenStopped = true
@@ -138,6 +141,7 @@ class DiscoveryVC: UIViewController, UICollectionViewDelegate , UICollectionView
 //            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! DiscoveryCollectionViewCell
 //            print(DiscoveryVC.arrLahore[indexPath.row].imageUrl!)
             
+            // Activity Indicator Added and setting data to the cell
             let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
             activityIndicator.center = view.center
             activityIndicator.hidesWhenStopped = true
@@ -162,7 +166,7 @@ class DiscoveryVC: UIViewController, UICollectionViewDelegate , UICollectionView
 //            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! DiscoveryCollectionViewCell
 //            print(DiscoveryVC.arrKarachi[indexPath.row].imageUrl!)
             
-            
+            // Activity Indicator Added and setting data to the cell
             let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
             activityIndicator.center = view.center
             activityIndicator.hidesWhenStopped = true
@@ -273,7 +277,7 @@ class DiscoveryVC: UIViewController, UICollectionViewDelegate , UICollectionView
         
     }
     
-    
+    /************Scrapping********************/
     
     func scrapingIslamabad()  {
 //        SVProgressHUD.show()
@@ -429,6 +433,8 @@ class DiscoveryVC: UIViewController, UICollectionViewDelegate , UICollectionView
         
     }
     
+    
+    // adding functionality to navigation bar buttons
     func sidemenu(){
         if revealViewController() != nil{
             moreButton.target = revealViewController()

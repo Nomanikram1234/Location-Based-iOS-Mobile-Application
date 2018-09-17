@@ -14,6 +14,7 @@ import SwiftyJSON
 
 class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, MKMapViewDelegate,CLLocationManagerDelegate{
  
+    // static array to populate collection view at the top
     let arr = ["sport","gaming","news","traffic","education"]
     var interestArray = [Event]()
 
@@ -33,8 +34,10 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // remove all elements from array to avoid over population / duplication
         HomeTVC.eventArray.removeAll()
         
+        // counter number of events
         print("Counter: \(HomeTVC.eventArray.count)")
         
         database.child("stories").observe(DataEventType.value) { (snapshot) in
@@ -84,7 +87,7 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
                         print()
                         
                     }
-                    
+                
 //                }
                 
                 
@@ -155,6 +158,7 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
         // Dispose of any resources that can be recreated.
     }
     
+    // enables the functionality of navigation bar buttons
     func sidemenu(){
         if revealViewController() != nil{
             moreButton.target = revealViewController()

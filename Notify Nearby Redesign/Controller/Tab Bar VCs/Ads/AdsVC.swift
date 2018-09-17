@@ -43,7 +43,7 @@ class AdsVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSourc
         return cell
     }
     
-    
+    // enabling the functionality of nav bar buttons
     func sidemenu(){
         if revealViewController() != nil{
             moreButton.target = revealViewController()

@@ -9,6 +9,7 @@
 import UIKit
 import  FirebaseAuth
 import FirebaseCore
+import SVProgressHUD
 
 class AccountTVC: UITableViewController {
 
@@ -31,6 +32,7 @@ class AccountTVC: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // enables navigation bar buttons functionality
     func sidemenu(){
         if revealViewController() != nil{
             moreButton.target = revealViewController()
@@ -41,7 +43,8 @@ class AccountTVC: UITableViewController {
             
         }
     }
-
+    
+    // change the password
     @IBAction func changePasswordPressed(_ sender: Any) {
         
         if password.text == confirmPassword.text{
@@ -49,6 +52,7 @@ class AccountTVC: UITableViewController {
         Auth.auth().currentUser?.updatePassword(to: password.text!, completion: nil)
         print("Changed Password")
         }else{
+            SVProgressHUD.showError(withStatus: "Password not matched")
             print("Passwords not match")
         }
     }

@@ -214,7 +214,7 @@
 				F809ED37213D8EE3007280E5 /* SplashVC.swift */,
 				F809ED47213D92E8007280E5 /* Side Menu */,
 				F809ED31213D8087007280E5 /* SWRevealController */,
-				F809ED46213D9203007280E5 /* Authentication */,
+				F809ED46213D9203007280E5 /* Authentication (not being used) */,
 				F809ED3D213D9124007280E5 /* Tab Bar VCs */,
 			);
 			path = Controller;
@@ -232,13 +232,13 @@
 			path = "Tab Bar VCs";
 			sourceTree = "<group>";
 		};
-		F809ED46213D9203007280E5 /* Authentication */ = {
+		F809ED46213D9203007280E5 /* Authentication (not being used) */ = {
 			isa = PBXGroup;
 			children = (
 				F809ED39213D8F29007280E5 /* LoginVC.swift */,
 				F809ED3B213D9034007280E5 /* SignUpVC.swift */,
 			);
-			path = Authentication;
+			path = "Authentication (not being used)";
 			sourceTree = "<group>";
 		};
 		F809ED47213D92E8007280E5 /* Side Menu */ = {

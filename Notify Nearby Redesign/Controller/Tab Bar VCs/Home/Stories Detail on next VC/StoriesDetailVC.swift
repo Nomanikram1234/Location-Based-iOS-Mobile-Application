@@ -52,6 +52,8 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
         self.present(image, animated: true, completion: nil)
         
     }
+    
+    
     @IBAction func updateButtonPressed(_ sender: Any) {
        
         let storageRef = Storage.storage().reference()
