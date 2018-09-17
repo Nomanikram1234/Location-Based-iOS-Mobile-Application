@@ -7,12 +7,17 @@
 //
 
 import UIKit
+import FirebaseDatabase
+import FirebaseAuth
+import SwiftyJSON
 
 class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewDataSource , UINavigationControllerDelegate , UIImagePickerControllerDelegate{
+    
+     var myStories = [Event]()
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if collectionView == storyCollectionview{
-          return 5
+            return (myStories.count)
         }
         else if collectionView == interestCollectionview{
             return 5
@@ -27,7 +32,8 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
         
         if collectionView == storyCollectionview{
             let cell = storyCollectionview.dequeueReusableCell(withReuseIdentifier: "storyCell", for: indexPath) as! StoriesCVC
-            cell.imageview.image = UIImage(named: "avatar")
+            cell.imageview.sd_setImage(with: URL(string: (myStories[indexPath.row].event_image)!), completed: nil )
+            cell.title.text = myStories[indexPath.row].event_title
             return cell
             
         }
@@ -59,15 +65,21 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
     
     @IBOutlet weak var moreButton: UIBarButtonItem!
     
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         name.text =  User.singleton.name
 //        profile_imageview.sd_setImage(with: URL(string:User.singleton.profileImgURL!), completed: nil)
         
+        noOfInterests.text = "\(MyInterestVC.interest.count)"
+        
         if let image = User.singleton.profileImgURL{
             profile_imageview.sd_setImage(with: URL(string: image), completed: nil)
             profileBG_imageview.sd_setImage(with: URL(string: image), completed: nil)
+            
+            mystories()
         }
         
         noOfInterests.text = "\(MyInterestVC.interest.count)"
@@ -101,7 +113,22 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
         }
     }
     
-    
+    func mystories(){
+        let database = Database.database().reference()
+        let uid = Auth.auth().currentUser?.uid
+        
+        var count = 0
+        
+        for event in HomeTVC.eventArray{
+            if event.event_author_uid == uid{
+                myStories.append(event)
+                count = count + 1
+                storyCollectionview.reloadData()
+            }
+        }
+            noOfStories.text = "\(count)"
+       
+    }
     
     // MARK: - Table view data source
 
