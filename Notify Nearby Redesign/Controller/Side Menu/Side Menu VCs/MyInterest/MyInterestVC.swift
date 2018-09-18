@@ -22,6 +22,8 @@ class MyInterestVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet var additional_view: UIView! // additional view for adding new interest
     @IBOutlet weak var interest_name: UITextField! // new interest name would be saved here
     
+    @IBOutlet weak var notificationBarBtn: UIBarButtonItem!
+    
     // cancel button pressed in additonal view
     @IBAction func cancelButtonPressed(_ sender: Any) {
         for view in view.subviews{
@@ -169,7 +171,9 @@ class MyInterestVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
             moreButton.action = #selector(revealViewController().revealToggle(_:))
             revealViewController().rearViewRevealWidth = 275
             
-            revealViewController().rightViewRevealWidth = 160
+            revealViewController().rightViewRevealWidth = 275
+            notificationBarBtn.target = revealViewController()
+            notificationBarBtn.action = #selector(SWRevealViewController.rightRevealToggle(_:))
             
         }
     }

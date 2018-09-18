@@ -511,6 +511,7 @@
                         <outlet property="commonInterest_collectionview" destination="SBQ-ey-AOe" id="Adr-VC-Uy3"/>
                         <outlet property="interest_collectionview" destination="nuo-rn-H1R" id="kFv-NS-Pdn"/>
                         <outlet property="moreButton" destination="06S-gz-bjF" id="N4G-cH-fKv"/>
+                        <outlet property="notificationBarBtn" destination="9vo-5p-Eet" id="Lof-WF-8wc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nGH-7c-PSk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -689,7 +690,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="T5P-Io-qWo"/>
-                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" translucent="NO" id="9pd-dm-YAT">
+                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="9pd-dm-YAT">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <items>
@@ -1349,6 +1350,7 @@
                     <connections>
                         <outlet property="collectionview" destination="Zz7-Ee-36d" id="N99-yw-cDH"/>
                         <outlet property="moreButton" destination="cgp-BU-hkc" id="Pax-Ow-Iwb"/>
+                        <outlet property="notificationBarBtn" destination="N6e-Is-WsF" id="pbR-bM-hZg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rMU-b5-EdI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1451,6 +1453,7 @@
                     <connections>
                         <outlet property="collectionview" destination="oiK-o8-fns" id="f0O-90-eak"/>
                         <outlet property="moreButton" destination="tga-Ne-Of8" id="AZ6-5k-JDR"/>
+                        <outlet property="notificationBarBtn" destination="tne-Bm-XV4" id="C9Y-MZ-fCW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UWo-2v-JZ1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1588,6 +1591,7 @@
                     <connections>
                         <outlet property="collectionview" destination="UPE-xp-kDa" id="ZeM-QF-Hbg"/>
                         <outlet property="moreButton" destination="ozf-vn-ryq" id="IMz-wn-6Ci"/>
+                        <outlet property="notificationBarBtn" destination="IQF-L3-ZK1" id="aCR-W5-xJ7"/>
                         <outlet property="segmentedcontrols" destination="uKl-mo-hoX" id="Yax-iy-FDv"/>
                     </connections>
                 </viewController>
@@ -1676,6 +1680,7 @@
                     </tableView>
                     <connections>
                         <outlet property="moreButton" destination="AxC-3m-5GS" id="FIK-Fb-TKd"/>
+                        <outlet property="notificationBarBtn" destination="E8W-on-zjy" id="6hN-mO-6u0"/>
                         <outlet property="toggle" destination="JSm-jg-sJM" id="pTz-ow-Uqq"/>
                     </connections>
                 </tableViewController>
@@ -1865,6 +1870,7 @@
                     </view>
                     <connections>
                         <outlet property="moreButton" destination="7SE-mE-HFl" id="toI-dH-Cpd"/>
+                        <outlet property="notificationBarBtn" destination="WjD-nx-Qe3" id="KLa-G2-lS6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dJt-Cy-P0T" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1950,6 +1956,7 @@
                     </view>
                     <connections>
                         <outlet property="moreButton" destination="f7C-Wq-64v" id="VuJ-vL-HLz"/>
+                        <outlet property="notificationBarBtn" destination="oDP-6P-SdX" id="CH9-kE-krX"/>
                         <outlet property="tableview" destination="8Lv-JB-ztk" id="ge1-3N-esG"/>
                     </connections>
                 </viewController>
@@ -2481,6 +2488,7 @@
                         <outlet property="black_view" destination="Ht6-zD-6Gr" id="mKC-th-ioN"/>
                         <outlet property="interest_name" destination="X9H-wa-m2O" id="w4w-lV-pXW"/>
                         <outlet property="moreButton" destination="wqM-sn-Lzu" id="xzQ-yC-nEt"/>
+                        <outlet property="notificationBarBtn" destination="7dv-2C-z2Z" id="W4c-fV-LtW"/>
                         <outlet property="tableview" destination="7I8-hB-d4y" id="ZZA-Do-UbL"/>
                     </connections>
                 </viewController>
@@ -2802,7 +2810,7 @@
                                         <rect key="frame" x="0.0" y="817" width="375" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PIR-cE-sU2" id="In3-xR-J43">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="87"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="86.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Followers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ta-PG-f7z">
@@ -2864,6 +2872,7 @@
                         <outlet property="name" destination="ozF-Xj-Guh" id="ZAL-my-13N"/>
                         <outlet property="noOfInterests" destination="F6L-Cg-UWA" id="4zA-ga-1Ib"/>
                         <outlet property="noOfStories" destination="yj2-hE-LeY" id="ihZ-Fx-yhp"/>
+                        <outlet property="notificationBarBtn" destination="cFg-Jh-wYC" id="Fic-4o-ozr"/>
                         <outlet property="profileBG_imageview" destination="Xgb-78-zLb" id="lw5-zc-Tgr"/>
                         <outlet property="profile_imageview" destination="92A-5z-4I3" id="2ZG-F3-PKG"/>
                         <outlet property="storyCollectionview" destination="xdq-PX-N2b" id="1H4-NL-hHu"/>
@@ -3303,6 +3312,6 @@
         <image name="ic_thumb_up" width="22" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="eLM-sh-ehW"/>
+        <segue reference="cNo-m8-hsO"/>
     </inferredMetricsTieBreakers>
 </document>

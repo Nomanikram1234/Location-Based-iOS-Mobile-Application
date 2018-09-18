@@ -30,6 +30,7 @@ class DiscoveryVC: UIViewController, UICollectionViewDelegate , UICollectionView
     
     @IBOutlet weak var moreButton: UIBarButtonItem!
     @IBOutlet weak var collectionview: UICollectionView!
+    @IBOutlet weak var notificationBarBtn: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,13 +38,13 @@ class DiscoveryVC: UIViewController, UICollectionViewDelegate , UICollectionView
         /* Check if threads have not fetched the data*/
         
         if DiscoveryVC.arrIslamabad.count == 0 {
-        scrapingIslamabad()
-             collectionview.reloadData()
+          scrapingIslamabad()
+          collectionview.reloadData()
         }
         
         if DiscoveryVC.arrKarachi.count == 0 {
             scrapingKarachi()
-//             collectionview.reloadData()
+//          collectionview.reloadData()
         }
         
         if DiscoveryVC.arrLahore.count == 0 {
@@ -441,7 +442,9 @@ class DiscoveryVC: UIViewController, UICollectionViewDelegate , UICollectionView
             moreButton.action = #selector(revealViewController().revealToggle(_:))
             revealViewController().rearViewRevealWidth = 275
             
-            revealViewController().rightViewRevealWidth = 160
+            revealViewController().rightViewRevealWidth = 275
+            notificationBarBtn.target = revealViewController()
+            notificationBarBtn.action = #selector(SWRevealViewController.rightRevealToggle(_:))
             
         }
     }

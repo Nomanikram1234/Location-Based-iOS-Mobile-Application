@@ -13,6 +13,7 @@ import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
 import SwiftyJSON
+import SVProgressHUD
 
 class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDataSource , UINavigationControllerDelegate , UIImagePickerControllerDelegate {
 
@@ -55,6 +56,7 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
     
     
     @IBAction func updateButtonPressed(_ sender: Any) {
+        SVProgressHUD.show()
        
         let storageRef = Storage.storage().reference()
         
@@ -80,6 +82,8 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
         
                     self.database.child("stories").child(self.Previouskey!).child("image").setValue("\(url!)")
             
+                    SVProgressHUD.dismiss()
+                    SVProgressHUD.showSuccess(withStatus: "Updated")
                     // Intiantiate Main Screen
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
                     self.present(vc, animated: true, completion: nil)
@@ -88,7 +92,8 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
                 })
                 
             }else{
-                //                SVProgressHUD.showError(withStatus: "Failure")
+                SVProgressHUD.dismiss()
+                SVProgressHUD.showError(withStatus: "Failed to Update")
                 print("Image Upload Failure")
             }
         }
@@ -255,7 +260,7 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
                 self.database.child("Users").child(self.uid!).child("accepted").childByAutoId().setValue(self.Previouskey)
                 
                 count = snapshot.childrenCount
-                
+                SVProgressHUD.showSuccess(withStatus: "Marked")
 //                view.noOfAccept.text = "\(count+1)"
                 self.database.child("stories").child(self.Previouskey!).child("acceptedNumber").setValue("\(count+1)")
             }else{
@@ -276,13 +281,14 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
 //                        view.noOfAccept.text = "\(count+1)"
                         self.database.child("stories").child(self.Previouskey!).child("acceptedNumber").setValue("\(count+1)")
                         
+                        SVProgressHUD.showSuccess(withStatus: "Marked")
                         //                        print("Extered")
                     }else{
                         //                        print("Already exists")
                         
                         //                        count = snapshot.childrenCount
                         //                        self.databaseRef.child("stories").child(storyKey).child("acceptedNumber").setValue(count+1)
-                        
+                        SVProgressHUD.showError(withStatus: "Already Marked")
                         return
                     }
                 }
@@ -316,7 +322,7 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
                 self.database.child("Users").child(self.uid!).child("denied").childByAutoId().setValue(self.Previouskey)
                 
                 count = snapshot.childrenCount
-                
+                SVProgressHUD.showSuccess(withStatus: "Marked")
 //                view.noOfDeny.text = "\(count+1)"
                 self.database.child("stories").child(self.Previouskey!).child("deniedNumber").setValue("\(count+1)")
             }else{
@@ -337,13 +343,15 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
 //                        view.noOfDeny.text = "\(count+1)"
                         self.database.child("stories").child(self.Previouskey!).child("deniedNumber").setValue("\(count+1)")
                         
+                        SVProgressHUD.showSuccess(withStatus: "Marked")
+                        
                         //                        print("Extered")
                     }else{
                         //                        print("Already exists")
                         
                         //                        count = snapshot.childrenCount
                         //                        self.databaseRef.child("stories").child(storyKey).child("deniedNumber").setValue(count+1)
-                        
+                        SVProgressHUD.showError(withStatus: "Already Marked")
                         return
                     }
                 }
@@ -356,6 +364,7 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
     }
     
     @IBAction func deleteButtonPressed(_ sender: Any) {
+        SVProgressHUD.show()
          print("Delete Button Pressed")
         
         database.child("stories").child(Previouskey!).removeValue()
@@ -367,11 +376,15 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
                     (snap as! AnyObject).ref.removeValue()
                 print("Deleted Successfully")
                    
+                    SVProgressHUD.dismiss()
+                    SVProgressHUD.showSuccess(withStatus: "Deleted Successfully")
+                    
                     // Intiantiate Main Screen
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
                     self.present(vc, animated: true, completion: nil)
                     
                 }else{
+                    SVProgressHUD.showError(withStatus: "Failed to Delete")
                     print("Failed to Delete")
                 }
             }
@@ -405,7 +418,7 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
                 self.database.child("Users").child(self.uid!).child("favourite").childByAutoId().setValue(self.Previouskey)
                 
                 count = snapshot.childrenCount
-                
+                SVProgressHUD.showSuccess(withStatus: "Marked")
 //                view.noOfFavourite.text = "\(count+1)"
                 self.database.child("stories").child(self.Previouskey!).child("favouriteNumber").setValue("\(count+1)")
             }else{
@@ -425,14 +438,14 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
                         
 //                        view.noOfFavourite.text = "\(count+1)"
                         self.database.child("stories").child(self.Previouskey!).child("favouriteNumber").setValue("\(count+1)")
-                        
+                        SVProgressHUD.showSuccess(withStatus: "Marked")
                         //                        print("Extered")
                     }else{
                         //                        print("Already exists")
                         
                         //                        count = snapshot.childrenCount
                         //                        self.databaseRef.child("stories").child(storyKey).child("favouriteNumber").setValue(count+1)
-                        
+                        SVProgressHUD.showError(withStatus: "Already Marked")
                         return
                     }
                 }

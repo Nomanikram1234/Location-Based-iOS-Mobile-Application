@@ -12,6 +12,7 @@ class AdsVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSourc
   
     
     
+    @IBOutlet weak var notificationBarBtn: UIBarButtonItem!
     @IBOutlet weak var collectionview: UICollectionView!
     
     @IBOutlet weak var moreButton: UIBarButtonItem!
@@ -50,7 +51,9 @@ class AdsVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSourc
             moreButton.action = #selector(revealViewController().revealToggle(_:))
             revealViewController().rearViewRevealWidth = 275
             
-            revealViewController().rightViewRevealWidth = 160
+            revealViewController().rightViewRevealWidth = 275
+            notificationBarBtn.target = revealViewController()
+            notificationBarBtn.action = #selector(SWRevealViewController.rightRevealToggle(_:))
             
         }
     }

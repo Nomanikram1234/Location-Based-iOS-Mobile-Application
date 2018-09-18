@@ -19,6 +19,7 @@ class AccountTVC: UITableViewController {
     
     @IBOutlet weak var confirmPassword: UITextField!
     
+    @IBOutlet weak var notificationBarBtn: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +40,9 @@ class AccountTVC: UITableViewController {
             moreButton.action = #selector(revealViewController().revealToggle(_:))
             revealViewController().rearViewRevealWidth = 275
             
-            revealViewController().rightViewRevealWidth = 160
+//            revealViewController().rightViewRevealWidth = 275
+//            notificationBarBtn.target = revealViewController()
+//            notificationBarBtn.action = #selector(SWRevealViewController.rightRevealToggle(_:))
             
         }
     }
@@ -50,6 +53,7 @@ class AccountTVC: UITableViewController {
         if password.text == confirmPassword.text{
         let email = Auth.auth().currentUser?.email
         Auth.auth().currentUser?.updatePassword(to: password.text!, completion: nil)
+            SVProgressHUD.showSuccess(withStatus: "Password Changed")
         print("Changed Password")
         }else{
             SVProgressHUD.showError(withStatus: "Password not matched")

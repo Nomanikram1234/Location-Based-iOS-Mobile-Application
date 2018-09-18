@@ -14,6 +14,7 @@ import SwiftyJSON
 
 class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, MKMapViewDelegate,CLLocationManagerDelegate{
  
+   
     // static array to populate collection view at the top
     let arr = ["sport","gaming","news","traffic","education"]
     var interestArray = [Event]()
@@ -165,7 +166,9 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
             moreButton.action = #selector(revealViewController().revealToggle(_:))
             revealViewController().rearViewRevealWidth = 275
             
-            revealViewController().rightViewRevealWidth = 160
+            revealViewController().rightViewRevealWidth = 275
+            notificationBarBtn.target = revealViewController()
+            notificationBarBtn.action = #selector(SWRevealViewController.rightRevealToggle(_:))
             
         }
     }

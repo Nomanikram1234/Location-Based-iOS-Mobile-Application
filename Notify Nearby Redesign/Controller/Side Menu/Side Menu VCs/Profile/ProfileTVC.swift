@@ -14,7 +14,9 @@ import CoreLocation
 
 class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewDataSource , UINavigationControllerDelegate , UIImagePickerControllerDelegate{
     
-     var myStories = [Event]()
+    @IBOutlet weak var notificationBarBtn: UIBarButtonItem!
+    
+    var myStories = [Event]()
     var myInterestBasedStories = [Event]()
     
     
@@ -121,6 +123,10 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
             moreButton.target = revealViewController()
             moreButton.action = #selector(revealViewController().revealToggle(_:))
             revealViewController().rearViewRevealWidth = 275
+            
+            revealViewController().rightViewRevealWidth = 275
+            notificationBarBtn.target = revealViewController()
+            notificationBarBtn.action = #selector(SWRevealViewController.rightRevealToggle(_:))
             
         }
     }

@@ -16,6 +16,7 @@ class MyFavouriteVC: UIViewController ,UITableViewDelegate,UITableViewDataSource
     
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var moreButton: UIBarButtonItem!
+    @IBOutlet weak var notificationBarBtn: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,7 +71,9 @@ class MyFavouriteVC: UIViewController ,UITableViewDelegate,UITableViewDataSource
             moreButton.action = #selector(revealViewController().revealToggle(_:))
             revealViewController().rearViewRevealWidth = 275
             
-            revealViewController().rightViewRevealWidth = 160
+            revealViewController().rightViewRevealWidth = 275
+            notificationBarBtn.target = revealViewController()
+            notificationBarBtn.action = #selector(SWRevealViewController.rightRevealToggle(_:))
             
         }
     }

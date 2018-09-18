@@ -13,6 +13,7 @@ import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
 import UserNotifications
+import SVProgressHUD
 
 class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, MKMapViewDelegate,CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
@@ -46,7 +47,6 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     /************Additional View Variables**************/
     @IBOutlet var blackBgView: UIView!
     
-    
     @IBOutlet var addEventView: UIView!
     @IBOutlet weak var addEventView_imageview: UIImageView!
 //    @IBOutlet weak var addEventView_selectPhoto: RoundedButton!
@@ -55,7 +55,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     @IBOutlet weak var addEventView_description: UITextView!
     
     @IBAction func addEventView_uploadBtn(_ sender: Any) {
-        
+        SVProgressHUD.show()
         guard let userLocation = locationManager.location else { return }
         
      let eventRef = database.child("stories").childByAutoId()
@@ -100,6 +100,8 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
 //                        "lat": self.latitude!,
 //                        "long": self.longitude!] as [String : Any]
                     
+                    SVProgressHUD.dismiss()
+                    SVProgressHUD.showSuccess(withStatus: "Story Uploaded Sucessfully")
                     print("Image Uploaded: Successfully")
                     eventRef.setValue(data)
                     
@@ -128,7 +130,8 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                 })
                 
             }else{
-//                SVProgressHUD.showError(withStatus: "Failure")
+              SVProgressHUD.dismiss()
+              SVProgressHUD.showError(withStatus: "Story Uploading Failure")
                 print("Image Upload Failure")
             }
         }
@@ -596,6 +599,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         showCircle(coordinate: userLocation.coordinate, radius: 10000) // radius in 10000 meters = 10 kms
     }
     
+    
     func mapView(_ mapView: MKMapView,didSelect view: MKAnnotationView)
     {
         // 1
@@ -644,7 +648,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         }
     }
     
-    // When select the annotation view
+    // When deselect the annotation view
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
         print("Annotation Deselected")
 

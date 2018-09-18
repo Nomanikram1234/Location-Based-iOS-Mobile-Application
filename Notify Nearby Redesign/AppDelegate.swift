@@ -15,8 +15,10 @@ import Firebase
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    // variable initiated for the first time login everytime
     static var firstStart = false
     
+    // calculating
     static var current_time_in_millisecond :Int?
 
     var window: UIWindow?
@@ -34,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
 //        FirebaseApp.configure()
         
-//        let timer = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(timeUpdate), userInfo: nil, repeats: true)
+        let timer = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(timeUpdate), userInfo: nil, repeats: true)
         
         DispatchQueue.global(qos: .userInteractive).async {
             self.scrapingIslamabad()

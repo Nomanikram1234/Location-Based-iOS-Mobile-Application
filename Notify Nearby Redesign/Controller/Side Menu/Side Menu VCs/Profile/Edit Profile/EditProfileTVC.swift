@@ -105,7 +105,7 @@ class EditProfileTVC: UITableViewController, UINavigationControllerDelegate , UI
                     User.singleton.name = self.name.text
         
                     User.singleton.profileImgURL = "\(url!)"
-                   
+                    SVProgressHUD.showSuccess(withStatus: "Changes made Successfully")
                     // Intiantiate Main Screen
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
                     self.present(vc, animated: true, completion: nil)
@@ -113,6 +113,7 @@ class EditProfileTVC: UITableViewController, UINavigationControllerDelegate , UI
                 })
                 
             }else{
+                
                 SVProgressHUD.showError(withStatus: "Image Upload Failure")
                 print("EditProfileTVC: -Image Upload Failure")
             }

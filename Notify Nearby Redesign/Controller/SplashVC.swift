@@ -67,7 +67,7 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-       login(email: "nomanikram0@icloud.com", password: "Rajanoman1")
+//       login(email: "nomanikram0@icloud.com", password: "Rajanoman1")
         
         
     }
@@ -357,6 +357,10 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
                 // Sending email verification
                 self.auth.currentUser?.sendEmailVerification(completion: { (error) in
                     if error == nil{
+                        let alertcontroller = UIAlertController(title: "Alert", message: "Verify Your Email Address", preferredStyle: .alert)
+                        alertcontroller.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
+                        self.present(alertcontroller, animated: true, completion: nil)
+                        
                         print("Email Verification Sent")
                     }else{
                         print("Email Verification Failed to Send")
@@ -411,9 +415,11 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
     
     // Login
     func login(email:String,password:String){
-        
+        SVProgressHUD.show()
         auth.signIn(withEmail: email, password: password) { (result, error) in
             if error == nil {
+                SVProgressHUD.dismiss()
+                
                 print("Login Success")
                 
                 // Email Verification
@@ -429,6 +435,8 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
                     SVProgressHUD.dismiss()
                     
                 }else{
+                    SVProgressHUD.dismiss()
+                  
                     print("Email is not Verified")
                     
                     SVProgressHUD.showError(withStatus: "Email is Not Verified")
@@ -462,6 +470,8 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
                 }
                 
             }else{
+                SVProgressHUD.dismiss()
+                SVProgressHUD.showError(withStatus: "Login Failure")
                 print("Login Failure")
             }
         }
@@ -488,6 +498,7 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
     
         auth.sendPasswordReset(withEmail: email) { (error) in
             if error == nil{
+                SVProgressHUD.showSuccess(withStatus: "Reset Password Request Successful")
                 print("Reset Password Request Successful")
                 
                 self.resetView_email.text = ""
