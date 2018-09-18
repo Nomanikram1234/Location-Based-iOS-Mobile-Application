@@ -13,7 +13,8 @@ target 'Notify Nearby Redesign' do
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
-  pod 'LUNSegmentedControl'
+#  pod 'LUNSegmentedControl'
+  pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
 
   # Pods for Notify Nearby Redesign
 

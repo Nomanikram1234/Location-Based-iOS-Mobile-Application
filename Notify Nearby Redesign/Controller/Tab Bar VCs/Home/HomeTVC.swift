@@ -14,8 +14,12 @@ import FirebaseDatabase
 import FirebaseStorage
 import UserNotifications
 import SVProgressHUD
+import GeoFire
 
 class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, MKMapViewDelegate,CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    
+    let storyLocation = Database.database().reference().child("StoryLocation")
+   
     
     var circle: MKCircle? = nil
     let regionRadius: Double = 1000
@@ -106,11 +110,14 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                     eventRef.setValue(data)
                     
                     
-                    /*Ridas*/
-                    let ridaData = ["0":"\(userLocation.coordinate.latitude)",
-                                    "1":"\(userLocation.coordinate.longitude)"]
-//                    print(eventRef)
-                    self.database.child("StoryLocation").child("\(eventRef.key)").child("l").setValue(ridaData)
+//                    /*Ridas*/
+//                    let ridaData = ["0":"\(userLocation.coordinate.latitude)",
+//                                    "1":"\(userLocation.coordinate.longitude)"]
+////                    print(eventRef)
+//                    self.database.child("StoryLocation").child("\(eventRef.key)").child("l").setValue(ridaData)
+                    
+                    let geofire = GeoFire(firebaseRef: self.storyLocation)
+                    geofire.setLocation(CLLocation(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude), forKey: "\(eventRef.key)")
                     
                     /*Ridas*/
                     
@@ -196,6 +203,8 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         if  AppDelegate.firstStart == false{
           
@@ -430,7 +439,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                 let coordinate = CLLocation(latitude: event.event_latitude!, longitude: event.event_longitude!)
                 
                 HomeTVC.eventArray.append(event)
-
+                
             }
             print("fetchEvents(): fetched Events")
             print("Event Array: Number of Events -> \(HomeTVC.eventArray.count)")
