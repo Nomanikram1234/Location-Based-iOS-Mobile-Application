@@ -23,6 +23,10 @@ class ActivityRightSideMenuVC: UIViewController,UITextFieldDelegate,UITableViewD
 
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("*************ActivityRightSideMenuVC**************")
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

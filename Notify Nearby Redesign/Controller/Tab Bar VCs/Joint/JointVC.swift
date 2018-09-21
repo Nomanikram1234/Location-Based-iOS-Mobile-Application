@@ -28,6 +28,9 @@ class JointVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSou
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        print("*************JointVC**************")
+    }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionview.frame.width - 150, height: collectionview.frame.height - 130)
     }

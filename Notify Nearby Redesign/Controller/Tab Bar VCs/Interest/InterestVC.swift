@@ -155,6 +155,10 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
         sidemenu()
         commonInterest_collectionview.reloadData()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("*************InterestVC**************")
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

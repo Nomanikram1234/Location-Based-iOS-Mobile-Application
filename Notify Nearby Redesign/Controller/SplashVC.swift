@@ -65,13 +65,16 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+       // Do any additional setup after loading the view.
        login(email: "nomanikram0@icloud.com", password: "Rajanoman1")
-        
-        
+    
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        print("*************SplashVC**************")
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

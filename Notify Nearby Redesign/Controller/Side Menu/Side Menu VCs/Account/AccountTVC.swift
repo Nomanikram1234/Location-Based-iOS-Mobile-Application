@@ -27,6 +27,10 @@ class AccountTVC: UITableViewController {
         // Do any additional setup after loading the view.
         sidemenu()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("*************AccountVC**************")
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

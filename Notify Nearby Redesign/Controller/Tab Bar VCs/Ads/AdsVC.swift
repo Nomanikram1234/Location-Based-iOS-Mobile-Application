@@ -22,6 +22,10 @@ class AdsVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSourc
         // Do any additional setup after loading the view.
         sidemenu()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("*************AdsVC**************")
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -47,7 +47,7 @@ class MyInterestVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         MyInterestVC.interest.append(interest_name.text!)
         tableview.reloadData()
         
-        database.child("Users").child(uid!).child("UserInterests").childByAutoId().setValue(interest_name.text) { (error, ref) in
+        database.child("Users").child(uid!).child("UserInterests").childByAutoId().setValue(interest_name.text?.lowercased()) { (error, ref) in
             if error == nil{
                 print("Successfully Uploaded interest to database")
             }else{
@@ -86,6 +86,10 @@ class MyInterestVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         // Do any additional setup after loading the view.
         additional_view.layer.cornerRadius = 7
         sidemenu()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("*************MyInterestVC**************")
     }
 
     override func didReceiveMemoryWarning() {

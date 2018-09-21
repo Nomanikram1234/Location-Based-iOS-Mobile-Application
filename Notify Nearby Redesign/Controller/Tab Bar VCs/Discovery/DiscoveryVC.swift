@@ -63,6 +63,8 @@ class DiscoveryVC: UIViewController, UICollectionViewDelegate , UICollectionView
 
     override func viewDidAppear(_ animated: Bool) {
 //        print(AppDelegate.arr)
+        print("*************DiscoveryVC**************")
+        
         collectionview.reloadData()
         
     }

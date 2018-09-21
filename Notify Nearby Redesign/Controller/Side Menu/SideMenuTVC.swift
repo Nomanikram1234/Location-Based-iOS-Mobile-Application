@@ -36,9 +36,13 @@ class SideMenuTVC: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("*************SideMenuTVC**************")
+    }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
+        print("Side Menu Option Selected: \(indexPath.row)")
         
         // signout cell is selected
         if indexPath.row == 8{

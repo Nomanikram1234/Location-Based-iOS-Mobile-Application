@@ -35,6 +35,10 @@ class MyFavouriteVC: UIViewController ,UITableViewDelegate,UITableViewDataSource
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        print("*************MyFavouriteVC**************")
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return MyFavouriteVC.favouriteEventArray.count
     }

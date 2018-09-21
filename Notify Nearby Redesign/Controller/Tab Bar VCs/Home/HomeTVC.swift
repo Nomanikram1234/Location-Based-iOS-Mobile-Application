@@ -90,7 +90,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                                 "storypostedby":User.singleton.name,
                                 "longitude":"\(userLocation.coordinate.longitude)",
                                 "lat":"\(userLocation.coordinate.latitude)",
-                                "interest":self.addEventView_interests.text,
+                                "interest":self.addEventView_interests.text?.lowercased(),//FIXME: lowercased made most recent change
                                 "image": "\(url!)",
                                 "acceptedNumber":"0",
                                 "deniedNumber":"0",
@@ -241,6 +241,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        print("*************HomeTVC**************")
         sidemenu()
         fetchEventsAndDisplayOnMap()
     }
@@ -340,10 +341,10 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                         
                         
                         
-                        
-                        print(user_interests)
-                        print(event_interests)
-                        print ( "Common Interests\(self.commonInterest(firstSet: user_interests, secondSet: event_interests))")
+                        print("Pin inside 10km radius , Distance Difference: \(Int(distanceDifference))")
+                        print("User Interests: \(user_interests)")
+                        print("Event Interests: \(event_interests)")
+                        print ( "Common Interests: \(self.commonInterest(firstSet: user_interests, secondSet: event_interests))")
                         print()
                         
                     }

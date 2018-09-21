@@ -78,7 +78,8 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
                     self.database.child("stories").child(self.Previouskey!).child("description").setValue(self.editStoryView_description.text)
                     self.database.child("stories").child(self.Previouskey!).child("title").setValue(self.editStoryView_title.text)
         
-                    self.database.child("stories").child(self.self.Previouskey!).child("interest").setValue(self.editStoryView_interest.text)
+                    //FIXME: Changes made lowercased()
+                    self.database.child("stories").child(self.self.Previouskey!).child("interest").setValue(self.editStoryView_interest.text?.lowercased())
         
                     self.database.child("stories").child(self.Previouskey!).child("image").setValue("\(url!)")
             
@@ -530,6 +531,10 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
         
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        print("*************StoryDetailVC**************")
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

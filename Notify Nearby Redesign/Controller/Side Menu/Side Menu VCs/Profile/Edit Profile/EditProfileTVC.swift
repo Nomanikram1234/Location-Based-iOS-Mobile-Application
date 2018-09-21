@@ -45,6 +45,11 @@ class EditProfileTVC: UITableViewController, UINavigationControllerDelegate , UI
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("*************EditProfileTVC**************")
+    }
     @IBAction func changePhoto(_ sender: Any) {
         let image = UIImagePickerController()
         image.delegate = self
