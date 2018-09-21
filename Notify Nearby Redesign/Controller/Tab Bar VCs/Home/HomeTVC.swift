@@ -430,6 +430,9 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     func fetchEvents() {
         database.child("stories").observe(DataEventType.value) { (snapshot) in
             
+            //FIXME: TEST DELTE ARRAY
+            HomeTVC.eventArray.removeAll()
+            
             for key in snapshot.children{
                 let json = JSON((key as! DataSnapshot).value)
                 let id = JSON((key as! DataSnapshot).key).stringValue
@@ -526,6 +529,9 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
 //        }
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.row)
+    }
 
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
