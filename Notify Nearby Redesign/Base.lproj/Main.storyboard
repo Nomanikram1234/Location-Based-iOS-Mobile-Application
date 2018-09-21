@@ -889,6 +889,7 @@
                         <outlet property="segmentedcontrols" destination="xnJ-IM-AoZ" id="7Bl-eP-GNl"/>
                         <outlet property="tableview" destination="fks-W5-iIR" id="e83-B9-Rsk"/>
                         <segue destination="FPh-t9-4PO" kind="show" identifier="showStoryDetail" id="xaO-43-eqt"/>
+                        <segue destination="FPh-t9-4PO" kind="show" identifier="showAllStoryDetail" id="nqx-gb-nL8"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zkn-9w-NaO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3313,5 +3314,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="cNo-m8-hsO"/>
+        <segue reference="nqx-gb-nL8"/>
     </inferredMetricsTieBreakers>
 </document>

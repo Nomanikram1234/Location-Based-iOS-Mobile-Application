@@ -151,6 +151,7 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
     //    @IBOutlet weak var mapview: MKMapView!
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+      
         return interestArray!.count
     }
     

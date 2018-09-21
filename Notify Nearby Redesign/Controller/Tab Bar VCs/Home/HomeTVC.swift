@@ -28,6 +28,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     let authStatus = CLLocationManager.authorizationStatus()
     
     var eventCalloutView : EventCalloutView!
+    var selectedEventIndex:Int?
     
     let auth = Auth.auth()
     let database = Database.database().reference()
@@ -530,6 +531,8 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedEventIndex = indexPath.row
+        performSegue(withIdentifier: "showAllStoryDetail", sender: self)
         print(indexPath.row)
     }
 
@@ -655,6 +658,14 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showAllStoryDetail"{
+            if let StoriesDetailVC = segue.destination as? StoriesDetailVC{
+                
+                StoriesDetailVC.Previouskey = HomeTVC.eventArray[selectedEventIndex!].event_key
+                
+                
+            }
+        }else
         if let StoriesDetailVC = segue.destination as? StoriesDetailVC{
    
             StoriesDetailVC.Previouskey = eventCalloutView.event_key.text
