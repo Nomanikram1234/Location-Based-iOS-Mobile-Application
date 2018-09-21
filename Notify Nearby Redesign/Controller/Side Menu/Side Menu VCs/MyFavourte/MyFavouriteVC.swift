@@ -18,6 +18,9 @@ class MyFavouriteVC: UIViewController ,UITableViewDelegate,UITableViewDataSource
     @IBOutlet weak var moreButton: UIBarButtonItem!
     @IBOutlet weak var notificationBarBtn: UIBarButtonItem!
     
+    static var favouriteEventArray = [Event]()
+    var selectedFavouriteEvent :Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,14 +36,14 @@ class MyFavouriteVC: UIViewController ,UITableViewDelegate,UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return MyFavouriteVC.favouriteEventArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableview.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MyFavouriteTableViewCell
-        cell.imageview.image = UIImage(named: "avatar4")
-        cell.title.text = "Momina"
-        cell.type.text = "Interest"
+        cell.imageview.sd_setImage(with: URL(string:MyFavouriteVC.favouriteEventArray[indexPath.row].event_image!), completed: nil)
+        cell.title.text = MyFavouriteVC.favouriteEventArray[indexPath.row].event_title
+        cell.type.text = MyFavouriteVC.favouriteEventArray[indexPath.row].event_interests
         return cell
     }
     
@@ -53,15 +56,33 @@ class MyFavouriteVC: UIViewController ,UITableViewDelegate,UITableViewDataSource
     let uid = Auth.auth().currentUser?.uid
         
         database.child("Users").child(uid!).child("favourite").observe(.value) { (snapshot) in
+            MyFavouriteVC.favouriteEventArray.removeAll()
+            
             for snap in snapshot.children{
                 let story = (snap as! DataSnapshot).value
+                print("Favourite: \(story)")
                 
-                
-//                database.child("stories").child("\(story)").observe(.value, with: { (snapshot) in
-//                    print(JSON(snapshot.value))
-//                })
-                
+                for event in HomeTVC.eventArray{
+                    if story as! String == event.event_key{
+                       MyFavouriteVC.favouriteEventArray.append(event)
+                        self.tableview.reloadData()
+                    }
+                }
+ 
             }
+        }
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedFavouriteEvent = indexPath.row
+        performSegue(withIdentifier: "showFavouriteEventDetail", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let detailVC = segue.destination as? StoriesDetailVC{
+            detailVC.Previouskey = MyFavouriteVC.favouriteEventArray[selectedFavouriteEvent!].event_key
         }
     }
     

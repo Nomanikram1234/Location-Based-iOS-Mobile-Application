@@ -428,8 +428,9 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
     
-    func fetchEvents() {
-        database.child("stories").observe(DataEventType.value) { (snapshot) in
+  static  func fetchEvents() {
+    var locationManager = CLLocationManager()
+        Database.database().reference().child("stories").observe(DataEventType.value) { (snapshot) in
             
             //FIXME: TEST DELTE ARRAY
             HomeTVC.eventArray.removeAll()
@@ -439,7 +440,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                 let id = JSON((key as! DataSnapshot).key).stringValue
                 let event = Event(eventId:id , json: json)
                 
-                guard let userLocation = self.locationManager.location else {return}
+                guard let userLocation = locationManager.location else {return}
                 let coordinate = CLLocation(latitude: event.event_latitude!, longitude: event.event_longitude!)
                 
                 HomeTVC.eventArray.append(event)

@@ -18,6 +18,7 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
     // static array to populate collection view at the top
     let arr = ["sport","gaming","news","traffic","education"]
     var interestArray = [Event]()
+    var selectedInterestIndex: Int?
 
     @IBOutlet weak var notificationBarBtn: UIBarButtonItem!
     
@@ -37,6 +38,7 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
         
         // remove all elements from array to avoid over population / duplication
         HomeTVC.eventArray.removeAll()
+        HomeTVC.fetchEvents() //FIXME: MADE CHANGES ON FRIDAY
         
         // counter number of events
         print("Counter: \(HomeTVC.eventArray.count)")
@@ -212,6 +214,12 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
             return CGSize(width: commonInterest_collectionview.frame.size.width / 4, height: commonInterest_collectionview.frame.size.height - 8)
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedInterestIndex = indexPath.row
+        print("Selected Index: \(indexPath.row)")
+        performSegue(withIdentifier: "showInterestBasedEventDetails", sender: self)
+    }
     /*
     // MARK: - Navigation
 
@@ -221,6 +229,16 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let StoriesDetailVC = segue.destination as? StoriesDetailVC{
+            print(interestArray[selectedInterestIndex!].event_key)
+            StoriesDetailVC.Previouskey = interestArray[selectedInterestIndex!].event_key
+            
+            
+        }
+    }
+    
     
     //1: converting string to string array
     func stringToArray(string:String)->[String]{

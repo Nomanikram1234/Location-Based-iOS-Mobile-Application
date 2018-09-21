@@ -19,7 +19,7 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
 
     var Previouskey :String?
     var event:Event?
-    var interestArray : [String]?
+    var interestArray = [String]()
     
     var commonInt:[String]?
     
@@ -152,13 +152,14 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
       
-        return interestArray!.count
+//        print("Interest Count: \(interestArray?.count)")
+        return interestArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionview.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! interestStoryDetailCVC
-        cell.interest.text = interestArray?[indexPath.row]
+        cell.interest.text = interestArray[indexPath.row]
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -479,7 +480,8 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-//        print("\(Previouskey)")
+        print("\(Previouskey)")
+        
         
     
         
@@ -518,7 +520,8 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
                 break
             }
         }
-        collectionview.reloadData()
+//        collectionview.reloadData()
+        
 //        mapview_height = mapview.frame.size.height
 //        mapview_width = mapview.frame.size.width
 //        mapview_x = mapview.frame.origin.x
