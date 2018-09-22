@@ -17,8 +17,10 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
     @IBOutlet weak var notificationBarBtn: UIBarButtonItem!
     
     var myStories = [Event]()
-    var myInterestBasedStories = [Event]()
+    var selectedStoryIndex:Int?
     
+    var myInterestBasedStories = [Event]()
+    var selectedInterestBasedIndex:Int?
     
     // Managing initiating the number of item in collection
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -33,6 +35,28 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
             return 15
         }
 
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == storyCollectionview {
+            selectedStoryIndex = indexPath.row
+            performSegue(withIdentifier: "showStoryDetailsFromProfile", sender: self)
+        }else if collectionView == interestCollectionview {
+            selectedInterestBasedIndex = indexPath.row
+            performSegue(withIdentifier: "showInterestBasedStoryDetailsFromProfile", sender: self)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showStoryDetailsFromProfile"{
+            if let detailVC = segue.destination as? StoriesDetailVC{
+                detailVC.Previouskey = myStories[selectedStoryIndex!].event_key
+            }
+        }else if segue.identifier == "showInterestBasedStoryDetailsFromProfile"{
+            if let detailVC = segue.destination as? StoriesDetailVC{
+                detailVC.Previouskey = myInterestBasedStories[selectedInterestBasedIndex!].event_key
+            }
+        }
     }
     
     // Manages initiating item and related data for the item
@@ -57,7 +81,7 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
         // it manages populating follower collection view
         else if collectionView == followerCollectionview{
             let cell = followerCollectionview.dequeueReusableCell(withReuseIdentifier: "followerCell", for: indexPath) as! FollowersCVC
-          cell.imageview.image = UIImage(named: "avatar")
+            cell.imageview.image = UIImage(named: "avatar")
             return cell
         }else{
             return UICollectionViewCell() //Most Probably this statement won't run
@@ -108,6 +132,8 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -187,9 +213,10 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
                         anno.event_noOfAccepted = event.event_noOfAccepted
                         anno.event_noOfDenied = event.event_noOfDenied
                         anno.event_noOfFavourite = event.event_noOfFavourite
-                        
+                        anno.event_key = event.event_key
                         // added interest based annotation in arraylist
                         myInterestBasedStories.append(anno)
+                        
                         interestCollectionview.reloadData()
                     }
                     
