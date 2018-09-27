@@ -214,7 +214,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         
         Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(alertTips), userInfo: nil, repeats: false)
         
-//        print("First Start: \(AppDelegate.firstStart)")
+        print("First Start: \(AppDelegate.firstStart)")
 //        if  AppDelegate.firstStart == false{
 //
 //                let alertcontroller = UIAlertController(title: "Tip", message: "Please add interests from sidemenu in order to see interest based pics on the map", preferredStyle: .alert)
@@ -259,6 +259,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
             present(alertcontroller, animated: true)
             //                present(alertcontroller, animated: true, completion: nil)
             AppDelegate.firstStart = true
+            UserDefaults.standard.set(AppDelegate.firstStart, forKey: "firstStart")
         }
     }
     

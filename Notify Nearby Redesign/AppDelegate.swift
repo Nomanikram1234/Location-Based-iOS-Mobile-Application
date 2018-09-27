@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     override init() {
        
+        
         var date = Date()
         AppDelegate.current_time_in_millisecond = Int(date.timeIntervalSince1970 * 1000)
         
@@ -37,30 +38,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        FirebaseApp.configure()
         
 //        let timer = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(timeUpdate), userInfo: nil, repeats: true)ut
-        
+        if UserDefaults.standard.bool(forKey: "firstStart") {
+        AppDelegate.firstStart = UserDefaults.standard.bool(forKey: "firstStart")
+        }else{
+        UserDefaults.standard.set(AppDelegate.firstStart, forKey: "firstStart")
+        }
       let auth =  Auth.auth().addStateDidChangeListener { (auth, user) in
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
             if user == nil{
                 print("User: Nil")
-                AppDelegate.firstStart = false
+//                AppDelegate.firstStart =
                 let controller = storyboard.instantiateViewController(withIdentifier: "SplashVC")
                 self.window?.rootViewController = controller
                 self.window?.makeKeyAndVisible()
                 
-                
-                
             }else{
                 print("User: Exists")
-                AppDelegate.firstStart = true
+//                AppDelegate.firstStart = false
+//                UserDefaults.standard.set(AppDelegate.firstStart, forKey: "firstStart")
                 
                 print(Auth.auth().currentUser?.uid)
                 let controller = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController")
                 self.window?.rootViewController = controller
                 self.window?.makeKeyAndVisible()
-                
-                
+                          
             }
         }
         

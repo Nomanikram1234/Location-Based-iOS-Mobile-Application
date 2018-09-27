@@ -50,6 +50,7 @@ class SideMenuTVC: UITableViewController {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "SplashVC") as! SplashVC
             do{
             try Auth.auth().signOut()
+//                UserDefaults.standard.set(AppDelegate.firstStart, forKey: nil)
             }catch{
                 print("error")
             }
