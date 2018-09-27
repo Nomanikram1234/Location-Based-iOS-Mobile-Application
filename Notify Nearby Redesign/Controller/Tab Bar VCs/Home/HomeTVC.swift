@@ -18,6 +18,10 @@ import GeoFire
 
 class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, MKMapViewDelegate,CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
+    @IBOutlet weak var addEventButton: UIButton!
+    @IBOutlet weak var centerMapOnUserLocationButton: UIButton!
+    
+    
     let storyLocation = Database.database().reference().child("StoryLocation")
    
     
@@ -205,15 +209,20 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addEventButton.imageView?.contentMode = .redraw
+        centerMapOnUserLocationButton.imageView?.contentMode = .redraw
         
+        Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(alertTips), userInfo: nil, repeats: false)
         
-        if  AppDelegate.firstStart == false{
-          
-                let alertcontroller = UIAlertController(title: "Tip", message: "Please add interests from sidemenu in order to see interest based pics on the map", preferredStyle: .alert)
-                alertcontroller.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
-                present(alertcontroller, animated: true, completion: nil)
-            AppDelegate.firstStart = true
-        }
+//        print("First Start: \(AppDelegate.firstStart)")
+//        if  AppDelegate.firstStart == false{
+//
+//                let alertcontroller = UIAlertController(title: "Tip", message: "Please add interests from sidemenu in order to see interest based pics on the map", preferredStyle: .alert)
+//                alertcontroller.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
+//            present(alertcontroller, animated: true)
+////                present(alertcontroller, animated: true, completion: nil)
+//            AppDelegate.firstStart = true
+//        }
 
         // Do any additional setup after loading the view.
 //        sidemenu()
@@ -234,10 +243,23 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
 //      mapview.addAnnotation(anno)
 
         fetchUserDetails()
+        
         MyInterestVC.fetchUserInterests()
 //      fetchEventsAndDisplayOnMap()
 //      fetchEventsAndDisplayOnMap()
         
+    }
+    
+    @objc func alertTips(){
+        print("First Start: \(AppDelegate.firstStart)")
+        if  AppDelegate.firstStart == false{
+            
+            let alertcontroller = UIAlertController(title: "Tip", message: "Please add interests from sidemenu in order to see interest based pics on the map", preferredStyle: .alert)
+            alertcontroller.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
+            present(alertcontroller, animated: true)
+            //                present(alertcontroller, animated: true, completion: nil)
+            AppDelegate.firstStart = true
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -285,6 +307,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         database.child("Users").child(uid!).observe(DataEventType.value) { (snapshot) in
             let json = JSON(snapshot.value)
             User.singleton = User.init(json: json)
+            print("User Type: \(User.singleton.userType!)")
         }
     }
     
@@ -554,7 +577,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
             moreButton.target = revealViewController()
             moreButton.action = #selector(revealViewController().revealToggle(_:))
             revealViewController().rearViewRevealWidth = 275
-            
+            view.addGestureRecognizer(revealViewController().panGestureRecognizer())
 
 //          revealViewController().rightViewRevealWidth = 160
             
@@ -608,13 +631,13 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         removeCircle() // remove radius around the current location
         
         // Uploading User Current Location
-        let data = ["latitude":  userLocation.location?.coordinate.latitude,
-            "longitutde": userLocation.location?.coordinate.longitude]
-        database.child("UserLocation").child(uid!).setValue(data)
-        
-        let ridaData = ["0":  userLocation.location?.coordinate.latitude,
-                    "1": userLocation.location?.coordinate.longitude]
-        database.child("UserLocation").child(uid!).child("l").setValue(ridaData)
+//        let data = ["latitude":  userLocation.location?.coordinate.latitude,
+//            "longitutde": userLocation.location?.coordinate.longitude]
+//        database.child("UserLocation").child(uid!).setValue(data)
+//        
+//        let ridaData = ["0":  userLocation.location?.coordinate.latitude,
+//                    "1": userLocation.location?.coordinate.longitude]
+//        database.child("UserLocation").child(uid!).child("l").setValue(ridaData)
         
         showCircle(coordinate: userLocation.coordinate, radius: 10000) // radius in 10000 meters = 10 kms
     }

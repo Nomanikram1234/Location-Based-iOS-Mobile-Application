@@ -57,6 +57,9 @@ class JointVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSou
             notificationBarBtn.target = revealViewController()
             notificationBarBtn.action = #selector(SWRevealViewController.rightRevealToggle(_:))
             
+            view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+
+            
         }
     }
 

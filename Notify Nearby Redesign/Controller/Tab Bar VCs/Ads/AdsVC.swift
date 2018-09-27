@@ -59,6 +59,9 @@ class AdsVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSourc
             notificationBarBtn.target = revealViewController()
             notificationBarBtn.action = #selector(SWRevealViewController.rightRevealToggle(_:))
             
+            view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+
+            
         }
     }
 

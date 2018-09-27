@@ -176,6 +176,8 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
             notificationBarBtn.target = revealViewController()
             notificationBarBtn.action = #selector(SWRevealViewController.rightRevealToggle(_:))
             
+            view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+
         }
     }
 
@@ -211,6 +213,7 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
     }
     
     
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == interest_collectionview{
         return CGSize(width: interest_collectionview.frame.width - 150, height: interest_collectionview.frame.height - 130)
@@ -220,9 +223,12 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+       
+        if collectionView == interest_collectionview{
         selectedInterestIndex = indexPath.row
         print("Selected Index: \(indexPath.row)")
         performSegue(withIdentifier: "showInterestBasedEventDetails", sender: self)
+        }
     }
     /*
     // MARK: - Navigation

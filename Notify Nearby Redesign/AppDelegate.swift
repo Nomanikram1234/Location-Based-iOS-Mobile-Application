@@ -8,7 +8,7 @@
 
 import UIKit
 import Alamofire
-import  SwiftSoup
+import SwiftSoup
 import Firebase
 
 
@@ -16,7 +16,7 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // variable initiated for the first time login everytime
-    static var firstStart = false
+    static var firstStart :Bool = false
     
     // calculating
     static var current_time_in_millisecond :Int?
@@ -36,7 +36,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
 //        FirebaseApp.configure()
         
-//        let timer = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(timeUpdate), userInfo: nil, repeats: true)
+//        let timer = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(timeUpdate), userInfo: nil, repeats: true)ut
+        
+      let auth =  Auth.auth().addStateDidChangeListener { (auth, user) in
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            if user == nil{
+                print("User: Nil")
+                AppDelegate.firstStart = false
+                let controller = storyboard.instantiateViewController(withIdentifier: "SplashVC")
+                self.window?.rootViewController = controller
+                self.window?.makeKeyAndVisible()
+                
+                
+                
+            }else{
+                print("User: Exists")
+                AppDelegate.firstStart = true
+                
+                print(Auth.auth().currentUser?.uid)
+                let controller = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController")
+                self.window?.rootViewController = controller
+                self.window?.makeKeyAndVisible()
+                
+                
+            }
+        }
+        
         
         DispatchQueue.global(qos: .userInteractive).async {
             self.scrapingIslamabad()

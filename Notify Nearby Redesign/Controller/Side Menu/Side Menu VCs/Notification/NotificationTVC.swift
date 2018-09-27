@@ -40,7 +40,9 @@ class NotificationTVC: UITableViewController {
             revealViewController().rightViewRevealWidth = 275
             notificationBarBtn.target = revealViewController()
             notificationBarBtn.action = #selector(SWRevealViewController.rightRevealToggle(_:))
-            
+         
+            view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+
         }
     }
 
