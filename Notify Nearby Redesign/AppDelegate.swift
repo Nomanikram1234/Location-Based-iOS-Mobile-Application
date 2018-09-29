@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         
-        
+        ////////////////////////////
         
         
       let auth =  Auth.auth().addStateDidChangeListener { (auth, user) in
@@ -61,6 +61,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.window?.makeKeyAndVisible()
                 
             }else{
+              
+                if (Auth.auth().currentUser?.isEmailVerified)! {
                 print("User: Exists")
 //                AppDelegate.firstStart = false
 //                UserDefaults.standard.set(AppDelegate.firstStart, forKey: "firstStart")
@@ -69,10 +71,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let controller = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController")
                 self.window?.rootViewController = controller
                 self.window?.makeKeyAndVisible()
+                     }
+                    
                           
             }
         }
-        
+       /////////////////////
         
         DispatchQueue.global(qos: .userInteractive).async {
             self.scrapingIslamabad()
