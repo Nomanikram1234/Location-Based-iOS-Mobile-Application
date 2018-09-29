@@ -21,6 +21,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     @IBOutlet weak var addEventButton: UIButton!
     @IBOutlet weak var centerMapOnUserLocationButton: UIButton!
     
+   static var change:Bool = false
     
     let storyLocation = Database.database().reference().child("StoryLocation")
    
@@ -444,23 +445,16 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         }
     }
     
-//    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-//        
-//        let annotationView = MKPinAnnotationView()
-//        annotationView.pinTintColor = UIColor.black
-//        
-//        print("Pin Color Set")
-//        
-//        return annotationView
-//    }
+
     
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "pin")
-        annotationView.markerTintColor = UIColor.blue
-        // annotationView.canShowCallout = true
-        return annotationView
-        
-    }
+//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+//
+//        let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+//        annotationView.markerTintColor = UIColor.purple
+//        // annotationView.canShowCallout = true
+//               HomeTVC.change = true
+//            return annotationView
+//    }
   
     
     
@@ -471,16 +465,16 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         content.body = body!
         content.badge = 1
         content.sound = UNNotificationSound.default()
-        //        content.
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
+        
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
         
         let center = CLLocationCoordinate2D(latitude: lat, longitude: long)
         let region = CLCircularRegion(center: center, radius: 10000.0, identifier: "Events")
         region.notifyOnEntry = true
         region.notifyOnExit = false
         let loc_trigger = UNLocationNotificationTrigger(region: region, repeats: false)
-        let request = UNNotificationRequest(identifier: "IS", content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: "IS", content: content, trigger: loc_trigger)
         
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
