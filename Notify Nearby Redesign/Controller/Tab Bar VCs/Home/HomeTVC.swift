@@ -453,6 +453,14 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
 //        
 //        return annotationView
 //    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+        annotationView.markerTintColor = UIColor.blue
+        // annotationView.canShowCallout = true
+        return annotationView
+        
+    }
   
     
     
