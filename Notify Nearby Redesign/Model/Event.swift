@@ -37,7 +37,10 @@ class Event:MKPointAnnotation{
     var event_Accepted:[String]?
     var event_Denied:[String]?
     
+    
 //    static var singleton = Event()
+    
+
     
     init(coordinate:CLLocationCoordinate2D) {
         super.init()
@@ -85,3 +88,4 @@ class Event:MKPointAnnotation{
         
     }
 }
+

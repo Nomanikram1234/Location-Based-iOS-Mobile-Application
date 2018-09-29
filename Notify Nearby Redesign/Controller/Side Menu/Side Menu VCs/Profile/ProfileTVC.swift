@@ -74,7 +74,9 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
         else if collectionView == interestCollectionview{
             let cell = interestCollectionview.dequeueReusableCell(withReuseIdentifier: "interestCell", for: indexPath) as! InterestCVC
             print(myInterestBasedStories[indexPath.row].event_title)
-            cell.title.text = myInterestBasedStories[indexPath.row].event_title
+            
+            //FIXME: ASKED TO MADE Changes So their will be little naming confusion between title and interest
+            cell.title.text = myInterestBasedStories[indexPath.row].event_interests
             cell.imageview.sd_setImage(with: URL(string: myInterestBasedStories[indexPath.row].event_image!), completed: nil)
             return cell
         }

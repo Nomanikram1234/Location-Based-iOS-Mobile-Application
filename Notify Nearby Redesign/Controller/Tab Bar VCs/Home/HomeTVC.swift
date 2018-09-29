@@ -209,6 +209,11 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        fetchEventsAndDisplayOnMap()
+//        vie
+        
+        mapview.delegate = self
+        
         addEventButton.imageView?.contentMode = .redraw
         centerMapOnUserLocationButton.imageView?.contentMode = .redraw
         
@@ -332,7 +337,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                 let anno = Event(coordinate: CLLocationCoordinate2D(latitude: event.event_latitude!, longitude: event.event_longitude! ))
                 let distanceDifference = self.calculateDistance(mainCoordinate: userLocation , coordinate: coordinate)
 
-                
+            
                 // if INTEREST is selected in segmented controls
                 if self.segmentedcontrols.selectedSegmentIndex == 0{
                     
@@ -347,6 +352,8 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                             anno.title = common_interests_string
                             anno.subtitle = event.event_title
                             
+                            
+                            
                             anno.event_title = event.event_title
                             anno.event_interests  =  common_interests_string
                             
@@ -356,7 +363,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                             anno.event_noOfDenied = event.event_noOfDenied
                             anno.event_noOfFavourite = event.event_noOfFavourite
                             self.collectionview.reloadData()
-                            
+//                            view.reloadInputViews()
 //                            self.localNotification(title: event.event_title, subtitle: event.event_title, body: common_interests_string, lat: coordinate.coordinate.latitude, long: coordinate.coordinate.longitude)
                             
                             self.mapview.addAnnotation(anno)
@@ -370,6 +377,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                         print("Event Interests: \(event_interests)")
                         print ( "Common Interests: \(self.commonInterest(firstSet: user_interests, secondSet: event_interests))")
                         print()
+                        self.collectionview.reloadData()
                         
                     }
                     
@@ -390,6 +398,8 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                     
                 anno.title = event.event_title
                 anno.subtitle = event.event_interests
+                    
+                    
                     
                     anno.event_title = event.event_title
                     anno.event_interests  =  common_interests_string
@@ -432,6 +442,19 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
             print("Event Array: Number of Events -> \(HomeTVC.eventArray.count)")
         }
     }
+    
+//    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+//        
+//        let annotationView = MKPinAnnotationView()
+//        annotationView.pinTintColor = UIColor.black
+//        
+//        print("Pin Color Set")
+//        
+//        return annotationView
+//    }
+  
+    
+    
     func localNotification(title:String?,subtitle:String?,body:String?,lat:CLLocationDegrees,long:CLLocationDegrees) {
         let content = UNMutableNotificationContent()
         content.title = title!
@@ -469,6 +492,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                 let coordinate = CLLocation(latitude: event.event_latitude!, longitude: event.event_longitude!)
                 
                 HomeTVC.eventArray.append(event)
+               
                 
             }
             print("fetchEvents(): fetched Events")

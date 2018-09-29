@@ -43,6 +43,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }else{
         UserDefaults.standard.set(AppDelegate.firstStart, forKey: "firstStart")
         }
+        
+        
+        
+        
+        
+        
       let auth =  Auth.auth().addStateDidChangeListener { (auth, user) in
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
