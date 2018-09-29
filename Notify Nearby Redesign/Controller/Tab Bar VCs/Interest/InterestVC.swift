@@ -158,6 +158,8 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
     
     override func viewDidAppear(_ animated: Bool) {
         print("*************InterestVC**************")
+       fetchUniqueInterest()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -187,7 +189,7 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
         
         return interestArray.count
         }else {
-            return arr.count
+            return MyInterestVC.uniqueInterestArray.count
         }
         }
     
@@ -207,7 +209,7 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
         {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "interest_cell", for: indexPath) as! TopInterestCollectionViewCell
             
-            cell.name.text = arr[indexPath.row]
+            cell.name.text = MyInterestVC.uniqueInterestArray[indexPath.row]
             return cell
         }
     }
@@ -294,4 +296,28 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
         return distance
     }
 
+    func fetchUniqueInterest(){
+        let database =  Database.database().reference().child("UniqueInterests")
+        database.observe(.value) { (snapshot) in
+            MyInterestVC.uniqueInterestArray.removeAll()
+            for i in snapshot.children{
+                
+                let value = (i as! DataSnapshot).value
+                //                 print(value)
+                print(value!)
+                if !MyInterestVC.uniqueInterestArray.contains(value! as! String)
+                {
+                    MyInterestVC.uniqueInterestArray.append(value! as! String)
+                    self.interest_collectionview.reloadData()
+                    self.loadView()
+                    self.sidemenu()
+                }else{
+                    print("It Already contains this interest")
+                }
+            }
+            
+        }
+        
+    }
+    
 }

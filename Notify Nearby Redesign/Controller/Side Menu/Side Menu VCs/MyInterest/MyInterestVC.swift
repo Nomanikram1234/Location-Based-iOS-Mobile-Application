@@ -10,8 +10,11 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 import SwiftyJSON
+import SVProgressHUD
 
 class MyInterestVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
+    
+    static var uniqueInterestArray = [String]()
     
     var arr = ["interest","traffic","university"] // not being used for now
     static var interest = [String]() // for storing user interests
@@ -36,6 +39,27 @@ class MyInterestVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         }
     }
     
+    static func fetchUniqueInterest(){
+        let database =  Database.database().reference().child("UniqueInterests")
+        database.observe(.value) { (snapshot) in
+            
+            for i in snapshot.children{
+               
+                let value = (i as! DataSnapshot).value
+//                 print(value)
+                            print(value!)
+                if !MyInterestVC.uniqueInterestArray.contains(value! as! String)
+                            {
+                                MyInterestVC.uniqueInterestArray.append(value! as! String)
+                            }else{
+                                print("It Already contains this interest")
+                            }
+            }
+
+        }
+        
+    }
+    
     // when add button pressed in addional view
     @IBAction func addInterestPressed(_ sender: Any)
     {
@@ -43,15 +67,32 @@ class MyInterestVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         print("Interest View: Additional View -> Add Button Pressed")
         
         
+        
         if !MyInterestVC.interest.contains(interest_name.text!){
         MyInterestVC.interest.append(interest_name.text!)
         tableview.reloadData()
         
+        let interest = interest_name.text?.lowercased()
         database.child("Users").child(uid!).child("UserInterests").childByAutoId().setValue(interest_name.text?.lowercased()) { (error, ref) in
             if error == nil{
                 print("Successfully Uploaded interest to database")
+                
+                // storing interest uniquely
+                
+                let ref = Database.database().reference().child("UniqueInterests")
+                if !MyInterestVC.uniqueInterestArray.contains(interest!){
+                ref.childByAutoId().setValue(interest)
+                MyInterestVC.uniqueInterestArray.append(interest!)
+                }else{
+                    print("It already contains uniquw interest")
+//                   SVProgressHUD.showError(withStatus: "It A")
+                   
+                }
+            
+                
             }else{
                 print("Interest Uploading: Operation Failed")
+                SVProgressHUD.showError(withStatus: "Interest Uploading: Operation Failed")
             }
         }
         }else{
@@ -80,7 +121,7 @@ class MyInterestVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        MyInterestVC.fetchUniqueInterest()
         fetchAndDisplayUserInterests()
         
         // Do any additional setup after loading the view.

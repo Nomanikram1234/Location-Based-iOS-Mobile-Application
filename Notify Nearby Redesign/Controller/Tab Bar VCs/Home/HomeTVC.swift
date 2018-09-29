@@ -248,6 +248,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
 //      mapview.addAnnotation(anno)
 
         fetchUserDetails()
+        MyInterestVC.fetchUniqueInterest()
         
         MyInterestVC.fetchUserInterests()
 //      fetchEventsAndDisplayOnMap()
