@@ -38,10 +38,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        FirebaseApp.configure()
         
 //        let timer = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(timeUpdate), userInfo: nil, repeats: true)ut
+        
+        
+        
+//          UserDefaults.standard.set(nil, forKey: "firstStart")
+//        UserDefaults.standard.setNilValueForKey("firstStart")
         if UserDefaults.standard.bool(forKey: "firstStart") {
         AppDelegate.firstStart = UserDefaults.standard.bool(forKey: "firstStart")
+            
         }else{
         UserDefaults.standard.set(AppDelegate.firstStart, forKey: "firstStart")
+            do{
+                try Auth.auth().signOut()
+            }catch{
+                print(error)
+            }
         }
         
         
@@ -50,30 +61,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
       let auth =  Auth.auth().addStateDidChangeListener { (auth, user) in
-            
+
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            
+
             if user == nil{
                 print("User: Nil")
 //                AppDelegate.firstStart =
+                UserDefaults.standard.set(nil, forKey: "firstStart")
                 let controller = storyboard.instantiateViewController(withIdentifier: "SplashVC")
                 self.window?.rootViewController = controller
                 self.window?.makeKeyAndVisible()
-                
+
             }else{
-              
+
                 if (Auth.auth().currentUser?.isEmailVerified)! {
                 print("User: Exists")
 //                AppDelegate.firstStart = false
 //                UserDefaults.standard.set(AppDelegate.firstStart, forKey: "firstStart")
-                
+
                 print(Auth.auth().currentUser?.uid)
                 let controller = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController")
                 self.window?.rootViewController = controller
                 self.window?.makeKeyAndVisible()
-                     }
-                    
-                          
+                }
+//                    else{//FIXME:  seems like fix to me otherwise you can remove it
+//                    let controller = storyboard.instantiateViewController(withIdentifier: "SplashVC")
+//                    self.window?.rootViewController = controller
+//                    self.window?.makeKeyAndVisible()
+//                }
+
+
             }
         }
        /////////////////////
