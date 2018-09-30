@@ -21,7 +21,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     @IBOutlet weak var addEventButton: UIButton!
     @IBOutlet weak var centerMapOnUserLocationButton: UIButton!
     
-   static var change:Bool = false
+//    static var change:Bool = false
     
     let storyLocation = Database.database().reference().child("StoryLocation")
    
@@ -42,6 +42,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     
     
     static var eventArray = [Event]()
+    static var adsArray = [Event]()
     
     
     @IBOutlet weak var notificationBarBtn: UIBarButtonItem!
