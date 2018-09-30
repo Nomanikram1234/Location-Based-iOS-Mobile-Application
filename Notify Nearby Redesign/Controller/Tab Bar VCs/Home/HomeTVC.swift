@@ -55,7 +55,37 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     /************ Additonal View: Ads upload View ******/
     
     @IBOutlet var addEventAdsView: UIView!
+    @IBOutlet weak var addEventAdsView_title: UITextField!
+    @IBOutlet weak var addEventAdsView_interests: UITextField!
     
+    @IBOutlet weak var addEventAdsView_imageview: UIImageView!
+    @IBAction func addEventAdsView_selectImage(_ sender: Any) {
+    }
+    
+    @IBOutlet weak var addEventAdsView_contact: UITextField!
+    @IBOutlet weak var addEventAdsView_durationSegmentedControl: UISegmentedControl!
+    
+    @IBAction func addEventAdsView_durationSegmentedControlPressed(_ sender: Any) {
+    }
+    @IBOutlet weak var addEventAdsView_description: UITextView!
+    
+    @IBAction func addEventAdsView_uploadButtonPressed(_ sender: Any) {
+        
+        
+        
+    }
+    @IBAction func addEventAdsView_cancelButtonPressed(_ sender: Any) {
+        
+        for v in view.subviews{
+            if v == addEventAdsView{
+                v.removeFromSuperview()
+            }
+        }
+        
+        UIView.animate(withDuration: 1) {
+            self.blackBgView.alpha = 0
+        }
+    }
     
     /************Additional View Variables**************/
     @IBOutlet var blackBgView: UIView!
@@ -94,7 +124,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                     let data = ["uid":"\(self.uid!)",
                                 "description":"\(self.addEventView_description.text!)",
                                 "title":self.addEventView_title.text,
-                                "type":User.singleton.userType,
+                                "type":"story",
                                 "storypostedby":User.singleton.name,
                                 "longitude":"\(userLocation.coordinate.longitude)",
                                 "lat":"\(userLocation.coordinate.latitude)",
@@ -102,7 +132,9 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                                 "image": "\(url!)",
                                 "acceptedNumber":"0",
                                 "deniedNumber":"0",
-                                "favouriteNumber":"0"
+                                "favouriteNumber":"0",
+                                "startTime": "\(AppDelegate.totalSeconds!)",
+                                "endTime":"\(AppDelegate.totalSeconds! + 86400)"
                                 ] as [String : Any]
                     
 //                    var storyDic = ["title": self.titleTxt.text!,
@@ -295,7 +327,9 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     
     @IBAction func addEvent(_ sender: UIButton) {
         print("called: addEvent()")
-  
+        
+        if User.singleton.userType == "user"{
+        
         blackBgView.frame.size = view.frame.size
         addEventView.center = view.center
         addEventView.frame.origin.y = 0
@@ -306,8 +340,18 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
              self.view.addSubview(self.blackBgView)
              self.view.addSubview(self.addEventView)
         }
-       
-        
+        }else if User.singleton.userType == "advertiser"{
+            blackBgView.frame.size = view.frame.size
+            addEventAdsView.center = view.center
+            addEventAdsView.frame.origin.y = 0
+            UIView.animate(withDuration: 1) {
+                
+                //            self.view.alpha = 0.4
+                self.blackBgView.alpha = 0.4
+                self.view.addSubview(self.blackBgView)
+                self.view.addSubview(self.addEventAdsView)
+        }
+        }
         
     }
     
@@ -324,10 +368,12 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     
     /**************** EVENT ****************/
    func fetchEventsAndDisplayOnMap() {
-    HomeTVC.eventArray.removeAll()
+    
+        HomeTVC.eventArray.removeAll()
+    
         print("fetchEventsAndDisplayOnMap")
         database.child("stories").observe(DataEventType.value) { (snapshot) in
-            
+            HomeTVC.eventArray.removeAll()
             for key in snapshot.children{
                 let json = JSON((key as! DataSnapshot).value)
                 let id = JSON((key as! DataSnapshot).key).stringValue

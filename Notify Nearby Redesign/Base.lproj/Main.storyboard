@@ -878,6 +878,12 @@
                     <tabBarItem key="tabBarItem" title="Home" image="Stroke 1" springLoaded="YES" id="uFM-Yd-FrT"/>
                     <connections>
                         <outlet property="addEventAdsView" destination="R19-W2-Su8" id="TFP-aJ-9dx"/>
+                        <outlet property="addEventAdsView_contact" destination="bX6-oc-FZo" id="qlJ-TQ-SwV"/>
+                        <outlet property="addEventAdsView_description" destination="DcL-eN-HkD" id="Ggz-jj-xa4"/>
+                        <outlet property="addEventAdsView_durationSegmentedControl" destination="bg1-qR-eTQ" id="JuS-TO-hfO"/>
+                        <outlet property="addEventAdsView_imageview" destination="KUF-Ql-skU" id="QJj-bK-Z2x"/>
+                        <outlet property="addEventAdsView_interests" destination="1vU-5M-ZGN" id="pfb-v8-vKk"/>
+                        <outlet property="addEventAdsView_title" destination="wZU-4K-DYf" id="yAb-IL-Fn2"/>
                         <outlet property="addEventButton" destination="RUl-8u-M3h" id="O6t-r3-MOD"/>
                         <outlet property="addEventView" destination="tk0-p3-oGj" id="p9N-iK-zHQ"/>
                         <outlet property="addEventView_description" destination="Nnk-bb-8qZ" id="2XP-Sq-Uou"/>
@@ -981,11 +987,11 @@
                     <viewLayoutGuide key="safeArea" id="1i3-5J-lCI"/>
                 </view>
                 <view contentMode="scaleToFill" id="R19-W2-Su8">
-                    <rect key="frame" x="0.0" y="0.0" width="334" height="492"/>
+                    <rect key="frame" x="0.0" y="0.0" width="334" height="393"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Roh-lh-lgV">
-                            <rect key="frame" x="31" y="44" width="273" height="450"/>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Roh-lh-lgV" customClass="RoundedView" customModule="Notify_Nearby_Redesign" customModuleProvider="target">
+                            <rect key="frame" x="31" y="44" width="273" height="352"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="KUF-Ql-skU">
@@ -1027,33 +1033,56 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ban-mw-lZx" customClass="TransparentButton" customModule="Notify_Nearby_Redesign" customModuleProvider="target">
+                                    <rect key="frame" x="78" y="317" width="60" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <state key="normal" title="Upload">
+                                        <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="addEventAdsView_uploadButtonPressed:" destination="6KH-4k-ycv" eventType="touchUpInside" id="OoB-In-wTh"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CpL-Ac-1kx">
+                                    <rect key="frame" x="149" y="317" width="60" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Cancel">
+                                        <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="addEventAdsView_cancelButtonPressed:" destination="6KH-4k-ycv" eventType="touchUpInside" id="4Pt-gd-SYf"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wim-54-6zY">
+                                    <rect key="frame" x="175" y="24" width="20" height="22"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" image="ic_camera_alt"/>
+                                    <connections>
+                                        <action selector="addEventAdsView_selectImage:" destination="6KH-4k-ycv" eventType="touchUpInside" id="vR2-VV-Kxa"/>
+                                    </connections>
+                                </button>
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="bg1-qR-eTQ">
+                                    <rect key="frame" x="8" y="225" width="257" height="29"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <segments>
+                                        <segment title="1 month"/>
+                                        <segment title="3 months"/>
+                                        <segment title="1 year"/>
+                                    </segments>
+                                    <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <connections>
+                                        <action selector="addEventAdsView_durationSegmentedControlPressed:" destination="6KH-4k-ycv" eventType="valueChanged" id="6uE-fs-5vd"/>
+                                    </connections>
+                                </segmentedControl>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="DcL-eN-HkD">
-                                    <rect key="frame" x="8" y="295" width="257" height="107"/>
+                                    <rect key="frame" x="8" y="256" width="257" height="58"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 </textView>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ban-mw-lZx" customClass="TransparentButton" customModule="Notify_Nearby_Redesign" customModuleProvider="target">
-                                    <rect key="frame" x="78" y="410" width="60" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                    <state key="normal" title="Upload">
-                                        <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </state>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CpL-Ac-1kx">
-                                    <rect key="frame" x="149" y="410" width="60" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" title="Cancel">
-                                        <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </state>
-                                </button>
-                                <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fib-al-GrX">
-                                    <rect key="frame" x="8" y="230" width="257" height="68"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                </pickerView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -3376,7 +3405,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Bitmap" width="375" height="667"/>
+        <image name="Bitmap" width="375" height="225"/>
         <image name="BitmapBG" width="375" height="667"/>
         <image name="Image" width="22" height="22"/>
         <image name="Profile" width="21" height="24"/>
@@ -3407,6 +3436,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="cNo-m8-hsO"/>
-        <segue reference="nqx-gb-nL8"/>
+        <segue reference="lqi-kv-dYk"/>
     </inferredMetricsTieBreakers>
 </document>

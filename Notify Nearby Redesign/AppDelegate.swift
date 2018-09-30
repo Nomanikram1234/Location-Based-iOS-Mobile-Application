@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static var firstStart :Bool = false
     
     // calculating
-    static var current_time_in_millisecond :Int?
+    static var totalSeconds :Int?
 
     var window: UIWindow?
 //    static var arr = [Discovery]()
@@ -27,8 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     override init() {
        
         
-        var date = Date()
-        AppDelegate.current_time_in_millisecond = Int(date.timeIntervalSince1970 * 1000)
+//        var date = Date()
+//        AppDelegate.totalSeconds = Int(date.timeIntervalSince1970 * 1000) / 1000
         
         FirebaseApp.configure()       
     }
@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
 //        FirebaseApp.configure()
         
-//        let timer = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(timeUpdate), userInfo: nil, repeats: true)ut
+        let timer = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(timeUpdate), userInfo: nil, repeats: true)
         
         
         
@@ -123,18 +123,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     @objc func timeUpdate(){
         let date = Date()
-        AppDelegate.current_time_in_millisecond = Int(date.timeIntervalSince1970 * 1000)
+        AppDelegate.totalSeconds = Int(date.timeIntervalSince1970 * 1000) / 1000
        
-        let totalSeconds = AppDelegate.current_time_in_millisecond! / 1000;
-        let currentSecond = totalSeconds % 60;
-        let totalMinutes = totalSeconds / 60;
+//        let totalSeconds = AppDelegate.totalSeconds! / 1000;
+        let currentSecond = AppDelegate.totalSeconds! % 60;
+        let totalMinutes = AppDelegate.totalSeconds! / 60;
         let currentMinute = totalMinutes % 60;
         let totalHours = totalMinutes / 60;
         let currentHour = totalHours % 24;
         
         //Note: 86400000 milliseconds are there in 24hours
         
-        print(AppDelegate.current_time_in_millisecond)
+        print(AppDelegate.totalSeconds!)
         print("\(currentHour):\(currentMinute):\(currentSecond)")
     }
     
