@@ -877,6 +877,7 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Home" image="Stroke 1" springLoaded="YES" id="uFM-Yd-FrT"/>
                     <connections>
+                        <outlet property="addEventAdsView" destination="R19-W2-Su8" id="TFP-aJ-9dx"/>
                         <outlet property="addEventButton" destination="RUl-8u-M3h" id="O6t-r3-MOD"/>
                         <outlet property="addEventView" destination="tk0-p3-oGj" id="p9N-iK-zHQ"/>
                         <outlet property="addEventView_description" destination="Nnk-bb-8qZ" id="2XP-Sq-Uou"/>
@@ -987,7 +988,7 @@
                             <rect key="frame" x="31" y="44" width="273" height="450"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KUF-Ql-skU">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="KUF-Ql-skU">
                                     <rect key="frame" x="86" y="-47" width="100" height="100"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
@@ -1057,11 +1058,10 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <viewLayoutGuide key="safeArea" id="R5u-1z-Vxd"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="1465" y="977"/>
+            <point key="canvasLocation" x="1401" y="977"/>
         </scene>
         <!--Stories DetailVC-->
         <scene sceneID="sa6-iW-Vt2">
@@ -3376,7 +3376,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Bitmap" width="375" height="225"/>
+        <image name="Bitmap" width="375" height="667"/>
         <image name="BitmapBG" width="375" height="667"/>
         <image name="Image" width="22" height="22"/>
         <image name="Profile" width="21" height="24"/>

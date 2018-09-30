@@ -52,7 +52,10 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     //    @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var moreButton: UIBarButtonItem!
     @IBOutlet weak var collectionview: UICollectionView!
-    /* Additonal View: Ads upload View */
+    /************ Additonal View: Ads upload View ******/
+    
+    @IBOutlet var addEventAdsView: UIView!
+    
     
     /************Additional View Variables**************/
     @IBOutlet var blackBgView: UIView!
