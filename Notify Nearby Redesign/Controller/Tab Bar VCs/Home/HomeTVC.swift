@@ -53,6 +53,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     @IBOutlet weak var moreButton: UIBarButtonItem!
     @IBOutlet weak var collectionview: UICollectionView!
     /************ Additonal View: Ads upload View ******/
+    var duration = 30
     
     @IBOutlet var addEventAdsView: UIView!
     @IBOutlet weak var addEventAdsView_title: UITextField!
@@ -66,12 +67,112 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     @IBOutlet weak var addEventAdsView_durationSegmentedControl: UISegmentedControl!
     
     @IBAction func addEventAdsView_durationSegmentedControlPressed(_ sender: Any) {
+        if addEventAdsView_durationSegmentedControl.selectedSegmentIndex == 0 {
+            duration = 30
+        }else if addEventAdsView_durationSegmentedControl.selectedSegmentIndex == 1{
+            duration = 90
+        }else if addEventAdsView_durationSegmentedControl.selectedSegmentIndex == 2{
+            duration = 365
+        }
+        print(duration)
     }
     @IBOutlet weak var addEventAdsView_description: UITextView!
     
     @IBAction func addEventAdsView_uploadButtonPressed(_ sender: Any) {
         
         
+        SVProgressHUD.show()
+        guard let userLocation = locationManager.location else { return }
+        
+        let eventRef = database.child("stories").childByAutoId()
+        //        let storiesRef = Database.database().reference().child("stories").childByAutoId()
+        let userRef = database.child("Users").child(uid!).child("stories").childByAutoId().setValue(eventRef.key)
+        let tempImgRef = storageRef.child("images/\(eventRef.key).jpg")
+        
+        // creating metafile which contains information about the image which we will save in the database
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpeg"
+        
+        
+        ////////
+        
+        // it place the image in the storage on firebase
+        tempImgRef.putData(UIImageJPEGRepresentation(addEventView_imageview.image!, 0)!, metadata: metadata) { (data, error) in
+            // if image is uploaded successfully and you can say that there is no error
+            if error == nil {
+                
+                tempImgRef.downloadURL(completion: { (url, error) in
+                    
+                    // creating dictionary
+                    let data = ["uid":"\(self.uid!)",
+                        "description":"\(self.addEventAdsView_description.text!)",
+                        "title":self.addEventAdsView_title.text,
+                        "type":"advertisement",
+                        "storypostedby":User.singleton.name,
+                        "longitude":"\(userLocation.coordinate.longitude)",
+                        "lat":"\(userLocation.coordinate.latitude)",
+                        "interest":self.addEventAdsView_interests.text?.lowercased(),//FIXME: lowercased made most recent change
+                        "image": "\(url!)",
+                        "acceptedNumber":"0",
+                        "deniedNumber":"0",
+                        "favouriteNumber":"0",
+                        "startTime": "\(AppDelegate.totalSeconds!)",
+                        "endTime":"\(AppDelegate.totalSeconds! + ( self.duration * 86400))"
+                        ] as [String : Any]
+                    
+                    //                    var storyDic = ["title": self.titleTxt.text!,
+                    //                                    "description": self.des.text!,
+                    //                                    "uid":uid,
+                    //                                    "keywords": self.keyword.text!,
+                    //                                    "image": "images/\(eventRef.key).jpg",
+                    //                        "lat": self.latitude!,
+                    //                        "long": self.longitude!] as [String : Any]
+                    
+                    SVProgressHUD.dismiss()
+                    SVProgressHUD.showSuccess(withStatus: "Advertisement Uploaded Sucessfully")
+                    print("Image Uploaded: Successfully")
+                    eventRef.setValue(data, withCompletionBlock: { (error, ref) in
+                        if error == nil {
+                             self.resetAdTextField()
+                            
+                            // Uploading Data to DB then refreshing map
+                            for v in self.view.subviews{
+                                if v == self.addEventAdsView{
+                                    v.removeFromSuperview()
+                                }
+                                self.fetchEventsAndDisplayOnMap()
+                                
+                            }
+                            
+                            UIView.animate(withDuration: 1) {
+                                self.blackBgView.alpha = 0
+                            }
+                            
+                        }
+                    })
+//                    eventRef.setValue(data)
+                    
+                    
+                    //                    /*Ridas*/
+                    //                    let ridaData = ["0":"\(userLocation.coordinate.latitude)",
+                    //                                    "1":"\(userLocation.coordinate.longitude)"]
+                    ////                    print(eventRef)
+                    //                    self.database.child("StoryLocation").child("\(eventRef.key)").child("l").setValue(ridaData)
+                    
+                    let geofire = GeoFire(firebaseRef: self.storyLocation)
+                    geofire.setLocation(CLLocation(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude), forKey: "\(eventRef.key)")
+                    
+                    /*Ridas*/
+                    
+                
+                })
+               
+            }else{
+                SVProgressHUD.dismiss()
+                SVProgressHUD.showError(withStatus: "Ad Uploading Failure")
+                print("Image Upload Failure")
+            }
+        }
         
     }
     @IBAction func addEventAdsView_cancelButtonPressed(_ sender: Any) {
@@ -85,6 +186,15 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         UIView.animate(withDuration: 1) {
             self.blackBgView.alpha = 0
         }
+    }
+    
+    func resetAdTextField()  {
+        addEventAdsView_title.text = ""
+        addEventAdsView_interests.text = ""
+        addEventAdsView_description.text = ""
+        addEventAdsView_durationSegmentedControl.selectedSegmentIndex = 0
+        addEventAdsView_contact.text = ""
+        addEventAdsView_imageview.image = nil
     }
     
     /************Additional View Variables**************/
@@ -148,6 +258,24 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                     SVProgressHUD.dismiss()
                     SVProgressHUD.showSuccess(withStatus: "Story Uploaded Sucessfully")
                     print("Image Uploaded: Successfully")
+                    
+                    eventRef.setValue(data, withCompletionBlock: { (error, ref) in
+                        if error == nil{
+                             self.resetStoryTextFields()
+                            // Uploading Data to DB then refreshing map
+                            for v in self.view.subviews{
+                                if v == self.addEventView{
+                                    v.removeFromSuperview()
+                                }
+                                self.fetchEventsAndDisplayOnMap()
+                                
+                            }
+                            
+                            UIView.animate(withDuration: 1) {
+                                self.blackBgView.alpha = 0
+                            }
+                        }
+                    })
                     eventRef.setValue(data)
                     
                     
@@ -162,20 +290,12 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                     
                     /*Ridas*/
                     
-                    // Uploading Data to DB then refreshing map
-                    for v in self.view.subviews{
-                        if v == self.addEventView{
-                        v.removeFromSuperview()
-                        }
-                        self.fetchEventsAndDisplayOnMap()
-                        
-                    }
                     
-                    UIView.animate(withDuration: 1) {
-                        self.blackBgView.alpha = 0
-                    }
+                
                     
                 })
+               
+                
                 
             }else{
               SVProgressHUD.dismiss()
@@ -197,6 +317,14 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
             self.blackBgView.alpha = 0
         }
         
+    }
+    
+    
+    func resetStoryTextFields() {
+        addEventView_title.text = ""
+        addEventView_imageview = nil
+        addEventView_interests.text = ""
+        addEventView_description.text = ""
     }
     /******************************************************/
     
