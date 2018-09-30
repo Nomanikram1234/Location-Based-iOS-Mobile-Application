@@ -62,6 +62,10 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     
     @IBOutlet weak var addEventAdsView_imageview: UIImageView!
     @IBAction func addEventAdsView_selectImage(_ sender: Any) {
+        let image = UIImagePickerController()
+        image.delegate = self
+        image.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        self.present(image, animated: true, completion: nil)
     }
     
     @IBOutlet weak var addEventAdsView_contact: UITextField!
@@ -77,6 +81,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         }
         print(duration)
     }
+    
     @IBOutlet weak var addEventAdsView_description: UITextView!
     
     @IBAction func addEventAdsView_uploadButtonPressed(_ sender: Any) {
@@ -117,6 +122,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                         "acceptedNumber":"0",
                         "deniedNumber":"0",
                         "favouriteNumber":"0",
+                        "contact":"\(self.addEventAdsView_contact.text)",
                         "startTime": "\(AppDelegate.totalSeconds!)",
                         "endTime":"\(AppDelegate.totalSeconds! + ( self.duration * 86400))"
                         ] as [String : Any]
@@ -328,7 +334,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         addEventView_description.text = ""
     }
     /******************************************************/
-    
+    //FIXME: CAMERAROLL
     /*Camera Roll Related*/
     @IBAction func addEventView_imageview(_ sender: Any) {
         let image = UIImagePickerController()
@@ -343,6 +349,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         let theInfo:NSDictionary = info as NSDictionary
         let img:UIImage = theInfo.object(forKey: UIImagePickerControllerOriginalImage) as! UIImage
         addEventView_imageview.image = img
+        addEventAdsView_imageview.image = img
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -499,6 +506,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
    func fetchEventsAndDisplayOnMap() {
     
         HomeTVC.eventArray.removeAll()
+        HomeTVC.adsArray.removeAll()
     
         print("fetchEventsAndDisplayOnMap")
         database.child("stories").observe(DataEventType.value) { (snapshot) in
@@ -542,6 +550,10 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                             anno.event_noOfAccepted = event.event_noOfAccepted
                             anno.event_noOfDenied = event.event_noOfDenied
                             anno.event_noOfFavourite = event.event_noOfFavourite
+                            
+                           
+                            
+                            
                             self.collectionview.reloadData()
 //                            view.reloadInputViews()
 //                            self.localNotification(title: event.event_title, subtitle: event.event_title, body: common_interests_string, lat: coordinate.coordinate.latitude, long: coordinate.coordinate.longitude)
@@ -589,10 +601,19 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                     anno.event_noOfDenied = event.event_noOfDenied
                     anno.event_noOfFavourite = event.event_noOfFavourite
                     
+                    if event.event_type == "advertisement"{
+                        HomeTVC.adsArray.append(event)
+                    }
+//
 //                    self.localNotification(title: event.event_title, subtitle: event.event_title, body: common_interests_string, lat: coordinate.coordinate.latitude, long: coordinate.coordinate.longitude)
                 self.mapview.addAnnotation(anno)
                 }
+                 
             }
+                
+                
+              
+                
                 //FIXME: - Local Notification
 //                let content = UNMutableNotificationContent()
                 
@@ -615,7 +636,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
 //                let request = UNNotificationRequest(identifier: "IS", content: content, trigger: trigger)
 //
 //                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-                
+                print("Event Type: \(event.event_type!)")
                 HomeTVC.eventArray.append(event)
             }
             print("fetchEventsAndDisplayOnMap(): fetched Events")
@@ -663,6 +684,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
             
             //FIXME: TEST DELTE ARRAY
             HomeTVC.eventArray.removeAll()
+            HomeTVC.adsArray.removeAll()
             
             for key in snapshot.children{
                 let json = JSON((key as! DataSnapshot).value)
@@ -671,6 +693,13 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                 
                 guard let userLocation = locationManager.location else {return}
                 let coordinate = CLLocation(latitude: event.event_latitude!, longitude: event.event_longitude!)
+                
+                if HomeTVC.calculateDistance_s(mainCoordinate: CLLocation(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude), coordinate: coordinate) <= 10000{
+                if event.event_type == "advertisement"{
+                    HomeTVC.adsArray.append(event)
+                }
+                }
+                
                 
                 HomeTVC.eventArray.append(event)
                
@@ -990,6 +1019,14 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         
         let distance = mainCoordinate.distance(from: coordinate)
 //        print("Calculate Distance: \(distance)")
+        
+        return distance
+    }
+    
+  static func calculateDistance_s(mainCoordinate: CLLocation,coordinate: CLLocation) -> Double{
+        
+        let distance = mainCoordinate.distance(from: coordinate)
+        //        print("Calculate Distance: \(distance)")
         
         return distance
     }
