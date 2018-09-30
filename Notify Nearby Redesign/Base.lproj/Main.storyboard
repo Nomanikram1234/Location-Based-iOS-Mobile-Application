@@ -1239,6 +1239,16 @@
                                     <action selector="backButton:" destination="FPh-t9-4PO" eventType="touchUpInside" id="yYd-dp-hIS"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="diC-HI-hvQ">
+                                <rect key="frame" x="329" y="522" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="ic_local_post_office"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="74g-JJ-njg">
+                                <rect key="frame" x="295" y="523" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="ic_local_phone"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -1315,8 +1325,8 @@
                                         <action selector="changePhoto:" destination="FPh-t9-4PO" eventType="touchUpInside" id="zyH-K9-Sbw"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Edit Story" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0M4-gM-g6I">
-                                    <rect key="frame" x="99" y="63" width="75" height="21"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Edit Event" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0M4-gM-g6I">
+                                    <rect key="frame" x="99" y="63" width="77" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
@@ -1379,7 +1389,7 @@
                     <viewLayoutGuide key="safeArea" id="b7t-3v-Wol"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="1513" y="1834"/>
+            <point key="canvasLocation" x="1512.8" y="1833.9901477832514"/>
         </scene>
         <!--Joint-->
         <scene sceneID="IPv-kJ-gqj">
@@ -2935,7 +2945,7 @@
                                         <rect key="frame" x="0.0" y="817" width="375" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PIR-cE-sU2" id="In3-xR-J43">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="87"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="86.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Followers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ta-PG-f7z">
@@ -3409,10 +3419,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Bitmap" width="375" height="225"/>
+        <image name="Bitmap" width="375" height="667"/>
         <image name="BitmapBG" width="375" height="667"/>
         <image name="Image" width="22" height="22"/>
-        <image name="Profile" width="21" height="24"/>
+        <image name="Profile" width="20" height="24"/>
         <image name="Splash" width="750" height="1334"/>
         <image name="Stroke 1" width="22" height="22"/>
         <image name="avatar" width="520" height="520"/>
@@ -3426,6 +3436,8 @@
         <image name="ic_explore" width="20" height="20"/>
         <image name="ic_live_tv" width="22" height="20"/>
         <image name="ic_local_activity" width="20" height="16"/>
+        <image name="ic_local_phone" width="18" height="18"/>
+        <image name="ic_local_post_office" width="20" height="16"/>
         <image name="ic_menu" width="18" height="12"/>
         <image name="ic_mood" width="20" height="20"/>
         <image name="ic_notifications" width="16" height="20"/>

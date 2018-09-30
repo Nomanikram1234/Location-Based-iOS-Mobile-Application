@@ -37,6 +37,12 @@ class Event:MKPointAnnotation{
     var event_Accepted:[String]?
     var event_Denied:[String]?
     
+    var event_startTime :String?
+    var event_endTime :String?
+    
+    var event_contact:String?
+    
+    
     
 //    static var singleton = Event()
     
@@ -61,6 +67,11 @@ class Event:MKPointAnnotation{
     event_noOfDenied = json["deniedNumber"].stringValue
     event_noOfAccepted = json["acceptedNumber"].stringValue
     event_author_uid = json["uid"].stringValue
+    
+    event_startTime = json["startTime"].stringValue
+    event_endTime = json["endTime"].stringValue
+    
+    event_contact = json["contact"].stringValue
     }
     
     init(eventId:String , json:JSON) {
@@ -78,6 +89,14 @@ class Event:MKPointAnnotation{
         event_noOfAccepted = json["acceptedNumber"].stringValue
         event_author_uid = json["uid"].stringValue
         event_key = eventId
+        
+        event_startTime = json["startTime"].stringValue
+        event_endTime = json["endTime"].stringValue
+        
+        event_contact = json["contact"].stringValue
+        
+//        print("S: \(event_startTime)")
+//        print("E:\(event_endTime)")
 //        print("Description:\(event_description)")
 //
 //        print("Event ID: \(event_key)")
