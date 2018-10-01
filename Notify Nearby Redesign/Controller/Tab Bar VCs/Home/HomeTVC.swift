@@ -122,7 +122,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                         "acceptedNumber":"0",
                         "deniedNumber":"0",
                         "favouriteNumber":"0",
-                        "contact":"\(self.addEventAdsView_contact.text)",
+                        "contact":"\(self.addEventAdsView_contact.text!)",
                         "startTime": "\(AppDelegate.totalSeconds!)",
                         "endTime":"\(AppDelegate.totalSeconds! + ( self.duration * 86400))"
                         ] as [String : Any]

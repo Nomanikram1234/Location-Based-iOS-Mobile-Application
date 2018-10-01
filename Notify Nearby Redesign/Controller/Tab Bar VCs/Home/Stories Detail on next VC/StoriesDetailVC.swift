@@ -37,6 +37,27 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
     
     @IBOutlet weak var collectionview: UICollectionView!
     
+    
+    var contact:String?
+    
+    
+    @IBOutlet weak var phoneButton: UIButton!
+    @IBOutlet weak var messageButton: UIButton!
+    
+    @IBAction func phoneButtonPressed(_ sender: Any) {
+        print(contact)
+        let url = URL(string: "telprompt://\(contact!)")
+        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+    
+    }
+    @IBAction func messageButtonPressed(_ sender: Any) {
+        print(contact)
+        let url = URL(string: "sms://\(contact!)")
+        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+    }
+    
+    
+    
     /* Addional Views */
     @IBOutlet var blackBgView: UIView!
     @IBOutlet var editStoryView: UIView!
@@ -510,12 +531,23 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
                 editStoryView_interest.text = event.event_interests
                 editStoryView_imageview.sd_setImage(with: URL(string: event.event_image!), completed: nil)
                 
+                contact = event.event_contact
+                
+                
                 if event.event_author_uid == Auth.auth().currentUser?.uid{
                     deleteButton.isHidden = false
                     editButton.isHidden = false
                 }else{
                     deleteButton.isHidden = true
                     editButton.isHidden = true
+                }
+                
+                if event.event_type == "advertisement" {
+                    phoneButton.isHidden = false
+                    messageButton.isHidden = false
+                }else if event.event_type == "story" || contact ==  ""{
+                    phoneButton.isHidden = true
+                    messageButton.isHidden = true
                 }
                 
                 break
