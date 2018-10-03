@@ -421,6 +421,7 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
     @IBAction func favouriteButtonPressed(_ sender: Any) {
         print("Favourite Button Pressed")
         
+        joint()
         
 //        let view = sender.superview as! StoryCalloutView
 //        let storyKey = view.sKey.text!
@@ -478,6 +479,21 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
         }
     }
     
+    func joint() {
+        let database = Database.database().reference().child("JointInterest").child((Auth.auth().currentUser?.uid)!)
+        print(event?.event_interests)
+        var arr = stringToArray(string: (event?.event_interests)!)
+        
+        for i in arr{
+            let data = ["interest":"\(i)",
+                        "startTime":"\(AppDelegate.totalSeconds!)",
+                        "endTime":"\(AppDelegate.totalSeconds! + 86400)"]
+            database.childByAutoId().setValue(data)
+        }
+//        database.childByAutoId().
+        
+    }
+    
     @IBAction func editButtonPressed(_ sender: Any) {
          print("Edit Button Pressed")
         
@@ -497,9 +513,30 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
         
     }
     
+    func fetchJoint() {
+        let database = Database.database().reference().child("JointInterest").child((Auth.auth().currentUser?.uid)!)
+        database.observe(.value) { (snapshot) in
+            print("****fetchJoint()****")
+            
+            for i in snapshot.children{
+                let joint = JointInterest(json: JSON((i as! DataSnapshot).value), id: (i as! DataSnapshot).key)
+                print(joint.id)
+                print(joint.interest)
+                print(joint.startTime)
+                print(joint.endTime)
+                if Int(joint.endTime!)! >= AppDelegate.totalSeconds!{
+                    print("time ended")
+                }
+            }
+            
+            
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        fetchJoint()
         
         // Do any additional setup after loading the view.
         print("\(Previouskey)")

@@ -124,21 +124,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     @objc func timeUpdate(){
         let date = Date()
         AppDelegate.totalSeconds = Int(date.timeIntervalSince1970 * 1000) / 1000
-        print(AppDelegate.totalSeconds!)
+  //      print(AppDelegate.totalSeconds!)
+  
         
+        /*
          //Note: 86400000 milliseconds are there in 24hours
          //Note: 86400         seconds are there in 24hours
         
-//        let totalSeconds = AppDelegate.totalSeconds! / 1000;
-//        let currentSecond = AppDelegate.totalSeconds! % 60;
-//        let totalMinutes = AppDelegate.totalSeconds! / 60;
-//        let currentMinute = totalMinutes % 60;
-//        let totalHours = totalMinutes / 60;
-//        let currentHour = totalHours % 24;
-//        print("\(currentHour):\(currentMinute):\(currentSecond)")
+        let totalSeconds = AppDelegate.totalSeconds! / 1000;
+        let currentSecond = AppDelegate.totalSeconds! % 60;
+        let totalMinutes = AppDelegate.totalSeconds! / 60;
+        let currentMinute = totalMinutes % 60;
+        let totalHours = totalMinutes / 60;
+        let currentHour = totalHours % 24;
+        print("\(currentHour):\(currentMinute):\(currentSecond)")
        
         
-        
+      */
 
     }
     
