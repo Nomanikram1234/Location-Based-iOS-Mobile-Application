@@ -21,6 +21,9 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
     
     var myInterestBasedStories = [Event]()
     var selectedInterestBasedIndex:Int?
+//    var selectedFollowerIndex:Int?
+    
+    static var allUsers = [String]()
     
     // Managing initiating the number of item in collection
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -32,7 +35,7 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
             return myInterestBasedStories.count
         }
         else{
-            return 15
+            return ProfileTVC.allUsers.count
         }
 
     }
@@ -44,6 +47,8 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
         }else if collectionView == interestCollectionview {
             selectedInterestBasedIndex = indexPath.row
             performSegue(withIdentifier: "showInterestBasedStoryDetailsFromProfile", sender: self)
+        }else if collectionView == followerCollectionview{
+//            selcted
         }
     }
     
@@ -83,7 +88,7 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
         // it manages populating follower collection view
         else if collectionView == followerCollectionview{
             let cell = followerCollectionview.dequeueReusableCell(withReuseIdentifier: "followerCell", for: indexPath) as! FollowersCVC
-            cell.imageview.image = UIImage(named: "avatar")
+            cell.imageview.sd_setImage(with: URL(string: ProfileTVC.allUsers[indexPath.row]), completed: nil)
             return cell
         }else{
             return UICollectionViewCell() //Most Probably this statement won't run
@@ -96,6 +101,8 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var noOfInterests: UILabel!
     @IBOutlet weak var noOfStories: UILabel!
+    @IBOutlet weak var noOfFollowers: UILabel!
+    
     @IBOutlet weak var profileBG_imageview: UIImageView!
     @IBOutlet weak var profile_imageview: RoundedImage!
     
@@ -115,7 +122,7 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
 //        profile_imageview.sd_setImage(with: URL(string:User.singleton.profileImgURL!), completed: nil)
         
         noOfInterests.text = "\(MyInterestVC.interest.count)"
-        
+        noOfFollowers.text = "\(ProfileTVC.allUsers.count)"
         // if there is a picture already saved then it would load from there
         if let image = User.singleton.profileImgURL{
             profile_imageview.sd_setImage(with: URL(string: image), completed: nil)
@@ -142,6 +149,28 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
         print("*************ProfileTVC**************")
     }
 
+    
+    static func getAllUsers(){
+        let database = Database.database().reference().child("Users")
+        
+        database.observe(.value) { (snapshot) in
+            
+            ProfileTVC.allUsers.removeAll()
+            
+            
+            print(")))))")
+            for i in snapshot.children{
+            let users = JSON((i as! DataSnapshot).value)
+                
+                let url = users["profileImageUrl"].stringValue
+                if url != nil{
+                ProfileTVC.allUsers.append(url)
+                }
+            }
+            
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

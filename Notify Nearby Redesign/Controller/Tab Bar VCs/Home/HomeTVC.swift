@@ -382,6 +382,8 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        ProfileTVC.getAllUsers()
 //        fetchEventsAndDisplayOnMap()
 //        vie
         

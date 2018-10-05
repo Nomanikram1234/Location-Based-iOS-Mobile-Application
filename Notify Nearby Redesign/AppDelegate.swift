@@ -97,7 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
    
         
-//        
+//
 //        Auth.auth().addStateDidChangeListener() { auth, user in
 //            // 2
 //            if user != nil {

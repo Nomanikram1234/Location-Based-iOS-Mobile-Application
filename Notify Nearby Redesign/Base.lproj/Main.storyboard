@@ -2805,7 +2805,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Followers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d89-RY-Jnh">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="People" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d89-RY-Jnh">
                                                     <rect key="frame" x="256" y="48" width="73" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -2964,8 +2964,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="86.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Followers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ta-PG-f7z">
-                                                    <rect key="frame" x="17" y="8" width="73" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="People" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ta-PG-f7z">
+                                                    <rect key="frame" x="17" y="8" width="53" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -3021,6 +3021,7 @@
                         <outlet property="interestCollectionview" destination="eeK-j7-O3l" id="oxt-zH-xTb"/>
                         <outlet property="moreButton" destination="AQX-Kg-Ohg" id="3vR-8s-fmj"/>
                         <outlet property="name" destination="ozF-Xj-Guh" id="ZAL-my-13N"/>
+                        <outlet property="noOfFollowers" destination="5pi-mG-Olj" id="sma-7H-MSF"/>
                         <outlet property="noOfInterests" destination="F6L-Cg-UWA" id="4zA-ga-1Ib"/>
                         <outlet property="noOfStories" destination="yj2-hE-LeY" id="ihZ-Fx-yhp"/>
                         <outlet property="notificationBarBtn" destination="cFg-Jh-wYC" id="Fic-4o-ozr"/>
@@ -3469,6 +3470,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="eLM-sh-ehW"/>
-        <segue reference="OGp-kz-edT"/>
+        <segue reference="lqi-kv-dYk"/>
     </inferredMetricsTieBreakers>
 </document>
