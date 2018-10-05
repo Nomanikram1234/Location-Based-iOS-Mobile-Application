@@ -14,6 +14,8 @@ import CoreLocation
 
 class JointVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,CLLocationManagerDelegate {
   
+    var selectedIndex:Int?
+    
     var locationManager = CLLocationManager()
     
     static var jointInterestArray = [String]()
@@ -53,6 +55,17 @@ class JointVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSou
         cell.imageview?.sd_setImage(with: URL(string:JointVC.jointInterestEventArray[indexPath.row].event_image!), completed: nil)
         cell.title.text = JointVC.jointInterestEventArray[indexPath.row].event_title
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedIndex = indexPath.row
+        performSegue(withIdentifier: "showJointEventDetails", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let detailsVC = segue.destination as? StoriesDetailVC{
+            detailsVC.Previouskey = JointVC.jointInterestEventArray[selectedIndex!].event_key
+        }
     }
     
     // enabling functionality of navigation bar buttons
@@ -119,6 +132,7 @@ class JointVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSou
                 }
             }
             self.loadView()
+            self.sidemenu()
         }
     }
     /*

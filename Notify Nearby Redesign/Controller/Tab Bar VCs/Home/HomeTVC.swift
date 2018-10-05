@@ -22,6 +22,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     @IBOutlet weak var centerMapOnUserLocationButton: UIButton!
     
 //    static var change:Bool = false
+    static var adsTitleArray = [String]()
     
     let storyLocation = Database.database().reference().child("StoryLocation")
    
@@ -386,12 +387,17 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         
         mapview.delegate = self
         
+        
+        
         addEventButton.imageView?.contentMode = .redraw
         centerMapOnUserLocationButton.imageView?.contentMode = .redraw
         
         Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(alertTips), userInfo: nil, repeats: false)
         
         print("First Start: \(AppDelegate.firstStart)")
+        
+        
+        
 //        if  AppDelegate.firstStart == false{
 //
 //                let alertcontroller = UIAlertController(title: "Tip", message: "Please add interests from sidemenu in order to see interest based pics on the map", preferredStyle: .alert)
@@ -507,6 +513,8 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     
         HomeTVC.eventArray.removeAll()
         HomeTVC.adsArray.removeAll()
+//        HomeTVC.adsTitleArray.removeAll()
+    
     
         print("fetchEventsAndDisplayOnMap")
         database.child("stories").observe(DataEventType.value) { (snapshot) in
@@ -636,14 +644,69 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
 //                let request = UNNotificationRequest(identifier: "IS", content: content, trigger: trigger)
 //
 //                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+                if event.event_type == "advertisement"{
+                    HomeTVC.adsTitleArray.append(event.event_title!)
+                }
+                
                 print("Event Type: \(event.event_type!)")
                 HomeTVC.eventArray.append(event)
             }
+            
+        
+            
             print("fetchEventsAndDisplayOnMap(): fetched Events")
             print("Event Array: Number of Events -> \(HomeTVC.eventArray.count)")
         }
     }
     
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        //
+        
+        if annotation is MKUserLocation
+        {
+            return nil
+        }
+        var annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+        
+        if annotationView == nil{
+            //            annotationView = AnnotationView(annotation: annotation, reuseIdentifier: "Pin")
+            annotationView.canShowCallout = false
+        }else{
+            annotationView.annotation = annotation
+        }
+        
+        //        let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+        // Setting Annotations Image
+        if segmentedcontrols.selectedSegmentIndex == 1 {
+            if HomeTVC.adsTitleArray.contains(annotation.title as! String) {
+                
+                annotationView.markerTintColor = UIColor.purple
+                //                mapView.reloadInputViews()
+                return annotationView
+            }else {
+                //                let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+                annotationView.markerTintColor = UIColor.black
+                mapView.reloadInputViews()
+                return annotationView
+            }
+        }else{
+            if HomeTVC.adsTitleArray.contains(annotation.subtitle as! String) {
+                //                let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+                annotationView.markerTintColor = UIColor.purple
+                //                 mapView.reloadInputViews()
+                return annotationView
+            }else {
+                //                let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+                annotationView.markerTintColor = UIColor.black
+                //                 mapView.reloadInputViews()
+                return annotationView
+            }
+        }
+        
+    }
+
 
     
 //    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -697,6 +760,8 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                 if HomeTVC.calculateDistance_s(mainCoordinate: CLLocation(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude), coordinate: coordinate) <= 10000{
                 if event.event_type == "advertisement"{
                     HomeTVC.adsArray.append(event)
+                    
+                    HomeTVC.adsTitleArray.append(event.event_title!)
                 }
                 }
                 
