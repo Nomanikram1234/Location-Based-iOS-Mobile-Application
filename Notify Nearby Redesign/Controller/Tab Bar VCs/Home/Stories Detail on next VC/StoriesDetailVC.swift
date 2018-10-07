@@ -14,9 +14,15 @@ import FirebaseDatabase
 import FirebaseStorage
 import SwiftyJSON
 import SVProgressHUD
+import CoreLocation
 
-class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDataSource , UINavigationControllerDelegate , UIImagePickerControllerDelegate {
-
+class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDataSource , UINavigationControllerDelegate , UIImagePickerControllerDelegate,CLLocationManagerDelegate {
+    
+    var locationManager = CLLocationManager()
+  
+    @IBOutlet weak var hidden_latitude: UILabel!
+    @IBOutlet weak var hidden_longitude: UILabel!
+    
     var Previouskey :String?
     var event:Event?
     var interestArray = [String]()
@@ -49,8 +55,7 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
         let url = URL(string: "telprompt://\(contact!)")
         UIApplication.shared.open(url!, options: [:], completionHandler: nil)
         
-        //Test Changes in the git
-        print("TEst")
+
     
     }
     @IBAction func messageButtonPressed(_ sender: Any) {
@@ -571,6 +576,9 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
                 editStoryView_interest.text = event.event_interests
                 editStoryView_imageview.sd_setImage(with: URL(string: event.event_image!), completed: nil)
                 
+                hidden_latitude.text = "\(event.event_latitude!)"
+                hidden_longitude.text = "\(event.event_longitude!)"
+                
                 contact = event.event_contact
                 
                 
@@ -687,6 +695,51 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
         //        print("Calculate Distance: \(distance)")
         
         return distance
+    }
+    
+    
+    
+    //TODO: Direction Related Functionality
+    
+    @IBAction func showDirection(_ sender: Any) {
+        openMapForPlace()
+    }
+    
+    
+    //Alas: Apple Map do not show direction in Pakistan
+    func openMapForPlace() {
+        
+        
+        guard let userLocation = locationManager.location else {return}
+        
+        print(userLocation.coordinate.latitude)
+        print(userLocation.coordinate.longitude)
+        
+        print(hidden_latitude.text!)
+        print(hidden_longitude.text!)
+//        print(userLocation.coordinate.latitude)
+        
+        UIApplication.shared.openURL(URL(string:
+            "comgooglemaps://?saddr=\(userLocation.coordinate.latitude),\(userLocation.coordinate.longitude)&daddr=\(hidden_latitude.text!),\(hidden_longitude.text!)&directionsmode=driving")!)
+        
+        
+        
+//        let latitude: CLLocationDegrees = 33.7153
+//        let longitude: CLLocationDegrees = 73.1020
+//
+//        let regionDistance:CLLocationDistance = 10000
+//        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+//        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+//        let options = [
+//            MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+//            MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+//        ]
+//        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+//        let mapItem = MKMapItem(placemark: placemark)
+//        mapItem.name = "Place Name"
+//        mapItem.openInMaps(launchOptions: options)
+        
+        
     }
 
 }

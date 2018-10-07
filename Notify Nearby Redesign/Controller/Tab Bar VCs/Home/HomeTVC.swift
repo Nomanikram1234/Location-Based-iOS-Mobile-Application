@@ -1098,6 +1098,13 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         return distance
     }
     
+    
+    
+    
+    
+    
+    
+    
 }
 
 
