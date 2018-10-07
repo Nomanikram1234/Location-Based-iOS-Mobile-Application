@@ -67,7 +67,8 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
         super.viewDidLoad()
         
        // Do any additional setup after loading the view.
-        login(email: "nomanikram0@icloud.com", password: "Nomi1234")
+        
+//        login(email: "nomanikram0@icloud.com", password: "Nomi1234")
 //        login(email: "notify.nearby.fyp@gmail.com", password: "Nomi1234") // advestiser
 //        login(email: "maida_ashrafgondal@hotmail.com", password: "tangled123")
     
@@ -75,6 +76,7 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
 
     override func viewDidAppear(_ animated: Bool) {
         print("*************SplashVC**************")
+        
     }
     
     override func didReceiveMemoryWarning() {
