@@ -16,6 +16,7 @@ import UserNotifications
 import SVProgressHUD
 import GeoFire
 
+
 class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, MKMapViewDelegate,CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     @IBOutlet weak var addEventButton: UIButton!
@@ -368,12 +369,32 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     /*********************/
     @IBAction func segmentedControlsChanged(_ sender: Any) {
         if segmentedcontrols.selectedSegmentIndex == 0{
+            removeCircle()
+            guard let userLocation = locationManager.location else { return }
+            showCircle(coordinate: userLocation.coordinate, radius: 10000)
+            
             removeAnnotations()
+            centerMapOnUserLocation()
             DisplayEventsOnMapFromArray()
         }else
         
         if segmentedcontrols.selectedSegmentIndex == 1{
+            removeCircle()
+            guard let userLocation = locationManager.location else { return }
+            showCircle(coordinate: userLocation.coordinate, radius: 10000)
+            
             removeAnnotations()
+            centerMapOnUserLocation()
+            DisplayEventsOnMapFromArray()
+        }
+        
+        if segmentedcontrols.selectedSegmentIndex == 2{
+            removeCircle()
+            let address_coordinate = CLLocationCoordinate2D(latitude: User.singleton.address_latitude!, longitude: User.singleton.address_longitude!)
+            showCircle(coordinate: address_coordinate, radius: 10000)
+            
+            removeAnnotations()
+            centerMapOnAddressLocation()
             DisplayEventsOnMapFromArray()
         }
     }
@@ -507,6 +528,37 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
             let json = JSON(snapshot.value)
             User.singleton = User.init(json: json)
             print("User Type: \(User.singleton.userType!)")
+            
+            if User.singleton.address != "" {
+            
+            
+            /* GeoCoding Started */
+                
+                var geocoder = CLGeocoder()
+                geocoder.geocodeAddressString(User.singleton.address!) {
+                    placemarks, error in
+                    let placemark = placemarks?.first
+                    let lat = placemark?.location?.coordinate.latitude
+                    let lon = placemark?.location?.coordinate.longitude
+                    if lat != nil , lon != nil{
+                        print("Lat: \(lat!), Lon: \(lon!)")
+                        
+                        User.singleton.address_latitude = lat!
+                        User.singleton.address_longitude = lon!
+                    }else{
+                        print("Error")
+                        
+                        guard let userLocation = self.locationManager.location else {return}
+                        User.singleton.address_latitude = userLocation.coordinate.latitude
+                        User.singleton.address_longitude = userLocation.coordinate.longitude
+                    }
+                    
+                }
+                
+                /* GeoCoding End */
+            
+            }
+            
         }
     }
     
@@ -621,6 +673,43 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                  
             }
                 
+                
+                if self.segmentedcontrols.selectedSegmentIndex == 2{
+                    print("ADDRESS")
+                    
+                    let address_coordinate = CLLocation(latitude: User.singleton.address_latitude!, longitude: User.singleton.address_longitude!)
+                    
+                    if self.calculateDistance(mainCoordinate: address_coordinate , coordinate: coordinate) <= 10000
+                    {
+                        var user_interests = MyInterestVC.interest
+                        var event_interests = self.stringToArray(string: event.event_interests!)
+                        var common_interests = self.commonInterest(firstSet: user_interests, secondSet: event_interests)
+                        var common_interests_string = self.commonInterestToString(common: common_interests)
+                        
+                        print("Pin inside 10km radius , Distance Difference: \(Int(distanceDifference))")
+                        
+                        anno.title = event.event_title
+                        anno.subtitle = event.event_interests
+                        
+                        
+                        
+                        anno.event_title = event.event_title
+                        anno.event_interests  =  common_interests_string
+                        anno.event_key = event.event_key
+                        anno.event_image = event.event_image
+                        anno.event_noOfAccepted = event.event_noOfAccepted
+                        anno.event_noOfDenied = event.event_noOfDenied
+                        anno.event_noOfFavourite = event.event_noOfFavourite
+                        
+                        if event.event_type == "advertisement"{
+                            HomeTVC.adsArray.append(event)
+                        }
+                        //
+                        //                    self.localNotification(title: event.event_title, subtitle: event.event_title, body: common_interests_string, lat: coordinate.coordinate.latitude, long: coordinate.coordinate.longitude)
+                        self.mapview.addAnnotation(anno)
+                    }
+                    
+                }
                 
               
                 
@@ -851,6 +940,43 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                 }
                 }
                 
+                if self.segmentedcontrols.selectedSegmentIndex == 2{
+                    print("ADDRESS")
+                    
+                    let address_coordinate = CLLocation(latitude: User.singleton.address_latitude!, longitude: User.singleton.address_longitude!)
+                    
+                    if self.calculateDistance(mainCoordinate: address_coordinate , coordinate: coordinate) <= 10000
+                    {
+                        var user_interests = MyInterestVC.interest
+                        var event_interests = self.stringToArray(string: event.event_interests!)
+                        var common_interests = self.commonInterest(firstSet: user_interests, secondSet: event_interests)
+                        var common_interests_string = self.commonInterestToString(common: common_interests)
+                        
+                        print("Pin inside 10km radius , Distance Difference: \(Int(distanceDifference))")
+                        
+                        anno.title = event.event_title
+                        anno.subtitle = event.event_interests
+                        
+                        
+                        
+                        anno.event_title = event.event_title
+                        anno.event_interests  =  common_interests_string
+                        anno.event_key = event.event_key
+                        anno.event_image = event.event_image
+                        anno.event_noOfAccepted = event.event_noOfAccepted
+                        anno.event_noOfDenied = event.event_noOfDenied
+                        anno.event_noOfFavourite = event.event_noOfFavourite
+                        
+                        if event.event_type == "advertisement"{
+                            HomeTVC.adsArray.append(event)
+                        }
+                        //
+                        //                    self.localNotification(title: event.event_title, subtitle: event.event_title, body: common_interests_string, lat: coordinate.coordinate.latitude, long: coordinate.coordinate.longitude)
+                        self.mapview.addAnnotation(anno)
+                    }
+                    
+                }
+                
             }
             print("DisplayEventsOnMapFromArray(): Called ")
 
@@ -908,6 +1034,14 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         
     }
     
+    func centerMapOnAddressLocation(){
+          let address_coordinate = CLLocationCoordinate2D(latitude: User.singleton.address_latitude!, longitude: User.singleton.address_longitude!)
+//        guard let coordinate = locationManager.location?.coordinate else { return }
+        let region = MKCoordinateRegionMakeWithDistance(address_coordinate, regionRadius * 2, regionRadius*2)
+        mapview.setRegion(region, animated: true)
+        
+    }
+    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         centerMapOnUserLocation()
     }
@@ -940,8 +1074,18 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
 //        let ridaData = ["0":  userLocation.location?.coordinate.latitude,
 //                    "1": userLocation.location?.coordinate.longitude]
 //        database.child("UserLocation").child(uid!).child("l").setValue(ridaData)
-        
-        showCircle(coordinate: userLocation.coordinate, radius: 10000) // radius in 10000 meters = 10 kms
+        if segmentedcontrols.selectedSegmentIndex == 0{
+            showCircle(coordinate: userLocation.coordinate, radius: 10000)
+        }
+        if segmentedcontrols.selectedSegmentIndex == 1{
+            showCircle(coordinate: userLocation.coordinate, radius: 10000)
+        }
+        if segmentedcontrols.selectedSegmentIndex == 2{
+              let address_coordinate = CLLocationCoordinate2D(latitude: User.singleton.address_latitude!, longitude: User.singleton.address_longitude!)
+              showCircle(coordinate: address_coordinate, radius: 10000)
+            
+        }
+         // radius in 10000 meters = 10 kms
     }
     
     

@@ -21,6 +21,11 @@ class User{
     var following: [String]?
     var favourite: [String]?
     
+    var address:String?
+    
+    var address_latitude:Double?
+    var address_longitude:Double?
+    
    
     var events: [String]?
     
@@ -36,7 +41,8 @@ class User{
         userType = json["userType"].stringValue as! String
         contact = json["contact"].stringValue as! String
         profileImgURL = json["profileImageUrl"].stringValue
-        
+        address = json["address"].stringValue
+        print("ADD: \(address!)")
     }
     
      init(){

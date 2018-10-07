@@ -11,15 +11,19 @@ import FirebaseDatabase
 import FirebaseAuth
 import FirebaseStorage
 import SVProgressHUD
+import CoreLocation
 
-class EditProfileTVC: UITableViewController, UINavigationControllerDelegate , UIImagePickerControllerDelegate  {
+class EditProfileTVC: UITableViewController, UINavigationControllerDelegate , UIImagePickerControllerDelegate ,CLLocationManagerDelegate {
 
+    var locationManager = CLLocationManager()
+    
     @IBOutlet weak var avatarBg_imageview: UIImageView! // background blurred image
     @IBOutlet weak var avatar_imageview: RoundedImage! // profile image
     
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var contact: UITextField!
     
+    @IBOutlet weak var address: UITextField!
     
     
 //    @IBOutlet weak var moreButton: UIBarButtonItem!
@@ -33,8 +37,9 @@ class EditProfileTVC: UITableViewController, UINavigationControllerDelegate , UI
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-        name.text = User.singleton.name
+        name.text    = User.singleton.name
         contact.text = User.singleton.contact
+        address.text = User.singleton.address
         
         
         if let image = User.singleton.profileImgURL{
@@ -106,6 +111,38 @@ class EditProfileTVC: UITableViewController, UINavigationControllerDelegate , UI
                     database.child("Users").child(uid!).child("name").setValue(self.name.text)
                     database.child("Users").child(uid!).child("contact").setValue(self.contact.text)
                     database.child("Users").child(uid!).child("profileImageUrl").setValue("\(url!)")
+                    database.child("Users").child(uid!).child("address").setValue(self.address.text!)
+                    
+                    /* GeoCoding Started */
+                    
+                    var geocoder = CLGeocoder()
+                    geocoder.geocodeAddressString(User.singleton.address!) {
+                        placemarks, error in
+                        let placemark = placemarks?.first
+                        let lat = placemark?.location?.coordinate.latitude
+                        let lon = placemark?.location?.coordinate.longitude
+                        if lat != nil , lon != nil{
+                            print("Lat: \(lat!), Lon: \(lon!)")
+                            
+                            User.singleton.address_latitude = lat!
+                            User.singleton.address_longitude = lon!
+                            
+                            print("LA: \(User.singleton.address_latitude!)")
+                            print("LO: \(User.singleton.address_longitude!)")
+                        }else{
+                            print("Error")
+                            
+                                                    guard let userLocation = self.locationManager.location else {return}
+                                                    User.singleton.address_latitude = userLocation.coordinate.latitude
+                                                    User.singleton.address_longitude = userLocation.coordinate.longitude
+
+                        }
+                        
+                    }
+                    
+                    /* GeoCoding End */
+                    
+                    
                     
                     User.singleton.name = self.name.text
         
