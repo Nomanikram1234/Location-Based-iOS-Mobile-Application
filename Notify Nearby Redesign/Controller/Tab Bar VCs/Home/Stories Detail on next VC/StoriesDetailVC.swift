@@ -48,6 +48,9 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
         print(contact)
         let url = URL(string: "telprompt://\(contact!)")
         UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+        
+        //Test Changes in the git
+        print("TEst")
     
     }
     @IBAction func messageButtonPressed(_ sender: Any) {
