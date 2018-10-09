@@ -40,6 +40,7 @@
 		F8670939213EDEA0004CAD58 /* NotificationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8670938213EDEA0004CAD58 /* NotificationTVC.swift */; };
 		F867093B213EFB48004CAD58 /* RedSmallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F867093A213EFB48004CAD58 /* RedSmallButton.swift */; };
 		F867093D213EFB8C004CAD58 /* BlackBorderSmallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F867093C213EFB8C004CAD58 /* BlackBorderSmallButton.swift */; };
+		F874ADD2216BACF7007873FE /* ActivityRightSideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F874ADD1216BACF7007873FE /* ActivityRightSideMenuTableViewCell.swift */; };
 		F87BB8A12146E5B200D21AF6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F87BB8A02146E5B200D21AF6 /* GoogleService-Info.plist */; };
 		F87BB8A321481D2F00D21AF6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87BB8A221481D2F00D21AF6 /* User.swift */; };
 		F895CCD82162A4DA00EAB847 /* JointInterest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895CCD72162A4DA00EAB847 /* JointInterest.swift */; };
@@ -103,6 +104,7 @@
 		F8670938213EDEA0004CAD58 /* NotificationTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTVC.swift; sourceTree = "<group>"; };
 		F867093A213EFB48004CAD58 /* RedSmallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedSmallButton.swift; sourceTree = "<group>"; };
 		F867093C213EFB8C004CAD58 /* BlackBorderSmallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackBorderSmallButton.swift; sourceTree = "<group>"; };
+		F874ADD1216BACF7007873FE /* ActivityRightSideMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRightSideMenuTableViewCell.swift; sourceTree = "<group>"; };
 		F87BB8A02146E5B200D21AF6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F87BB8A221481D2F00D21AF6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F895CCD72162A4DA00EAB847 /* JointInterest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JointInterest.swift; sourceTree = "<group>"; };
@@ -248,7 +250,7 @@
 			children = (
 				F809ED48213D9315007280E5 /* Side Menu VCs */,
 				F809ED34213D8D88007280E5 /* SideMenuTVC.swift */,
-				F802D3172144FE85001934A2 /* ActivityRightSideMenuVC.swift */,
+				F874ADD3216BB316007873FE /* Activty Right Side Menu */,
 			);
 			path = "Side Menu";
 			sourceTree = "<group>";
@@ -351,6 +353,15 @@
 				F809ED2C213C72ED007280E5 /* Notify Nearby Redesign-Bridging-Header.h */,
 			);
 			path = "Notify Nearby Redesign";
+			sourceTree = "<group>";
+		};
+		F874ADD3216BB316007873FE /* Activty Right Side Menu */ = {
+			isa = PBXGroup;
+			children = (
+				F802D3172144FE85001934A2 /* ActivityRightSideMenuVC.swift */,
+				F874ADD1216BACF7007873FE /* ActivityRightSideMenuTableViewCell.swift */,
+			);
+			path = "Activty Right Side Menu";
 			sourceTree = "<group>";
 		};
 		F8C80983213F07F9008FBC44 /* Profile */ = {
@@ -628,6 +639,7 @@
 				F802D30A2142CEA8001934A2 /* RoundedLabel.swift in Sources */,
 				F802D31121443369001934A2 /* RoundedView.swift in Sources */,
 				F802D3182144FE85001934A2 /* ActivityRightSideMenuVC.swift in Sources */,
+				F874ADD2216BACF7007873FE /* ActivityRightSideMenuTableViewCell.swift in Sources */,
 				F8C80999214069CB008FBC44 /* AdsCollectionViewCell.swift in Sources */,
 				F809ED41213D918A007280E5 /* AdsVC.swift in Sources */,
 				F867093B213EFB48004CAD58 /* RedSmallButton.swift in Sources */,
@@ -793,13 +805,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3Y5T3DM53Z;
+				DEVELOPMENT_TEAM = H76X9343PR;
 				INFOPLIST_FILE = "Notify Nearby Redesign/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.fyp.Notify-Nearby-Redesign";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.fyp.Notify-Nearby-Redesign0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Notify Nearby Redesign/Notify Nearby Redesign-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -815,13 +827,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3Y5T3DM53Z;
+				DEVELOPMENT_TEAM = H76X9343PR;
 				INFOPLIST_FILE = "Notify Nearby Redesign/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.fyp.Notify-Nearby-Redesign";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.fyp.Notify-Nearby-Redesign0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Notify Nearby Redesign/Notify Nearby Redesign-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;

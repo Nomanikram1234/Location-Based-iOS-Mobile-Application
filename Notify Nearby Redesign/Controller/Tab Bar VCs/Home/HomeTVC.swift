@@ -29,7 +29,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
    
     
     var circle: MKCircle? = nil
-    let regionRadius: Double = 1000
+    let regionRadius: Double = 10000
  
     var locationManager = CLLocationManager()
     let authStatus = CLLocationManager.authorizationStatus()
