@@ -79,10 +79,10 @@ class MyFavouriteVC: UIViewController ,UITableViewDelegate,UITableViewDataSource
     
    
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        selectedFavouriteEvent = indexPath.row
-//        performSegue(withIdentifier: "showFavouriteEventDetail", sender: self)
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedFavouriteEvent = indexPath.row
+        performSegue(withIdentifier: "showFavouriteEventDetail", sender: self)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         

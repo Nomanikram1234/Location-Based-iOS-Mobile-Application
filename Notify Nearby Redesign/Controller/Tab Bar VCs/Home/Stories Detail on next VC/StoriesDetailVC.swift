@@ -22,6 +22,8 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
   
     @IBOutlet weak var hidden_latitude: UILabel!
     @IBOutlet weak var hidden_longitude: UILabel!
+    @IBOutlet weak var hidden_storyAuthorKey: UILabel!
+    
     
     var Previouskey :String?
     var event:Event?
@@ -295,6 +297,7 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
                 SVProgressHUD.showSuccess(withStatus: "Accepted")
 //                view.noOfAccept.text = "\(count+1)"
                 self.database.child("stories").child(self.Previouskey!).child("acceptedNumber").setValue("\(count+1)")
+                self.notifyAcceptedStory()
             }else{
                 
                 
@@ -314,6 +317,7 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
                         self.database.child("stories").child(self.Previouskey!).child("acceptedNumber").setValue("\(count+1)")
                         
                         SVProgressHUD.showSuccess(withStatus: "Accepted")
+                        self.notifyAcceptedStory()
                         //                        print("Extered")
                     }else{
                         //                        print("Already exists")
@@ -357,6 +361,7 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
                 SVProgressHUD.showSuccess(withStatus: "Denied")
 //                view.noOfDeny.text = "\(count+1)"
                 self.database.child("stories").child(self.Previouskey!).child("deniedNumber").setValue("\(count+1)")
+               self.notifyRejectedStory()
             }else{
                 
                 
@@ -376,6 +381,7 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
                         self.database.child("stories").child(self.Previouskey!).child("deniedNumber").setValue("\(count+1)")
                         
                         SVProgressHUD.showSuccess(withStatus: "Denied")
+                        self.notifyRejectedStory()
                         
                         //                        print("Extered")
                     }else{
@@ -454,6 +460,8 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
                 SVProgressHUD.showSuccess(withStatus: "Favourite")
 //                view.noOfFavourite.text = "\(count+1)"
                 self.database.child("stories").child(self.Previouskey!).child("favouriteNumber").setValue("\(count+1)")
+                
+                self.notifyFavouriteStory()
             }else{
                 
                 for id in snapshot.children{
@@ -472,6 +480,7 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
 //                        view.noOfFavourite.text = "\(count+1)"
                         self.database.child("stories").child(self.Previouskey!).child("favouriteNumber").setValue("\(count+1)")
                         SVProgressHUD.showSuccess(withStatus: "Favourite")
+                        self.notifyFavouriteStory()
                         //                        print("Extered")
                     }else{
                         //                        print("Already exists")
@@ -501,6 +510,44 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
 //        database.childByAutoId().
         
     }
+    
+    func notifyAcceptedStory(){
+        // hidden_storyAuthorKey refers to the author of story
+        let uid = auth.currentUser?.uid
+        
+        let database = Database.database().reference().child("Notifications").child(hidden_storyAuthorKey.text!).childByAutoId()
+        let data = ["sid":Previouskey!, // Previous key Refer to the story id
+                    "string":"has confirmed your story",
+                    "type":"confirmed",
+                    "userid":"\(uid!)"] // auth refers to firebase logged in user
+        database.setValue(data)
+    }
+    
+    func notifyRejectedStory(){
+        // hidden_storyAuthorKey refers to the author of story
+        let uid = auth.currentUser?.uid
+        
+        
+        let database = Database.database().reference().child("Notifications").child(hidden_storyAuthorKey.text!).childByAutoId()
+        let data = ["sid":Previouskey!, // Previous key Refer to the story id
+            "string":"has denied your story",
+            "type":"confirmed",
+            "userid": "\(uid!)"] // auth refers to firebase logged in user
+        database.setValue(data)
+    }
+    
+    func notifyFavouriteStory(){
+        // hidden_storyAuthorKey refers to the author of story
+        let uid = auth.currentUser?.uid
+        
+        let database = Database.database().reference().child("Notifications").child(hidden_storyAuthorKey.text!).childByAutoId()
+        let data = ["sid":Previouskey!, // Previous key Refer to the story id
+            "string":"has favorited your story",
+            "type":"confirmed",
+            "userid":"\(uid!)"] // auth refers to firebase logged in user
+        database.setValue(data)
+    }
+    
     
     @IBAction func editButtonPressed(_ sender: Any) {
          print("Edit Button Pressed")
@@ -578,6 +625,8 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
                 
                 hidden_latitude.text = "\(event.event_latitude!)"
                 hidden_longitude.text = "\(event.event_longitude!)"
+                
+                hidden_storyAuthorKey.text = event.event_author_uid
                 
                 contact = event.event_contact
                 

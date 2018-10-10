@@ -44,6 +44,9 @@
 		F87BB8A12146E5B200D21AF6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F87BB8A02146E5B200D21AF6 /* GoogleService-Info.plist */; };
 		F87BB8A321481D2F00D21AF6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87BB8A221481D2F00D21AF6 /* User.swift */; };
 		F895CCD82162A4DA00EAB847 /* JointInterest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895CCD72162A4DA00EAB847 /* JointInterest.swift */; };
+		F8BACEE1216D4E9F007FA7EF /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BACEE0216D4E9F007FA7EF /* NotificationTableViewCell.swift */; };
+		F8BACEE3216D4F22007FA7EF /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BACEE2216D4F22007FA7EF /* NotificationViewController.swift */; };
+		F8BACEE5216D5DED007FA7EF /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BACEE4216D5DED007FA7EF /* Notification.swift */; };
 		F8C80980213F009D008FBC44 /* ProfileTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C8097F213F009D008FBC44 /* ProfileTVC.swift */; };
 		F8C80982213F0249008FBC44 /* RoundedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C80981213F0249008FBC44 /* RoundedImage.swift */; };
 		F8C80988213F0934008FBC44 /* StoriesCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C80987213F0934008FBC44 /* StoriesCVC.swift */; };
@@ -108,6 +111,9 @@
 		F87BB8A02146E5B200D21AF6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F87BB8A221481D2F00D21AF6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F895CCD72162A4DA00EAB847 /* JointInterest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JointInterest.swift; sourceTree = "<group>"; };
+		F8BACEE0216D4E9F007FA7EF /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		F8BACEE2216D4F22007FA7EF /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		F8BACEE4216D5DED007FA7EF /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		F8C8097F213F009D008FBC44 /* ProfileTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTVC.swift; sourceTree = "<group>"; };
 		F8C80981213F0249008FBC44 /* RoundedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedImage.swift; sourceTree = "<group>"; };
 		F8C80987213F0934008FBC44 /* StoriesCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesCVC.swift; sourceTree = "<group>"; };
@@ -190,6 +196,7 @@
 		F802D315214456F4001934A2 /* Notification */ = {
 			isa = PBXGroup;
 			children = (
+				F8BACEDF216D4E76007FA7EF /* Modified */,
 				F8670938213EDEA0004CAD58 /* NotificationTVC.swift */,
 			);
 			path = Notification;
@@ -316,6 +323,7 @@
 				F8CE799C21457F5700B965B8 /* Event.swift */,
 				F87BB8A221481D2F00D21AF6 /* User.swift */,
 				F895CCD72162A4DA00EAB847 /* JointInterest.swift */,
+				F8BACEE4216D5DED007FA7EF /* Notification.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -362,6 +370,15 @@
 				F874ADD1216BACF7007873FE /* ActivityRightSideMenuTableViewCell.swift */,
 			);
 			path = "Activty Right Side Menu";
+			sourceTree = "<group>";
+		};
+		F8BACEDF216D4E76007FA7EF /* Modified */ = {
+			isa = PBXGroup;
+			children = (
+				F8BACEE0216D4E9F007FA7EF /* NotificationTableViewCell.swift */,
+				F8BACEE2216D4F22007FA7EF /* NotificationViewController.swift */,
+			);
+			path = Modified;
 			sourceTree = "<group>";
 		};
 		F8C80983213F07F9008FBC44 /* Profile */ = {
@@ -636,6 +653,8 @@
 				F8C80980213F009D008FBC44 /* ProfileTVC.swift in Sources */,
 				F836C104213AFF76005A86F8 /* AppDelegate.swift in Sources */,
 				F8C8098A213F0947008FBC44 /* InterestCVC.swift in Sources */,
+				F8BACEE3216D4F22007FA7EF /* NotificationViewController.swift in Sources */,
+				F8BACEE5216D5DED007FA7EF /* Notification.swift in Sources */,
 				F802D30A2142CEA8001934A2 /* RoundedLabel.swift in Sources */,
 				F802D31121443369001934A2 /* RoundedView.swift in Sources */,
 				F802D3182144FE85001934A2 /* ActivityRightSideMenuVC.swift in Sources */,
@@ -648,6 +667,7 @@
 				F809ED3A213D8F29007280E5 /* LoginVC.swift in Sources */,
 				F87BB8A321481D2F00D21AF6 /* User.swift in Sources */,
 				F8CE79A02145815700B965B8 /* AnnotationView.swift in Sources */,
+				F8BACEE1216D4E9F007FA7EF /* NotificationTableViewCell.swift in Sources */,
 				F802D3082142C9A0001934A2 /* TopInterestCollectionViewCell.swift in Sources */,
 				F8670939213EDEA0004CAD58 /* NotificationTVC.swift in Sources */,
 				F8C8099C21406E65008FBC44 /* JointCollectionViewCell.swift in Sources */,
