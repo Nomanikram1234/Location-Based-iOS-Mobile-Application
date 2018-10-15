@@ -99,6 +99,8 @@ class ActivityRightSideMenuVC: UIViewController,UITextFieldDelegate,UITableViewD
 //
 //        }
         
+        
+        //Mark: Fetching events from array and searching from those array if segmented control index is at 0
         if segmentedcontrols.selectedSegmentIndex == 0 {
             
             for event in HomeTVC.eventArray{
@@ -108,7 +110,7 @@ class ActivityRightSideMenuVC: UIViewController,UITextFieldDelegate,UITableViewD
                 
                 let anno = Event(coordinate: CLLocationCoordinate2D(latitude: event.event_latitude!, longitude: event.event_longitude! ))
                 let distanceDifference = self.calculateDistance(mainCoordinate: userLocation , coordinate: coordinate)
-                let user_searched_interest = stringToArray(string: (searchField.text?.lowercased())!)
+                let user_searched_interest = stringToArray(string: (searchField.text?.lowercased())!) // searchField.text?.lowercased() is the term(interest) we search for
                 //FIXME: MODiFying
                
                     if self.calculateDistance(mainCoordinate: userLocation , coordinate: coordinate) <= 10000{
@@ -152,6 +154,8 @@ class ActivityRightSideMenuVC: UIViewController,UITextFieldDelegate,UITableViewD
             }
     }
         
+        
+        // segmented control index is at 1
         if segmentedcontrols.selectedSegmentIndex == 1 {
             print("Pressed 1")
             
@@ -166,6 +170,7 @@ class ActivityRightSideMenuVC: UIViewController,UITextFieldDelegate,UITableViewD
                 let lon = placemark?.location?.coordinate.longitude
                 
                 
+                // if we have some values for latitude and longitude then we will find the events around that coordinate(using latitude and longitude value)
                 if lat != nil , lon != nil{
                     print("Lat: \(lat!), Lon: \(lon!)")
                     
@@ -174,7 +179,7 @@ class ActivityRightSideMenuVC: UIViewController,UITextFieldDelegate,UITableViewD
                     ///////////////////////
                     
                     
-                    
+                    // search for event
                     for event in HomeTVC.eventArray{
                         
                         //                guard let userLocation = self.locationManager.location else {return}
@@ -230,7 +235,8 @@ class ActivityRightSideMenuVC: UIViewController,UITextFieldDelegate,UITableViewD
                     ///////////////////////
                     print("LA: \(latitude!)")
                     print("LO: \(longitude!)")
-                }else{
+                }// Incase we donot get any value for latitude and longitude then we set the corresponding value equal to user's latitude and longitude in order to avoid errors
+                else{
                     print("Error")
                     
                     guard let userLocation = self.locationManager.location else {return}

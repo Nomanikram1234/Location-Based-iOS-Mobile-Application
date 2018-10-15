@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-// class for managing user related data
+// Class for managing user related data
 class User{
     var name:String?
     var contact:String?

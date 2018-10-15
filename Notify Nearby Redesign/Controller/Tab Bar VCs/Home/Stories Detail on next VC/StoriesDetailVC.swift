@@ -25,7 +25,7 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
     @IBOutlet weak var hidden_storyAuthorKey: UILabel!
     
     
-    var Previouskey :String?
+    var Previouskey :String? // Story/Ad Key which is selected on any screen
     var event:Event?
     var interestArray = [String]()
     
@@ -52,17 +52,21 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
     @IBOutlet weak var phoneButton: UIButton!
     @IBOutlet weak var messageButton: UIButton!
     
+    
+    // when phone button is pressed then it would call
     @IBAction func phoneButtonPressed(_ sender: Any) {
         print(contact)
-        let url = URL(string: "telprompt://\(contact!)")
+        let url = URL(string: "telprompt://\(contact!)") // default pattern given by apple to dialup screen
         UIApplication.shared.open(url!, options: [:], completionHandler: nil)
         
 
     
     }
+    
+    // when message button is pressed then it will take to the message screen
     @IBAction func messageButtonPressed(_ sender: Any) {
         print(contact)
-        let url = URL(string: "sms://\(contact!)")
+        let url = URL(string: "sms://\(contact!)") // default pattern given by apple to open message application
         UIApplication.shared.open(url!, options: [:], completionHandler: nil)
     }
     
@@ -76,6 +80,8 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
     @IBOutlet weak var editStoryView_title: UITextField!
     @IBOutlet weak var editStoryView_interest: UITextField!
     @IBOutlet weak var editStoryView_description: UITextView!
+    
+    
     
     @IBAction func changePhoto(_ sender: Any) {
         let image = UIImagePickerController()
@@ -182,6 +188,10 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
     
     //    @IBOutlet weak var mapview: MKMapView!
     
+    
+    
+    
+    // Collection View to Display the interests related to the story/ads
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
       
 //        print("Interest Count: \(interestArray?.count)")
@@ -200,6 +210,8 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
      
     }
     
+    
+    // Alert for Report button
     @IBAction func reportButtonPressed(_ sender: Any) {
         print("Report Button Pressed")
         
@@ -496,6 +508,8 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
         }
     }
     
+    
+    // it fetches the all interests of the story/ads and story it in the separate in database with its mentioned start time and end time
     func joint() {
         let database = Database.database().reference().child("JointInterest").child((Auth.auth().currentUser?.uid)!)
         print(event?.event_interests)
@@ -510,6 +524,8 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
 //        database.childByAutoId().
         
     }
+    
+    /* These Notify Functions are there to give the notification of our action to the author of story/ad */
     
     func notifyAcceptedStory(){
         // hidden_storyAuthorKey refers to the author of story
@@ -568,6 +584,8 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
         
     }
     
+    
+    // not being used
     func fetchJoint() {
         let database = Database.database().reference().child("JointInterest").child((Auth.auth().currentUser?.uid)!)
         database.observe(.value) { (snapshot) in
@@ -598,9 +616,10 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
         
         
     
-        
+        // Go through all events
         for event in HomeTVC.eventArray{
             
+            // finding the one story/ads which was selected from any screen among all events
             if event.event_key == Previouskey {
                 
                 print(event.event_key)

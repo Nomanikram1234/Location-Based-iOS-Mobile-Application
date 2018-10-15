@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 
+// Class Notification is storing Notification Related Data
 class Notification{
     var storyId :String?
 //    var storyname:String?

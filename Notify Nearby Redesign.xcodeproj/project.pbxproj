@@ -197,7 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				F8BACEDF216D4E76007FA7EF /* Modified */,
-				F8670938213EDEA0004CAD58 /* NotificationTVC.swift */,
+				F890A2AC2173AF760063B1CB /* Not being used */,
 			);
 			path = Notification;
 			sourceTree = "<group>";
@@ -370,6 +370,14 @@
 				F874ADD1216BACF7007873FE /* ActivityRightSideMenuTableViewCell.swift */,
 			);
 			path = "Activty Right Side Menu";
+			sourceTree = "<group>";
+		};
+		F890A2AC2173AF760063B1CB /* Not being used */ = {
+			isa = PBXGroup;
+			children = (
+				F8670938213EDEA0004CAD58 /* NotificationTVC.swift */,
+			);
+			path = "Not being used";
 			sourceTree = "<group>";
 		};
 		F8BACEDF216D4E76007FA7EF /* Modified */ = {

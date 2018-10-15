@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Class Discovery is Blueprint or Model for Data Fetching by Scraping
 class Discovery{
 
     var url: String?

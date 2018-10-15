@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 
+// Class JointInterest is Blueprint or Model for storing joint interests
 class JointInterest{
     var id:String?
     var startTime:String?

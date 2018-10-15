@@ -31,6 +31,8 @@ class NotificationTVC: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    //MARK: it enables Side menu functionality
     func sidemenu(){
         if revealViewController() != nil{
             moreButton.target = revealViewController()

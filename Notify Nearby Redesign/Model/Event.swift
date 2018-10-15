@@ -37,10 +37,10 @@ class Event:MKPointAnnotation{
     var event_Accepted:[String]?
     var event_Denied:[String]?
     
-    var event_startTime :String?
-    var event_endTime :String?
+    var event_startTime :String? // time when story/ad is added
+    var event_endTime :String?  // time when story/ad will end
     
-    var event_contact:String?
+    var event_contact:String? // if and only if required if user is advertiser
     
     
     

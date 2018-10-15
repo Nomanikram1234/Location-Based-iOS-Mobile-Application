@@ -150,6 +150,7 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
     }
 
     
+    //MARK: Counting All Users
     static func getAllUsers(){
         let database = Database.database().reference().child("Users")
         
@@ -178,7 +179,7 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
     
 
     
-    
+    //MARK: Side Menu functionality
     func sidemenu(){
         if revealViewController() != nil{
             moreButton.target = revealViewController()
@@ -195,13 +196,14 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
         }
     }
     
-    // Fetching and Stores Event + Count Number of Stories
+    //MARK: Fetching and Stores Event of currently logged in user + Count Number of Stories
     func mystories(){
         let database = Database.database().reference()
         let uid = Auth.auth().currentUser?.uid
         
         var count = 0
         
+    
         for event in HomeTVC.eventArray{
             if event.event_author_uid == uid{
                 myStories.append(event)
@@ -213,7 +215,7 @@ class ProfileTVC: UITableViewController ,UICollectionViewDelegate,UICollectionVi
        
     }
     
-    // Fetching and Stores Interest based Event + Count Number of Stories
+    //MARK: Fetching and Stores Interest based Event + Count Number of Stories
     func myInterestStories(){
         // iterating array of array to loojat events
         for event in HomeTVC.eventArray{
