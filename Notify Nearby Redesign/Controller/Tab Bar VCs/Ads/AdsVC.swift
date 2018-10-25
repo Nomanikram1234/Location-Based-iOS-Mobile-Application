@@ -82,7 +82,7 @@ class AdsVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSourc
         }
     }
 
-    
+    // fetching event and storing that in the array
     func fetchEvents() {
         var locationManager = CLLocationManager()
         Database.database().reference().child("stories").observe(DataEventType.value) { (snapshot) in

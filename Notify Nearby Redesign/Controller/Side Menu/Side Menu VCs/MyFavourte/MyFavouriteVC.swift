@@ -55,6 +55,7 @@ class MyFavouriteVC: UIViewController ,UITableViewDelegate,UITableViewDataSource
         return 85.0
     }
     
+    
     func fetchFavourites(){
     let database = Database.database().reference()
     let uid = Auth.auth().currentUser?.uid

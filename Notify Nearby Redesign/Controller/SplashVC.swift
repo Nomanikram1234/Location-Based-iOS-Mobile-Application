@@ -59,8 +59,8 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
     
     
     /* Firebase */
-    var auth = Auth.auth()
-    let database = Database.database().reference()
+    var auth = Auth.auth() // responsible for managing authentication state of firebase
+    let database = Database.database().reference() // stores the reference to firebase database
     
     
     override func viewDidLoad() {
@@ -126,7 +126,7 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
         // adding signup view
         let v = self.signupView
         v?.center = self.view.center
-        v?.frame.origin.y = (v?.frame.origin.y)! - 100
+        v?.frame.origin.y = (v?.frame.origin.y)! - 100 // moving up the view 100px up from the center
         self.view.addSubview(v!)
         
         // animating
@@ -155,8 +155,8 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
         // adding signup view
         let v = self.signupView
         v?.center = self.view.center
-        v?.frame.origin.y = (v?.frame.origin.y)! - 100
-        v?.alpha = 0
+        v?.frame.origin.y = (v?.frame.origin.y)! - 100 // moving up the view 100px up from the center
+        v?.alpha = 0 // alpha = 0 means its invisible
         self.view.addSubview(v!)
         
         UIView.animate(withDuration: 2) {
@@ -167,7 +167,7 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
                 }
             }
             
-            v?.alpha = 1
+            v?.alpha = 1 // alpha = 1 means its visible
  
         }
   
@@ -183,11 +183,9 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
         // adding signup view
         let v = self.resetView
         v?.center = self.view.center
-        v?.frame.origin.y = (v?.frame.origin.y)! - 50
-        v?.alpha = 0
-        self.view.addSubview(v!)
-        
-        
+        v?.frame.origin.y = (v?.frame.origin.y)! - 50 // moving up the view 50px up from the center
+        v?.alpha = 0 // alpha = 0 means its invisible
+        self.view.addSubview(v!) // add reset view(window) on the screen
         
         UIView.animate(withDuration: 1) {
             for view in self.view.subviews{
@@ -195,7 +193,6 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
                     view.removeFromSuperview()
                 }
             }
-            
             v?.alpha = 1
         }
         

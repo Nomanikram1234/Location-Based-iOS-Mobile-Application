@@ -85,6 +85,12 @@ class JointVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSou
         }
     }
 
+    
+    /*
+     Fetching the joint interest while checking their end time
+     if current time is greater than end time then that interest will be removed from database
+     else it would be added into the array
+     */
     func fetchJoint() {
         let database = Database.database().reference().child("JointInterest").child((Auth.auth().currentUser?.uid)!)
         database.observe(.value) { (snapshot) in

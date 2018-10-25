@@ -16,7 +16,7 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
  
    
     // static array to populate collection view at the top
-    let arr = ["sport","gaming","news","traffic","education"]
+    let arr = ["sport","gaming","news","traffic","education"] // not being used now
     var interestArray = [Event]()
     var selectedInterestIndex: Int?
 
@@ -38,11 +38,12 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
         
         // remove all elements from array to avoid over population / duplication
         HomeTVC.eventArray.removeAll()
-        HomeTVC.fetchEvents() //FIXME: MADE CHANGES ON FRIDAY
+        HomeTVC.fetchEvents() // fetchting events
         
         // counter number of events
         print("Counter: \(HomeTVC.eventArray.count)")
         
+        // getting stories
         database.child("stories").observe(DataEventType.value) { (snapshot) in
             
             for key in snapshot.children{
@@ -63,11 +64,12 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
                 // if INTEREST is selected in segmented controls
 //                if self.segmentedcontrols.selectedSegmentIndex == 0{
                 
+                // checking if event is within 10km radius
                     if self.calculateDistance(mainCoordinate: userLocation , coordinate: coordinate) <= 10000{
                         var user_interests = MyInterestVC.interest
-                        var event_interests = self.stringToArray(string: event.event_interests!)
-                        var common_interests = self.commonInterest(firstSet: user_interests, secondSet: event_interests)
-                        var common_interests_string = self.commonInterestToString(common: common_interests)
+                        var event_interests = self.stringToArray(string: event.event_interests!) // separate the string by comma and store them in array
+                        var common_interests = self.commonInterest(firstSet: user_interests, secondSet: event_interests) // find common from two arrays
+                        var common_interests_string = self.commonInterestToString(common: common_interests) // common term to string form
                         
                         // if there are any/some matching interest between user and event
                         if !common_interests.isEmpty{
@@ -158,6 +160,7 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
     
     override func viewDidAppear(_ animated: Bool) {
         print("*************InterestVC**************")
+        //fetch unique interest saves interest in static uniqueInterestArray
        fetchUniqueInterest()
         
     }
@@ -296,6 +299,7 @@ class InterestVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDat
         return distance
     }
 
+    // to fetch unique interest of users
     func fetchUniqueInterest(){
         let database =  Database.database().reference().child("UniqueInterests")
         database.observe(.value) { (snapshot) in

@@ -193,13 +193,13 @@
 			path = MyFavourte;
 			sourceTree = "<group>";
 		};
-		F802D315214456F4001934A2 /* Notification */ = {
+		F802D315214456F4001934A2 /* Notification ( Search ) */ = {
 			isa = PBXGroup;
 			children = (
 				F8BACEDF216D4E76007FA7EF /* Modified */,
 				F890A2AC2173AF760063B1CB /* Not being used */,
 			);
-			path = Notification;
+			path = "Notification ( Search )";
 			sourceTree = "<group>";
 		};
 		F802D3162144609D001934A2 /* Account */ = {
@@ -269,7 +269,7 @@
 				F802D30B2142EA91001934A2 /* MyInterest */,
 				F802D31221445004001934A2 /* MyFavourte */,
 				F802D3162144609D001934A2 /* Account */,
-				F802D315214456F4001934A2 /* Notification */,
+				F802D315214456F4001934A2 /* Notification ( Search ) */,
 			);
 			path = "Side Menu VCs";
 			sourceTree = "<group>";

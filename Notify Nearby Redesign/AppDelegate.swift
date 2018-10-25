@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // variable initiated for the first time login everytime
     static var firstStart :Bool = false
     
-    // calculating
+    // calculating the time in seconds since 1970
     static var totalSeconds :Int?
 
     var window: UIWindow?
@@ -43,6 +43,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //          UserDefaults.standard.set(nil, forKey: "firstStart")
 //        UserDefaults.standard.setNilValueForKey("firstStart")
+        
+        /*
+         Note: When we are using UserDefaults.standard then we are actually saving the value locally on device for later use even after app is close and reopen it would give the same value from where our application has left previously
+         
+         First start = false ; means that it has not logged in before
+         
+         Here in code below we check if the variable firstStart has the value the assign it to AppDeleagate.first
+         else
+         Save the value of AppDelagate.firstStart = false to variable firstStart
+         as we know that application has not logged in previously so we programmatically try to log out if possible (do-try-catch block allows us to try statements)
+         */
         if UserDefaults.standard.bool(forKey: "firstStart") {
         AppDelegate.firstStart = UserDefaults.standard.bool(forKey: "firstStart")
             
@@ -94,6 +105,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            }
 //        }
         
+        
        /////////////////////
         
    
@@ -119,17 +131,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            }
 //        }
         
-        
+        // Fetching the data on background thread
         DispatchQueue.global(qos: .userInteractive).async {
             self.scrapingIslamabad()
 //            DispatchQueue.main.async {
 //                print("Scraping Isb Completed")
 //            }
         }
+        // Fetching the data on background thread
         DispatchQueue.global(qos: .userInitiated).async {
             self.scrapingKarachi()
         
         }
+        // Fetching the data on background thread
         DispatchQueue.global(qos: .userInitiated).async {
             self.scrapingLahore()
 //            DispatchQueue.main.async {
@@ -146,12 +160,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    // to get total seconds since 1970
     @objc func timeUpdate(){
         let date = Date()
         AppDelegate.totalSeconds = Int(date.timeIntervalSince1970 * 1000) / 1000
   //      print(AppDelegate.totalSeconds!)
-  
-        
         /*
          //Note: 86400000 milliseconds are there in 24hours
          //Note: 86400         seconds are there in 24hours
@@ -163,8 +176,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let totalHours = totalMinutes / 60;
         let currentHour = totalHours % 24;
         print("\(currentHour):\(currentMinute):\(currentSecond)")
-       
-        
       */
 
     }

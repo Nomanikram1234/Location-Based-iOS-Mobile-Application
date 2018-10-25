@@ -53,6 +53,7 @@ class Event:MKPointAnnotation{
         self.coordinate = coordinate
     }
 
+    // JSON Parsing
    init(json:JSON) {
     event_title = json["title"].stringValue
     event_description = json["description"].stringValue
@@ -74,6 +75,7 @@ class Event:MKPointAnnotation{
     event_contact = json["contact"].stringValue
     }
     
+    // JSON Parsing
     init(eventId:String , json:JSON) {
         event_title = json["title"].stringValue
         event_description = json["description"].stringValue

@@ -19,14 +19,15 @@ class JointInterest{
     init() {
         
     }
-    
+
+    // JSON Parsing
     init(json:JSON) {
-//        id = json[""]
         startTime = json["startTime"].stringValue
         endTime = json["endTime"].stringValue
         interest = json["interest"].stringValue
     }
     
+    // JSON Parsing
     init(json:JSON,id: String?) {
         self.id = id
         startTime = json["startTime"].stringValue

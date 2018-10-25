@@ -34,15 +34,14 @@ class User{
     // static: - Because i want this data to be accessible in every class
     static var singleton = User()
     
+    // JSON Parsing
     init(json:JSON) {
-//        print(json["name"])
         name = json["name"].stringValue as! String
         email = json["email"].stringValue as! String
         userType = json["userType"].stringValue as! String
         contact = json["contact"].stringValue as! String
         profileImgURL = json["profileImageUrl"].stringValue
         address = json["address"].stringValue
-        print("ADD: \(address!)")
     }
     
      init(){

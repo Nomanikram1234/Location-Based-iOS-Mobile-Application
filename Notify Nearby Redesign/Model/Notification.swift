@@ -20,15 +20,13 @@ class Notification{
     var username:String?
     var profileImage:String?
     
+    
+    // JSON Parsing
     init(json: JSON) {
         storyId = json["sid"].stringValue
         string = json["string"].stringValue
         type = json["type"].stringValue
         userID =  json["userid"].stringValue
         
-        print(storyId)
-        print(string)
-        print(type)
-        print(userID)
     }
 }

@@ -29,22 +29,21 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
    
     
     var circle: MKCircle? = nil
-    let regionRadius: Double = 10000
+    let regionRadius: Double = 10000 // radius of 10km = 10000 would be displayed/centered on screen
  
     var locationManager = CLLocationManager()
-    let authStatus = CLLocationManager.authorizationStatus()
+    let authStatus = CLLocationManager.authorizationStatus() // it maintains state of location manager when it changes
     
     var eventCalloutView : EventCalloutView!
     var selectedEventIndex:Int?
     
-    let auth = Auth.auth()
-    let database = Database.database().reference()
-    let storageRef = Storage.storage().reference()
-    let uid = Auth.auth().currentUser?.uid
+    let auth = Auth.auth() // handles authorization of user in firebase
+    let database = Database.database().reference()  // provides reference to database in firebase
+    let storageRef = Storage.storage().reference() // provide reference to storage where we want to storage our images
+    let uid = Auth.auth().currentUser?.uid // reference to uid(unique identifier for currently logged user)
     
-    
-    static var eventArray = [Event]()
-    static var adsArray = [Event]()
+    static var eventArray = [Event]() // this array is for storing/retriving all events
+    static var adsArray = [Event]() // this array is for storing/retriving all ads among the events
     
     
     @IBOutlet weak var notificationBarBtn: UIBarButtonItem!
@@ -56,7 +55,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     @IBOutlet weak var moreButton: UIBarButtonItem!
     @IBOutlet weak var collectionview: UICollectionView!
     /************ Additonal View: Ads upload View ******/
-    var duration = 30
+    var duration = 30 // this is for the number of days advertiser wants to display their ad
     
     @IBOutlet var addEventAdsView: UIView!
     @IBOutlet weak var addEventAdsView_title: UITextField!
@@ -402,12 +401,15 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        /*
+            In ProfileTVC , there is a static array allUsers and static function getAllUsers()
+            so we are calling that method here so that allUsers array get populated with data
+         */
         ProfileTVC.getAllUsers()
 //        fetchEventsAndDisplayOnMap()
 //        vie
         
+        // this statement gives the responsiblity to this class to handle the map related task
         mapview.delegate = self
         
         
@@ -415,6 +417,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         addEventButton.imageView?.contentMode = .redraw
         centerMapOnUserLocationButton.imageView?.contentMode = .redraw
         
+        // Timer scheduled to run function alertTips() after 3 seconds
         Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(alertTips), userInfo: nil, repeats: false)
         
         print("First Start: \(AppDelegate.firstStart)")
@@ -432,11 +435,12 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
 
         // Do any additional setup after loading the view.
 //        sidemenu()
-        authorizingLocalNotification()
+        
+        authorizingLocalNotification() // configured but not being used
         
         
-        configureLocationServices()
-        centerMapOnUserLocation()
+        configureLocationServices()// configuring location services either its authorized or not
+        centerMapOnUserLocation() // center the map on users location
         
         tableview.frame.size.height = view.frame.size.height
         
@@ -448,10 +452,11 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
 //      anno.coordinate.longitude = 73.122932
 //      mapview.addAnnotation(anno)
 
-        fetchUserDetails()
-        MyInterestVC.fetchUniqueInterest()
         
-        MyInterestVC.fetchUserInterests()
+        fetchUserDetails() // fetch user related details and store them in user singleton object & geocode (address to coordinates conversion)
+        MyInterestVC.fetchUniqueInterest() // static function fetchUniqueInterest() is called which is storing data in static array uniqueInterestArray
+        
+        MyInterestVC.fetchUserInterests() // static function fetchUserInterests() is called which is storing data in static array interest
 //      fetchEventsAndDisplayOnMap()
 //      fetchEventsAndDisplayOnMap()
         
@@ -459,6 +464,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     
     @objc func alertTips(){
         print("First Start: \(AppDelegate.firstStart)")
+        // if for the first time user has logged in then this condition will run and make the AppDelagate.firstStart = true so that it can donot showup message again
         if  AppDelegate.firstStart == false{
             
             let alertcontroller = UIAlertController(title: "Tip", message: "Please add interests from sidemenu in order to see interest based pics on the map", preferredStyle: .alert)
@@ -472,10 +478,12 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     
     override func viewDidAppear(_ animated: Bool) {
         print("*************HomeTVC**************")
-        sidemenu()
-        fetchEventsAndDisplayOnMap()
+        sidemenu() // enabling sidemenus
+        fetchEventsAndDisplayOnMap() // fetching the events and displaying them on the map according to the segmented control selected
     }
    
+    
+    // Function not being used in actual but incase its getting permission for displaying notifications to the user
     func authorizingLocalNotification(){
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.badge,.sound]) { (bool, error) in
             if error == nil
@@ -490,9 +498,12 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         // Dispose of any resources that can be recreated.
     }
     
+    
+    // when add event button is pressed then it will show the views accordingly from user or advertiser point of view
     @IBAction func addEvent(_ sender: UIButton) {
         print("called: addEvent()")
         
+        // if usertype is user then it would show the story uploading form
         if User.singleton.userType == "user"{
         
         blackBgView.frame.size = view.frame.size
@@ -505,7 +516,8 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
              self.view.addSubview(self.blackBgView)
              self.view.addSubview(self.addEventView)
         }
-        }else if User.singleton.userType == "advertiser"{
+        }// if the usertype is advertiser then it will show the advertisement uploading form
+        else if User.singleton.userType == "advertiser"{
             blackBgView.frame.size = view.frame.size
             addEventAdsView.center = view.center
             addEventAdsView.frame.origin.y = 0
@@ -751,10 +763,10 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     }
     
     
+    // this is function that changes the appearance for the pin i.e purple or black
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
-        //
-        
+        // if the annotation is representing user's current position then it would not change any thing. it will simply return
         if annotation is MKUserLocation
         {
             return nil
@@ -770,6 +782,8 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         
         //        let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "pin")
         // Setting Annotations Image
+        
+        // if the array adsTitleArray contains the title that event then it would be an Ad hence it would be represented by purple color else black color
         if segmentedcontrols.selectedSegmentIndex == 1 {
             if HomeTVC.adsTitleArray.contains(annotation.title as! String) {
                 
@@ -782,7 +796,8 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                 mapView.reloadInputViews()
                 return annotationView
             }
-        }else{
+        }// Since we are replace the title with subtitle in segments so so we are interchanging their color
+        else{
             if HomeTVC.adsTitleArray.contains(annotation.subtitle as! String) {
                 //                let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "pin")
                 annotationView.markerTintColor = UIColor.purple
@@ -810,7 +825,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
 //    }
   
     
-    
+    // function not being used
     func localNotification(title:String?,subtitle:String?,body:String?,lat:CLLocationDegrees,long:CLLocationDegrees) {
         let content = UNMutableNotificationContent()
         content.title = title!
@@ -832,23 +847,27 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
     
+  // static function to fetch all the events
   static  func fetchEvents() {
     var locationManager = CLLocationManager()
         Database.database().reference().child("stories").observe(DataEventType.value) { (snapshot) in
             
-            //FIXME: TEST DELTE ARRAY
+            // Removing Previous Data from arrays before fetching new data otherwise there will be multiple dulicates of same data
             HomeTVC.eventArray.removeAll()
             HomeTVC.adsArray.removeAll()
             
+            // Fetching all stories
             for key in snapshot.children{
                 let json = JSON((key as! DataSnapshot).value)
                 let id = JSON((key as! DataSnapshot).key).stringValue
-                let event = Event(eventId:id , json: json)
+                let event = Event(eventId:id , json: json)  // initiazling by parsed json
                 
-                guard let userLocation = locationManager.location else {return}
-                let coordinate = CLLocation(latitude: event.event_latitude!, longitude: event.event_longitude!)
+                guard let userLocation = locationManager.location else {return} // getting user's current location
+                let coordinate = CLLocation(latitude: event.event_latitude!, longitude: event.event_longitude!) // getting event's coordinates
                 
+                // checking if event is within 10km radius
                 if HomeTVC.calculateDistance_s(mainCoordinate: CLLocation(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude), coordinate: coordinate) <= 10000{
+                    // checking if its ad then place it into arrays i.e adsArray , adsTitleArray
                 if event.event_type == "advertisement"{
                     HomeTVC.adsArray.append(event)
                     
@@ -873,14 +892,14 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         
         
         
-        
+            // getting events from array
             for event in HomeTVC.eventArray{
                 
-                guard let userLocation = self.locationManager.location else {return}
-                let coordinate = CLLocation(latitude: event.event_latitude!, longitude: event.event_longitude!)
+                guard let userLocation = self.locationManager.location else {return} // getting user location
+                let coordinate = CLLocation(latitude: event.event_latitude!, longitude: event.event_longitude!) // getting event's location
                 
-                let anno = Event(coordinate: CLLocationCoordinate2D(latitude: event.event_latitude!, longitude: event.event_longitude! ))
-                let distanceDifference = self.calculateDistance(mainCoordinate: userLocation , coordinate: coordinate)
+                let anno = Event(coordinate: CLLocationCoordinate2D(latitude: event.event_latitude!, longitude: event.event_longitude! )) // initializing event annotation
+                let distanceDifference = self.calculateDistance(mainCoordinate: userLocation , coordinate: coordinate) // checking difference b/w distance of user and event
 
                 //FIXME: MODiFying
                 if segmentedcontrols.selectedSegmentIndex == 0{
@@ -924,7 +943,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                     
                     print("Pin inside 10km radius , Distance Difference: \(Int(distanceDifference))")
                     
-                    //FIXME: Modify Annotation
+                    //Setting up attribute to annotation
                     anno.title = event.event_title
                     anno.subtitle = common_interests_string
                     
@@ -936,6 +955,8 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                     anno.event_noOfDenied = event.event_noOfDenied
                     anno.event_noOfFavourite = event.event_noOfFavourite
                     
+                    
+                    // adding annotation to the map
                     self.mapview.addAnnotation(anno)
                 }
                 }
@@ -943,21 +964,22 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                 if self.segmentedcontrols.selectedSegmentIndex == 2{
                     print("ADDRESS")
                     
+                    // when user details were fetched it then geocoded the address to coordinates; now we are using the coordinates
                     let address_coordinate = CLLocation(latitude: User.singleton.address_latitude!, longitude: User.singleton.address_longitude!)
                     
+                    // checking if events are within radius of 10km
                     if self.calculateDistance(mainCoordinate: address_coordinate , coordinate: coordinate) <= 10000
                     {
                         var user_interests = MyInterestVC.interest
-                        var event_interests = self.stringToArray(string: event.event_interests!)
-                        var common_interests = self.commonInterest(firstSet: user_interests, secondSet: event_interests)
-                        var common_interests_string = self.commonInterestToString(common: common_interests)
+                        var event_interests = self.stringToArray(string: event.event_interests!) // getting interest from strings and separate them by comma & place in array
+                        var common_interests = self.commonInterest(firstSet: user_interests, secondSet: event_interests) // find common interests in two array
+                        var common_interests_string = self.commonInterestToString(common: common_interests) // changing the common interests array to string
                         
                         print("Pin inside 10km radius , Distance Difference: \(Int(distanceDifference))")
                         
+                        // setting up attributes to annotation
                         anno.title = event.event_title
                         anno.subtitle = event.event_interests
-                        
-                        
                         
                         anno.event_title = event.event_title
                         anno.event_interests  =  common_interests_string
@@ -967,11 +989,12 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                         anno.event_noOfDenied = event.event_noOfDenied
                         anno.event_noOfFavourite = event.event_noOfFavourite
                         
+                        // if event is ad then place it into adsArray
                         if event.event_type == "advertisement"{
                             HomeTVC.adsArray.append(event)
                         }
                         //
-                        //                    self.localNotification(title: event.event_title, subtitle: event.event_title, body: common_interests_string, lat: coordinate.coordinate.latitude, long: coordinate.coordinate.longitude)
+                        //  self.localNotification(title: event.event_title, subtitle: event.event_title, body: common_interests_string, lat: coordinate.coordinate.latitude, long: coordinate.coordinate.longitude)
                         self.mapview.addAnnotation(anno)
                     }
                     
@@ -983,17 +1006,19 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
 //        }
     }
     
+    // when cell is selected this method is called
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedEventIndex = indexPath.row
         performSegue(withIdentifier: "showAllStoryDetail", sender: self)
         print(indexPath.row)
     }
 
-    
+    // tells how many items are there in collectionview
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
        return HomeTVC.eventArray.count
     }
     
+    // tells the content of cell at specific spot or position
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! StoriesCollectionViewCell
         cell.imageview.sd_setImage(with: URL(string: "\(HomeTVC.eventArray[indexPath.row].event_image!)"), completed: nil)
@@ -1025,6 +1050,8 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
             return
         }
     }
+    
+    
     
     func centerMapOnUserLocation(){
         
@@ -1063,6 +1090,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
    
     }
     
+    // whenever user changes its position then this
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         removeCircle() // remove radius around the current location
         
@@ -1083,12 +1111,11 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         if segmentedcontrols.selectedSegmentIndex == 2{
               let address_coordinate = CLLocationCoordinate2D(latitude: User.singleton.address_latitude!, longitude: User.singleton.address_longitude!)
               showCircle(coordinate: address_coordinate, radius: 10000)
-            
         }
          // radius in 10000 meters = 10 kms
     }
     
-    
+    // when any annotation is selected
     func mapView(_ mapView: MKMapView,didSelect view: MKAnnotationView)
     {
         // 1
