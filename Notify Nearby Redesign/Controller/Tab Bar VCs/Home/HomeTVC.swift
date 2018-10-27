@@ -625,8 +625,15 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                             anno.event_noOfDenied = event.event_noOfDenied
                             anno.event_noOfFavourite = event.event_noOfFavourite
                             
-                           
                             
+                            if event.event_endTime == ""{
+                                continue
+                            }
+                           
+                            if AppDelegate.totalSeconds! >= Int(event.event_endTime!)!{
+                                self.database.child("stories").child(event.event_key!).removeValue()
+                                continue
+                            }
                             
                             self.collectionview.reloadData()
 //                            view.reloadInputViews()
@@ -675,6 +682,15 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                     anno.event_noOfDenied = event.event_noOfDenied
                     anno.event_noOfFavourite = event.event_noOfFavourite
                     
+                    if event.event_endTime == nil{
+                        continue
+                    }
+                    
+                    if AppDelegate.totalSeconds! >= Int(event.event_endTime!)!{
+                        self.database.child("stories").child(event.event_key!).removeValue()
+                        continue
+                    }
+                    
                     if event.event_type == "advertisement"{
                         HomeTVC.adsArray.append(event)
                     }
@@ -713,6 +729,16 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                         anno.event_noOfDenied = event.event_noOfDenied
                         anno.event_noOfFavourite = event.event_noOfFavourite
                         
+                        
+                        if event.event_endTime == nil{
+                            continue
+                        }
+                        
+                        if AppDelegate.totalSeconds! >= Int(event.event_endTime!)!{
+                            self.database.child("stories").child(event.event_key!).removeValue()
+                            continue
+                        }
+                        
                         if event.event_type == "advertisement"{
                             HomeTVC.adsArray.append(event)
                         }
@@ -747,6 +773,17 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
 //                let request = UNNotificationRequest(identifier: "IS", content: content, trigger: trigger)
 //
 //                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+                
+                if event.event_endTime == ""{
+                    continue
+                }
+                
+                if AppDelegate.totalSeconds! >= Int(event.event_endTime!)!{
+                    self.database.child("stories").child(event.event_key!).removeValue()
+                    continue
+                }
+                
+                
                 if event.event_type == "advertisement"{
                     HomeTVC.adsTitleArray.append(event.event_title!)
                 }
@@ -867,6 +904,15 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                 
                 // checking if event is within 10km radius
                 if HomeTVC.calculateDistance_s(mainCoordinate: CLLocation(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude), coordinate: coordinate) <= 10000{
+                    
+                    if event.event_endTime == ""{
+                        continue
+                    }
+                    
+                    if AppDelegate.totalSeconds! >= Int(event.event_endTime!)!{
+                        continue
+                    }
+                    
                     // checking if its ad then place it into arrays i.e adsArray , adsTitleArray
                 if event.event_type == "advertisement"{
                     HomeTVC.adsArray.append(event)
@@ -923,6 +969,15 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                             anno.event_noOfDenied = event.event_noOfDenied
                             anno.event_noOfFavourite = event.event_noOfFavourite
                             
+                            if event.event_endTime == ""{
+                                continue
+                            }
+                            
+                            if AppDelegate.totalSeconds! >= Int(event.event_endTime!)!{
+                                database.child("stories").child(event.event_key!).removeValue()
+                                continue
+                            }
+                            
                             self.mapview.addAnnotation(anno)
                         }
                         
@@ -955,9 +1010,27 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                     anno.event_noOfDenied = event.event_noOfDenied
                     anno.event_noOfFavourite = event.event_noOfFavourite
                     
+                    print()
+                    print(event.event_title!)
+                    print("Current time: \(AppDelegate.totalSeconds!)")
+                    print("End time: \(event.event_endTime!)")
+                   
+                    
+                    if event.event_endTime == ""{
+                         print("continued")
+                        continue
+                    }
+                    
+                    if AppDelegate.totalSeconds! >= Int(event.event_endTime!)!{
+                        database.child("stories").child(event.event_key!).removeValue()
+                         print("Removed")
+                        continue
+                    }
+                             self.mapview.addAnnotation(anno)
+                    
                     
                     // adding annotation to the map
-                    self.mapview.addAnnotation(anno)
+               
                 }
                 }
                 
@@ -988,6 +1061,17 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                         anno.event_noOfAccepted = event.event_noOfAccepted
                         anno.event_noOfDenied = event.event_noOfDenied
                         anno.event_noOfFavourite = event.event_noOfFavourite
+                        
+                        
+                        if event.event_endTime == ""{
+                            
+                            continue
+                        }
+                        
+                        if AppDelegate.totalSeconds! >= Int(event.event_endTime!)!{
+                            database.child("stories").child(event.event_key!).removeValue()
+                            continue
+                        }
                         
                         // if event is ad then place it into adsArray
                         if event.event_type == "advertisement"{
