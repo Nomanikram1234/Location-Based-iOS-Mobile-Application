@@ -34,6 +34,7 @@
 		F836C109213AFF76005A86F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F836C107213AFF76005A86F8 /* Main.storyboard */; };
 		F836C10B213AFF78005A86F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F836C10A213AFF78005A86F8 /* Assets.xcassets */; };
 		F836C10E213AFF78005A86F8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F836C10C213AFF78005A86F8 /* LaunchScreen.storyboard */; };
+		F8583C9521861689003C597A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F8583C9421861688003C597A /* GoogleService-Info.plist */; };
 		F8670933213EDE0B004CAD58 /* MyInterestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8670932213EDE0B004CAD58 /* MyInterestVC.swift */; };
 		F8670935213EDE24004CAD58 /* MyFavouriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8670934213EDE24004CAD58 /* MyFavouriteVC.swift */; };
 		F8670937213EDE63004CAD58 /* AccountTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8670936213EDE63004CAD58 /* AccountTVC.swift */; };
@@ -41,7 +42,6 @@
 		F867093B213EFB48004CAD58 /* RedSmallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F867093A213EFB48004CAD58 /* RedSmallButton.swift */; };
 		F867093D213EFB8C004CAD58 /* BlackBorderSmallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F867093C213EFB8C004CAD58 /* BlackBorderSmallButton.swift */; };
 		F874ADD2216BACF7007873FE /* ActivityRightSideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F874ADD1216BACF7007873FE /* ActivityRightSideMenuTableViewCell.swift */; };
-		F87BB8A12146E5B200D21AF6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F87BB8A02146E5B200D21AF6 /* GoogleService-Info.plist */; };
 		F87BB8A321481D2F00D21AF6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87BB8A221481D2F00D21AF6 /* User.swift */; };
 		F895CCD82162A4DA00EAB847 /* JointInterest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895CCD72162A4DA00EAB847 /* JointInterest.swift */; };
 		F8BACEE1216D4E9F007FA7EF /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BACEE0216D4E9F007FA7EF /* NotificationTableViewCell.swift */; };
@@ -101,6 +101,7 @@
 		F836C10A213AFF78005A86F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F836C10D213AFF78005A86F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F836C10F213AFF78005A86F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F8583C9421861688003C597A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F8670932213EDE0B004CAD58 /* MyInterestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInterestVC.swift; sourceTree = "<group>"; };
 		F8670934213EDE24004CAD58 /* MyFavouriteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFavouriteVC.swift; sourceTree = "<group>"; };
 		F8670936213EDE63004CAD58 /* AccountTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTVC.swift; sourceTree = "<group>"; };
@@ -108,7 +109,6 @@
 		F867093A213EFB48004CAD58 /* RedSmallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedSmallButton.swift; sourceTree = "<group>"; };
 		F867093C213EFB8C004CAD58 /* BlackBorderSmallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackBorderSmallButton.swift; sourceTree = "<group>"; };
 		F874ADD1216BACF7007873FE /* ActivityRightSideMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRightSideMenuTableViewCell.swift; sourceTree = "<group>"; };
-		F87BB8A02146E5B200D21AF6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F87BB8A221481D2F00D21AF6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F895CCD72162A4DA00EAB847 /* JointInterest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JointInterest.swift; sourceTree = "<group>"; };
 		F8BACEE0216D4E9F007FA7EF /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
@@ -349,7 +349,7 @@
 		F836C102213AFF76005A86F8 /* Notify Nearby Redesign */ = {
 			isa = PBXGroup;
 			children = (
-				F87BB8A02146E5B200D21AF6 /* GoogleService-Info.plist */,
+				F8583C9421861688003C597A /* GoogleService-Info.plist */,
 				F835E3A9213DCFDC00901CFF /* Model */,
 				F809ED36213D8EBA007280E5 /* Controller */,
 				F821606A213BC58500CA19AD /* View */,
@@ -569,7 +569,7 @@
 			files = (
 				F836C10E213AFF78005A86F8 /* LaunchScreen.storyboard in Resources */,
 				F836C10B213AFF78005A86F8 /* Assets.xcassets in Resources */,
-				F87BB8A12146E5B200D21AF6 /* GoogleService-Info.plist in Resources */,
+				F8583C9521861689003C597A /* GoogleService-Info.plist in Resources */,
 				F8CE79A32145862D00B965B8 /* EventCalloutView.xib in Resources */,
 				F836C109213AFF76005A86F8 /* Main.storyboard in Resources */,
 			);

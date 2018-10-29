@@ -63,10 +63,32 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     
     @IBOutlet weak var addEventAdsView_imageview: UIImageView!
     @IBAction func addEventAdsView_selectImage(_ sender: Any) {
-        let image = UIImagePickerController()
-        image.delegate = self
-        image.sourceType = UIImagePickerControllerSourceType.photoLibrary
-        self.present(image, animated: true, completion: nil)
+//        let image = UIImagePickerController()
+//        image.delegate = self
+//        image.sourceType = UIImagePickerControllerSourceType.photoLibrary
+//        self.present(image, animated: true, completion: nil)
+        
+        
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (alert:UIAlertAction!) -> Void in
+            let image = UIImagePickerController()
+            image.delegate = self
+            image.sourceType = UIImagePickerControllerSourceType.camera
+            self.present(image, animated: true, completion: nil)
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { (alert:UIAlertAction!) -> Void in
+            let image = UIImagePickerController()
+            image.delegate = self
+            image.sourceType = UIImagePickerControllerSourceType.photoLibrary
+            self.present(image, animated: true, completion: nil)
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(actionSheet, animated: true, completion: nil)
+        
     }
     
     @IBOutlet weak var addEventAdsView_contact: UITextField!
@@ -202,7 +224,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         addEventAdsView_description.text = ""
         addEventAdsView_durationSegmentedControl.selectedSegmentIndex = 0
         addEventAdsView_contact.text = ""
-        addEventAdsView_imageview.image = nil
+        addEventAdsView_imageview.image = UIImage(named: "no_image_available")
     }
     
     /************Additional View Variables**************/
@@ -333,15 +355,41 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         addEventView_imageview = nil
         addEventView_interests.text = ""
         addEventView_description.text = ""
+        addEventView_imageview.image = UIImage(named: "no_image_available")
     }
     /******************************************************/
     //FIXME: CAMERAROLL
     /*Camera Roll Related*/
     @IBAction func addEventView_imageview(_ sender: Any) {
-        let image = UIImagePickerController()
-        image.delegate = self
-        image.sourceType = UIImagePickerControllerSourceType.photoLibrary
-        self.present(image, animated: true, completion: nil)
+//        let image = UIImagePickerController()
+//        image.delegate = self
+//        image.sourceType = UIImagePickerControllerSourceType.camera
+//        self.present(image, animated: true, completion: nil)
+        
+        
+        ////
+        
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (alert:UIAlertAction!) -> Void in
+            let image = UIImagePickerController()
+            image.delegate = self
+            image.sourceType = UIImagePickerControllerSourceType.camera
+            self.present(image, animated: true, completion: nil)
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { (alert:UIAlertAction!) -> Void in
+            let image = UIImagePickerController()
+            image.delegate = self
+            image.sourceType = UIImagePickerControllerSourceType.photoLibrary
+            self.present(image, animated: true, completion: nil)
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(actionSheet, animated: true, completion: nil)
+        
+        ////
     }
     
     // choose image from cameraRoll
@@ -389,8 +437,16 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         
         if segmentedcontrols.selectedSegmentIndex == 2{
             removeCircle()
+            if User.singleton.address_latitude != nil{
             let address_coordinate = CLLocationCoordinate2D(latitude: User.singleton.address_latitude!, longitude: User.singleton.address_longitude!)
             showCircle(coordinate: address_coordinate, radius: 10000)
+            }else{
+            
+                let alertcontroller = UIAlertController(title: "Tip", message: "Set up your address from Profile Setting", preferredStyle: .alert)
+                alertcontroller.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
+                present(alertcontroller, animated: true)
+                
+            }
             
             removeAnnotations()
             centerMapOnAddressLocation()
@@ -629,6 +685,10 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                             if event.event_endTime == ""{
                                 continue
                             }
+                            
+                            if event.event_endTime == nil{
+                                continue
+                            }
                            
                             if AppDelegate.totalSeconds! >= Int(event.event_endTime!)!{
                                 self.database.child("stories").child(event.event_key!).removeValue()
@@ -809,7 +869,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
             return nil
         }
         var annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "pin")
-        
+        annotationView.displayPriority = .required
         if annotationView == nil{
             //            annotationView = AnnotationView(annotation: annotation, reuseIdentifier: "Pin")
             annotationView.canShowCallout = false
@@ -824,7 +884,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         if segmentedcontrols.selectedSegmentIndex == 1 {
             if HomeTVC.adsTitleArray.contains(annotation.title as! String) {
                 
-                annotationView.markerTintColor = UIColor.purple
+                annotationView.markerTintColor = UIColor.red
                 //                mapView.reloadInputViews()
                 return annotationView
             }else {
@@ -833,11 +893,25 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                 mapView.reloadInputViews()
                 return annotationView
             }
-        }// Since we are replace the title with subtitle in segments so so we are interchanging their color
+        }else   if segmentedcontrols.selectedSegmentIndex == 2 {
+            if HomeTVC.adsTitleArray.contains(annotation.title as! String) {
+                
+                annotationView.markerTintColor = UIColor.red
+                //                mapView.reloadInputViews()
+                return annotationView
+            }else {
+                //                let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+                annotationView.markerTintColor = UIColor.black
+                mapView.reloadInputViews()
+                return annotationView
+            }
+        }
+            
+            // Since we are replace the title with subtitle in segments so so we are interchanging their color
         else{
             if HomeTVC.adsTitleArray.contains(annotation.subtitle as! String) {
                 //                let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "pin")
-                annotationView.markerTintColor = UIColor.purple
+                annotationView.markerTintColor = UIColor.red
                 //                 mapView.reloadInputViews()
                 return annotationView
             }else {
@@ -906,6 +980,10 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                 if HomeTVC.calculateDistance_s(mainCoordinate: CLLocation(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude), coordinate: coordinate) <= 10000{
                     
                     if event.event_endTime == ""{
+                        continue
+                    }
+                    
+                    if event.event_endTime == nil{
                         continue
                     }
                     
@@ -1037,6 +1115,8 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                 if self.segmentedcontrols.selectedSegmentIndex == 2{
                     print("ADDRESS")
                     
+                    if User.singleton.address_latitude != nil {
+                    
                     // when user details were fetched it then geocoded the address to coordinates; now we are using the coordinates
                     let address_coordinate = CLLocation(latitude: User.singleton.address_latitude!, longitude: User.singleton.address_longitude!)
                     
@@ -1068,6 +1148,10 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                             continue
                         }
                         
+                        if event.event_endTime == nil{
+                         continue
+                        }
+                        
                         if AppDelegate.totalSeconds! >= Int(event.event_endTime!)!{
                             database.child("stories").child(event.event_key!).removeValue()
                             continue
@@ -1081,6 +1165,14 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                         //  self.localNotification(title: event.event_title, subtitle: event.event_title, body: common_interests_string, lat: coordinate.coordinate.latitude, long: coordinate.coordinate.longitude)
                         self.mapview.addAnnotation(anno)
                     }
+                    
+                    
+                    }
+//                    else{
+//                        let alertcontroller = UIAlertController(title: "Tip", message: "Please add interests from sidemenu in order to see interest based pics on the map", preferredStyle: .alert)
+//                        alertcontroller.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
+//                        present(alertcontroller, animated: true)
+//                    }
                     
                 }
                 
@@ -1146,10 +1238,14 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     }
     
     func centerMapOnAddressLocation(){
+        if User.singleton.address_latitude != nil {
           let address_coordinate = CLLocationCoordinate2D(latitude: User.singleton.address_latitude!, longitude: User.singleton.address_longitude!)
 //        guard let coordinate = locationManager.location?.coordinate else { return }
         let region = MKCoordinateRegionMakeWithDistance(address_coordinate, regionRadius * 2, regionRadius*2)
         mapview.setRegion(region, animated: true)
+        }
+            
+        
         
     }
     
@@ -1193,8 +1289,11 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
             showCircle(coordinate: userLocation.coordinate, radius: 10000)
         }
         if segmentedcontrols.selectedSegmentIndex == 2{
+            
+            if User.singleton.address_latitude != nil{
               let address_coordinate = CLLocationCoordinate2D(latitude: User.singleton.address_latitude!, longitude: User.singleton.address_longitude!)
               showCircle(coordinate: address_coordinate, radius: 10000)
+            }
         }
          // radius in 10000 meters = 10 kms
     }

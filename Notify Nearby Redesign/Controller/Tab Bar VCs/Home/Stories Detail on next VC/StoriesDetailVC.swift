@@ -434,7 +434,7 @@ class StoriesDetailVC: UIViewController ,UICollectionViewDelegate,UICollectionVi
                     self.present(vc, animated: true, completion: nil)
                     
                 }else{
-                    SVProgressHUD.showError(withStatus: "Failed to Delete")
+//                  SVProgressHUD.showError(withStatus: "Failed to Delete")
                     print("Failed to Delete")
                 }
             }

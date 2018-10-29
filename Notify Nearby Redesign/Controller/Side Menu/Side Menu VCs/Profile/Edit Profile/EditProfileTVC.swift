@@ -75,6 +75,11 @@ class EditProfileTVC: UITableViewController, UINavigationControllerDelegate , UI
      
         // name field should not be empty
            if !(name.text?.isEmpty)!{
+            
+            if avatar_imageview.image == nil{
+                avatar_imageview.image = UIImage(named: "blank")
+//                avatarBg_imageview.image = UIImage(named: "blank")
+            }
         
         tempImgRef.putData(UIImageJPEGRepresentation(avatar_imageview.image!, 0)!, metadata: metadata) { (data, error) in
             // if image is uploaded successfully and you can say that there is no error
