@@ -69,7 +69,7 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
        // Do any additional setup after loading the view.
         
 //        login(email: "nomanikram0@icloud.com", password: "Nomi1234")
-          login(email: "rajanomanikram@yahoo.com", password: "Nomi1234")
+//          login(email: "rajanomanikram@yahoo.com", password: "Nomi1234")
 //        login(email: "notify.nearby.fyp@gmail.com", password: "Nomi1234") // advestiser
 //        login(email: "maida_ashrafgondal@hotmail.com", password: "tangled123")
     

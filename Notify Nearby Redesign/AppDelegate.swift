@@ -10,10 +10,17 @@ import UIKit
 import Alamofire
 import SwiftSoup
 import Firebase
+import FirebaseAuth
+import FirebaseCore
 
+import FirebaseMessaging
+import UserNotifications
+import SwiftyStoreKit
+
+import FirebaseInstanceID
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDelegate  ,MessagingDelegate {
     
     // variable initiated for the first time login everytime
     static var firstStart :Bool = false
@@ -25,18 +32,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    static var arr = [Discovery]()
     
     override init() {
-       
-        
-//        var date = Date()
-//        AppDelegate.totalSeconds = Int(date.timeIntervalSince1970 * 1000) / 1000
-        
-        FirebaseApp.configure()       
+        FirebaseApp.configure()
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 //        FirebaseApp.configure()
-        
+         setupIAP()
+         Messaging.messaging().delegate = self
+      
+         registerForNotifications(application)
+         Messaging.messaging().shouldEstablishDirectChannel = true
+    
+//        FirebaseApp.configure()
         let timer = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(timeUpdate), userInfo: nil, repeats: true)
         
         
@@ -106,30 +114,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         
-       /////////////////////
-        
-   
-        
-//
-//        Auth.auth().addStateDidChangeListener() { auth, user in
-//            // 2
-//            if user != nil {
-//                // 3
-//                if (Auth.auth().currentUser?.isEmailVerified)! {
-//                    print("User: Exists")
-//                    //                AppDelegate.firstStart = false
-//                    //                UserDefaults.standard.set(AppDelegate.firstStart, forKey: "firstStart")
-//
-//                    print(Auth.auth().currentUser?.uid)
-//                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                    let controller = storyboard.instantiateViewController(withIdentifier: "SplashVC")
-//                    controller.performSegue(withIdentifier: "SWRevealViewController", sender: nil)
-////                    let controller = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController")
-////                    self.window?.rootViewController = controller
-////                    self.window?.makeKeyAndVisible()
-//                }
-//            }
-//        }
+   /* Do Not try this
+        Auth.auth().addStateDidChangeListener() { auth, user in
+            // 2
+            if user != nil {
+                // 3
+                if (Auth.auth().currentUser?.isEmailVerified)! {
+                    print("User: Exists")
+                    //                AppDelegate.firstStart = false
+                    //                UserDefaults.standard.set(AppDelegate.firstStart, forKey: "firstStart")
+
+                    print(Auth.auth().currentUser?.uid)
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let controller = storyboard.instantiateViewController(withIdentifier: "SplashVC")
+                    controller.performSegue(withIdentifier: "SWRevealViewController", sender: nil)
+//                    let controller = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController")
+//                    self.window?.rootViewController = controller
+//                    self.window?.makeKeyAndVisible()
+                }
+            }
+        }
+        */
         
         // Fetching the data on background thread
         DispatchQueue.global(qos: .userInteractive).async {
@@ -156,6 +161,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        scrapingIslamabad()
 //        scrapingLahore()
 //        scrapingKarachi()
+        
+//        registerForNotifications(application)
         
         return true
     }
@@ -398,25 +405,114 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+        print("Will Resign Active")
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        print("Did Enter Background")
+        Messaging.messaging().shouldEstablishDirectChannel = false
+      
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        print("Will Enter Foreground")
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        print("Did Become Active")
+        Messaging.messaging().shouldEstablishDirectChannel = true
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        print("Application Terminate")
+    }
+    
+    /* Additional Functions Required for Remote Notification */
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Error: \(error)")
+    }
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        print("Token: \(deviceToken)")
+        
+        let   tokenString = deviceToken.reduce("", {$0 + String(format: "%02X",    $1)})
+        print("tokenString: \(tokenString)") // use to test push notification
+        
+        let newToken = InstanceID.instanceID().token()
+        print("newToken: \(newToken)")
+    
+    }
+    
+    /* Cloud Messaging */
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        let newToken = InstanceID.instanceID().token()
+        print("newToken: \(newToken)")
+        Messaging.messaging().shouldEstablishDirectChannel = true
+//        Messaging.messaging().
+    }
+    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
+        print("Received: \(remoteMessage.appData)")
+    }
+    
+    /* SwiftyStoreKit Configuration */
+    func setupIAP() {
+        
+        SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
+            
+            for purchase in purchases {
+                switch purchase.transaction.transactionState {
+                case .purchased, .restored:
+                    let downloads = purchase.transaction.downloads
+                    if !downloads.isEmpty {
+                        SwiftyStoreKit.start(downloads)
+                    } else if purchase.needsFinishTransaction {
+                        // Deliver content from server, then:
+                        SwiftyStoreKit.finishTransaction(purchase.transaction)
+                    }
+                    print("\(purchase.transaction.transactionState.debugDescription): \(purchase.productId)")
+                case .failed, .purchasing, .deferred:
+                    break // do nothing
+                }
+            }
+        }
+        
+        SwiftyStoreKit.updatedDownloadsHandler = { downloads in
+            
+            // contentURL is not nil if downloadState == .finished
+            let contentURLs = downloads.compactMap { $0.contentURL }
+            if contentURLs.count == downloads.count {
+                print("Saving: \(contentURLs)")
+                SwiftyStoreKit.finishTransaction(downloads[0].transaction)
+            }
+        }
+    }
+    
+    /* Remote Notification Configuration */
+    func registerForNotifications(_ application: UIApplication) {
+        
+        //        if #available(iOS 10.0, *) {
+        // For iOS 10 display notification (sent via APNS)
+        
+        UNUserNotificationCenter.current().delegate = self
+      
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: { _, _ in })
+        
+        //        } else {
+        
+//                    let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+//                    application.registerUserNotificationSettings(settings)
+        
+        //        }
+
+        application.registerForRemoteNotifications()
+        
     }
 
-
+    
 }
 
