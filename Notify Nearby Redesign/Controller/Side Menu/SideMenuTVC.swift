@@ -45,7 +45,7 @@ class SideMenuTVC: UITableViewController {
         print("Side Menu Option Selected: \(indexPath.row)")
         
         // signout cell is selected
-        if indexPath.row == 8{
+        if indexPath.row == 9{
             // Intiantiate Main Screen
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "SplashVC") as! SplashVC
             do{

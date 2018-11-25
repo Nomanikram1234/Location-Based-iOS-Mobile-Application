@@ -204,15 +204,63 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
      /***********   Sign Up View    ***************/
     
     @IBAction func signupView_signupBtnPressed(_ sender: Any) {
-        if signupView_password.text! == signupView_confirmPassword.text!{
+        print("Function called: signupView_signupBtnPressed()")
+        
+        if signupView_usertype.selectedSegmentIndex == 0{
+            print("UserType: User")
             
-        SVProgressHUD.show()
-        createNewUser(email: signupView_email.text!, password: signupView_password.text!, name: signupView_name.text!, contact: signupView_contact.text!)
+            if signupView_name.text == "" {
+                alertMessage(title: "Failure", message: "Name field is empty")
+            }else if !(signupView_email.text?.contains("@"))!{
+                alertMessage(title: "Failure", message: "Invalid email address")
+            }else if signupView_password.text == "" || signupView_confirmPassword.text == ""{
+                alertMessage(title: "Failure", message: "Password Fields cannot be empty")
+            }else if !((signupView_password.text?.count)! >= 8){
+                alertMessage(title: "Failure", message: "Password must contain 8 characters")
+            }else if signupView_password.text != signupView_confirmPassword.text{
+                alertMessage(title: "Failure", message: "Passwords donot match")
+            }else if !(signupView_contact.text?.count == 0 || signupView_contact.text?.count == 11){
+                print(signupView_contact.text?.count)
+                alertMessage(title: "Failure", message: "Phone Number is optional for user otherwise it must be 11 digit nummber")
+            }else{
+                alertMessage(title: "Success", message: "User Created")
+                createNewUser(email: signupView_email.text!, password: signupView_password.text!, name: signupView_name.text!, contact: signupView_contact.text!)
+            }
             
-    
-        }else{
-            print("Signup Failure: Password Not Match")
+        }else {
+            print("UserType: Advertiser")
+            
+            if signupView_name.text == "" {
+                alertMessage(title: "Failure", message: "Name field is empty")
+            }else if !(signupView_email.text?.count == 0 || (signupView_email.text?.contains("@"))!){
+                print(signupView_contact.text?.count)
+                alertMessage(title: "Failure", message: "Email Field is optional for advertiser otherwise it must be correct")
+            }else if signupView_password.text == "" || signupView_confirmPassword.text == ""{
+                alertMessage(title: "Failure", message: "Password Fields cannot be empty")
+            }else if !((signupView_password.text?.count)! >= 8){
+                alertMessage(title: "Failure", message: "Password must contain 8 characters")
+            }else if signupView_password.text != signupView_confirmPassword.text{
+                alertMessage(title: "Failure", message: "Passwords donot match")
+            }else if signupView_contact.text!.count == 0 {
+                alertMessage(title: "Failure", message: "Contact Field cannot be empty")
+            }else if !(signupView_contact.text?.count == 11){
+                alertMessage(title: "Failure", message: "Mobile Number must be 11 digits long")
+            }else{
+                alertMessage(title: "Success", message: "User Created")
+                 createNewUser(email: signupView_email.text!, password: signupView_password.text!, name: signupView_name.text!, contact: signupView_contact.text!)
+            }
+            
         }
+        
+//        if signupView_password.text! == signupView_confirmPassword.text!{
+//
+//        SVProgressHUD.show()
+//        createNewUser(email: signupView_email.text!, password: signupView_password.text!, name: signupView_name.text!, contact: signupView_contact.text!)
+//
+//
+//        }else{
+//            print("Signup Failure: Password Not Match")
+//        }
     }
     
     @IBAction func signupView_signinBtnPressed(_ sender: Any) {
@@ -547,5 +595,14 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
         // Pass the selected object to the new view controller.
     }
     */
-
+    func alertMessage(title:String,message:String){
+        // create the alert
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
+    }
 }

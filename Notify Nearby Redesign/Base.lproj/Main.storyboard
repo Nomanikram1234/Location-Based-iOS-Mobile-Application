@@ -3859,7 +3859,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="T5T-SY-Ukl" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="T2w-DD-qhp"/>
+                                            <segue destination="T5T-SY-Ukl" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="7Zh-8F-mey"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="icX-JS-4X0">
