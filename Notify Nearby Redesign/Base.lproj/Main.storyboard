@@ -3902,10 +3902,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Bitmap" width="375" height="667"/>
+        <image name="Bitmap" width="375" height="225"/>
         <image name="BitmapBG" width="375" height="667"/>
         <image name="Image" width="22" height="22"/>
-        <image name="Profile" width="21" height="24"/>
+        <image name="Profile" width="20" height="24"/>
         <image name="Splash" width="750" height="1334"/>
         <image name="Stroke 1" width="22" height="22"/>
         <image name="apps" width="16" height="16"/>

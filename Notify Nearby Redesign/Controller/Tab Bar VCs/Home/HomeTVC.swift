@@ -108,30 +108,42 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     @IBOutlet weak var addEventAdsView_description: UITextView!
     
     @IBAction func addEventAdsView_uploadButtonPressed(_ sender: Any) {
+        print("Event ads upload button pressed")
+        
+        if addEventAdsView_title.text == "" {
+            alertMessage(title: "Failure", message: "Title field is empty")
+        }else if addEventAdsView_interests.text == "" {
+            alertMessage(title: "Failure", message: "Interest field is empty")
+        }else if !(addEventAdsView_contact.text?.count == 11){
+            alertMessage(title: "Failure", message: "Mobile number field must not be empty. It must contain 11 digits")
+        }else if addEventAdsView_description.text == "" {
+            alertMessage(title: "Failure", message: "Description field is empty")
+        }else{
+//            print("Success")
         
         
         SVProgressHUD.show()
         guard let userLocation = locationManager.location else { return }
-        
+
         let eventRef = database.child("stories").childByAutoId()
         //        let storiesRef = Database.database().reference().child("stories").childByAutoId()
         let userRef = database.child("Users").child(uid!).child("stories").childByAutoId().setValue(eventRef.key)
         let tempImgRef = storageRef.child("images/\(eventRef.key).jpg")
-        
+
         // creating metafile which contains information about the image which we will save in the database
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpeg"
-        
-        
+
+
         ////////
-        
+
         // it place the image in the storage on firebase
         tempImgRef.putData(UIImageJPEGRepresentation(addEventView_imageview.image!, 0)!, metadata: metadata) { (data, error) in
             // if image is uploaded successfully and you can say that there is no error
             if error == nil {
-                
+
                 tempImgRef.downloadURL(completion: { (url, error) in
-                    
+
                     // creating dictionary
                     let data = ["uid":"\(self.uid!)",
                         "description":"\(self.addEventAdsView_description.text!)",
@@ -149,7 +161,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                         "startTime": "\(AppDelegate.totalSeconds!)",
                         "endTime":"\(AppDelegate.totalSeconds! + ( self.duration * 86400))"
                         ] as [String : Any]
-                    
+
                     //                    var storyDic = ["title": self.titleTxt.text!,
                     //                                    "description": self.des.text!,
                     //                                    "uid":uid,
@@ -157,53 +169,53 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                     //                                    "image": "images/\(eventRef.key).jpg",
                     //                        "lat": self.latitude!,
                     //                        "long": self.longitude!] as [String : Any]
-                    
+
                     SVProgressHUD.dismiss()
                     SVProgressHUD.showSuccess(withStatus: "Advertisement Uploaded Sucessfully")
                     print("Image Uploaded: Successfully")
                     eventRef.setValue(data, withCompletionBlock: { (error, ref) in
                         if error == nil {
                              self.resetAdTextField()
-                            
+
                             // Uploading Data to DB then refreshing map
                             for v in self.view.subviews{
                                 if v == self.addEventAdsView{
                                     v.removeFromSuperview()
                                 }
                                 self.fetchEventsAndDisplayOnMap()
-                                
+
                             }
-                            
+
                             UIView.animate(withDuration: 1) {
                                 self.blackBgView.alpha = 0
                             }
-                            
+
                         }
                     })
 //                    eventRef.setValue(data)
-                    
-                    
+
+
                     //                    /*Ridas*/
                     //                    let ridaData = ["0":"\(userLocation.coordinate.latitude)",
                     //                                    "1":"\(userLocation.coordinate.longitude)"]
                     ////                    print(eventRef)
                     //                    self.database.child("StoryLocation").child("\(eventRef.key)").child("l").setValue(ridaData)
-                    
+
                     let geofire = GeoFire(firebaseRef: self.storyLocation)
                     geofire.setLocation(CLLocation(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude), forKey: "\(eventRef.key)")
-                    
+
                     /*Ridas*/
-                    
-                
+
+
                 })
-               
+
             }else{
                 SVProgressHUD.dismiss()
                 SVProgressHUD.showError(withStatus: "Ad Uploading Failure")
                 print("Image Upload Failure")
             }
         }
-        
+        }//else ending here
     }
     @IBAction func addEventAdsView_cancelButtonPressed(_ sender: Any) {
         
@@ -238,28 +250,40 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     @IBOutlet weak var addEventView_description: UITextView!
     
     @IBAction func addEventView_uploadBtn(_ sender: Any) {
+        
+        print("pressed")
+        
+        if addEventView_title.text == "" {
+           alertMessage(title: "Failure", message: "Title field is empty")
+        }else if addEventView_interests.text == "" {
+            alertMessage(title: "Failure", message: "Interest field is empty")
+        }else if addEventView_description.text == ""{
+            alertMessage(title: "Failure", message: "Description field is empty")
+        }else{
+            
+            
         SVProgressHUD.show()
         guard let userLocation = locationManager.location else { return }
-        
+
      let eventRef = database.child("stories").childByAutoId()
 //        let storiesRef = Database.database().reference().child("stories").childByAutoId()
         let userRef = database.child("Users").child(uid!).child("stories").childByAutoId().setValue(eventRef.key)
        let tempImgRef = storageRef.child("images/\(eventRef.key).jpg")
-        
+
         // creating metafile which contains information about the image which we will save in the database
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpeg"
-       
-        
+
+
         ////////
-      
+
         // it place the image in the storage on firebase
         tempImgRef.putData(UIImageJPEGRepresentation(addEventView_imageview.image!, 0)!, metadata: metadata) { (data, error) in
             // if image is uploaded successfully and you can say that there is no error
             if error == nil {
-                
+
                 tempImgRef.downloadURL(completion: { (url, error) in
-                
+
                     // creating dictionary
                     let data = ["uid":"\(self.uid!)",
                                 "description":"\(self.addEventView_description.text!)",
@@ -276,7 +300,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                                 "startTime": "\(AppDelegate.totalSeconds!)",
                                 "endTime":"\(AppDelegate.totalSeconds! + 86400)"
                                 ] as [String : Any]
-                    
+
 //                    var storyDic = ["title": self.titleTxt.text!,
 //                                    "description": self.des.text!,
 //                                    "uid":uid,
@@ -284,11 +308,11 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
 //                                    "image": "images/\(eventRef.key).jpg",
 //                        "lat": self.latitude!,
 //                        "long": self.longitude!] as [String : Any]
-                    
+
                     SVProgressHUD.dismiss()
                     SVProgressHUD.showSuccess(withStatus: "Story Uploaded Sucessfully")
                     print("Image Uploaded: Successfully")
-                    
+
                     eventRef.setValue(data, withCompletionBlock: { (error, ref) in
                         if error == nil{
                              self.resetStoryTextFields()
@@ -298,35 +322,35 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
                                     v.removeFromSuperview()
                                 }
                                 self.fetchEventsAndDisplayOnMap()
-                                
+
                             }
-                            
+
                             UIView.animate(withDuration: 1) {
                                 self.blackBgView.alpha = 0
                             }
                         }
                     })
                     eventRef.setValue(data)
-                    
-                    
+
+
 //                    /*Ridas*/
 //                    let ridaData = ["0":"\(userLocation.coordinate.latitude)",
 //                                    "1":"\(userLocation.coordinate.longitude)"]
 ////                    print(eventRef)
 //                    self.database.child("StoryLocation").child("\(eventRef.key)").child("l").setValue(ridaData)
-                    
+
                     let geofire = GeoFire(firebaseRef: self.storyLocation)
                     geofire.setLocation(CLLocation(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude), forKey: "\(eventRef.key)")
-                    
+
                     /*Ridas*/
-                    
-                    
-                
-                    
+
+
+
+
                 })
-               
-                
-                
+
+
+
             }else{
               SVProgressHUD.dismiss()
               SVProgressHUD.showError(withStatus: "Story Uploading Failure")
@@ -334,6 +358,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
             }
         }
  
+        }//else ending here
     }
     @IBAction func addEventView_cancelBtn(_ sender: Any) {
         
@@ -1444,6 +1469,17 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         return distance
     }
     
+    func alertMessage(title:String,message:String){
+        // create the alert
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
+    }
+    
   static func calculateDistance_s(mainCoordinate: CLLocation,coordinate: CLLocation) -> Double{
         
         let distance = mainCoordinate.distance(from: coordinate)
@@ -1489,6 +1525,9 @@ extension MKAnnotationView {
         }
         return isInside
     }
+    
+    
+    
 }
 
 

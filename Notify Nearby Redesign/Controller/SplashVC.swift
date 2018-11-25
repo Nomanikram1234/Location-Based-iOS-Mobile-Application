@@ -206,6 +206,7 @@ class SplashVC: UIViewController ,UITextFieldDelegate{
     @IBAction func signupView_signupBtnPressed(_ sender: Any) {
         print("Function called: signupView_signupBtnPressed()")
         
+        SVProgressHUD.show()
         if signupView_usertype.selectedSegmentIndex == 0{
             print("UserType: User")
             
