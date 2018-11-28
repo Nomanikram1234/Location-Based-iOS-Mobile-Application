@@ -380,7 +380,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         addEventView_imageview = nil
         addEventView_interests.text = ""
         addEventView_description.text = ""
-        addEventView_imageview.image = UIImage(named: "no_image_available")
+//        addEventView_imageview.image = UIImage(named: "no_image_available")
     }
     /******************************************************/
     //FIXME: CAMERAROLL
