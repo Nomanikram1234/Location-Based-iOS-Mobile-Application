@@ -45,6 +45,7 @@
 		F867093D213EFB8C004CAD58 /* BlackBorderSmallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F867093C213EFB8C004CAD58 /* BlackBorderSmallButton.swift */; };
 		F874ADD2216BACF7007873FE /* ActivityRightSideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F874ADD1216BACF7007873FE /* ActivityRightSideMenuTableViewCell.swift */; };
 		F87BB8A321481D2F00D21AF6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87BB8A221481D2F00D21AF6 /* User.swift */; };
+		F87D896221AEDEFC00975A1E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F87D896121AEDEFC00975A1E /* GoogleService-Info.plist */; };
 		F895CCD82162A4DA00EAB847 /* JointInterest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895CCD72162A4DA00EAB847 /* JointInterest.swift */; };
 		F8BACEE1216D4E9F007FA7EF /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BACEE0216D4E9F007FA7EF /* NotificationTableViewCell.swift */; };
 		F8BACEE3216D4F22007FA7EF /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BACEE2216D4F22007FA7EF /* NotificationViewController.swift */; };
@@ -67,7 +68,6 @@
 		F8CE79A32145862D00B965B8 /* EventCalloutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8CE79A22145862D00B965B8 /* EventCalloutView.xib */; };
 		F8CE79A52145864300B965B8 /* EventCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CE79A42145864300B965B8 /* EventCalloutView.swift */; };
 		F8F5B33E214EF79600793248 /* EditProfileTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F5B33D214EF79600793248 /* EditProfileTVC.swift */; };
-		F8FF28CA21A570ED00DBED0B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F8FF28C921A570ED00DBED0B /* GoogleService-Info.plist */; };
 		F8FF28CC21A572F300DBED0B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8FF28CB21A572F300DBED0B /* StoreKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -116,6 +116,7 @@
 		F867093C213EFB8C004CAD58 /* BlackBorderSmallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackBorderSmallButton.swift; sourceTree = "<group>"; };
 		F874ADD1216BACF7007873FE /* ActivityRightSideMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRightSideMenuTableViewCell.swift; sourceTree = "<group>"; };
 		F87BB8A221481D2F00D21AF6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F87D896121AEDEFC00975A1E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F895CCD72162A4DA00EAB847 /* JointInterest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JointInterest.swift; sourceTree = "<group>"; };
 		F8BACEE0216D4E9F007FA7EF /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		F8BACEE2216D4F22007FA7EF /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
@@ -138,7 +139,6 @@
 		F8CE79A22145862D00B965B8 /* EventCalloutView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventCalloutView.xib; sourceTree = "<group>"; };
 		F8CE79A42145864300B965B8 /* EventCalloutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCalloutView.swift; sourceTree = "<group>"; };
 		F8F5B33D214EF79600793248 /* EditProfileTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileTVC.swift; sourceTree = "<group>"; };
-		F8FF28C921A570ED00DBED0B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F8FF28CB21A572F300DBED0B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		F8FF28CD21A5939000DBED0B /* Notify Nearby Redesign.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Notify Nearby Redesign.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -370,8 +370,8 @@
 		F836C102213AFF76005A86F8 /* Notify Nearby Redesign */ = {
 			isa = PBXGroup;
 			children = (
+				F87D896121AEDEFC00975A1E /* GoogleService-Info.plist */,
 				F8FF28CD21A5939000DBED0B /* Notify Nearby Redesign.entitlements */,
-				F8FF28C921A570ED00DBED0B /* GoogleService-Info.plist */,
 				F835E3A9213DCFDC00901CFF /* Model */,
 				F809ED36213D8EBA007280E5 /* Controller */,
 				F821606A213BC58500CA19AD /* View */,
@@ -611,9 +611,9 @@
 			files = (
 				F836C10E213AFF78005A86F8 /* LaunchScreen.storyboard in Resources */,
 				F836C10B213AFF78005A86F8 /* Assets.xcassets in Resources */,
+				F87D896221AEDEFC00975A1E /* GoogleService-Info.plist in Resources */,
 				F8CE79A32145862D00B965B8 /* EventCalloutView.xib in Resources */,
 				F836C109213AFF76005A86F8 /* Main.storyboard in Resources */,
-				F8FF28CA21A570ED00DBED0B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

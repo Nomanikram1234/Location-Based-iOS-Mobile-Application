@@ -171,7 +171,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     @objc func timeUpdate(){
         let date = Date()
         AppDelegate.totalSeconds = Int(date.timeIntervalSince1970 * 1000) / 1000
-  //      print(AppDelegate.totalSeconds!)
+        print(AppDelegate.totalSeconds!)
         /*
          //Note: 86400000 milliseconds are there in 24hours
          //Note: 86400         seconds are there in 24hours

@@ -278,7 +278,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
         ////////
 
         // it place the image in the storage on firebase
-        tempImgRef.putData(UIImageJPEGRepresentation(addEventView_imageview.image!, 0)!, metadata: metadata) { (data, error) in
+            tempImgRef.putData(UIImageJPEGRepresentation(addEventView_imageview.image!, 0)!, metadata: metadata) { (data, error) in
             // if image is uploaded successfully and you can say that there is no error
             if error == nil {
 
@@ -340,8 +340,10 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
 //                    self.database.child("StoryLocation").child("\(eventRef.key)").child("l").setValue(ridaData)
 
                     let geofire = GeoFire(firebaseRef: self.storyLocation)
-                    geofire.setLocation(CLLocation(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude), forKey: "\(eventRef.key)")
+                    geofire.setLocation(CLLocation(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude), forKey: eventRef.key!)
 
+                    
+//                    geofire.setLocation(CLLocation(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude), forKey: <#T##String#>, withCompletionBlock: <#T##GFCompletionBlock?##GFCompletionBlock?##(Error?) -> Void#>)
                     /*Ridas*/
 
 
@@ -349,7 +351,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
 
                 })
 
-
+                self.addEventView_imageview.image = UIImage(named: "no_image_available")
 
             }else{
               SVProgressHUD.dismiss()
@@ -377,7 +379,7 @@ class HomeTVC: UITableViewController ,UICollectionViewDelegate,UICollectionViewD
     
     func resetStoryTextFields() {
         addEventView_title.text = ""
-        addEventView_imageview = nil
+        addEventView_imageview.image = UIImage(named: "no_image_available")
         addEventView_interests.text = ""
         addEventView_description.text = ""
 //        addEventView_imageview.image = UIImage(named: "no_image_available")
