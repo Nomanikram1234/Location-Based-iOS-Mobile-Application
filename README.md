@@ -44,7 +44,7 @@ This is the signup screen where user is asked to register either as normal user 
   
   # Side Navigation
   Side Navigation has plenty of options like home screen, profile , Interest (screen to adds user interests), category, notification (of nearby events and people around you), account setting and logout.
-  ![alt text](https://dl.dropboxusercontent.com/s/wackg9i0j0w62sf/side%20nav.png?dl=0)
+![alt text](https://dl.dropboxusercontent.com/s/wackg9i0j0w62sf/side%20nav.png?dl=0)
   
   # Search
   This is the advance search option available in the application. You can either search by tags or address i.e. it will display events nearby that address. 
